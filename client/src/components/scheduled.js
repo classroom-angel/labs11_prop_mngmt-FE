@@ -1,12 +1,11 @@
 import React from 'react'
 
-function onBoard() {
+function scheduled() {
     return (
         <div className="onboarding-component">
-            <h1>Onbaording component</h1>
-
+            <h1>Scheduled Issues</h1>
         </div>
     )
 }
 
-export default onBoard
+export default scheduled

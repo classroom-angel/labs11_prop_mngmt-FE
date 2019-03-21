@@ -1,12 +1,11 @@
 import React from 'react'
 
-function onBoard() {
+function boardMemberHub() {
     return (
         <div className="onboarding-component">
-            <h1>Onbaording component</h1>
-
+            <h1>Board member homepage</h1>
         </div>
     )
 }
 
-export default onBoard
+export default boardMemberHub

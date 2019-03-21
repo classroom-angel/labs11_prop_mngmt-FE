@@ -1,12 +1,11 @@
 import React from 'react'
 
-function onBoard() {
+function issueLog() {
     return (
         <div className="onboarding-component">
-            <h1>Onbaording component</h1>
-
+            <h1>Issue Log</h1>
         </div>
     )
 }
 
-export default onBoard
+export default issueLog
