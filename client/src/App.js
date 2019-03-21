@@ -3,6 +3,7 @@ import axios from './axiosInstance';
 import useFormInput from './components/useFormInput';
 import logo from './logo.svg';
 import './App.css';
+import {Route} from 'react-router-dom';
 
 const App = props => {
   const inputs = [
@@ -42,6 +43,17 @@ const App = props => {
           <button>Submit</button>
         </form>
       </header>
+      
+      <Route exact path='/'/>
+      <Route exact path='/onboarding'/>
+      <Route exact path='/join-org'/>
+      <Route exact path='/bm-homepage'/>
+      <Route exact path='/issue-log'/>
+      <Route exact path='/scheduled-issues'/>
+      <Route exact path='/teacher-attendance'/>
+      <Route exact path='/admin-visits'/>
+      <Route exact path='/payments'/>
+
     </div>
   );
 }
