@@ -14,6 +14,7 @@ function home() {
         </div>
         <div className = "Main">
          <NavLink to="/onBoard">Get Started</NavLink>
+	 <NavLink to="/bm-homepage">View App</NavLink>
          </div>
        
         <div className= "Footer">
