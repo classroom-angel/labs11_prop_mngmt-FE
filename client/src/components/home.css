@@ -2,7 +2,7 @@ h1 {
     font-family: 'Quicksand', sans-serif;
 }
 
-a {
+a.land-link {
    text-decoration: none;
    margin: 60px 20px;
    color: blue;
