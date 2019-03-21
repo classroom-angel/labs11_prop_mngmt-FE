@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from './axiosInstance';
 import useFormInput from './components/useFormInput';
+import {Route} from 'react-router-dom';
+import landingpage from './components/landingpage';
 import logo from './logo.svg';
 import './App.css';
 
@@ -26,7 +28,9 @@ const App = props => {
 
   return (
     <div className="App">
+   
       <header className="App-header">
+      <Route exact path="/" component={landingpage} />
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
