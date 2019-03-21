@@ -8,13 +8,13 @@ function home() {
         <div>
         <div className="onboarding-component">
             <h1>Classroom Angel</h1>
-            <NavLink to="/ourmission">Our Mission</NavLink>
-            <NavLink to="/testimonials">Testimonials</NavLink>
-            <NavLink to="/signout">Signout</NavLink>
+            <NavLink className='land-link' to="/ourmission">Our Mission</NavLink>
+            <NavLink className='land-link' to="/testimonials">Testimonials</NavLink>
+            <NavLink className='land-link' to="/signout">Signout</NavLink>
         </div>
         <div className = "Main">
-         <NavLink to="/onBoard">Get Started</NavLink>
-	 <NavLink to="/bm-homepage">View App</NavLink>
+         <NavLink className='land-link' to="/onBoard">Get Started</NavLink>
+	 <NavLink className='land-link' to="/bm-homepage">View App</NavLink>
          </div>
        
         <div className= "Footer">
