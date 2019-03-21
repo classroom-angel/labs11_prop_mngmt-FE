@@ -1,9 +1,15 @@
 import React from 'react'
+import Sidebar from './Sidebar';
+import '../App.css'
 
 function scheduled() {
     return (
-        <div className="onboarding-component">
-            <h1>Scheduled Issues</h1>
+        <div className="page-container">
+            <Sidebar />
+            <div>
+                <h1>Scheduled stuff stuff....</h1>
+            </div>
+            
         </div>
     )
 }
