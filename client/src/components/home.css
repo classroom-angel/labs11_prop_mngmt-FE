@@ -1,3 +1,15 @@
 h1 {
     font-family: 'Quicksand', sans-serif;
 }
+
+a {
+   text-decoration: none;
+   margin: 60px 20px;
+   color: blue;
+   background: orange;
+   border: 2px solid blue;
+   }
+
+a:hover {
+  color: firebrick;
+  }
