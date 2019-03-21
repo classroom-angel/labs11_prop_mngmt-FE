@@ -1,9 +1,12 @@
 import React from 'react'
+import Sidebar from './Sidebar';
+import '../App.css'
 
 function Payments() {
     return (
-        <div className="onboarding-component">
-            <h1>Payments</h1>
+        <div className="page-container">
+            <Sidebar />
+            <div>Payments stuff....</div>
         </div>
     )
 }

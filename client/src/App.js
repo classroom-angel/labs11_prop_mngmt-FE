@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import axios from './axiosInstance';
-import useFormInput from './components/useFormInput';
-import logo from './logo.svg';
+// import axios from './axiosInstance';
+// import useFormInput from './components/useFormInput';
+// import logo from './logo.svg';
 import './App.css';
 import {Route} from 'react-router-dom';
 import onBoard from './components/onBoard';
