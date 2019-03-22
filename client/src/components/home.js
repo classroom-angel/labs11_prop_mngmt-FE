@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import './home.css'
-// import onBoard from './components/onBoard';
+
 
 function home() {
     return (
@@ -13,8 +13,8 @@ function home() {
             <NavLink to="/signout">Signout</NavLink>
         </div>
         <div className = "Main">
-         <NavLink to="/onBoard">Get Started</NavLink>
-         </div>
+         <NavLink to="/onboarding">Get Started</NavLink>
+       </div>
        
         <div className= "Footer">
         <p>©Classroom Angel</p>
@@ -24,4 +24,4 @@ function home() {
     )
 }
 
-export default home
+export default home;
