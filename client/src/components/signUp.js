@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from '../axiosInstance';
 import useFormInput from './useFormInput';
+import { NavLink } from 'react-router-dom'
 
 const roles = [
   "Board member",
@@ -68,6 +69,7 @@ export default class SignUp extends Component {
           </div>
           <button>Submit</button>
         </form>
+        <NavLink className='land-link' to="/">Back to home</NavLink>
         </div>
 
       )
