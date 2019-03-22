@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import './App.css';
 import {Route} from 'react-router-dom';
 import onBoard from './components/onBoard';
-import signUp from './components/signUp';
+import SignUp from './components/signUp';
 import home from './components/home';
 import joinOrg from './components/joinOrg';
 import boardMemberHub from './components/boardMember'
@@ -18,7 +18,7 @@ const App = props => {
   return (
     <div className="App">
       <Route exact path='/' component={home}/>
-      <Route exact path='/signup' component={signUp}/>
+      <Route exact path='/signup' component={SignUp}/>
       <Route exact path='/onboarding' component={onBoard}/>
       <Route exact path='/join-org' component={joinOrg}/>
       <Route exact path='/bm-homepage' component={boardMemberHub}/>
