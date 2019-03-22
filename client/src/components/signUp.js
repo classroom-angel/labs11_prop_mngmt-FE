@@ -43,6 +43,8 @@ export default class SignUp extends Component {
     onSubmit = async event => {
       event.preventDefault();
 
+      console.log(this.state);
+
       const tempResponse = await axios.post(`users/register`, this.state);
 
       console.log(tempResponse);
@@ -66,6 +68,7 @@ export default class SignUp extends Component {
               })}
             </select>
             <input name="password" value={this.state.password} type="password" placeholder="Password..." onChange={this.change} />
+            <input name="organizationName" value={this.state.organizationName} type="text" placeholder="Enter an existing organization name" onChange={this.change} />
           </div>
           <button>Submit</button>
         </form>
