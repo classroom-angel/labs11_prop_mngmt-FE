@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import './home.css'
 
 
-function home() {
+function Home() {
     return (
         <div>
         <div className="onboarding-component">
@@ -28,4 +28,4 @@ function home() {
     )
 }
 
-export default home;
+export default Home;

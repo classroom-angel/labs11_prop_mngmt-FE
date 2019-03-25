@@ -1,35 +1,49 @@
-import React, { Component } from 'react';
-// import axios from './axiosInstance';
+import React from 'react';
+import axios from './axiosInstance';
 // import useFormInput from './components/useFormInput';
 // import logo from './logo.svg';
 import './App.css';
 import {Route} from 'react-router-dom';
-import onBoard from './components/onBoard';
-import SignUp from './components/signUp';
-import home from './components/home';
-import joinOrg from './components/joinOrg';
-import boardMemberHub from './components/boardMember'
-import issueLog from './components/issueLog';
-import scheduled from './components/scheduled';
-import Visits from './components/visits';
-import Payments from './components/payments';
+import OnBoard from './components/OnBoard';
+import SignUp from './components/SignUp';
+import Home from './components/Home';
+import JoinOrg from './components/JoinOrg';
+import BoardMemberHub from './components/BoardMember'
+import IssueLog from './components/IssueLog';
+import Scheduled from './components/Scheduled';
+import Visits from './components/Visits';
+import Payments from './components/Payments';
 
-const App = props => {
-  return (
-    <div className="App">
-      <Route exact path='/' component={home}/>
-      <Route exact path='/signup' component={SignUp}/>
-      <Route exact path='/onboarding' component={onBoard}/>
-      <Route exact path='/join-org' component={joinOrg}/>
-      <Route exact path='/bm-homepage' component={boardMemberHub}/>
-      <Route exact path='/issue-log' component={issueLog}/>
-      <Route exact path='/scheduled' component={scheduled}/>
-      {/* <Route exact path='/teacher-attendance'/> */}
-      {/* <Route exact path='/admin-visits'/> */}
-      <Route exact path='/visits' component={Visits}/>
-      <Route exact path='/payments' component={Payments}/>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      issues: [],
+      issuesLoaded: false
+    }
+  }
+
+  componentDidMount() {
+    axios.get('issues').then(res => this.setState({issues: res.data.issues, issuesLoaded: true})).catch(err => console.log(err))
+  }
+
+  render(){
+    return (
+      <div className="App">
+        <Route exact path='/' component={Home}/>
+        <Route exact path='/signup' component={SignUp}/>
+        <Route exact path='/onboarding' component={OnBoard}/>
+        <Route exact path='/join-org' component={JoinOrg}/>
+        <Route exact path='/bm-homepage' component={BoardMemberHub}/>
+        <Route exact path='/issue-log' render={(props) => <IssueLog {...props} issues={this.state.issues} issuesLoaded={this.state.issuesLoaded} />}/>
+        <Route exact path='/scheduled' component={Scheduled}/>
+        {/* <Route exact path='/teacher-attendance'/> */}
+        {/* <Route exact path='/admin-visits'/> */}
+        <Route exact path='/visits' component={Visits}/>
+        <Route exact path='/payments' component={Payments}/>
+      </div>
+    );
+  }
 }
 
 export default App;

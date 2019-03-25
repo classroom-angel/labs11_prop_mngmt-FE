@@ -1,6 +1,6 @@
 import React from 'react'
 
-function onBoard() {
+function OnBoard() {
     return (
         <div className="onboarding-component">
             <h1>Onbaording component</h1>
@@ -9,4 +9,4 @@ function onBoard() {
     )
 }
 
-export default onBoard
+export default OnBoard
