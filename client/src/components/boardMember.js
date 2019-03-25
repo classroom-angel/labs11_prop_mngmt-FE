@@ -2,7 +2,7 @@ import React from 'react'
 import Sidebar from './Sidebar'
 import '../App.css'
 
-function boardMemberHub() {
+function BoardMemberHub() {
     return (
         <div className="page-container">
             {/* <h1>Board member homepage</h1> */}
@@ -16,4 +16,4 @@ function boardMemberHub() {
     )
 }
 
-export default boardMemberHub
+export default BoardMemberHub

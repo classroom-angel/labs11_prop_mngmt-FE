@@ -6,11 +6,11 @@ import './App.css';
 import {Route} from 'react-router-dom';
 import OnBoard from './components/OnBoard';
 import SignUp from './components/SignUp';
-import home from './components/Home';
-import joinOrg from './components/JoinOrg';
-import boardMemberHub from './components/BoardMember'
+import Home from './components/Home';
+import JoinOrg from './components/JoinOrg';
+import BoardMemberHub from './components/BoardMember'
 import IssueLog from './components/IssueLog';
-import scheduled from './components/Scheduled';
+import Scheduled from './components/Scheduled';
 import Visits from './components/Visits';
 import Payments from './components/Payments';
 
@@ -30,13 +30,13 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
-        <Route exact path='/' component={home}/>
+        <Route exact path='/' component={Home}/>
         <Route exact path='/signup' component={SignUp}/>
         <Route exact path='/onboarding' component={OnBoard}/>
-        <Route exact path='/join-org' component={joinOrg}/>
-        <Route exact path='/bm-homepage' component={boardMemberHub}/>
+        <Route exact path='/join-org' component={JoinOrg}/>
+        <Route exact path='/bm-homepage' component={BoardMemberHub}/>
         <Route exact path='/issue-log' render={(props) => <IssueLog {...props} issues={this.state.issues} issuesLoaded={this.state.issuesLoaded} />}/>
-        <Route exact path='/scheduled' component={scheduled}/>
+        <Route exact path='/scheduled' component={Scheduled}/>
         {/* <Route exact path='/teacher-attendance'/> */}
         {/* <Route exact path='/admin-visits'/> */}
         <Route exact path='/visits' component={Visits}/>

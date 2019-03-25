@@ -1,6 +1,6 @@
 import React from 'react'
 
-function joinOrg() {
+function JoinOrg() {
     return (
         <div className="onboarding-component">
             <h1>Join organization Component</h1>
@@ -8,4 +8,4 @@ function joinOrg() {
     )
 }
 
-export default joinOrg
+export default JoinOrg
