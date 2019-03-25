@@ -4,7 +4,7 @@ import axios from './axiosInstance';
 // import logo from './logo.svg';
 import './App.css';
 import {Route} from 'react-router-dom';
-import onBoard from './components/OnBoard';
+import OnBoard from './components/OnBoard';
 import SignUp from './components/SignUp';
 import home from './components/Home';
 import joinOrg from './components/JoinOrg';
@@ -32,7 +32,7 @@ class App extends React.Component {
       <div className="App">
         <Route exact path='/' component={home}/>
         <Route exact path='/signup' component={SignUp}/>
-        <Route exact path='/onboarding' component={onBoard}/>
+        <Route exact path='/onboarding' component={OnBoard}/>
         <Route exact path='/join-org' component={joinOrg}/>
         <Route exact path='/bm-homepage' component={boardMemberHub}/>
         <Route exact path='/issue-log' render={(props) => <IssueLog {...props} issues={this.state.issues} issuesLoaded={this.state.issuesLoaded} />}/>
