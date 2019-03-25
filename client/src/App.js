@@ -4,15 +4,15 @@ import axios from './axiosInstance';
 // import logo from './logo.svg';
 import './App.css';
 import {Route} from 'react-router-dom';
-import onBoard from './components/onBoard';
-import SignUp from './components/signUp';
-import home from './components/home';
-import joinOrg from './components/joinOrg';
-import boardMemberHub from './components/boardMember'
+import onBoard from './components/OnBoard';
+import SignUp from './components/SignUp';
+import home from './components/Home';
+import joinOrg from './components/JoinOrg';
+import boardMemberHub from './components/BoardMember'
 import IssueLog from './components/IssueLog';
 import scheduled from './components/Scheduled';
-import Visits from './components/visits';
-import Payments from './components/payments';
+import Visits from './components/Visits';
+import Payments from './components/Payments';
 
 class App extends React.Component {
   constructor(props) {
