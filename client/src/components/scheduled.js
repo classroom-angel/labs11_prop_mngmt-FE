@@ -2,7 +2,7 @@ import React from 'react'
 import Sidebar from './Sidebar';
 import '../App.css'
 
-function scheduled() {
+function Scheduled() {
     return (
         <div className="page-container">
             <Sidebar />
@@ -14,4 +14,4 @@ function scheduled() {
     )
 }
 
-export default scheduled
+export default Scheduled
