@@ -19,12 +19,16 @@ class App extends React.Component {
     super(props)
     this.state = {
       issues: [],
-      issuesLoaded: false
+      issuesLoaded: false,
+      solutions: [],
+      solutionsLoaded: false
     }
   }
 
   componentDidMount() {
     axios.get('issues').then(res => this.setState({issues: res.data.issues, issuesLoaded: true})).catch(err => console.log(err))
+    axios.get('solutions').then(res => this.setState({solutions: res.data.solutions, solutionsLoaded: true})).catch(err => console.log(err))
+
   }
 
   render(){
@@ -36,7 +40,7 @@ class App extends React.Component {
         <Route exact path='/join-org' component={JoinOrg}/>
         <Route exact path='/bm-homepage' component={BoardMemberHub}/>
         <Route exact path='/issue-log' render={(props) => <IssueLog {...props} issues={this.state.issues} issuesLoaded={this.state.issuesLoaded} />}/>
-        <Route exact path='/scheduled' component={Scheduled}/>
+        <Route exact path='/scheduled' render={(props) => <Scheduled {...props} solutions={this.state.solutions} solutionsLoaded={this.state.solutionsLoaded} />}/>
         {/* <Route exact path='/teacher-attendance'/> */}
         {/* <Route exact path='/admin-visits'/> */}
         <Route exact path='/visits' component={Visits}/>

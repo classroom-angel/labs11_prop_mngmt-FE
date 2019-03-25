@@ -30,7 +30,11 @@ function IssueLog(props) {
         )
     } else {
         return (
-            <h1>Loading...</h1>
+            <div className="page-container">
+                <Sidebar />
+                <h1>Loading...</h1>
+            </div>
+            
         )
     }
     
