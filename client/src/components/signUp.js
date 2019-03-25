@@ -60,12 +60,14 @@ export default class SignUp extends Component {
             <input name="firstName" value={this.state.firstName} type="text" placeholder="First Name..." onChange={this.change} />
             <input name="lastName" value={this.state.lastName} type="text" placeholder="Last Name..." onChange={this.change} />
             <select name="role" onChange={this.change} value={this.state.role}>
-              <option disabled="true" selected="true">role...</option>
+              <option selected="true">role...</option>
               {roles.map(role => {
                 return <option value={role}>{role}</option>
               })}
             </select>
             <input name="password" value={this.state.password} type="password" placeholder="Password..." onChange={this.change} />
+            
+            {/* <input name="organizationName" value={this.state.organizationName} type="text" placeholder="Organization" onChange={this.change}/> */}
           </div>
           <button>Submit</button>
         </form>
