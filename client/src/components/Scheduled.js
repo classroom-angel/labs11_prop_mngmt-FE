@@ -8,7 +8,7 @@ function Scheduled(props) {
         return (
             <div className="page-container">
                 <Sidebar />
-                <div>
+                <div className="right-side">
                         <h1 style={{textAlign: 'center', border: '2px solid green'}}>Scheduled Issues</h1>
                         <ul>
                             {props.solutions.map(solution => {

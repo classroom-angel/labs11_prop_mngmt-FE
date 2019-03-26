@@ -42,7 +42,7 @@ class App extends React.Component {
 
   postIssues(event) {
     console.log('posting...')
-    // event.preventDefault()
+    event.preventDefault()
     axios.post('issues', {name: this.state.issueName,
       notes: this.state.issueNotes,
     status: this.state.issueStatus,
