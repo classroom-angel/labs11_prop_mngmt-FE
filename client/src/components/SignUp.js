@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from '../axiosInstance';
 // import useFormInput from './useFormInput';
 import { NavLink } from 'react-router-dom'
+import Auth from '../Auth/auth.js';
 
 const roles = [
   "Board member",
@@ -20,6 +21,11 @@ export default class SignUp extends Component {
         role: "",
         organizationName: ""
       }
+    }
+
+    componentDidMount() {
+      const auth = new Auth();
+      auth.login();
     }
 
     clearState = () => {
@@ -53,8 +59,9 @@ export default class SignUp extends Component {
     };
 
     render() {
-      return (
-        <div>
+      console.log(process.env)
+       return (
+       <div>
         <h1>signUp page</h1>
         <form onSubmit={this.onSubmit}>
           <div>
