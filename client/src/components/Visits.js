@@ -6,7 +6,7 @@ function Visits() {
     return (
         <div className="page-container">
             <Sidebar />
-            <div>
+            <div className="right-side">
                 <h1>Visits</h1> 
             </div>
             
