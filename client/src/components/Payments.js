@@ -6,7 +6,7 @@ function Payments() {
     return (
         <div className="page-container">
             <Sidebar />
-            <div>Payments stuff....</div>
+            <div className="right-side">Payments stuff....</div>
         </div>
     )
 }
