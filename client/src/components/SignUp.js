@@ -59,8 +59,9 @@ export default class SignUp extends Component {
     };
 
     render() {
+      console.log(process.env)
        return (
-        <div>
+       <div>
         <h1>signUp page</h1>
         <form onSubmit={this.onSubmit}>
           <div>
