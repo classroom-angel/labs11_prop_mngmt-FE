@@ -29,6 +29,7 @@ class App extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.postIssues = this.postIssues.bind(this)
+    this.deleteIssue = this.deleteIssue.bind(this)
   }
 
   componentDidMount() {
@@ -52,10 +53,20 @@ class App extends React.Component {
  })
    .then(res => console.log(res))
    .catch(err => console.log(err))
+   this.setState({issueName: "", issueNotes: ""})
 }
 
+  deleteIssue(event) {
+    console.log('deleting...')
+    console.log(event.target.value)
+    // event.preventDefault()
+    axios.delete(`issues/${event.target.value}`)
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+  }
+
   render(){
-    console.log(this.state)
+    // console.log(this.state)
     return (
       <div className="App">
         <Route exact path='/' component={Home}/>
@@ -69,7 +80,8 @@ class App extends React.Component {
         issuesLoaded={this.state.issuesLoaded}
         handleChange={this.handleChange}
         issueStatus={this.state.issueStatus}
-        postIssues={this.postIssues} />}/>
+        postIssues={this.postIssues}
+        deleteIssue={this.deleteIssue} />}/>
         <Route exact path='/scheduled' render={(props) => <Scheduled {...props} solutions={this.state.solutions} solutionsLoaded={this.state.solutionsLoaded} />}/>
         {/* <Route exact path='/teacher-attendance'/> */}
         {/* <Route exact path='/admin-visits'/> */}
