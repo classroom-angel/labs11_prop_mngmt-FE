@@ -28,6 +28,7 @@ class App extends React.Component {
       orgID: 1
     }
     this.handleChange = this.handleChange.bind(this)
+    this.postIssues = this.postIssues.bind(this)
   }
 
   componentDidMount() {
@@ -38,6 +39,18 @@ class App extends React.Component {
   handleChange(event) {
     this.setState({[event.target.name]: event.target.value})
   }
+
+  postIssues() {
+    axios.post('issues', {name: this.state.issueName,
+      notes: this.state.issueNotes,
+    status: this.state.issueStatus,
+    isVisit: true,
+    organization_id: this.state.orgID,
+    date: Date.now()
+ })
+   .then(res => console.log(res))
+   .catch(err => console.log(err))
+}
 
   render(){
     console.log(this.state)
