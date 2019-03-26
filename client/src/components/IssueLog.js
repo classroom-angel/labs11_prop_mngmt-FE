@@ -19,6 +19,7 @@ function IssueLog(props) {
                                   <h3>Status: {issue.status}</h3>
                                   <h4>Date: {issue.date}</h4>
                                   <h5>Org. Id: {issue.organization_id}</h5>
+                                  <button onClick={props.deleteIssue} value={issue.id} sytle={{backgroundColor:'firebrick', color:'orange'}}>Delete Issue</button>
                                 </div>
                             )
                         })}
