@@ -17,6 +17,7 @@ import Payments from './components/Payments';
 class App extends React.Component {
   constructor(props) {
     super(props)
+    // When we're ready we can delete these extra state values
     this.state = {
       solutions: [],
       solutionsLoaded: false,
