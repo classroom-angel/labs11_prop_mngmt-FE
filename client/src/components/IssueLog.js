@@ -24,6 +24,12 @@ function IssueLog(props) {
                             )
                         })}
                     </ul>
+                    <form>
+                        <input name="issueName" value={props.issueName} placeholder="Issue Title" onChange={props.handleChange}/>
+                        <input name="issueNotes" value={props.issueNotes} placeholder="Additional notes" onChange={props.handleChange}/>
+                        {/* Need to come back and use select elements for the following line */}
+                        <input name="issueStatus" value={props.issueStatus} placeholder="Status" onChange={props.handleChange}/> 
+                    </form>
                 </div>
                 
             </div>

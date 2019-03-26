@@ -21,17 +21,26 @@ class App extends React.Component {
       issues: [],
       issuesLoaded: false,
       solutions: [],
-      solutionsLoaded: false
+      solutionsLoaded: false,
+      issueName: "",
+      issueNotes: "",
+      issueStatus: "Needs Attention",
+      orgID: 1
     }
+    this.handleChange = this.handleChange.bind(this)
   }
 
   componentDidMount() {
     axios.get('issues').then(res => this.setState({issues: res.data.issues, issuesLoaded: true})).catch(err => console.log(err))
     axios.get('solutions').then(res => this.setState({solutions: res.data.solutions, solutionsLoaded: true})).catch(err => console.log(err))
+  }
 
+  handleChange(event) {
+    this.setState({[event.target.name]: event.target.value})
   }
 
   render(){
+    console.log(this.state)
     return (
       <div className="App">
         <Route exact path='/' component={Home}/>
@@ -39,7 +48,11 @@ class App extends React.Component {
         <Route exact path='/onboarding' component={OnBoard}/>
         <Route exact path='/join-org' component={JoinOrg}/>
         <Route exact path='/bm-homepage' component={BoardMemberHub}/>
-        <Route exact path='/issue-log' render={(props) => <IssueLog {...props} issues={this.state.issues} issuesLoaded={this.state.issuesLoaded} />}/>
+        <Route exact path='/issue-log'
+        render={(props) => <IssueLog {...props}
+        issues={this.state.issues}
+        issuesLoaded={this.state.issuesLoaded}
+        handleChange={this.handleChange} />}/>
         <Route exact path='/scheduled' render={(props) => <Scheduled {...props} solutions={this.state.solutions} solutionsLoaded={this.state.solutionsLoaded} />}/>
         {/* <Route exact path='/teacher-attendance'/> */}
         {/* <Route exact path='/admin-visits'/> */}
