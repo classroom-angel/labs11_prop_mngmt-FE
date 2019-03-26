@@ -13,6 +13,8 @@ import IssueLog from './components/IssueLog';
 import Scheduled from './components/Scheduled';
 import Visits from './components/Visits';
 import Payments from './components/Payments';
+import Auth from './Auth/auth.js';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -30,6 +32,7 @@ class App extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.postIssues = this.postIssues.bind(this)
     this.deleteIssue = this.deleteIssue.bind(this)
+    this.auth = new Auth();
   }
 
   componentDidMount() {
@@ -70,7 +73,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Route exact path='/' component={Home}/>
-        <Route exact path='/signup' component={SignUp}/>
+        <Route exact path='/signup' render={(props) => <SignUp auth={this.auth} />} />
         <Route exact path='/onboarding' component={OnBoard}/>
         <Route exact path='/join-org' component={JoinOrg}/>
         <Route exact path='/bm-homepage' component={BoardMemberHub}/>
