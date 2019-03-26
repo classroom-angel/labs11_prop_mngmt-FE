@@ -26,9 +26,7 @@ class App extends React.Component {
       solutionsLoaded: false,
       orgID: 1
     }
-    this.handleChange = this.handleChange.bind(this)
-    this.postIssues = this.postIssues.bind(this)
-    this.deleteIssue = this.deleteIssue.bind(this)
+    
     this.auth = new Auth();
   }
 
