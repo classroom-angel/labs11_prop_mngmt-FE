@@ -13,7 +13,8 @@ import IssueLog from './components/IssueLog';
 import Scheduled from './components/Scheduled';
 import Visits from './components/Visits';
 import Payments from './components/Payments';
-import Auth from './Auth/auth.js';
+import Auth from './Auth/auth';
+import AuthLoad from './components/AuthLoad';
 
 
 class App extends React.Component {
@@ -74,6 +75,7 @@ class App extends React.Component {
       <div className="App">
         <Route exact path='/' component={Home}/>
         <Route exact path='/signup' render={(props) => <SignUp auth={this.auth} />} />
+        <Route exact path='/authload' render={(props) => <AuthLoad auth={this.auth} />} />
         <Route exact path='/onboarding' component={OnBoard}/>
         <Route exact path='/join-org' component={JoinOrg}/>
         <Route exact path='/bm-homepage' component={BoardMemberHub}/>
