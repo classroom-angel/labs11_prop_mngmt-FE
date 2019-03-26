@@ -40,13 +40,15 @@ class App extends React.Component {
     this.setState({[event.target.name]: event.target.value})
   }
 
-  postIssues() {
+  postIssues(event) {
+    console.log('posting...')
+    event.preventDefault()
     axios.post('issues', {name: this.state.issueName,
       notes: this.state.issueNotes,
     status: this.state.issueStatus,
-    isVisit: true,
-    organization_id: this.state.orgID,
-    date: Date.now()
+    isVisit: false,
+    organizationId: this.state.orgID,
+    date: '03-25-20'
  })
    .then(res => console.log(res))
    .catch(err => console.log(err))
@@ -65,7 +67,9 @@ class App extends React.Component {
         render={(props) => <IssueLog {...props}
         issues={this.state.issues}
         issuesLoaded={this.state.issuesLoaded}
-        handleChange={this.handleChange} />}/>
+        handleChange={this.handleChange}
+        issueStatus={this.state.issueStatus}
+        postIssues={this.postIssues} />}/>
         <Route exact path='/scheduled' render={(props) => <Scheduled {...props} solutions={this.state.solutions} solutionsLoaded={this.state.solutionsLoaded} />}/>
         {/* <Route exact path='/teacher-attendance'/> */}
         {/* <Route exact path='/admin-visits'/> */}

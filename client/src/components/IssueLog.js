@@ -5,11 +5,10 @@ import '../axiosInstance'
 
 function IssueLog(props) {
     if (props.issuesLoaded) {
-        console.log(props.issues)
         return (
             <div className="page-container">
                 <Sidebar />
-                <div>
+                <div style={{overflow: 'scroll'}}>
                     <h1 style={{textAlign: 'center', border: '2px solid gray'}}>Issue Log</h1>
                     <ul>
                         {props.issues.map(issue => {
@@ -24,11 +23,12 @@ function IssueLog(props) {
                             )
                         })}
                     </ul>
-                    <form>
+                    <form onSubmit={props.postIssues}>
                         <input name="issueName" value={props.issueName} placeholder="Issue Title" onChange={props.handleChange}/>
                         <input name="issueNotes" value={props.issueNotes} placeholder="Additional notes" onChange={props.handleChange}/>
                         {/* Need to come back and use select elements for the following line */}
                         <input name="issueStatus" value={props.issueStatus} placeholder="Status" onChange={props.handleChange}/> 
+                        <input type="submit" />
                     </form>
                 </div>
                 
