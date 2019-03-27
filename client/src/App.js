@@ -10,6 +10,7 @@ import Home from './components/Home';
 import JoinOrg from './components/JoinOrg';
 import BoardMemberHub from './components/BoardMember'
 import IssueLog from './components/IssueLog';
+import ViewIssue from './components/ViewIssue';
 import Scheduled from './components/Scheduled';
 import Visits from './components/Visits';
 import Payments from './components/Payments';
@@ -44,6 +45,7 @@ class App extends React.Component {
         <Route exact path='/join-org' component={JoinOrg}/>
         <Route exact path='/bm-homepage' component={BoardMemberHub}/>
         <Route exact path='/issue-log' component={IssueLog}/>
+        <Route exact path='/issue/:id' component={ViewIssue}/>
         <Route exact path='/scheduled' render={(props) => <Scheduled {...props} solutions={this.state.solutions} solutionsLoaded={this.state.solutionsLoaded} />}/>
         {/* <Route exact path='/teacher-attendance'/> */}
         {/* <Route exact path='/admin-visits'/> */}
