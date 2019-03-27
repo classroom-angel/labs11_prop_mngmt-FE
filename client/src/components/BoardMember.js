@@ -8,7 +8,7 @@ function BoardMemberHub() {
             {/* <h1>Board member homepage</h1> */}
             {/* <div> */}
                 <Sidebar/>
-                <div>
+                <div className="right-side">
                     <h1>Board member homepage stuff</h1>
                 </div>
             {/* </div> */}
