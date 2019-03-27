@@ -114,8 +114,8 @@ export default class IssueLog extends React.Component {
                         <input name="issueNotes" value={this.state.issueNotes} placeholder="Additional notes" onChange={this.handleChange}/>
                         <select name="role" onChange={this.change} value={this.state.role}>
                             <option>Status...</option>
-                                {statuses.map(status => {
-                                  return <option value={status}>{status}</option>
+                                {statuses.map((status, index) => {
+                                  return <option key={index} value={status}>{status}</option>
                                 })}
                         </select>
                         
