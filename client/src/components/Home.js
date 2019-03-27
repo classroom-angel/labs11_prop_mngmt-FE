@@ -15,11 +15,11 @@ function Home() {
         <div className = "Main">
          <NavLink to="/onboarding">Get Started</NavLink>
        </div>
-      
+
 	 <NavLink className='land-link' to="/bm-homepage">View App</NavLink>
-     <NavLink className='land-link' to="/signup">Signup</NavLink>
-         
-       
+     <NavLink className='land-link' to="/authload">Signup</NavLink>
+
+
         <div className= "Footer">
         <p>©Classroom Angel</p>
          <NavLink to="/team">Meet The Team</NavLink>
