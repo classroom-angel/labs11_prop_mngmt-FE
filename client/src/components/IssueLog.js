@@ -86,7 +86,21 @@ export default class IssueLog extends React.Component {
         .catch(err => {
             console.log(err)
         })
-    }
+    } 
+
+    handleTagEdit(id, event) {
+        event.preventDefault()
+        const newTag = {name: this.state.tag, issueId: id}
+        axios.post(`tag`, newTag)
+        .then(response => {
+          console.log("axios response", response.data);
+          this.setState({tags: response.data, tag:''})
+        })
+        .catch(err => {
+          console.log("Tag Edit Error", err);
+        })
+      }
+    
     
 
     render() {
@@ -128,9 +142,9 @@ export default class IssueLog extends React.Component {
                                               </div>
                                           )
                                       })}
-                                      <form className="tagForm" onSubmit={this.handleTagSubmit}>
+                                      {/* <form className="tagForm" onSubmit={() => this.handleTagSubmit(issue.id)}>
                                         <input className="mainInput" type="text" placeholder="add tag" name="tag" onChange={this.handleChange} value={this.state.tag} />
-                                      </form>
+                                      </form> */}
                                   </div>
                                   <button onClick={this.deleteIssue} value={issue.id} sytle={{display: 'inline-block'}}>Delete Issue</button>
                                   <NavLink to={`/issue/${issue.id}`}><div value={issue.id} className="edit-issue-button">Update Issue</div></NavLink>

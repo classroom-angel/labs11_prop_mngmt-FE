@@ -101,6 +101,8 @@
   background: blue;
   color: silver;
   font-weight: 800;
+  display: inline-block;
+  margin: 10px;
 }
 
 
