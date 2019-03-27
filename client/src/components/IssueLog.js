@@ -86,7 +86,21 @@ export default class IssueLog extends React.Component {
         .catch(err => {
             console.log(err)
         })
-    }
+    } 
+
+    handleTagEdit(id, event) {
+        event.preventDefault()
+        const newTag = {name: this.state.tag, issueId: id}
+        axios.post(`tag`, newTag)
+        .then(response => {
+          console.log("axios response", response.data);
+          this.setState({tags: response.data, tag:''})
+        })
+        .catch(err => {
+          console.log("Tag Edit Error", err);
+        })
+      }
+    
     
 
     render() {
@@ -97,32 +111,6 @@ export default class IssueLog extends React.Component {
                 <Sidebar />
                 <div className="right-side">
                     <h1 style={{textAlign: 'center', border: '2px solid gray'}}>Issue Log</h1>
-                    <ul>
-                        {this.state.issues.map(issue => {
-                            return (
-                                <div key={issue.id} className="issue-card">
-                                  <h1>Name: {issue.name}</h1>
-                                  <h2>Notes: {issue.notes}</h2>
-                                  <h3>Status: {issue.status}</h3>
-                                  <h4>Date: {issue.date}</h4>
-                                  <h5>Org. Id: {issue.organization_id}</h5>
-                                  <ul>
-                                      {this.state.tags.filter(function(tag) {
-                                          return tag.id === issue.id
-                                      }).map(function(tag) {
-                                          return (
-                                              <div>
-                                                  {tag.name}
-                                              </div>
-                                          )
-                                      })}
-                                  </ul>
-                                  <button onClick={this.deleteIssue} value={issue.id} sytle={{backgroundColor:'firebrick', color:'orange'}}>Delete Issue</button>
-                                  <NavLink to={`/issue/${issue.id}`}><div value={issue.id} className="edit-issue-button">Update Issue</div></NavLink>
-                                </div>
-                            ) 
-                        })}
-                    </ul>
                     <form onSubmit={this.postIssues}>
                         <input name="issueName" value={this.state.issueName} placeholder="Issue Title" onChange={this.handleChange}/>
                         <input name="issueNotes" value={this.state.issueNotes} placeholder="Additional notes" onChange={this.handleChange}/>
@@ -135,6 +123,35 @@ export default class IssueLog extends React.Component {
                         
                         <input type="submit" />
                     </form>
+                    <div className="issue-list">
+                        {this.state.issues.map(issue => {
+                            return (
+                                <div key={issue.id} className="issue-card">
+                                  <p>Name: {issue.name}</p>
+                                  <h2>Notes: {issue.notes}</h2>
+                                  <h3>Status: {issue.status}</h3>
+                                  <h4>Date: {issue.date}</h4>
+                                  <h5>Org. Id: {issue.organization_id}</h5>
+                                  <div>
+                                      {this.state.tags.filter(function(tag) {
+                                          return tag.issueId === issue.id
+                                      }).map(function(tag) {
+                                          return (
+                                              <div key={tag.id} className="tag">
+                                                  {tag.name}
+                                              </div>
+                                          )
+                                      })}
+                                      {/* <form className="tagForm" onSubmit={() => this.handleTagSubmit(issue.id)}>
+                                        <input className="mainInput" type="text" placeholder="add tag" name="tag" onChange={this.handleChange} value={this.state.tag} />
+                                      </form> */}
+                                  </div>
+                                  <button onClick={this.deleteIssue} value={issue.id} sytle={{display: 'inline-block'}}>Delete Issue</button>
+                                  <NavLink to={`/issue/${issue.id}`}><div value={issue.id} className="edit-issue-button">Update Issue</div></NavLink>
+                                </div>
+                            ) 
+                        })}
+                    </div>
                 </div>
                 
             </div>
