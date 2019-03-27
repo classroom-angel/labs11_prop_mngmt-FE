@@ -65,9 +65,15 @@
   height: 100vh;
 }
 
+.issue-card {
+  text-align: center; 
+  border: 1px solid orange;
+  margin: 10px auto;
+}
 
-
-
+.edit-issue-button {
+  border: 1px solid indianred
+}
 
 
 /* CALENDAR STYLE */
@@ -100,7 +106,7 @@
 
 :root {
   --main-color: #1a8fff;
-  --text-color: #777;
+  --text-color: #444;
   --text-color-light: #ccc;
   --border-color: #eee;
   --bg-color: #f9f9f9;
