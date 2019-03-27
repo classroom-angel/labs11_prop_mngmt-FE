@@ -2,6 +2,7 @@ import React from 'react'
 import Sidebar from './Sidebar';
 import '../App.css'
 import axios from '../axiosInstance'
+import {NavLink} from 'react-router-dom'
 
 class ViewIssue extends React.Component {
     constructor(props) {
@@ -17,6 +18,11 @@ class ViewIssue extends React.Component {
             }
             this.toggleEdit = this.toggleEdit.bind(this)
             this.fetchIssue = this.fetchIssue.bind(this)
+        }
+
+        componentDidMount() {
+            console.log(this.props.match.params.id)
+            this.fetchIssue(this.props.match.params.id)
         }
     
 
@@ -44,6 +50,8 @@ class ViewIssue extends React.Component {
             <div className="page-container">
                 <Sidebar />
                 <div className="right-side">
+                {this.state.issue ?
+                    <div> 
                     <h1 style={{textAlign: 'center', border: '2px solid gray'}}>Issue</h1>
                     <div key={this.state.issue.id}>
                       <h1>Name: {this.state.issue.name}</h1>
@@ -53,7 +61,9 @@ class ViewIssue extends React.Component {
                       <h5>Org. Id: {this.state.issue.organization_id}</h5>
                       <button onClick={this.deleteIssue} value={this.state.issue.id} sytle={{backgroundColor:'firebrick', color:'orange'}}>Delete Issue</button>
                       <button onClick={this.deleteIssue} value={this.state.issue.id} sytle={{backgroundColor:'firebrick', color:'orange'}}>Edit Issue</button>
+                      <NavLink to='/issue-log'>Back to Issues</NavLink>
                     </div>
+                    </div> : "Loading..."}
     
                 </div>
             </div>

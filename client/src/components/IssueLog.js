@@ -2,8 +2,14 @@ import React from 'react'
 import Sidebar from './Sidebar';
 import '../App.css'
 import axios from '../axiosInstance'
+import {NavLink} from 'react-router-dom'
 
-class IssueLog extends React.Component {
+const statuses = [
+    "Needs Attention",
+    "Resolved",
+    "Scheduled"
+]
+export default class IssueLog extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -14,7 +20,7 @@ class IssueLog extends React.Component {
             issueStatus: "Needs Attention",
             orgID: 1,
             editingIssue: false,
-            issue: null
+            issue: null 
         }
         this.postIssues = this.postIssues.bind(this)
         this.deleteIssue = this.deleteIssue.bind(this)
@@ -90,23 +96,29 @@ class IssueLog extends React.Component {
                     <ul>
                         {this.state.issues.map(issue => {
                             return (
-                                <div key={issue.id}>
+
+                                <div key={issue.id} className="issue-card">
                                   <h1>Name: {issue.name}</h1>
                                   <h2>Notes: {issue.notes}</h2>
                                   <h3>Status: {issue.status}</h3>
                                   <h4>Date: {issue.date}</h4>
                                   <h5>Org. Id: {issue.organization_id}</h5>
                                   <button onClick={this.deleteIssue} value={issue.id} sytle={{backgroundColor:'firebrick', color:'orange'}}>Delete Issue</button>
-                                  <button onClick={this.deleteIssue} value={issue.id} sytle={{backgroundColor:'firebrick', color:'orange'}}>Delete Issue</button>
+                                  <NavLink to={`/issue/${issue.id}`}><div value={issue.id} className="edit-issue-button">Update Issue</div></NavLink>
                                 </div>
-                            )
+                            ) 
                         })}
                     </ul>
                     <form onSubmit={this.postIssues}>
                         <input name="issueName" value={this.state.issueName} placeholder="Issue Title" onChange={this.handleChange}/>
                         <input name="issueNotes" value={this.state.issueNotes} placeholder="Additional notes" onChange={this.handleChange}/>
-                        {/* Need to come back and use select elements for the following line */}
-                        <input name="issueStatus" value={this.state.issueStatus} placeholder="Status" onChange={this.handleChange}/> 
+                        <select name="role" onChange={this.change} value={this.state.role}>
+                            <option>Status...</option>
+                                {statuses.map(status => {
+                                  return <option value={status}>{status}</option>
+                                })}
+                        </select>
+                        
                         <input type="submit" />
                     </form>
                 </div>
@@ -124,5 +136,3 @@ class IssueLog extends React.Component {
     }
 }
 }
-
-export default IssueLog

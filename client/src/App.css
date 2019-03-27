@@ -64,3 +64,13 @@
   overflow-y: scroll;
   height: 100vh;
 }
+
+.issue-card {
+  text-align: center; 
+  border: 1px solid orange;
+  margin: 10px auto;
+}
+
+.edit-issue-button {
+  border: 1px solid indianred
+}
