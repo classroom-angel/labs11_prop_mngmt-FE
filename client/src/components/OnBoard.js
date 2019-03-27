@@ -1,11 +1,12 @@
 import React from 'react'
 
-function joinOrg() {
+function OnBoard() {
     return (
         <div className="onboarding-component">
-            <h1>Join organization Component</h1>
+            <h1>Onbaording component</h1>
+
         </div>
     )
 }
 
-export default joinOrg
+export default OnBoard

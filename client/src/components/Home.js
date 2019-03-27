@@ -1,9 +1,9 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import './home.css'
-// import onBoard from './components/onBoard';
 
-function home() {
+
+function Home() {
     return (
         <div>
         <div className="onboarding-component">
@@ -13,10 +13,13 @@ function home() {
             <NavLink className='land-link' to="/signout">Signout</NavLink>
         </div>
         <div className = "Main">
-         <NavLink className='land-link' to="/onBoard">Get Started</NavLink>
+         <NavLink to="/onboarding">Get Started</NavLink>
+       </div>
+
 	 <NavLink className='land-link' to="/bm-homepage">View App</NavLink>
-         </div>
-       
+     <NavLink className='land-link' to="/authload">Signup</NavLink>
+
+
         <div className= "Footer">
         <p>©Classroom Angel</p>
          <NavLink to="/team">Meet The Team</NavLink>
@@ -25,4 +28,4 @@ function home() {
     )
 }
 
-export default home
+export default Home;

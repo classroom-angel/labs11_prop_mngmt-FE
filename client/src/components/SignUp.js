@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from '../axiosInstance';
-import useFormInput from './useFormInput';
+// import useFormInput from './useFormInput';
+import { NavLink } from 'react-router-dom'
 
 const roles = [
   "Board member",
@@ -19,6 +20,10 @@ export default class SignUp extends Component {
         role: "",
         organizationName: ""
       }
+    }
+
+    componentDidMount() {
+      this.props.auth.login();
     }
 
     clearState = () => {
@@ -42,6 +47,8 @@ export default class SignUp extends Component {
     onSubmit = async event => {
       event.preventDefault();
 
+      console.log(this.state);
+
       const tempResponse = await axios.post(`users/register`, this.state);
 
       console.log(tempResponse);
@@ -50,8 +57,9 @@ export default class SignUp extends Component {
     };
 
     render() {
-      return (
-        <div>
+      console.log(process.env)
+       return (
+       <div>
         <h1>signUp page</h1>
         <form onSubmit={this.onSubmit}>
           <div>
@@ -59,15 +67,17 @@ export default class SignUp extends Component {
             <input name="firstName" value={this.state.firstName} type="text" placeholder="First Name..." onChange={this.change} />
             <input name="lastName" value={this.state.lastName} type="text" placeholder="Last Name..." onChange={this.change} />
             <select name="role" onChange={this.change} value={this.state.role}>
-              <option disabled="true" selected="true">role...</option>
+              <option selected="true">role...</option>
               {roles.map(role => {
                 return <option value={role}>{role}</option>
               })}
             </select>
             <input name="password" value={this.state.password} type="password" placeholder="Password..." onChange={this.change} />
-          </div>
+              {/* <input name="organizationName" value={this.state.organizationName} type="text" placeholder="Organization" onChange={this.change}/> */}
+            </div>
           <button>Submit</button>
         </form>
+        <NavLink className='land-link' to="/">Back to home</NavLink>
         </div>
 
       )
