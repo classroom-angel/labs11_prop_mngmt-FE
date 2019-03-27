@@ -134,10 +134,10 @@ export default class IssueLog extends React.Component {
                                   <h5>Org. Id: {issue.organization_id}</h5>
                                   <div>
                                       {this.state.tags.filter(function(tag) {
-                                          return tag.id === issue.id
+                                          return tag.issueId === issue.id
                                       }).map(function(tag) {
                                           return (
-                                              <div className="tag">
+                                              <div key={tag.id} className="tag">
                                                   {tag.name}
                                               </div>
                                           )
