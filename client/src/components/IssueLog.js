@@ -12,11 +12,15 @@ class IssueLog extends React.Component {
             issueName: "",
             issueNotes: "",
             issueStatus: "Needs Attention",
-            orgID: 1
+            orgID: 1,
+            editingIssue: false,
+            issue: null
         }
         this.postIssues = this.postIssues.bind(this)
         this.deleteIssue = this.deleteIssue.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.toggleEdit = this.toggleEdit.bind(this)
+        this.fetchIssue = this.fetchIssue.bind(this)
     }
 
     componentDidMount() {
@@ -56,6 +60,26 @@ class IssueLog extends React.Component {
         this.setState({[event.target.name]: event.target.value})
       }
 
+      toggleEdit() {
+        this.setState({
+          editingIssue: !this.state.editingIssue,
+          title: this.state.note.title,
+          textBody: this.state.note.textBody
+        })
+    }
+
+    fetchIssue(id) {
+        axios.get(`issues/${id}`)
+        .then(res => {
+            console.log('fetched note', res.data)
+            this.setState({issue: res.data.issue})
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+    
+
     render() {
     if (this.state.issuesLoaded) {
         return (
@@ -72,6 +96,7 @@ class IssueLog extends React.Component {
                                   <h3>Status: {issue.status}</h3>
                                   <h4>Date: {issue.date}</h4>
                                   <h5>Org. Id: {issue.organization_id}</h5>
+                                  <button onClick={this.deleteIssue} value={issue.id} sytle={{backgroundColor:'firebrick', color:'orange'}}>Delete Issue</button>
                                   <button onClick={this.deleteIssue} value={issue.id} sytle={{backgroundColor:'firebrick', color:'orange'}}>Delete Issue</button>
                                 </div>
                             )
