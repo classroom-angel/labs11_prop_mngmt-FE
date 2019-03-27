@@ -1,6 +1,7 @@
 /* eslint no-restricted-globals: 0 */
 import auth0 from 'auth0-js';
 import React, { Component } from 'react';
+import axios from '../axiosInstance';
 
 export default class Auth extends Component {
   constructor(props) {
@@ -19,39 +20,32 @@ export default class Auth extends Component {
 
     userProfile = JSON.parse(localStorage.getItem('profile'));
 
-
-    // getProfile(cb) {
-    //   const tok = localStorage.getItem('access_token');
-    //     this.auth0.client.userInfo(tok, (err, profile) => {
-    //       console.log(profile);
-    //         if (profile) {
-    //             this.userProfile = profile;
-    //             localStorage.setItem('profile', JSON.stringify(profile));
-    //         } else {
-    //           console.log("NO PROFILE!!")
-    //         }
-    //         cb(err, profile);
-    //      });
-    //  }
-
     login() {
         this.auth0.authorize();
     }
 
     logout() {
      localStorage.clear();
-     this.userProfile = null;
     }
 
     handleAuth = () => {
-      this.auth0.parseHash((err, authResults) => {
-        console.log(authResults);
+      this.auth0.parseHash(async (err, authResults) => {
+        let users = await axios.get('/users');
+        users = users.data.users;
         if (authResults && authResults.accessToken && authResults.idToken) {
           let expires = JSON.stringify((authResults.expiresIn * 1000) + new Date().getTime());
+          const profile = authResults.idTokenPayload
           localStorage.setItem('access_token', JSON.stringify(authResults.accessToken));
           localStorage.setItem('expires', expires);
-          localStorage.setItem('profile', JSON.stringify(authResults.idTokenPayload));
-          location.pathname= "/signup";
+          localStorage.setItem('profile', JSON.stringify(profile));
+
+          if (users.filter(user => {return user.username === profile.email}).length)
+          {
+            location.pathname = "/"
+          } else {
+            location.pathname= "/signup";
+          }
+
         } else if (err) {
           location.pathname = "/";
           console.log(err);
