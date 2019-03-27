@@ -5,6 +5,7 @@
   "dependencies": {
     "auth0-js": "^9.10.1",
     "axios": "^0.18.0",
+    "date-fns": "^1.30.1",
     "dotenv": "^7.0.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
