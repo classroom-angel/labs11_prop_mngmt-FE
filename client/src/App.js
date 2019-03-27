@@ -53,7 +53,6 @@ class App extends React.Component {
         <Route exact path='/issue/:id' component={ViewIssue}/>
         <Route exact path='/scheduled' render={(props) => <Scheduled {...props} solutions={this.state.solutions} solutionsLoaded={this.state.solutionsLoaded} />}/>
         {/* <Route exact path='/teacher-attendance'/> */}
-        {/* <Route exact path='/admin-visits'/> */}
         <Route exact path='/visits' component={Visits}/>
         <Route exact path='/payments' component={Payments}/>
       </div>
