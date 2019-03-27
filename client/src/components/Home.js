@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import './home.css'
 
 
-function Home() {
+function Home(props) {
     return (
         <div>
         <div className="onboarding-component">
@@ -17,7 +17,7 @@ function Home() {
        </div>
 
 	 <NavLink className='land-link' to="/bm-homepage">View App</NavLink>
-     <NavLink className='land-link' to="/authload">Signup</NavLink>
+     <NavLink className='land-link' to="/" onClick={function(e) {props.auth.login()}}>Signup</NavLink>
 
 
         <div className= "Footer">

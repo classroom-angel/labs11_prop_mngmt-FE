@@ -22,9 +22,24 @@ export default class SignUp extends Component {
       }
     }
 
-    componentDidMount() {
-      this.props.auth.login();
+    componentWillMount() {
+      const userProfile = JSON.parse(localStorage.getItem('profile'));
+      const profName = userProfile.name.split(" ");
+      console.log(profName);
+      const email = userProfile.email;
+      if (profName) {
+        let firstName = profName[0];
+        let lastName = profName[1];
+        this.setState({
+          firstName, lastName
+        });
+      }
+      if (email) {
+        this.setState({
+          username: email
+      })
     }
+  }
 
     clearState = () => {
       this.setState({
@@ -57,7 +72,6 @@ export default class SignUp extends Component {
     };
 
     render() {
-      console.log(process.env)
        return (
        <div>
         <h1>signUp page</h1>
@@ -67,7 +81,7 @@ export default class SignUp extends Component {
             <input name="firstName" value={this.state.firstName} type="text" placeholder="First Name..." onChange={this.change} />
             <input name="lastName" value={this.state.lastName} type="text" placeholder="Last Name..." onChange={this.change} />
             <select name="role" onChange={this.change} value={this.state.role}>
-              <option selected="true">role...</option>
+              <option hidden>role...</option>
               {roles.map(role => {
                 return <option value={role}>{role}</option>
               })}

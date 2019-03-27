@@ -4,12 +4,12 @@ export default class AuthLoad extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      
+
     }
   }
 
   componentDidMount() {
-    this.props.auth.login();
+    this.props.auth.handleAuth();
   }
 
   render() {
