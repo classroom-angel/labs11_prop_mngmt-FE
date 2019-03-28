@@ -64,9 +64,10 @@ return (
          solutions={this.state.solutions}
          style={{ height: "100vh", width: "80vw"}}
         />
-    </div>
+      </div>
+   </div>
   </div>
-  </div>
-);
+    );
+  }
 }
-}
+

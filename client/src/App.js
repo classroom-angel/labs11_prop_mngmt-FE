@@ -14,6 +14,7 @@ import ViewIssue from './components/ViewIssue';
 import Scheduled from './components/Scheduled';
 import Visits from './components/Visits';
 import Payments from './components/Payments';
+import TeacherAttendance from './components/TeacherAttendance';
 import Auth from './Auth/auth';
 import AuthLoad from './components/AuthLoad';
 
@@ -27,8 +28,8 @@ class App extends React.Component {
       solutionsLoaded: false,
       orgID: 1
     }
-    
-    this.auth = new Auth();
+
+    this.auth = new Auth(props);
   }
 
   componentDidMount() {
@@ -43,17 +44,16 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
-        <Route exact path='/' component={Home}/>
-        <Route exact path='/signup' render={(props) => <SignUp auth={this.auth} />} />
-        <Route exact path='/authload' render={(props) => <AuthLoad auth={this.auth} />} />
-        <Route exact path='/onboarding' component={OnBoard}/>
+        <Route exact path='/' render={(props) => <Home {...props} auth={this.auth} />} />
+        <Route exact path='/signup' render={(props) => <SignUp {...props} auth={this.auth} />} />
+        <Route exact path='/authload' render={(props) => <AuthLoad {...props} auth={this.auth} />} />
+        <Route exact path='/onboarding' render={(props) => <OnBoard {...props} auth={this.auth} />} />
         <Route exact path='/join-org' component={JoinOrg}/>
         <Route exact path='/bm-homepage' component={BoardMemberHub}/>
         <Route exact path='/issue-log' component={IssueLog}/>
         <Route exact path='/issue/:id' component={ViewIssue}/>
         <Route exact path='/scheduled' render={(props) => <Scheduled {...props} solutions={this.state.solutions} solutionsLoaded={this.state.solutionsLoaded} />}/>
-        {/* <Route exact path='/teacher-attendance'/> */}
-        {/* <Route exact path='/admin-visits'/> */}
+        <Route exact path='/attendance' component={TeacherAttendance}/>
         <Route exact path='/visits' component={Visits}/>
         <Route exact path='/payments' component={Payments}/>
       </div>
