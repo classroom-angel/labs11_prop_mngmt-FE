@@ -14,6 +14,7 @@ import ViewIssue from './components/ViewIssue';
 import Scheduled from './components/Scheduled';
 import Visits from './components/Visits';
 import Payments from './components/Payments';
+import TeacherAttendance from './components/TeacherAttendance';
 import Auth from './Auth/auth';
 import AuthLoad from './components/AuthLoad';
 
@@ -68,7 +69,7 @@ class App extends React.Component {
         <Route exact path='/issue-log' component={IssueLog}/>
         <Route exact path='/issue/:id' component={ViewIssue}/>
         <Route exact path='/scheduled' render={(props) => <Scheduled {...props} solutions={this.state.solutions} solutionsLoaded={this.state.solutionsLoaded} />}/>
-        {/* <Route exact path='/teacher-attendance'/> */}
+        <Route exact path='/attendance' component={TeacherAttendance}/>
         <Route exact path='/visits' component={Visits}/>
         <Route exact path='/payments' component={Payments}/>
       </div>
