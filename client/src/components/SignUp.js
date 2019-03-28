@@ -75,11 +75,15 @@ export default class SignUp extends Component {
 
       console.log(this.state);
 
-      const tempResponse = await axios.post(`users/register`, this.state);
+      // const tempResponse = await axios.post(`users/register`, this.state);
+      //
+      // console.log(tempResponse);
 
-      console.log(tempResponse);
+      this.props.shareState(this.state);
 
       this.clearState();
+
+      this.props.history.push("/authload");
     };
 
     render() {

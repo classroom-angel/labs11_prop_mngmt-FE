@@ -39,12 +39,28 @@ class App extends React.Component {
     this.setState({[event.target.name]: event.target.value})
   }
 
+  shareState = async (ste) => {
+    this.setState((prevState) => ({
+      ...prevState,
+      profile: ste
+    }));
+
+    if (ste.organizationName !== "") {
+      const tempResponse = await axios.post(`users/register`, ste);
+
+      console.log(tempResponse);
+    } else {
+      this.props.history.push("/");
+    }
+
+  }
+
 
   render(){
     return (
       <div className="App">
         <Route exact path='/' render={(props) => <Home {...props} auth={this.auth} />} />
-        <Route exact path='/signup' render={(props) => <SignUp {...props} auth={this.auth} />} />
+        <Route exact path='/signup' render={(props) => <SignUp {...props} auth={this.auth} shareState={this.shareState} />} />
         <Route exact path='/authload' render={(props) => <AuthLoad {...props} auth={this.auth} />} />
         <Route exact path='/onboarding' render={(props) => <OnBoard {...props} auth={this.auth} />} />
         <Route exact path='/join-org' component={JoinOrg}/>
