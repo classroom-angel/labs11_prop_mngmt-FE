@@ -31,7 +31,7 @@ export default class BoardMemberHub extends React.Component {
             <div className="page-container">
                     <Sidebar/>
                     <div className="right-side">
-                        <h1>Board member homepage stufffff</h1>
+                        <h1>Board member homepage</h1>
                         <div style={{display: 'inline-block', border: '2px solid'}}>
                             {
                                 this.state.equipmentLoaded ? (

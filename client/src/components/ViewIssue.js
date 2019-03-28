@@ -81,7 +81,7 @@ class ViewIssue extends React.Component {
         axios.post(`tags`, newTag)
         .then(response => {
           console.log("axios response", response.data);
-          this.setState({tags: [...this.state.tags, response.data.tag], tag:''})
+          this.setState({tags: [...this.state.tags, {...response.data.tag, issueId: response.data.issueJoinTag.issueId}], tag:''})
         })
         .catch(err => {
           console.log("Tag Edit Error", err);
@@ -94,6 +94,7 @@ class ViewIssue extends React.Component {
     }
 
     render() {
+        console.log('render', this.state.tags)
         return (
             <div className="page-container">
                 <Sidebar />
