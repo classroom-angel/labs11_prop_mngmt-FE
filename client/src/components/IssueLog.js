@@ -24,13 +24,14 @@ export default class IssueLog extends React.Component {
             tag: '',
             tags: [],
             modal: false,
+            isVisit: false
         }
         this.postIssues = this.postIssues.bind(this)
         this.deleteIssue = this.deleteIssue.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.toggleEdit = this.toggleEdit.bind(this)
         this.fetchIssue = this.fetchIssue.bind(this)
-        // this.change = this.change.bind(this)
+        this.visitChange = this.visitChange.bind(this)
     }
 
     componentDidMount() {
@@ -43,7 +44,7 @@ export default class IssueLog extends React.Component {
         axios.post('issues', {name: this.state.issueName,
           notes: this.state.issueNotes,
         status: this.state.issueStatus,
-        isVisit: false,
+        isVisit: this.state.isVisit,
         organizationId: this.state.orgID,
         date: '03-25-20'
      })
@@ -102,12 +103,12 @@ export default class IssueLog extends React.Component {
         })
       }
 
-    // change(event) {
-    //     this.setState({[event.target.name]: event.target.value})
-    // }
+    visitChange(event) {
+        this.setState({[event.target.name]: event.target.checked})
+    }
     
     render() {
-        console.log(this.state.issueStatus)
+        console.log(this.state.isVisit)
     if (this.state.issuesLoaded) {
         return (
             <div className="page-container">
@@ -117,6 +118,8 @@ export default class IssueLog extends React.Component {
                     <form onSubmit={this.postIssues}>
                         <input name="issueName" value={this.state.issueName} placeholder="Issue Title" onChange={this.handleChange}/>
                         <input name="issueNotes" value={this.state.issueNotes} placeholder="Additional notes" onChange={this.handleChange}/>
+                        <input type="checkbox" id="isVisit" name="isVisit" value={true} onChange={this.visitChange}/>
+                        <label for="isVisit">isVisit</label>
                         <select name="issueStatus" onChange={this.handleChange}>
                             <option value="">Status...</option>
                                 {statuses.map((status, index) => {
