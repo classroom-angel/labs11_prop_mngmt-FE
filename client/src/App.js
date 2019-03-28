@@ -27,8 +27,8 @@ class App extends React.Component {
       solutionsLoaded: false,
       orgID: 1
     }
-    
-    this.auth = new Auth();
+
+    this.auth = new Auth(props);
   }
 
   componentDidMount() {
@@ -43,10 +43,10 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
-        <Route exact path='/' component={Home}/>
-        <Route exact path='/signup' render={(props) => <SignUp auth={this.auth} />} />
-        <Route exact path='/authload' render={(props) => <AuthLoad auth={this.auth} />} />
-        <Route exact path='/onboarding' component={OnBoard}/>
+        <Route exact path='/' render={(props) => <Home {...props} auth={this.auth} />} />
+        <Route exact path='/signup' render={(props) => <SignUp {...props} auth={this.auth} />} />
+        <Route exact path='/authload' render={(props) => <AuthLoad {...props} auth={this.auth} />} />
+        <Route exact path='/onboarding' render={(props) => <OnBoard {...props} auth={this.auth} />} />
         <Route exact path='/join-org' component={JoinOrg}/>
         <Route exact path='/bm-homepage' component={BoardMemberHub}/>
         <Route exact path='/issue-log' component={IssueLog}/>
