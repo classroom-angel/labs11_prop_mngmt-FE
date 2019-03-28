@@ -101,10 +101,8 @@ export default class IssueLog extends React.Component {
         })
       }
     
-    
-
     render() {
-        console.log('2', this.state.tags)
+        console.log(this.state)
     if (this.state.issuesLoaded) {
         return (
             <div className="page-container">
