@@ -17,19 +17,20 @@ export default class IssueLog extends React.Component {
             issuesLoaded: false,
             issueName: "",
             issueNotes: "",
-            issueStatus: "Needs Attention",
+            issueStatus: "",
             orgID: 1,
             editingIssue: false,
             issue: null,
             tag: '',
             tags: [],
-            modal: false
+            modal: false,
         }
         this.postIssues = this.postIssues.bind(this)
         this.deleteIssue = this.deleteIssue.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.toggleEdit = this.toggleEdit.bind(this)
         this.fetchIssue = this.fetchIssue.bind(this)
+        // this.change = this.change.bind(this)
     }
 
     componentDidMount() {
@@ -100,8 +101,13 @@ export default class IssueLog extends React.Component {
           console.log("Tag Edit Error", err);
         })
       }
+
+    // change(event) {
+    //     this.setState({[event.target.name]: event.target.value})
+    // }
     
     render() {
+        console.log(this.state.issueStatus)
     if (this.state.issuesLoaded) {
         return (
             <div className="page-container">
@@ -111,8 +117,8 @@ export default class IssueLog extends React.Component {
                     <form onSubmit={this.postIssues}>
                         <input name="issueName" value={this.state.issueName} placeholder="Issue Title" onChange={this.handleChange}/>
                         <input name="issueNotes" value={this.state.issueNotes} placeholder="Additional notes" onChange={this.handleChange}/>
-                        <select name="role" onChange={this.change} value={this.state.role}>
-                            <option>Status...</option>
+                        <select name="issueStatus" onChange={this.handleChange}>
+                            <option value="">Status...</option>
                                 {statuses.map((status, index) => {
                                   return <option key={index} value={status}>{status}</option>
                                 })}
