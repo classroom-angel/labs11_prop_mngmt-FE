@@ -101,10 +101,7 @@ export default class IssueLog extends React.Component {
         })
       }
     
-    
-
     render() {
-        console.log('2', this.state.tags)
     if (this.state.issuesLoaded) {
         return (
             <div className="page-container">
@@ -131,7 +128,7 @@ export default class IssueLog extends React.Component {
                                   <h2>Notes: {issue.notes}</h2>
                                   <h3>Status: {issue.status}</h3>
                                   <h4>Date: {issue.date}</h4>
-                                  <h5>Org. Id: {issue.organization_id}</h5>
+                                  <h5>Org. Id: {issue.organizationId}</h5>
                                   <div>
                                       {this.state.tags.filter(function(tag) {
                                           return tag.issueId === issue.id
