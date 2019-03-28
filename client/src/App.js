@@ -40,19 +40,13 @@ class App extends React.Component {
     this.setState({[event.target.name]: event.target.value})
   }
 
-  shareState = async (ste) => {
+  shareState = async (ste, cb) => {
     this.setState((prevState) => ({
       ...prevState,
       profile: ste
     }));
 
-    if (ste.organizationName !== "") {
-      const tempResponse = await axios.post(`users/register`, ste);
-
-      console.log(tempResponse);
-    } else {
-      this.props.history.push("/");
-    }
+    cb(ste);
 
   }
 

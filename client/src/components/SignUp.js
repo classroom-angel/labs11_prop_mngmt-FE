@@ -68,6 +68,19 @@ export default class SignUp extends Component {
       this.setState({
         [e.currentTarget.name]: e.currentTarget.value
       });
+    };
+
+    callback = async (ste) => {
+      if (ste.organizationName !== "") {
+        const tempResponse = await axios.post(`users/register`, ste);
+
+        console.log(tempResponse);
+
+        this.props.history.push("/authload");
+
+      } else {
+        this.props.history.push("/createorg");
+      }
     }
 
     onSubmit = async event => {
@@ -79,11 +92,10 @@ export default class SignUp extends Component {
       //
       // console.log(tempResponse);
 
-      this.props.shareState(this.state);
+      this.props.shareState(this.state, this.callback);
 
       this.clearState();
 
-      this.props.history.push("/authload");
     };
 
     render() {
