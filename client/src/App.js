@@ -54,7 +54,7 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
-        <Route exact path='/' render={(props) => <Home {...props} auth={this.auth} />} />
+        <Route exact path='/' render={(props) => <Home {...props} auth={this.auth} name={JSON.parse(localStorage.profile.name)} />} />
         <Route exact path='/signup' render={(props) => <SignUp {...props} auth={this.auth} shareState={this.shareState} />} />
         <Route exact path='/authload' render={(props) => <AuthLoad {...props} auth={this.auth} />} />
         <Route exact path='/onboarding' render={(props) => <OnBoard {...props} auth={this.auth} />} />

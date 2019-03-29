@@ -59,7 +59,7 @@ export default class Auth extends Component {
       let expires_at = JSON.parse(localStorage.getItem('expires'));
       const now = new Date().getTime()
       if (expires_at < now) {
-        localStorage.clear();
+        this.logout();
       }
       return expires_at > now;
     }
