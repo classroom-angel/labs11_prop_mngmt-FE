@@ -39,11 +39,13 @@ export default class Auth extends Component {
           localStorage.setItem('expires', expires);
           localStorage.setItem('profile', JSON.stringify(profile));
 
-          if (users.filter(user => {return user.username === profile.email}).length)
+          if (users.filter(user => {return (user.username === profile.email || user.firstName+" "+user.lastName === profile.name)}).length)
           {
             location.pathname = "/"
+            console.log(location.pathname)
           } else {
             location.pathname= "/signup";
+            console.log(location.pathname)
           }
 
         } else if (err) {
@@ -55,6 +57,10 @@ export default class Auth extends Component {
 
     isAuth = () => {
       let expires_at = JSON.parse(localStorage.getItem('expires'));
-      return expires_at > new Date().getTime();
+      const now = new Date().getTime()
+      if (expires_at < now) {
+        this.logout();
+      }
+      return expires_at > now;
     }
 }
