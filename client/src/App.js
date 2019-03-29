@@ -17,6 +17,7 @@ import Payments from './components/Payments';
 import TeacherAttendance from './components/TeacherAttendance';
 import Auth from './Auth/auth';
 import AuthLoad from './components/AuthLoad';
+import CreateOrg from './components/CreateOrg';
 
 
 class App extends React.Component {
@@ -43,7 +44,10 @@ class App extends React.Component {
   shareState = async (ste, cb) => {
     this.setState((prevState) => ({
       ...prevState,
-      profile: ste
+      profile: {
+        ...prevState.profile,
+        ste
+      }
     }));
 
     cb(ste);
@@ -52,10 +56,17 @@ class App extends React.Component {
 
 
   render(){
+    let profile = JSON.parse(localStorage.getItem('profile'));
+    if (profile == null) {
+      profile = {
+        name: ""
+      }
+    }
     return (
       <div className="App">
-        <Route exact path='/' render={(props) => <Home {...props} auth={this.auth} name={JSON.parse(localStorage.profile.name)} />} />
+        <Route exact path='/' render={(props) => <Home {...props} auth={this.auth} name={profile.name} />} />
         <Route exact path='/signup' render={(props) => <SignUp {...props} auth={this.auth} shareState={this.shareState} />} />
+        <Route exact path='/createorg' render={(props) => <CreateOrg {...props} auth={this.auth} shareState={this.shareState} />} />
         <Route exact path='/authload' render={(props) => <AuthLoad {...props} auth={this.auth} />} />
         <Route exact path='/onboarding' render={(props) => <OnBoard {...props} auth={this.auth} />} />
         <Route exact path='/join-org' component={JoinOrg}/>

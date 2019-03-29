@@ -9,7 +9,11 @@ export default class AuthLoad extends Component {
   }
 
   componentDidMount() {
-    this.props.auth.handleAuth();
+    if (this.props.auth.isAuth()) {
+      this.props.history.push("/")
+    } else {
+      this.props.auth.handleAuth();
+    }
   }
 
   render() {

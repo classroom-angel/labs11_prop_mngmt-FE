@@ -19,7 +19,8 @@ export default class SignUp extends Component {
         lastName: "",
         role: "",
         organizationName: "",
-        img: ""
+        img: "",
+        creating: false
       }
       this.orgs = []
     }
@@ -59,16 +60,23 @@ export default class SignUp extends Component {
         firstName: "",
         lastName: "",
         role: "",
-        organizationName: ""
+        organizationName: "",
+        creating: false
       })
     }
 
     change = (e) => {
-      console.log(e.currentTarget.value);
       this.setState({
         [e.currentTarget.name]: e.currentTarget.value
       });
     };
+
+    toggleCreate = (e) => {
+      this.setState(prevState => ({
+        ...prevState,
+        creating: !prevState.creating
+      }))
+    }
 
     callback = async (ste) => {
       if (ste.organizationName !== "") {
@@ -84,6 +92,9 @@ export default class SignUp extends Component {
     }
 
     onSubmit = async event => {
+      if (this.state.creating) {
+        this.props.history.push("/createorg")
+      }
       event.preventDefault();
 
       console.log(this.state);
