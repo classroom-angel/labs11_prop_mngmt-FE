@@ -4,6 +4,19 @@ import '../App.css'
 import axios from '../axiosInstance'
 import {NavLink} from 'react-router-dom'
 
+const statuses = [
+    "Needs Attention",
+    "Resolved",
+    "Scheduled",
+    "Ignored"
+]
+
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+today = mm + '-' + dd + '-' + yyyy;
 class ViewIssue extends React.Component {
     constructor(props) {
         super(props) 
@@ -11,7 +24,7 @@ class ViewIssue extends React.Component {
                 issuesLoaded: false,
                 issueName: "",
                 issueNotes: "",
-                issueStatus: "Needs Attention",
+                issueStatus: "",
                 orgID: 1,
                 editingIssue: false,
                 issue: null,
@@ -58,6 +71,7 @@ class ViewIssue extends React.Component {
             .catch(err => {
                 console.log(err)
             })
+            // this.setState({issueStatus: this.state.issue.status})s
         }
 
         handleEdit(id) {
@@ -68,7 +82,8 @@ class ViewIssue extends React.Component {
             // }
             if (this.state.nameEdits.length > 0) newEdits.name = this.state.nameEdits;
             if (this.state.noteEdits.length > 0) newEdits.notes = this.state.noteEdits;
-            newEdits.status = "Needs Attention" // NEed to make this dynamic
+            newEdits.status = this.state.issueStatus
+            newEdits.date = today
             axios.put(`issues/${id}`, newEdits)
             .then(response => {
               this.setState({issue: response.data.issue, editingIssue: false});
@@ -121,9 +136,16 @@ class ViewIssue extends React.Component {
                     <div key={this.state.issue.id}>
                       <h1>Name: {this.state.editingIssue ? <input name ="nameEdits" className="issue-input" value={this.state.nameEdits} onChange={this.handleChange}/>: this.state.issue.name}</h1>
                       <h2>Notes: {this.state.editingIssue ? <input name ="noteEdits" className="issue-input" value={this.state.noteEdits} onChange={this.handleChange}/>: this.state.issue.notes}</h2>
-                      <h3>Status: {this.state.issue.status}</h3>
+                      <h3>Status: {
+                          this.state.editingIssue ? <select name="issueStatus" onChange={this.handleChange}>
+                            <option value="">Status...</option>
+                                {statuses.map((status, index) => {
+                                  return <option key={index} value={status}>{status}</option>
+                                })}
+                        </select>: this.state.issue.status
+                    }</h3>
                       <h4>Date: {this.state.issue.date}</h4>
-                      <h5>Org. Id: {this.state.issue.organization_id}</h5>
+                      <h5>Org. Id: {this.state.issue.organizationId}</h5>
                       <div className="tag-container">
                             {this.state.tags.filter((tag) => {
                                 return tag.issueId === this.state.issue.id

@@ -3,12 +3,21 @@ import Sidebar from './Sidebar';
 import '../App.css'
 import axios from '../axiosInstance'
 import {NavLink} from 'react-router-dom'
+import moment from 'moment'
 
 const statuses = [
     "Needs Attention",
     "Resolved",
-    "Scheduled"
+    "Scheduled",
+    "Ignored"
 ]
+
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+today = mm + '-' + dd + '-' + yyyy;
 export default class IssueLog extends React.Component {
     constructor(props) {
         super(props)
@@ -46,7 +55,7 @@ export default class IssueLog extends React.Component {
         status: this.state.issueStatus,
         isVisit: this.state.isVisit,
         organizationId: this.state.orgID,
-        date: '03-25-20'
+        date: today 
      })
        .then(res => {
            console.log(res)
@@ -108,7 +117,7 @@ export default class IssueLog extends React.Component {
     }
     
     render() {
-        console.log(this.state.isVisit)
+        console.log(today)
     if (this.state.issuesLoaded) {
         return (
             <div className="page-container">
