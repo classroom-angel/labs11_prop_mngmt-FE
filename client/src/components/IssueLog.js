@@ -33,7 +33,9 @@ export default class IssueLog extends React.Component {
             tag: '',
             tags: [],
             modal: false,
-            isVisit: false
+            isVisit: false,
+            comments: [],
+            showComments: false
         }
         this.postIssues = this.postIssues.bind(this)
         this.deleteIssue = this.deleteIssue.bind(this)
@@ -41,11 +43,14 @@ export default class IssueLog extends React.Component {
         this.toggleEdit = this.toggleEdit.bind(this)
         this.fetchIssue = this.fetchIssue.bind(this)
         this.visitChange = this.visitChange.bind(this)
+        this.toggleShowComments = this.toggleShowComments.bind(this)
     }
 
     componentDidMount() {
         axios.get('issues').then(res => this.setState({issues: res.data.issues, issuesLoaded: true})).catch(err => console.log(err))
         axios.get('tags').then(res => this.setState({tags: res.data.tags})).catch(err => console.log(err))
+        axios.get('comments').then(res => this.setState({comments: res.data.comments})).catch(err => console.log(err))
+
     }
 
     postIssues(event) {
@@ -88,6 +93,10 @@ export default class IssueLog extends React.Component {
         })
     }
 
+    toggleShowComments() {
+        this.setState({showComments: !this.state.showComments})
+    }
+
     fetchIssue(id) {
         axios.get(`issues/${id}`)
         .then(res => {
@@ -117,7 +126,7 @@ export default class IssueLog extends React.Component {
     }
     
     render() {
-        console.log(today)
+        console.log(this.state.comments)
     if (this.state.issuesLoaded) {
         return (
             <div className="page-container">
@@ -163,6 +172,22 @@ export default class IssueLog extends React.Component {
                                   </div>
                                   <button onClick={this.deleteIssue} value={issue.id} sytle={{display: 'inline-block'}}>Delete Issue</button>
                                   <NavLink to={`/issue/${issue.id}`}><div value={issue.id} className="edit-issue-button">Update Issue</div></NavLink>
+                                  <button onClick={this.toggleShowComments} value={issue.id} sytle={{display: 'inline-block'}}>Show Comments</button>
+                                  {this.state.showComments ?
+                                  <div>
+                                      {this.state.comments.filter(function(comment) {
+                                          return comment.issueId === issue.id
+                                      }).map(function(comment) {
+                                          return (
+                                              <div key={comment.id}>
+                                                  - {comment.content}
+                                              </div>
+                                          )
+                                      })}
+                                      {/* <form className="tagForm" onSubmit={() => this.handleTagSubmit(issue.id)}>
+                                        <input className="mainInput" type="text" placeholder="add tag" name="tag" onChange={this.handleChange} value={this.state.tag} />
+                                      </form> */}
+                                  </div>: null}
                                 </div>
                             ) 
                         })}
