@@ -35,7 +35,7 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  background-color: #d3d2d3;
+  background-color: #094D92;
   width: 21.5%;
   font-family: 'Roboto', sans-serif;
   padding: 0px 20px;
@@ -43,8 +43,12 @@
   box-shadow: 2px 0px;
 }
 
+.sidebar h1 {
+  color: white
+}
+
 .sidebar-button {
-  background: #2BC1C4;
+  background: #FC5130;
   color: white;
   height: 45px;
   width: 200px;
