@@ -3,12 +3,21 @@ import Sidebar from './Sidebar';
 import '../App.css'
 import axios from '../axiosInstance'
 import {NavLink} from 'react-router-dom'
+import moment from 'moment'
 
 const statuses = [
     "Needs Attention",
     "Resolved",
-    "Scheduled"
+    "Scheduled",
+    "Ignored"
 ]
+
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+today = mm + '-' + dd + '-' + yyyy;
 export default class IssueLog extends React.Component {
     constructor(props) {
         super(props)
@@ -17,24 +26,31 @@ export default class IssueLog extends React.Component {
             issuesLoaded: false,
             issueName: "",
             issueNotes: "",
-            issueStatus: "Needs Attention",
+            issueStatus: "",
             orgID: 1,
             editingIssue: false,
             issue: null,
             tag: '',
             tags: [],
-            modal: false
+            modal: false,
+            isVisit: false,
+            comments: [],
+            showComments: false
         }
         this.postIssues = this.postIssues.bind(this)
         this.deleteIssue = this.deleteIssue.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.toggleEdit = this.toggleEdit.bind(this)
         this.fetchIssue = this.fetchIssue.bind(this)
+        this.visitChange = this.visitChange.bind(this)
+        this.toggleShowComments = this.toggleShowComments.bind(this)
     }
 
     componentDidMount() {
         axios.get('issues').then(res => this.setState({issues: res.data.issues, issuesLoaded: true})).catch(err => console.log(err))
         axios.get('tags').then(res => this.setState({tags: res.data.tags})).catch(err => console.log(err))
+        axios.get('comments').then(res => this.setState({comments: res.data.comments})).catch(err => console.log(err))
+
     }
 
     postIssues(event) {
@@ -42,9 +58,9 @@ export default class IssueLog extends React.Component {
         axios.post('issues', {name: this.state.issueName,
           notes: this.state.issueNotes,
         status: this.state.issueStatus,
-        isVisit: false,
+        isVisit: this.state.isVisit,
         organizationId: this.state.orgID,
-        date: '03-25-20'
+        date: today 
      })
        .then(res => {
            console.log(res)
@@ -77,6 +93,10 @@ export default class IssueLog extends React.Component {
         })
     }
 
+    toggleShowComments() {
+        this.setState({showComments: !this.state.showComments})
+    }
+
     fetchIssue(id) {
         axios.get(`issues/${id}`)
         .then(res => {
@@ -100,11 +120,13 @@ export default class IssueLog extends React.Component {
           console.log("Tag Edit Error", err);
         })
       }
-    
-    
 
+    visitChange(event) {
+        this.setState({[event.target.name]: event.target.checked})
+    }
+    
     render() {
-        console.log('2', this.state.tags)
+        console.log(this.state.comments)
     if (this.state.issuesLoaded) {
         return (
             <div className="page-container">
@@ -114,8 +136,10 @@ export default class IssueLog extends React.Component {
                     <form onSubmit={this.postIssues}>
                         <input name="issueName" value={this.state.issueName} placeholder="Issue Title" onChange={this.handleChange}/>
                         <input name="issueNotes" value={this.state.issueNotes} placeholder="Additional notes" onChange={this.handleChange}/>
-                        <select name="role" onChange={this.change} value={this.state.role}>
-                            <option>Status...</option>
+                        <input type="checkbox" id="isVisit" name="isVisit" value={true} onChange={this.visitChange}/>
+                        <label for="isVisit">isVisit</label>
+                        <select name="issueStatus" onChange={this.handleChange}>
+                            <option value="">Status...</option>
                                 {statuses.map((status, index) => {
                                   return <option key={index} value={status}>{status}</option>
                                 })}
@@ -131,7 +155,7 @@ export default class IssueLog extends React.Component {
                                   <h2>Notes: {issue.notes}</h2>
                                   <h3>Status: {issue.status}</h3>
                                   <h4>Date: {issue.date}</h4>
-                                  <h5>Org. Id: {issue.organization_id}</h5>
+                                  <h5>Org. Id: {issue.organizationId}</h5>
                                   <div>
                                       {this.state.tags.filter(function(tag) {
                                           return tag.issueId === issue.id
@@ -148,6 +172,22 @@ export default class IssueLog extends React.Component {
                                   </div>
                                   <button onClick={this.deleteIssue} value={issue.id} sytle={{display: 'inline-block'}}>Delete Issue</button>
                                   <NavLink to={`/issue/${issue.id}`}><div value={issue.id} className="edit-issue-button">Update Issue</div></NavLink>
+                                  <button onClick={this.toggleShowComments} value={issue.id} sytle={{display: 'inline-block'}}>Show Comments</button>
+                                  {this.state.showComments ?
+                                  <div>
+                                      {this.state.comments.filter(function(comment) {
+                                          return comment.issueId === issue.id
+                                      }).map(function(comment) {
+                                          return (
+                                              <div key={comment.id}>
+                                                  - {comment.content}
+                                              </div>
+                                          )
+                                      })}
+                                      {/* <form className="tagForm" onSubmit={() => this.handleTagSubmit(issue.id)}>
+                                        <input className="mainInput" type="text" placeholder="add tag" name="tag" onChange={this.handleChange} value={this.state.tag} />
+                                      </form> */}
+                                  </div>: null}
                                 </div>
                             ) 
                         })}

@@ -4,6 +4,19 @@ import '../App.css'
 import axios from '../axiosInstance'
 import {NavLink} from 'react-router-dom'
 
+const statuses = [
+    "Needs Attention",
+    "Resolved",
+    "Scheduled",
+    "Ignored"
+]
+
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+today = mm + '-' + dd + '-' + yyyy;
 class ViewIssue extends React.Component {
     constructor(props) {
         super(props) 
@@ -11,7 +24,7 @@ class ViewIssue extends React.Component {
                 issuesLoaded: false,
                 issueName: "",
                 issueNotes: "",
-                issueStatus: "Needs Attention",
+                issueStatus: "",
                 orgID: 1,
                 editingIssue: false,
                 issue: null,
@@ -27,18 +40,21 @@ class ViewIssue extends React.Component {
             this.handleEdit = this.handleEdit.bind(this)
             this.handleTagEdit = this.handleTagEdit.bind(this)
             this.handleTagSubmit = this.handleTagSubmit.bind(this)
+            this.deleteTag = this.deleteTag.bind(this)
         }
 
         componentDidMount() {
             this.fetchIssue(this.props.match.params.id)
-            axios.get('tags').then(res => this.setState({tags: res.data.tags})).catch(err => console.log(err))
+            axios.get('tags').then(res => {
+                this.setState({
+                tags: res.data.tags})
+            }).catch(err => console.log(err))
         }
 
         handleChange(event) {
             this.setState({[event.target.name]: event.target.value})
         }
     
-
         toggleEdit() {
             this.setState({
               editingIssue: !this.state.editingIssue,
@@ -55,6 +71,7 @@ class ViewIssue extends React.Component {
             .catch(err => {
                 console.log(err)
             })
+            // this.setState({issueStatus: this.state.issue.status})s
         }
 
         handleEdit(id) {
@@ -65,10 +82,10 @@ class ViewIssue extends React.Component {
             // }
             if (this.state.nameEdits.length > 0) newEdits.name = this.state.nameEdits;
             if (this.state.noteEdits.length > 0) newEdits.notes = this.state.noteEdits;
-            newEdits.status = "Needs Attention" // NEed to make this dynamic
+            newEdits.status = this.state.issueStatus
+            newEdits.date = today
             axios.put(`issues/${id}`, newEdits)
             .then(response => {
-              console.log(response.data);
               this.setState({issue: response.data.issue, editingIssue: false});
             })
             .catch(err => {
@@ -80,8 +97,7 @@ class ViewIssue extends React.Component {
         const newTag = {name: this.state.tag, issueId: id}
         axios.post(`tags`, newTag)
         .then(response => {
-          console.log("axios response", response.data);
-          this.setState({tags: [...this.state.tags, response.data.tag], tag:''})
+          this.setState({tags: [...this.state.tags, {...response.data.tag, issueId: response.data.issueJoinTag.issueId}], tag:''})
         })
         .catch(err => {
           console.log("Tag Edit Error", err);
@@ -92,6 +108,22 @@ class ViewIssue extends React.Component {
         e.preventDefault();
         this.handleTagEdit(this.state.issue.id);
     }
+
+    deleteTag(event) {
+        let newArray = this.state.tags.slice();
+        axios.delete(`tags/${event.target.getAttribute('id')}`)
+        .then(response => {
+          let deleteId = response.data.tag.id
+          newArray = newArray.filter(function(tag) {
+              return tag.id !== deleteId
+          })
+          this.setState({tags: newArray});
+        })
+        .catch(err => {
+          console.log("Tag Edit Error", err);
+        })
+      }
+    
 
     render() {
         return (
@@ -104,18 +136,25 @@ class ViewIssue extends React.Component {
                     <div key={this.state.issue.id}>
                       <h1>Name: {this.state.editingIssue ? <input name ="nameEdits" className="issue-input" value={this.state.nameEdits} onChange={this.handleChange}/>: this.state.issue.name}</h1>
                       <h2>Notes: {this.state.editingIssue ? <input name ="noteEdits" className="issue-input" value={this.state.noteEdits} onChange={this.handleChange}/>: this.state.issue.notes}</h2>
-                      <h3>Status: {this.state.issue.status}</h3>
+                      <h3>Status: {
+                          this.state.editingIssue ? <select name="issueStatus" onChange={this.handleChange}>
+                            <option value="">Status...</option>
+                                {statuses.map((status, index) => {
+                                  return <option key={index} value={status}>{status}</option>
+                                })}
+                        </select>: this.state.issue.status
+                    }</h3>
                       <h4>Date: {this.state.issue.date}</h4>
-                      <h5>Org. Id: {this.state.issue.organization_id}</h5>
-                      <div>
+                      <h5>Org. Id: {this.state.issue.organizationId}</h5>
+                      <div className="tag-container">
                             {this.state.tags.filter((tag) => {
                                 return tag.issueId === this.state.issue.id
-                            }).map(function(tag) {
+                            }).map((tag, index) => {
                                 return (
                                     <div key={tag.id} className="tag">
-                                        {tag.name}
+                                        {tag.name}<span className="close" id={tag.id} index={index} onClick={this.deleteTag}></span>
                                     </div>
-                                )
+                                ) 
                             })}
                             <form className="tagForm" onSubmit={this.handleTagSubmit}>
                               <input className="mainInput" type="text" placeholder="add tag" name="tag" onChange={this.handleChange} value={this.state.tag} />

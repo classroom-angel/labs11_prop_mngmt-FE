@@ -34,7 +34,7 @@ export default class IssueLog extends React.Component {
         .get('issues')
         .then(res => {
             let copy = res.data.issues.filter(function(issue) {
-                return issue.is_visit
+                return issue.isVisit
             })
             this.setState({issues: copy, issuesLoaded: true})
         })
@@ -110,7 +110,7 @@ export default class IssueLog extends React.Component {
                                   <h2>Notes: {issue.notes}</h2>
                                   <h3>Status: {issue.status}</h3>
                                   <h4>Date: {issue.date}</h4>
-                                  <h5>Org. Id: {issue.organization_id}</h5>
+                                  <h5>Org. Id: {issue.organizationId}</h5>
                                   <button onClick={this.deleteIssue} value={issue.id} sytle={{backgroundColor:'firebrick', color:'orange'}}>Delete Issue</button>
                                   <NavLink to={`/issue/${issue.id}`}><div value={issue.id} className="edit-issue-button">Update Issue</div></NavLink>
                                 </div>
@@ -122,8 +122,8 @@ export default class IssueLog extends React.Component {
                         <input name="issueNotes" value={this.state.issueNotes} placeholder="Additional notes" onChange={this.handleChange}/>
                         <select name="role" onChange={this.change} value={this.state.role}>
                             <option>Status...</option>
-                                {statuses.map(status => {
-                                  return <option value={status}>{status}</option>
+                                {statuses.map((status, index) => {
+                                  return <option key={index} value={status}>{status}</option>
                                 })}
                         </select>
                         
