@@ -53,7 +53,7 @@ render() {
 return (
     <div className ="page-container">
     <Sidebar />
-    <div className="calendar">
+    <div className="calendar right-side">
     <h1 className="calendar-title">Calendar</h1>
      <div style={{ height: 700 }}>
       <Calendar

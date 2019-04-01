@@ -3,7 +3,7 @@ import Sidebar from './Sidebar';
 import '../App.css'
 import axios from '../axiosInstance'
 import {NavLink} from 'react-router-dom'
-import moment from 'moment'
+// import moment from 'moment'
 
 const statuses = [
     "Needs Attention",
@@ -200,7 +200,10 @@ export default class IssueLog extends React.Component {
         return (
             <div className="page-container">
                 <Sidebar />
-                <h1>Loading...</h1>
+                <div className="right-side">
+                    <h1>Loading...</h1>
+                </div>
+                
             </div>
             
         )

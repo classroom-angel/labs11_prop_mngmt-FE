@@ -7,7 +7,7 @@ function Payments() {
     return (
         <div className="page-container">
           <Sidebar />
-            <div className="checkout">
+            <div className="checkout right-side">
             <Checkout
               name={'10+ Teachers'}
               description={'Subscribe to get more teachers'}
