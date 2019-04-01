@@ -9,8 +9,8 @@ import SignUp from './components/SignUp';
 import Home from './components/Home';
 import JoinOrg from './components/JoinOrg';
 import BoardMemberHub from './components/BoardMember/BoardMember'
-import IssueLog from './components/IssueLog';
-import ViewIssue from './components/ViewIssue';
+import IssueLog from './components/IssueLog/IssueLog';
+import ViewIssue from './components/ViewIssue/ViewIssue';
 import Scheduled from './components/Scheduled';
 import Visits from './components/Visits';
 import Payments from './components/Payments';

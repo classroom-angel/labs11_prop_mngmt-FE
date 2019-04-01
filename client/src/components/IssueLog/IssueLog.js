@@ -1,7 +1,8 @@
 import React from 'react'
-import Sidebar from './Sidebar';
-import '../App.css'
-import axios from '../axiosInstance'
+import Sidebar from '../Sidebar';
+import '../../App.css'
+import './IssueLog.css'
+import axios from '../../axiosInstance'
 import {NavLink} from 'react-router-dom'
 // import moment from 'moment'
 
@@ -144,7 +145,7 @@ export default class IssueLog extends React.Component {
 
     deleteComment(event) {
         axios
-        .delete(`comments/${event.target.attributes[0].value}`)
+        .delete(`comments/${event.target.getAttribute('issue_id')}`)
         .then(res => {
             let copy = this.state.comments.slice().filter(function(comment) {
                 return comment.id !== res.data.comment.id
@@ -207,7 +208,7 @@ export default class IssueLog extends React.Component {
                                           return (
                                               
                                               <div key={comment.id}>
-                                                  - {comment.content}<span onClick={this.deleteComment} issue_id={comment.id}>X</span>
+                                                  - {comment.content}<span className="delete-button" onClick={this.deleteComment} issue_id={comment.id}> x</span>
                                               </div>
                                           )
                                       })}
