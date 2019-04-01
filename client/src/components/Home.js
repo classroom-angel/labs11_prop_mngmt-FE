@@ -9,7 +9,12 @@ function Home(props) {
       <div>
         <div className="onboarding-component">
           <h1>Classroom Angel</h1>
-          {isAuth && <h3>Welcome, {props.name}</h3>}
+          {isAuth &&
+            <div>
+              <h3>Welcome, {props.profile.name.split(" ")[0]}</h3>
+              <div className="avatar" style={{backgroundImage: `url(${props.profile.picture})`, backgroundSize: 'cover', width: '100px', height: '100px', borderRadius: '50px', margin: '0 auto 20px'}}>
+              </div>
+            </div>}
           <NavLink className='land-link' to="/ourmission">Our Mission</NavLink>
           <NavLink className='land-link' to="/testimonials">Testimonials</NavLink>
           {isAuth ? <NavLink className='land-link' to="/"  onClick={function(e) {props.auth.logout()}}>Signout</NavLink> : <NavLink className='land-link' to="/"  onClick={function(e) {props.auth.login()}}>Signin/Signup</NavLink>}

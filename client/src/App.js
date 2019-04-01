@@ -64,7 +64,7 @@ class App extends React.Component {
     }
     return (
       <div className="App">
-        <Route exact path='/' render={(props) => <Home {...props} auth={this.auth} name={profile.name} />} />
+        <Route exact path='/' render={(props) => <Home {...props} auth={this.auth} profile={profile} />} />
         <Route exact path='/signup' render={(props) => <SignUp {...props} auth={this.auth} shareState={this.shareState} />} />
         <Route exact path='/createorg' render={(props) => <CreateOrg {...props} auth={this.auth} shareState={this.shareState} />} />
         <Route exact path='/authload' render={(props) => <AuthLoad {...props} auth={this.auth} />} />
