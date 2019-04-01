@@ -34,6 +34,7 @@ export default class IssueLog extends React.Component {
             tags: [],
             modal: false,
             isVisit: false,
+            comment: '',
             comments: [],
             showComments: false
         }
@@ -44,6 +45,7 @@ export default class IssueLog extends React.Component {
         this.fetchIssue = this.fetchIssue.bind(this)
         this.visitChange = this.visitChange.bind(this)
         this.toggleShowComments = this.toggleShowComments.bind(this)
+        this.submitComment = this.submitComment.bind(this)
     }
 
     componentDidMount() {
@@ -124,6 +126,20 @@ export default class IssueLog extends React.Component {
     visitChange(event) {
         this.setState({[event.target.name]: event.target.checked})
     }
+
+    submitComment(event) {
+        event.preventDefault()
+        axios
+        .post('comments', {
+            content: this.state.comment,
+            userId: 1,
+            issueId: event.target[0].attributes[2].value
+        })
+        .then(res => {
+            this.setState({comments: [...this.state.comments, res.data.comment], comment: ''})
+        })
+        .catch(err => console.error(err))
+    }
     
     render() {
         console.log(this.state.comments)
@@ -175,6 +191,7 @@ export default class IssueLog extends React.Component {
                                   <button onClick={this.toggleShowComments} value={issue.id} sytle={{display: 'inline-block'}}>Show Comments</button>
                                   {this.state.showComments ?
                                   <div>
+                                  <div>
                                       {this.state.comments.filter(function(comment) {
                                           return comment.issueId === issue.id
                                       }).map(function(comment) {
@@ -187,6 +204,10 @@ export default class IssueLog extends React.Component {
                                       {/* <form className="tagForm" onSubmit={() => this.handleTagSubmit(issue.id)}>
                                         <input className="mainInput" type="text" placeholder="add tag" name="tag" onChange={this.handleChange} value={this.state.tag} />
                                       </form> */}
+                                  </div>
+                                  <form onSubmit={this.submitComment}>
+                                      <input name='comment' placeholder='add comment' value={this.state.comment} issue_id={issue.id} onChange={this.handleChange} />
+                                  </form>
                                   </div>: null}
                                 </div>
                             ) 
