@@ -1,7 +1,8 @@
 import React from 'react'
-import Sidebar from './Sidebar'
-import '../App.css'
-import axios from '../axiosInstance'
+import Sidebar from '../Sidebar'
+import '../../App.css'
+import './BoardMember.css'
+import axios from '../../axiosInstance'
 
 export default class BoardMemberHub extends React.Component {
     constructor(props) {
@@ -10,7 +11,9 @@ export default class BoardMemberHub extends React.Component {
             equipment: [],
             equipmentLoaded: false,
             attendance: [],
-            attendanceLoaded: false
+            attendanceLoaded: false,
+            issuesLoaded: false,
+            issues: []
         }
     }
 
@@ -18,6 +21,11 @@ export default class BoardMemberHub extends React.Component {
         axios
         .get('equipment')
         .then(res => this.setState({equipment: res.data.equipment, equipmentLoaded: true}))
+        .catch(err => console.error(err))
+
+        axios
+        .get('issues')
+        .then(res => this.setState({issues: res.data.issues, issuesLoaded: true}))
         .catch(err => console.error(err))
 
         axios
@@ -63,6 +71,21 @@ export default class BoardMemberHub extends React.Component {
                                         <p>lastOut: {teacher.lastOut}</p>
                                         <p>OrgID: Need a different request</p>
                                         <p>TMM: {teacher.totalMinutesMissed}</p>
+                                        </div>
+                                        )
+                                    }))
+                                : "Loading..."
+                            }
+                        </div>
+                        <div style={{display: 'inline-block', border: '2px solid'}}>
+                            {
+                                this.state.issuesLoaded ? (
+                                    this.state.issues.map(function(issue) {
+                                        return (
+                                        <div key={issue.id}>
+                                        <p>ID: {issue.id}</p>
+                                        <p>name: {issue.name}</p>
+                                        <p>Date: {issue.date}</p>
                                         </div>
                                         )
                                     }))

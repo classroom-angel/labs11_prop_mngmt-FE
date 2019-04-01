@@ -8,7 +8,7 @@ import OnBoard from './components/OnBoard';
 import SignUp from './components/SignUp';
 import Home from './components/Home';
 import JoinOrg from './components/JoinOrg';
-import BoardMemberHub from './components/BoardMember'
+import BoardMemberHub from './components/BoardMember/BoardMember'
 import IssueLog from './components/IssueLog';
 import ViewIssue from './components/ViewIssue';
 import Scheduled from './components/Scheduled';
