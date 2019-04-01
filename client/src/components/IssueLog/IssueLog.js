@@ -37,7 +37,9 @@ export default class IssueLog extends React.Component {
             isVisit: false,
             comment: '',
             comments: [],
-            showComments: false
+            showComments: false,
+            filterStatus: 'all',
+            filterTag: ''
         }
         this.postIssues = this.postIssues.bind(this)
         this.deleteIssue = this.deleteIssue.bind(this)
@@ -156,12 +158,21 @@ export default class IssueLog extends React.Component {
     }
     
     render() {
+        console.log(this.state.filterStatus)
     if (this.state.issuesLoaded) {
         return (
             <div className="page-container">
                 <Sidebar />
                 <div className="right-side">
                     <h1 style={{textAlign: 'center', border: '2px solid gray'}}>Issue Log</h1>
+                    Filter By Status:<select name='filterStatus' onChange={this.handleChange} className='' style={{marginBottom: '20px'}}>
+                        <option value="all">Choose...</option>
+                        {
+                            statuses.map((status, index) => {
+                                return <option key={index} value={status}>{status}</option>
+                              })
+                        }
+                    </select>
                     <form onSubmit={this.postIssues}>
                         <input name="issueName" value={this.state.issueName} placeholder="Issue Title" onChange={this.handleChange}/>
                         <input name="issueNotes" value={this.state.issueNotes} placeholder="Additional notes" onChange={this.handleChange}/>
@@ -178,6 +189,7 @@ export default class IssueLog extends React.Component {
                     </form>
                     <div className="issue-list">
                         {this.state.issues.map(issue => {
+                            if (issue.status === this.state.filterStatus || this.state.filterStatus === 'all')
                             return (
                                 <div key={issue.id} className="issue-card">
                                   <p>Name: {issue.name}</p>
