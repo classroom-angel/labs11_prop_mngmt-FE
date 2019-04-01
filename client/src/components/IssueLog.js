@@ -46,6 +46,7 @@ export default class IssueLog extends React.Component {
         this.visitChange = this.visitChange.bind(this)
         this.toggleShowComments = this.toggleShowComments.bind(this)
         this.submitComment = this.submitComment.bind(this)
+        this.deleteComment = this.deleteComment.bind(this)
     }
 
     componentDidMount() {
@@ -140,9 +141,20 @@ export default class IssueLog extends React.Component {
         })
         .catch(err => console.error(err))
     }
+
+    deleteComment(event) {
+        axios
+        .delete(`comments/${event.target.attributes[0].value}`)
+        .then(res => {
+            let copy = this.state.comments.slice().filter(function(comment) {
+                return comment.id !== res.data.comment.id
+            })
+            this.setState({comments: copy})
+        })
+        .catch(err => console.error(err))
+    }
     
     render() {
-        console.log(this.state.comments)
     if (this.state.issuesLoaded) {
         return (
             <div className="page-container">
@@ -182,9 +194,6 @@ export default class IssueLog extends React.Component {
                                               </div>
                                           )
                                       })}
-                                      {/* <form className="tagForm" onSubmit={() => this.handleTagSubmit(issue.id)}>
-                                        <input className="mainInput" type="text" placeholder="add tag" name="tag" onChange={this.handleChange} value={this.state.tag} />
-                                      </form> */}
                                   </div>
                                   <button onClick={this.deleteIssue} value={issue.id} sytle={{display: 'inline-block'}}>Delete Issue</button>
                                   <NavLink to={`/issue/${issue.id}`}><div value={issue.id} className="edit-issue-button">Update Issue</div></NavLink>
@@ -194,16 +203,14 @@ export default class IssueLog extends React.Component {
                                   <div>
                                       {this.state.comments.filter(function(comment) {
                                           return comment.issueId === issue.id
-                                      }).map(function(comment) {
+                                      }).map((comment) => {
                                           return (
+                                              
                                               <div key={comment.id}>
-                                                  - {comment.content}
+                                                  - {comment.content}<span onClick={this.deleteComment} issue_id={comment.id}>X</span>
                                               </div>
                                           )
                                       })}
-                                      {/* <form className="tagForm" onSubmit={() => this.handleTagSubmit(issue.id)}>
-                                        <input className="mainInput" type="text" placeholder="add tag" name="tag" onChange={this.handleChange} value={this.state.tag} />
-                                      </form> */}
                                   </div>
                                   <form onSubmit={this.submitComment}>
                                       <input name='comment' placeholder='add comment' value={this.state.comment} issue_id={issue.id} onChange={this.handleChange} />
