@@ -38,10 +38,13 @@ this.setEvents
 
 setEvents = () => {
     const events = []
+    console.log(this.state.solutions)
     this.state.solutions.map(solution =>{
+         console.log(Object.keys(solution))
         const date = new Date(moment(solution.date,'MM_DD_YY'));
         events.push({
         title: solution.name,
+        resource: solution.id,
         start: date,
         end:  date
         })
@@ -51,13 +54,20 @@ setEvents = () => {
 
 
 
-
+ selectedEvent = (event) => {
+ this.props.update(event.resource)
+ this.props.history.push(`/events/${event.resource}`)
+  console.log(event)
+ }
 
 render() {
 return (
     <div className ="page-container">
     <Sidebar />
-  <NavLink to="/createEventForm">Create new Event</NavLink>
+
+    <NavLink to="/createEventForm">Create new Event</NavLink>
+   
+
     <div className="calendar">
   <h1 className="calendar-title">Calendar</h1>
      <div style={{ height: 700 }}>
@@ -68,6 +78,7 @@ return (
          events={this.state.events}
          solutions={this.state.solutions}
          style={{ height: "100vh", width: "80vw"}}
+         onSelectEvent={this.selectedEvent}
         />
       </div>
    </div>
