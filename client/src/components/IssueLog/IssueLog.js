@@ -1,9 +1,10 @@
 import React from 'react'
 import Sidebar from '../Sidebar';
-import '../../App.css'
-import './IssueLog.css'
-import axios from '../../axiosInstance'
-import {NavLink} from 'react-router-dom'
+import '../../App.css';
+import './IssueLog.css';
+import axios from '../../axiosInstance';
+import {NavLink} from 'react-router-dom';
+import Uploader from '../Uploader';
 // import moment from 'moment'
 
 const statuses = [
@@ -39,7 +40,9 @@ export default class IssueLog extends React.Component {
             comments: [],
             showComments: false,
             filterStatus: 'all',
-            filterTag: ''
+            filterTag: '',
+            uploading: false,
+
         }
         this.postIssues = this.postIssues.bind(this)
         this.deleteIssue = this.deleteIssue.bind(this)
@@ -66,11 +69,22 @@ export default class IssueLog extends React.Component {
         status: this.state.issueStatus,
         isVisit: this.state.isVisit,
         organizationId: this.state.orgID,
-        date: today 
+        date: today
      })
        .then(res => {
-           console.log(res)
-           this.setState({issueName: "", issueNotes: "", issues: [...this.state.issues, res.data.issue]})
+           console.log(res);
+           const id = res.data.issue.id;
+           const formData = new FormData()
+           const files = [this.state.images];
+           files.forEach((file, i) => {
+             formData.append(i, file);
+           });
+           formData.append('issueId', id);
+           const images = [...this.state.images];
+           axios.post('upload', formData).then(res => {
+             console.log("RES2", res);
+             this.setState(prevState => ({issueName: "", issueNotes: "", issues: [prevState.issues, res.data.issue], images: []}))
+           }).catch(err => console.log(err))
        })
        .catch(err => console.log(err))
     }
@@ -80,7 +94,7 @@ export default class IssueLog extends React.Component {
         .then(res => {
             console.log(res.data.issue.id)
             var copy = this.state.issues.filter(function(element) {
-                return element.id !== res.data.issue.id 
+                return element.id !== res.data.issue.id
             })
             this.setState({issues: copy})
         })
@@ -112,7 +126,7 @@ export default class IssueLog extends React.Component {
         .catch(err => {
             console.log(err)
         })
-    } 
+    }
 
     handleTagEdit(id, event) {
         event.preventDefault()
@@ -126,6 +140,14 @@ export default class IssueLog extends React.Component {
           console.log("Tag Edit Error", err);
         })
       }
+
+    imgAdder = (e) => {
+      const files = Array.from(e.target.files);
+      this.setState({
+        images: files,
+        uploading: true
+      })
+    }
 
     visitChange(event) {
         this.setState({[event.target.name]: event.target.checked})
@@ -156,9 +178,10 @@ export default class IssueLog extends React.Component {
         })
         .catch(err => console.error(err))
     }
-    
+
     render() {
         console.log(this.state.filterStatus)
+
     if (this.state.issuesLoaded) {
         return (
             <div className="page-container">
@@ -177,14 +200,14 @@ export default class IssueLog extends React.Component {
                         <input name="issueName" value={this.state.issueName} placeholder="Issue Title" onChange={this.handleChange}/>
                         <input name="issueNotes" value={this.state.issueNotes} placeholder="Additional notes" onChange={this.handleChange}/>
                         <input type="checkbox" id="isVisit" name="isVisit" value={true} onChange={this.visitChange}/>
-                        <label for="isVisit">isVisit</label>
+                        <label htmlFor="isVisit">isVisit</label>
                         <select name="issueStatus" onChange={this.handleChange}>
                             <option value="">Status...</option>
                                 {statuses.map((status, index) => {
                                   return <option key={index} value={status}>{status}</option>
                                 })}
                         </select>
-                        
+                        <Uploader uploading={this.state.uploading} imgAdder={this.imgAdder} />
                         <input type="submit" />
                     </form>
                     <div className="issue-list">
@@ -218,7 +241,7 @@ export default class IssueLog extends React.Component {
                                           return comment.issueId === issue.id
                                       }).map((comment) => {
                                           return (
-                                              
+
                                               <div key={comment.id}>
                                                   - {comment.content}<span className="delete-button" onClick={this.deleteComment} issue_id={comment.id}> x</span>
                                               </div>
@@ -230,11 +253,11 @@ export default class IssueLog extends React.Component {
                                   </form>
                                   </div>: null}
                                 </div>
-                            ) 
+                            )
                         })}
                     </div>
                 </div>
-                
+
             </div>
         )
     } else {
@@ -244,9 +267,9 @@ export default class IssueLog extends React.Component {
                 <div className="right-side">
                     <h1>Loading...</h1>
                 </div>
-                
+
             </div>
-            
+
         )
     }
 }
