@@ -195,7 +195,7 @@ export default class IssueLog extends React.Component {
                         <input name="issueName" value={this.state.issueName} placeholder="Issue Title" onChange={this.handleChange}/>
                         <input name="issueNotes" value={this.state.issueNotes} placeholder="Additional notes" onChange={this.handleChange}/>
                         <input type="checkbox" id="isVisit" name="isVisit" value={true} onChange={this.visitChange}/>
-                        <label for="isVisit">isVisit</label>
+                        <label htmlFor="isVisit">isVisit</label>
                         <select name="issueStatus" onChange={this.handleChange}>
                             <option value="">Status...</option>
                                 {statuses.map((status, index) => {
