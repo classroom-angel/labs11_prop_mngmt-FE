@@ -13,6 +13,7 @@ import IssueLog from './components/Issues/IssueLog';
 import ViewIssue from './components/Issues/ViewIssue';
 import Scheduled from './components/Scheduled';
 import CreateEventForm from './components/CreateEventForm';
+import EditEventForm from './components/EditEventForm';
 import Visits from './components/Visits';
 import Payments from './components/Payments';
 import TeacherAttendance from './components/TeacherAttendance';
@@ -28,7 +29,8 @@ class App extends React.Component {
     this.state = {
       solutions: [],
       solutionsLoaded: false,
-      orgID: 1
+      orgID: 1,
+      solutionEditId: 1
     }
 
     this.auth = new Auth(props);
@@ -42,6 +44,10 @@ class App extends React.Component {
     this.setState({[event.target.name]: event.target.value})
   }
 
+
+  updateSolutionEditId = (id) => {
+    this.setState({solutionEditId: id})
+
   shareState = async (ste, cb) => {
     this.setState((prevState) => ({
       ...prevState,
@@ -52,6 +58,7 @@ class App extends React.Component {
     }));
 
     cb(ste);
+
 
   }
 
@@ -75,9 +82,10 @@ class App extends React.Component {
         <Route exact path='/bm-homepage' component={BoardMemberHub}/>
         <Route exact path='/issue-log' component={IssueLog}/>
         <Route exact path='/issue/:id' component={ViewIssue}/>
-        <Route exact path='/scheduled' render={(props) => <Scheduled {...props} solutions={this.state.solutions} solutionsLoaded={this.state.solutionsLoaded} />}/>
+        <Route exact path='/scheduled' render={(props) => <Scheduled {...props} solutions={this.state.solutions} solutionsLoaded={this.state.solutionsLoaded} update={this.updateSolutionEditId}/>}/>
         <Route exact path='/CreateEventForm' render={(props) => <CreateEventForm {...props} name={this.state.solution} date={this.state.date} time={this.state.time} organizationId={this.state.orgID} handleChange={this.handleInputChange} />}/>
         {/* <Route exact path='/attendance' component={TeacherAttendance}/> */}
+        <Route exact path='/events/:id' render={(props) => <EditEventForm  solutionEditId={this.state.solutionEditId}/>} />
         <Route exact path='/visits' component={Visits}/>
         <Route exact path='/payments' component={Payments}/>
       </div>
