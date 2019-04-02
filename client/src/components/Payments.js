@@ -9,9 +9,9 @@ function Payments() {
           <Sidebar />
             <div className="checkout">
             <Checkout
-              name={'10+ Teachers'}
-              description={'Subscribe to get more teachers'}
-              amount={5.00}
+              name={'Classroom Angel'}
+              description={'Subscribe to get 10 more teachers'}
+              amount={29.99}
            />
         </div>
      </div>

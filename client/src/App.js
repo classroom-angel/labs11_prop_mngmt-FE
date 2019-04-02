@@ -12,6 +12,7 @@ import BoardMemberHub from './components/BoardMember'
 import IssueLog from './components/IssueLog';
 import ViewIssue from './components/ViewIssue';
 import Scheduled from './components/Scheduled';
+import CreateEventForm from './components/CreateEventForm';
 import Visits from './components/Visits';
 import Payments from './components/Payments';
 import TeacherAttendance from './components/TeacherAttendance';
@@ -53,6 +54,7 @@ class App extends React.Component {
         <Route exact path='/issue-log' component={IssueLog}/>
         <Route exact path='/issue/:id' component={ViewIssue}/>
         <Route exact path='/scheduled' render={(props) => <Scheduled {...props} solutions={this.state.solutions} solutionsLoaded={this.state.solutionsLoaded} />}/>
+        <Route exact path='/CreateEventForm' render={(props) => <CreateEventForm {...props} name={this.state.solution} date={this.state.date} time={this.state.time} organizationId={this.state.orgID} handleChange={this.handleInputChange} />}/>
         <Route exact path='/attendance' component={TeacherAttendance}/>
         <Route exact path='/visits' component={Visits}/>
         <Route exact path='/payments' component={Payments}/>
