@@ -1,5 +1,5 @@
 import React from 'react'
-import Sidebar from '../Sidebar';
+import Sidebar from '../Sidebar/Sidebar';
 import '../../App.css'
 import './IssueLog.css'
 import axios from '../../axiosInstance'
@@ -66,7 +66,7 @@ export default class IssueLog extends React.Component {
         event.preventDefault()
         axios.post('issues', {name: this.state.issueName,
           notes: this.state.issueNotes,
-        status: this.state.issueStatus,
+        status: this.state.issueStatus.toLowerCase(),
         isVisit: this.state.isVisit,
         organizationId: this.state.orgID,
         date: today 
@@ -217,14 +217,14 @@ export default class IssueLog extends React.Component {
                                 testArray.push(entry.issueId)
                             }) 
 
-                            if ((issue.status === this.state.filterStatus || this.state.filterStatus === 'all') && ((testArray.includes(issue.id)) || this.state.filterTag === 'all'))
+                            if ((issue.status === this.state.filterStatus.toLowerCase() || this.state.filterStatus === 'all') && ((testArray.includes(issue.id)) || this.state.filterTag === 'all'))
                             return (
                                 <div key={issue.id} className="issue-card">
-                                  <p>Name: {issue.name}</p>
-                                  <h2>Notes: {issue.notes}</h2>
-                                  <h3>Status: {issue.status}</h3>
-                                  <h4>Date: {issue.date}</h4>
-                                  <h5>Org. Id: {issue.organizationId}</h5>
+                                  <p style={{textAlign:"left", marginLeft:"20px", fontSize: "18px"}}>{issue.name}</p>
+                                  <p>{issue.notes}</p>
+                                  <p>Status: {issue.status}</p>
+                                  <p>Date: {issue.date}</p>
+                                  <p>Org. Id: {issue.organizationId}</p>
                                   <div>
                                       {this.state.tags.filter(function(tag) {
                                           return tag.issueId === issue.id

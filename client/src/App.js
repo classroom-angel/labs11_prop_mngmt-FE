@@ -6,7 +6,7 @@ import './App.css';
 import {Route} from 'react-router-dom';
 import OnBoard from './components/OnBoard';
 import SignUp from './components/SignUp';
-import Home from './components/Home';
+import Home from './components/Home/Home';
 import JoinOrg from './components/JoinOrg';
 import BoardMemberHub from './components/BoardMember/BoardMember'
 import IssueLog from './components/IssueLog/IssueLog';

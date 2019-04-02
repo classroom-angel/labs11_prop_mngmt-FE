@@ -1,11 +1,12 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
-import '../App.css'
+import '../../App.css'
+import './Sidebar.css'
 
 function Sidebar() {
     return (
         <div className="sidebar">
-            <h1>Classroom Angel</h1>
+            <h1 className="sidebar-header">Classroom Angel</h1>
             
             <NavLink to="/bm-homepage"><button className="sidebar-button">Board Member Homepage</button></NavLink>
             <NavLink to="/issue-log"><button className="sidebar-button">Issue Log</button></NavLink>

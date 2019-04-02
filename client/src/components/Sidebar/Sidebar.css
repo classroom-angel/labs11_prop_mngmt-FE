@@ -1,0 +1,43 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    background-color: #094D92;
+    width: 21.5%;
+    font-family: 'Roboto', sans-serif;
+    padding: 0px 20px;
+    /* min-height: 100vh; */
+    box-shadow: 2px 0px;
+  }
+
+  @media only screen and (max-width: 700px) {
+      .sidebar {
+        height: 100px;
+        overflow: hidden;
+        display: block;
+        width: 100%;
+        border: 2px solid yellow;
+      }
+
+      .sidebar:hover {
+          height: 100%;
+      }
+    
+}
+  
+  .sidebar h1 {
+    color: white;
+    margin: 10% auto;
+    width: 165px;
+  }
+  
+  .sidebar-button {
+    background: #FC5130;
+    color: white;
+    height: 45px;
+    width: 95%;
+    margin-top: 20px;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    border: 1px solid black;
+    
+  }

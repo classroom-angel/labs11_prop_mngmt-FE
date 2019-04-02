@@ -32,58 +32,38 @@
   }
 }
 
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  background-color: #094D92;
-  width: 21.5%;
-  font-family: 'Roboto', sans-serif;
-  padding: 0px 20px;
-  /* min-height: 100vh; */
-  box-shadow: 2px 0px;
-}
-
-.sidebar h1 {
-  color: white
-}
-
-.sidebar-button {
-  background: #FC5130;
-  color: white;
-  height: 45px;
-  width: 200px;
-  margin-top: 20px;
-  font-size: 16px;
-  font-family: 'Roboto', sans-serif;
-  border: 1px solid black;
-  
-}
-
 .page-container {
   display: flex;
   height: 100%;
+}
+
+@media only screen and (max-width: 700px) {
+  .page-container {
+    flex-wrap: wrap;
+  }
 }
 
 .right-side {
   overflow-y: scroll;
   height: 100vh;
   width: 100%;
+  border: 2px solid indigo;
 }
 
 .issue-list {
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   flex-wrap: wrap;
   /* justify-content: space-evenly; */
 }
 
 .issue-card {
-  text-align: center; 
+  /* text-align: center;  */
   border: 1px solid orange;
   margin: 40px 20px;
   width: 300px;
   padding-bottom: 20px;
-  font-size: 14px;
+  /* font-size: 14px; */
 }
 
 .edit-issue-button {
