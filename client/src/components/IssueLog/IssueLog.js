@@ -191,20 +191,6 @@ export default class IssueLog extends React.Component {
                               })
                         }
                     </select>
-                    <form onSubmit={this.postIssues}>
-                        <input name="issueName" value={this.state.issueName} placeholder="Issue Title" onChange={this.handleChange}/>
-                        <input name="issueNotes" value={this.state.issueNotes} placeholder="Additional notes" onChange={this.handleChange}/>
-                        <input type="checkbox" id="isVisit" name="isVisit" value={true} onChange={this.visitChange}/>
-                        <label htmlFor="isVisit">isVisit</label>
-                        <select name="issueStatus" onChange={this.handleChange}>
-                            <option value="">Status...</option>
-                                {statuses.map((status, index) => {
-                                  return <option key={index} value={status}>{status}</option>
-                                })}
-                        </select>
-                        
-                        <input type="submit" />
-                    </form>
                     <div className="issue-list">
                         {this.state.issues.map(issue => {
                             // filters tags by filter criteria
@@ -222,7 +208,7 @@ export default class IssueLog extends React.Component {
                                 <div key={issue.id} className="issue-card">
                                   <p style={{textAlign:"left", marginLeft:"20px", fontSize: "18px"}}>{issue.name}</p>
                                   <p>{issue.notes}</p>
-                                  <p>Status: {issue.status}</p>
+                                  {/* <p>Status: {issue.status}</p> */}
                                   <p>Date: {issue.date}</p>
                                   <p>Org. Id: {issue.organizationId}</p>
                                   <div>
@@ -236,8 +222,8 @@ export default class IssueLog extends React.Component {
                                           )
                                       })}
                                   </div>
-                                  <button onClick={this.deleteIssue} value={issue.id} sytle={{display: 'inline-block'}}>Delete Issue</button>
-                                  <NavLink to={`/issue/${issue.id}`}><div value={issue.id} className="edit-issue-button">Update Issue</div></NavLink>
+                                  <button onClick={this.deleteIssue} value={issue.id} sytle={{display: 'inline-block'}}>Delete</button>
+                                  <NavLink to={`/issue/${issue.id}`}><button value={issue.id} className="edit-issue-button">Update</button></NavLink>
                                   <button onClick={this.toggleShowComments} value={issue.id} sytle={{display: 'inline-block'}}>Show Comments</button>
                                   {this.state.showComments ?
                                   <div>
@@ -260,6 +246,20 @@ export default class IssueLog extends React.Component {
                                 </div>
                             ) 
                         })}
+                        <form onSubmit={this.postIssues} className="issue-card submit-issue">
+                        <input name="issueName" value={this.state.issueName} placeholder="Issue Title" onChange={this.handleChange}/><br/>
+                        <input name="issueNotes" value={this.state.issueNotes} placeholder="Additional notes" onChange={this.handleChange}/><br/>
+                        <input type="checkbox" id="isVisit" name="isVisit" value={true} onChange={this.visitChange}/>
+                        <label htmlFor="isVisit">isVisit</label><br/>
+                        <select name="issueStatus" onChange={this.handleChange}>
+                            <option value="">Status...</option>
+                                {statuses.map((status, index) => {
+                                  return <option key={index} value={status}>{status}</option>
+                                })}
+                        </select><br/>
+                        
+                        <input type="submit" />
+                    </form>
                     </div>
                 </div>
                 

@@ -60,19 +60,29 @@
 .issue-card {
   /* text-align: center;  */
   border: 1px solid orange;
-  margin: 40px 20px;
+  margin: 40px 10px;
   width: 300px;
-  padding-bottom: 20px;
+  padding-bottom: 5px;
   /* font-size: 14px; */
 }
 
+.submit-issue {
+  border: 1px solid green;
+  padding-top: 10px;
+}
+
 .edit-issue-button {
-  border: 1px solid indianred;
-  width: 100px;
+  border: 1px solid gold;
+  width: 70px;
   text-decoration: none;
   background: indianred;
   color: white;
-  font-weight: 800;
+  font-weight: 400;
+  margin: 0 10px;
+}
+
+.edit-issue-button:hover {
+  cursor: pointer;
 }
 
 /* a {
