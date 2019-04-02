@@ -1,6 +1,7 @@
 import React from 'react';
 import Calendar from 'react-big-calendar';
 import moment from 'moment';
+import { NavLink } from "react-router-dom";
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import axios from '../axiosInstance';
 import Sidebar from './Sidebar';
@@ -14,7 +15,7 @@ constructor(props){
 super(props)
 this.state = {
 solutions: [],
-events: []
+events: [],
 }
 };
 
@@ -33,6 +34,8 @@ this.setEvents
 });
 }
 
+
+
 setEvents = () => {
     const events = []
     this.state.solutions.map(solution =>{
@@ -49,12 +52,14 @@ setEvents = () => {
 
 
 
+
 render() {
 return (
     <div className ="page-container">
     <Sidebar />
-    <div className="calendar right-side">
-    <h1 className="calendar-title">Calendar</h1>
+  <NavLink to="/createEventForm">Create new Event</NavLink>
+    <div className="calendar">
+  <h1 className="calendar-title">Calendar</h1>
      <div style={{ height: 700 }}>
       <Calendar
          localizer={localizer}
