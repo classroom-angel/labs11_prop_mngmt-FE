@@ -64,10 +64,12 @@ render() {
 return (
     <div className ="page-container">
     <Sidebar />
+
     <NavLink to="/createEventForm">Create new Event</NavLink>
    
+
     <div className="calendar">
-    <h1 className="calendar-title">Calendar</h1>
+  <h1 className="calendar-title">Calendar</h1>
      <div style={{ height: 700 }}>
       <Calendar
          localizer={localizer}
