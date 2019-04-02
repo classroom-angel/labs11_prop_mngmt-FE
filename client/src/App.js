@@ -47,6 +47,7 @@ class App extends React.Component {
 
   updateSolutionEditId = (id) => {
     this.setState({solutionEditId: id})
+  }
 
   shareState = async (ste, cb) => {
     this.setState((prevState) => ({
@@ -59,8 +60,8 @@ class App extends React.Component {
 
     cb(ste);
 
-
   }
+
 
 
   render(){
