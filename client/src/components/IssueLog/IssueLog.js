@@ -13,9 +13,11 @@ const statuses = [
     "Ignored"
 ]
 
+let tags = []
+
 var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
-var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var mm = String(today.getMonth() + 1).padStart(2, '0');
 var yyyy = today.getFullYear();
 
 today = mm + '-' + dd + '-' + yyyy;
@@ -39,7 +41,8 @@ export default class IssueLog extends React.Component {
             comments: [],
             showComments: false,
             filterStatus: 'all',
-            filterTag: ''
+            filterTag: 'all',
+            passes: false
         }
         this.postIssues = this.postIssues.bind(this)
         this.deleteIssue = this.deleteIssue.bind(this)
@@ -50,13 +53,13 @@ export default class IssueLog extends React.Component {
         this.toggleShowComments = this.toggleShowComments.bind(this)
         this.submitComment = this.submitComment.bind(this)
         this.deleteComment = this.deleteComment.bind(this)
+        this.arrayTags = this.arrayTags.bind(this)
     }
 
     componentDidMount() {
         axios.get('issues').then(res => this.setState({issues: res.data.issues, issuesLoaded: true})).catch(err => console.log(err))
         axios.get('tags').then(res => this.setState({tags: res.data.tags})).catch(err => console.log(err))
         axios.get('comments').then(res => this.setState({comments: res.data.comments})).catch(err => console.log(err))
-
     }
 
     postIssues(event) {
@@ -156,9 +159,16 @@ export default class IssueLog extends React.Component {
         })
         .catch(err => console.error(err))
     }
+
+    // Populates global tags array with whatever new tags are entered
+    arrayTags() {
+        this.state.tags.forEach((tag) => {
+            if (!tags.includes(tag.name)) tags.push(tag.name) 
+        })
+    }
     
     render() {
-        console.log(this.state.filterStatus)
+        this.arrayTags()
     if (this.state.issuesLoaded) {
         return (
             <div className="page-container">
@@ -170,6 +180,14 @@ export default class IssueLog extends React.Component {
                         {
                             statuses.map((status, index) => {
                                 return <option key={index} value={status}>{status}</option>
+                              })
+                        }
+                    </select>
+                    Filter By Tag:<select name='filterTag' onChange={this.handleChange} className='' style={{marginBottom: '20px'}}>
+                        <option value="all">Choose...</option>
+                        {
+                            tags.map((tag, index) => {
+                                return <option key={index} value={tag}>{tag}</option>
                               })
                         }
                     </select>
@@ -189,7 +207,17 @@ export default class IssueLog extends React.Component {
                     </form>
                     <div className="issue-list">
                         {this.state.issues.map(issue => {
-                            if (issue.status === this.state.filterStatus || this.state.filterStatus === 'all')
+                            // filters tags by filter criteria
+                            let truthArray = this.state.tags.filter((tag) => {
+                                    return (tag.name === this.state.filterTag)
+                            })
+                            // Array that will hold whatever issue IDs are attached to filtered tags
+                            let testArray = []
+                            truthArray.forEach(entry => {
+                                testArray.push(entry.issueId)
+                            }) 
+
+                            if ((issue.status === this.state.filterStatus || this.state.filterStatus === 'all') && ((testArray.includes(issue.id)) || this.state.filterTag === 'all'))
                             return (
                                 <div key={issue.id} className="issue-card">
                                   <p>Name: {issue.name}</p>
