@@ -65,6 +65,7 @@ class App extends React.Component {
     }
     return (
       <div className="App">
+      {/* Should've mentioned earlier but feel free to delete render props if cumbersome or unnecessary */}
         <Route exact path='/' render={(props) => <Home {...props} auth={this.auth} profile={profile} />} />
         <Route exact path='/signup' render={(props) => <SignUp {...props} auth={this.auth} shareState={this.shareState} />} />
         <Route exact path='/createorg' render={(props) => <CreateOrg {...props} auth={this.auth} shareState={this.shareState} />} />
@@ -76,7 +77,7 @@ class App extends React.Component {
         <Route exact path='/issue/:id' component={ViewIssue}/>
         <Route exact path='/scheduled' render={(props) => <Scheduled {...props} solutions={this.state.solutions} solutionsLoaded={this.state.solutionsLoaded} />}/>
         <Route exact path='/CreateEventForm' render={(props) => <CreateEventForm {...props} name={this.state.solution} date={this.state.date} time={this.state.time} organizationId={this.state.orgID} handleChange={this.handleInputChange} />}/>
-        <Route exact path='/attendance' component={TeacherAttendance}/>
+        {/* <Route exact path='/attendance' component={TeacherAttendance}/> */}
         <Route exact path='/visits' component={Visits}/>
         <Route exact path='/payments' component={Payments}/>
       </div>
