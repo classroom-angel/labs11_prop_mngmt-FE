@@ -1,7 +1,7 @@
 import React from 'react'
 import Sidebar from '../Sidebar/Sidebar';
 import '../../App.css'
-import './ViewIssue.css'
+import './Issues.css'
 import axios from '../../axiosInstance'
 import {NavLink} from 'react-router-dom'
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import Sidebar from '../Sidebar/Sidebar';
 import '../../App.css'
-import './IssueLog.css'
+import './Issues.css'
 import axios from '../../axiosInstance'
 import {NavLink} from 'react-router-dom'
 // import moment from 'moment'
@@ -210,7 +210,7 @@ export default class IssueLog extends React.Component {
                                   <p>{issue.notes}</p>
                                   {/* <p>Status: {issue.status}</p> */}
                                   <p>Date: {issue.date}</p>
-                                  <p>Org. Id: {issue.organizationId}</p>
+                                  {/* <p>Org. Id: {issue.organizationId}</p> */}
                                   <div>
                                       {this.state.tags.filter(function(tag) {
                                           return tag.issueId === issue.id
@@ -247,6 +247,7 @@ export default class IssueLog extends React.Component {
                             ) 
                         })}
                         <form onSubmit={this.postIssues} className="issue-card submit-issue">
+                        <h1>New Issue +</h1>
                         <input name="issueName" value={this.state.issueName} placeholder="Issue Title" onChange={this.handleChange}/><br/>
                         <input name="issueNotes" value={this.state.issueNotes} placeholder="Additional notes" onChange={this.handleChange}/><br/>
                         <input type="checkbox" id="isVisit" name="isVisit" value={true} onChange={this.visitChange}/>
