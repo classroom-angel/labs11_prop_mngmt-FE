@@ -1,9 +1,10 @@
 import React from 'react'
-import Sidebar from './Sidebar';
-import '../App.css'
-import axios from '../axiosInstance'
+import Sidebar from '../Sidebar';
+import '../../App.css'
+import './IssueLog.css'
+import axios from '../../axiosInstance'
 import {NavLink} from 'react-router-dom'
-import moment from 'moment'
+// import moment from 'moment'
 
 const statuses = [
     "Needs Attention",
@@ -34,8 +35,11 @@ export default class IssueLog extends React.Component {
             tags: [],
             modal: false,
             isVisit: false,
+            comment: '',
             comments: [],
-            showComments: false
+            showComments: false,
+            filterStatus: 'all',
+            filterTag: ''
         }
         this.postIssues = this.postIssues.bind(this)
         this.deleteIssue = this.deleteIssue.bind(this)
@@ -44,6 +48,8 @@ export default class IssueLog extends React.Component {
         this.fetchIssue = this.fetchIssue.bind(this)
         this.visitChange = this.visitChange.bind(this)
         this.toggleShowComments = this.toggleShowComments.bind(this)
+        this.submitComment = this.submitComment.bind(this)
+        this.deleteComment = this.deleteComment.bind(this)
     }
 
     componentDidMount() {
@@ -124,15 +130,49 @@ export default class IssueLog extends React.Component {
     visitChange(event) {
         this.setState({[event.target.name]: event.target.checked})
     }
+
+    submitComment(event) {
+        event.preventDefault()
+        axios
+        .post('comments', {
+            content: this.state.comment,
+            userId: 1,
+            issueId: event.target[0].attributes[2].value
+        })
+        .then(res => {
+            this.setState({comments: [...this.state.comments, res.data.comment], comment: ''})
+        })
+        .catch(err => console.error(err))
+    }
+
+    deleteComment(event) {
+        axios
+        .delete(`comments/${event.target.getAttribute('issue_id')}`)
+        .then(res => {
+            let copy = this.state.comments.slice().filter(function(comment) {
+                return comment.id !== res.data.comment.id
+            })
+            this.setState({comments: copy})
+        })
+        .catch(err => console.error(err))
+    }
     
     render() {
-        console.log(this.state.comments)
+        console.log(this.state.filterStatus)
     if (this.state.issuesLoaded) {
         return (
             <div className="page-container">
                 <Sidebar />
                 <div className="right-side">
                     <h1 style={{textAlign: 'center', border: '2px solid gray'}}>Issue Log</h1>
+                    Filter By Status:<select name='filterStatus' onChange={this.handleChange} className='' style={{marginBottom: '20px'}}>
+                        <option value="all">Choose...</option>
+                        {
+                            statuses.map((status, index) => {
+                                return <option key={index} value={status}>{status}</option>
+                              })
+                        }
+                    </select>
                     <form onSubmit={this.postIssues}>
                         <input name="issueName" value={this.state.issueName} placeholder="Issue Title" onChange={this.handleChange}/>
                         <input name="issueNotes" value={this.state.issueNotes} placeholder="Additional notes" onChange={this.handleChange}/>
@@ -149,6 +189,7 @@ export default class IssueLog extends React.Component {
                     </form>
                     <div className="issue-list">
                         {this.state.issues.map(issue => {
+                            if (issue.status === this.state.filterStatus || this.state.filterStatus === 'all')
                             return (
                                 <div key={issue.id} className="issue-card">
                                   <p>Name: {issue.name}</p>
@@ -166,27 +207,27 @@ export default class IssueLog extends React.Component {
                                               </div>
                                           )
                                       })}
-                                      {/* <form className="tagForm" onSubmit={() => this.handleTagSubmit(issue.id)}>
-                                        <input className="mainInput" type="text" placeholder="add tag" name="tag" onChange={this.handleChange} value={this.state.tag} />
-                                      </form> */}
                                   </div>
                                   <button onClick={this.deleteIssue} value={issue.id} sytle={{display: 'inline-block'}}>Delete Issue</button>
                                   <NavLink to={`/issue/${issue.id}`}><div value={issue.id} className="edit-issue-button">Update Issue</div></NavLink>
                                   <button onClick={this.toggleShowComments} value={issue.id} sytle={{display: 'inline-block'}}>Show Comments</button>
                                   {this.state.showComments ?
                                   <div>
+                                  <div>
                                       {this.state.comments.filter(function(comment) {
                                           return comment.issueId === issue.id
-                                      }).map(function(comment) {
+                                      }).map((comment) => {
                                           return (
+                                              
                                               <div key={comment.id}>
-                                                  - {comment.content}
+                                                  - {comment.content}<span className="delete-button" onClick={this.deleteComment} issue_id={comment.id}> x</span>
                                               </div>
                                           )
                                       })}
-                                      {/* <form className="tagForm" onSubmit={() => this.handleTagSubmit(issue.id)}>
-                                        <input className="mainInput" type="text" placeholder="add tag" name="tag" onChange={this.handleChange} value={this.state.tag} />
-                                      </form> */}
+                                  </div>
+                                  <form onSubmit={this.submitComment}>
+                                      <input name='comment' placeholder='add comment' value={this.state.comment} issue_id={issue.id} onChange={this.handleChange} />
+                                  </form>
                                   </div>: null}
                                 </div>
                             ) 
@@ -200,7 +241,10 @@ export default class IssueLog extends React.Component {
         return (
             <div className="page-container">
                 <Sidebar />
-                <h1>Loading...</h1>
+                <div className="right-side">
+                    <h1>Loading...</h1>
+                </div>
+                
             </div>
             
         )

@@ -137,7 +137,10 @@ export default class IssueLog extends React.Component {
         return (
             <div className="page-container">
                 <Sidebar />
-                <h1>Loading...</h1>
+                <div className="right-side">
+                    <h1>Loading...</h1>
+                </div>
+                
             </div>
             
         )

@@ -1,7 +1,8 @@
 import React from 'react'
-import Sidebar from './Sidebar'
-import '../App.css'
-import axios from '../axiosInstance'
+import Sidebar from '../Sidebar'
+import '../../App.css'
+// import './BoardMember.css'
+import axios from '../../axiosInstance'
 
 export default class BoardMemberHub extends React.Component {
     constructor(props) {
@@ -10,7 +11,9 @@ export default class BoardMemberHub extends React.Component {
             equipment: [],
             equipmentLoaded: false,
             attendance: [],
-            attendanceLoaded: false
+            attendanceLoaded: false,
+            issuesLoaded: false,
+            issues: []
         }
     }
 
@@ -21,6 +24,11 @@ export default class BoardMemberHub extends React.Component {
         .catch(err => console.error(err))
 
         axios
+        .get('issues')
+        .then(res => this.setState({issues: res.data.issues, issuesLoaded: true}))
+        .catch(err => console.error(err))
+
+        axios
         .get('attendance')
         .then(res => this.setState({attendance: res.data.attendance, attendanceLoaded: true}))
         .catch(err => console.error(err))
@@ -28,11 +36,10 @@ export default class BoardMemberHub extends React.Component {
 
     render() {
         return (
-            <div className="page-container">
+            <div className="page-container grid-container">
                     <Sidebar/>
-                    <div className="right-side">
-                        <h1>Board member homepage</h1>
-                        <div style={{display: 'inline-block', border: '2px solid'}}>
+                    <div className="right-side grid-container">
+                        <div className="item-1" style={{display: 'inline-block', border: '2px solid'}}>
                             {
                                 this.state.equipmentLoaded ? (
                                     this.state.equipment.map(function(item) {
@@ -51,7 +58,7 @@ export default class BoardMemberHub extends React.Component {
                                 : "Loading..."
                             }
                         </div>
-                        <div style={{display: 'inline-block', border: '2px solid'}}>
+                        <div className="item-2" style={{display: 'inline-block', border: '2px solid'}}>
                             {
                                 this.state.attendanceLoaded ? (
                                     this.state.attendance.map(function(teacher) {
@@ -63,6 +70,21 @@ export default class BoardMemberHub extends React.Component {
                                         <p>lastOut: {teacher.lastOut}</p>
                                         <p>OrgID: Need a different request</p>
                                         <p>TMM: {teacher.totalMinutesMissed}</p>
+                                        </div>
+                                        )
+                                    }))
+                                : "Loading..."
+                            }
+                        </div>
+                        <div className="item-3" style={{display: 'inline-block', border: '2px solid'}}>
+                            {
+                                this.state.issuesLoaded ? (
+                                    this.state.issues.map(function(issue) {
+                                        return (
+                                        <div key={issue.id}>
+                                        <p>ID: {issue.id}</p>
+                                        <p>name: {issue.name}</p>
+                                        <p>Date: {issue.date}</p>
                                         </div>
                                         )
                                     }))
