@@ -76,15 +76,15 @@ export default class IssueLog extends React.Component {
            console.log(res);
            const id = res.data.issue.id;
            const formData = new FormData()
-           const files = [this.state.images];
+           const files = [...this.state.images];
+           console.log(files);
            files.forEach((file, i) => {
              formData.append(i, file);
            });
-           formData.append('issueId', id);
-           const images = [...this.state.images];
-           axios.post('upload', formData).then(res => {
-             console.log("RES2", res);
-             this.setState(prevState => ({issueName: "", issueNotes: "", issues: [prevState.issues, res.data.issue], images: []}))
+           console.log(formData);
+           axios.post(`issues/${id}/images`, formData).then(res2 => {
+             console.log("RES2", res2);
+             this.setState(prevState => ({...prevState, issueName: "", issueNotes: "", issues: [prevState.issues, res.data.issue], images: []}))
            }).catch(err => console.log(err))
        })
        .catch(err => console.log(err))
@@ -93,7 +93,6 @@ export default class IssueLog extends React.Component {
     deleteIssue(event) {
         axios.delete(`issues/${event.target.value}`)
         .then(res => {
-            console.log(res.data.issue.id)
             var copy = this.state.issues.filter(function(element) {
                 return element.id !== res.data.issue.id
             })

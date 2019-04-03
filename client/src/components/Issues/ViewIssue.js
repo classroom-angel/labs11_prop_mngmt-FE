@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
 import Sidebar from '../Sidebar/Sidebar';
-import '../../App.css'
-import './Issues.css'
-import axios from '../../axiosInstance'
-import {NavLink} from 'react-router-dom'
+import '../../App.css';
+import './Issues.css';
+import axios from '../../axiosInstance';
+import {NavLink} from 'react-router-dom';
+import {Image, Transformation } from 'cloudinary-react';
 
 const statuses = [
     "Needs Attention",
@@ -36,7 +37,8 @@ class ViewIssue extends React.Component {
                 modal: false,
                 comments: [],
                 comment: '',
-                showComments: false
+                showComments: false,
+                imageIds: []
             }
             this.toggleEdit = this.toggleEdit.bind(this)
             this.fetchIssue = this.fetchIssue.bind(this)
@@ -56,11 +58,18 @@ class ViewIssue extends React.Component {
                 this.setState({
                 tags: res.data.tags});
                 axios.get(`issues/${this.props.match.params.id}/images`).then(res => {
-                  console.log(res.data);
+                  let images = res.data.images;
+                  const imageIds = images.map(image => {
+                    return image.path.slice(0, -4)
+                  });
+                  console.log(imageIds);
+                  this.setState({
+                    imageIds
+                  })
                 }).catch(err => console.log("CRAP!!!"));
-            }).catch(err => console.log(err))
+            }).catch(err => console.log(err));
 
-            axios.get('comments').then(res => this.setState({comments: res.data.comments})).catch(err => console.log(err))
+            axios.get('comments').then(res => this.setState({comments: res.data.comments})).catch(err => console.log(err));
         }
 
         handleChange(event) {
@@ -191,6 +200,13 @@ class ViewIssue extends React.Component {
                     }</h3>
                       <h4>Date: {this.state.issue.date}</h4>
                       <h5>Org. Id: {this.state.issue.organizationId}</h5>
+                      {this.state.imageIds.map(id => {
+                        return (
+                          <Image cloudName="dzeio0al7" publicId={id}>
+                            <Transformation width='200' height='200' crop='fill' gravity='auto' />
+                          </Image>
+                        )
+                      })}
                       <div className="tag-container">
                             {this.state.tags.filter((tag) => {
                                 return tag.issueId === this.state.issue.id
