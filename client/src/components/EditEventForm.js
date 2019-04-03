@@ -35,15 +35,32 @@ this.state = {
         
     }
 
-
-    updateEvent = () => {
+    // this allows you to edit a event
+    updateEvent = (event) => {
+    event.preventDefault()
     axios
     .put(`solutions/${this.props.solutionEditId}`,this.state)
-    .then()
+    .then( () => {
+        console.log(this.props)
+        this.props.history.push('/scheduled');
+     })
     .catch(error => {
         console.error("Can't edit solution",error)
     })
 
+    }
+
+    // this allows you to delete a event
+    deleteEvent = (event) => {
+        event.preventDefault()
+        axios
+       .delete(`solutions/${this.props.solutionEditId}`,this.state)
+       .then( () => {
+        this.props.history.push('/scheduled');
+       })
+       .catch(error => {
+        console.error("Can't delete solution",error)
+    })
     }
 
     handleChange = event => {
@@ -75,8 +92,10 @@ this.state = {
                       name="time"
                     />
                     <button>Submit</button>
+                    
 
                 </form>
+                <button onClick={this.deleteEvent}>Delete Event</button>
             </div>
         )
 

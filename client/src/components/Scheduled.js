@@ -4,7 +4,7 @@ import moment from 'moment';
 import { NavLink } from "react-router-dom";
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import axios from '../axiosInstance';
-import Sidebar from './Sidebar';
+import Sidebar from './Sidebar/Sidebar';
 import '../App.css'
 const localizer = Calendar.momentLocalizer(moment)
 

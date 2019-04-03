@@ -6,11 +6,11 @@ import './App.css';
 import {Route} from 'react-router-dom';
 import OnBoard from './components/OnBoard';
 import SignUp from './components/SignUp';
-import Home from './components/Home';
+import Home from './components/Home/Home';
 import JoinOrg from './components/JoinOrg';
 import BoardMemberHub from './components/BoardMember/BoardMember'
-import IssueLog from './components/IssueLog/IssueLog';
-import ViewIssue from './components/ViewIssue/ViewIssue';
+import IssueLog from './components/Issues/IssueLog';
+import ViewIssue from './components/Issues/ViewIssue';
 import Scheduled from './components/Scheduled';
 import CreateEventForm from './components/CreateEventForm';
 import EditEventForm from './components/EditEventForm';
@@ -47,6 +47,7 @@ class App extends React.Component {
 
   updateSolutionEditId = (id) => {
     this.setState({solutionEditId: id})
+  }
 
   shareState = async (ste, cb) => {
     this.setState((prevState) => ({
@@ -59,8 +60,8 @@ class App extends React.Component {
 
     cb(ste);
 
-
   }
+
 
 
   render(){
@@ -72,6 +73,7 @@ class App extends React.Component {
     }
     return (
       <div className="App">
+      {/* Should've mentioned earlier but feel free to delete render props if cumbersome or unnecessary */}
         <Route exact path='/' render={(props) => <Home {...props} auth={this.auth} profile={profile} />} />
         <Route exact path='/signup' render={(props) => <SignUp {...props} auth={this.auth} shareState={this.shareState} />} />
         <Route exact path='/createorg' render={(props) => <CreateOrg {...props} auth={this.auth} shareState={this.shareState} />} />
@@ -83,8 +85,9 @@ class App extends React.Component {
         <Route exact path='/issue/:id' component={ViewIssue}/>
         <Route exact path='/scheduled' render={(props) => <Scheduled {...props} solutions={this.state.solutions} solutionsLoaded={this.state.solutionsLoaded} update={this.updateSolutionEditId}/>}/>
         <Route exact path='/CreateEventForm' render={(props) => <CreateEventForm {...props} name={this.state.solution} date={this.state.date} time={this.state.time} organizationId={this.state.orgID} handleChange={this.handleInputChange} />}/>
-        <Route exact path='/events/:id' render={(props) => <EditEventForm  solutionEditId={this.state.solutionEditId}/>} />
+        <Route exact path='/events/:id' render={(props) => <EditEventForm  solutionEditId={this.state.solutionEditId} {...props}/>} />
         <Route exact path='/attendance' component={TeacherAttendance}/>
+        {/* <Route exact path='/attendance' component={TeacherAttendance}/> */}
         <Route exact path='/visits' component={Visits}/>
         <Route exact path='/payments' component={Payments}/>
       </div>

@@ -73,7 +73,7 @@ export default class IssueLog extends React.Component {
         event.preventDefault()
         axios.post('issues', {name: this.state.issueName,
           notes: this.state.issueNotes,
-        status: this.state.issueStatus,
+        status: this.state.issueStatus.toLowerCase(),
         isVisit: this.state.isVisit,
         organizationId: this.state.orgID,
         date: today
@@ -217,6 +217,7 @@ export default class IssueLog extends React.Component {
                               })
                         }
                     </select>
+<<<<<<< HEAD:client/src/components/IssueLog/IssueLog.js
                     <form onSubmit={this.postIssues}>
                         <input name="issueName" value={this.state.issueName} placeholder="Issue Title" onChange={this.handleChange}/>
                         <input name="issueNotes" value={this.state.issueNotes} placeholder="Additional notes" onChange={this.handleChange}/>
@@ -231,6 +232,8 @@ export default class IssueLog extends React.Component {
                         <Uploader uploading={this.state.uploading} imgAdder={this.imgAdder} />
                         <input type="submit" />
                     </form>
+=======
+>>>>>>> 6e6917f95ffcf5353503e7b83b427a7f61be9840:client/src/components/Issues/IssueLog.js
                     <div className="issue-list">
                         {this.state.issues.map(issue => {
                             // filters tags by filter criteria
@@ -243,14 +246,14 @@ export default class IssueLog extends React.Component {
                                 testArray.push(entry.issueId)
                             })
 
-                            if ((issue.status === this.state.filterStatus || this.state.filterStatus === 'all') && ((testArray.includes(issue.id)) || this.state.filterTag === 'all'))
+                            if ((issue.status === this.state.filterStatus.toLowerCase() || this.state.filterStatus === 'all') && ((testArray.includes(issue.id)) || this.state.filterTag === 'all'))
                             return (
                                 <div key={issue.id} className="issue-card">
-                                  <p>Name: {issue.name}</p>
-                                  <h2>Notes: {issue.notes}</h2>
-                                  <h3>Status: {issue.status}</h3>
-                                  <h4>Date: {issue.date}</h4>
-                                  <h5>Org. Id: {issue.organizationId}</h5>
+                                  <p style={{textAlign:"left", marginLeft:"20px", fontSize: "18px"}}>{issue.name}</p>
+                                  <p>{issue.notes}</p>
+                                  {/* <p>Status: {issue.status}</p> */}
+                                  <p>Date: {issue.date}</p>
+                                  {/* <p>Org. Id: {issue.organizationId}</p> */}
                                   <div>
                                       {this.state.tags.filter(function(tag) {
                                           return tag.issueId === issue.id
@@ -262,8 +265,8 @@ export default class IssueLog extends React.Component {
                                           )
                                       })}
                                   </div>
-                                  <button onClick={this.deleteIssue} value={issue.id} sytle={{display: 'inline-block'}}>Delete Issue</button>
-                                  <NavLink to={`/issue/${issue.id}`}><div value={issue.id} className="edit-issue-button">Update Issue</div></NavLink>
+                                  <button onClick={this.deleteIssue} value={issue.id} sytle={{display: 'inline-block'}}>Delete</button>
+                                  <NavLink to={`/issue/${issue.id}`}><button value={issue.id} className="edit-issue-button">Update</button></NavLink>
                                   <button onClick={this.toggleShowComments} value={issue.id} sytle={{display: 'inline-block'}}>Show Comments</button>
                                   {this.state.showComments ?
                                   <div>
@@ -286,6 +289,21 @@ export default class IssueLog extends React.Component {
                                 </div>
                             )
                         })}
+                        <form onSubmit={this.postIssues} className="issue-card submit-issue">
+                        <h1>New Issue +</h1>
+                        <input name="issueName" value={this.state.issueName} placeholder="Issue Title" onChange={this.handleChange}/><br/>
+                        <input name="issueNotes" value={this.state.issueNotes} placeholder="Additional notes" onChange={this.handleChange}/><br/>
+                        <input type="checkbox" id="isVisit" name="isVisit" value={true} onChange={this.visitChange}/>
+                        <label htmlFor="isVisit">isVisit</label><br/>
+                        <select name="issueStatus" onChange={this.handleChange}>
+                            <option value="">Status...</option>
+                                {statuses.map((status, index) => {
+                                  return <option key={index} value={status}>{status}</option>
+                                })}
+                        </select><br/>
+
+                        <input type="submit" />
+                    </form>
                     </div>
                 </div>
 
