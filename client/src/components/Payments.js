@@ -15,17 +15,27 @@ class Payments extends React.Component {
     }
   }
 
+  componentDidMount = () => {
+    this.getCredentials();
+  }
+
   handleChange = (e) => {
     this.setState({[e.target.name]: [e.target.value]})
   }
 
   getCredentials = () => {
-    const code = this.props.match.params.code;
+    let vars = {};
+    let parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+      vars[key] = value;
+    });
+
+    const code = vars["code"];
     console.log(code);
+    return code;
   }
 
   render() {
-    this.getCredentials();
+    
     return (
         <div className="page-container">
           <Sidebar />
