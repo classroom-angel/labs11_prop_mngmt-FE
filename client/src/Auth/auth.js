@@ -12,7 +12,7 @@ export default class Auth extends Component {
     auth0 = new auth0.WebAuth ({
         domain: 'classroomangel.auth0.com',
         clientID:'aCRKf9uUYcF1v2gFUZf0s3PZtxy6uwvn',
-        redirectUri: 'http://localhost:3000/authload',
+        redirectUri: `${process.env.URL || 'http://localhost:3000'}/authload`,
         responseType: 'token id_token',
         // audience: 'classroomangel.auth0.com/userinfo',
         scope: 'openid profile email firstName'
