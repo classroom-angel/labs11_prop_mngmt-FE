@@ -46,7 +46,6 @@ export default class SignUp extends Component {
 
   componentDidMount() {
     axios.get('organizations').then(res => {
-      this.orgs = res.data.organizations;
     }).catch(err => {
       console.log(err);
     })

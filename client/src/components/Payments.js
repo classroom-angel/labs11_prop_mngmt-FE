@@ -1,21 +1,62 @@
 import React from 'react'
+import Connect from './Connect';
 import Sidebar from './Sidebar/Sidebar';
 import Checkout from './Checkout';
+
 import '../App.css'
 
-function Payments() {
+class Payments extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      amount: "",
+      accountId: ""
+    }
+  }
+
+  handleChange = (e) => {
+    this.setState({[e.target.name]: [e.target.value]})
+  }
+
+  getCredentials = () => {
+    const code = this.props.match.params.code;
+    console.log(code);
+  }
+
+  render() {
+    this.getCredentials();
     return (
         <div className="page-container">
           <Sidebar />
             <div className="checkout right-side">
+
+            <h1>Upgrade Account</h1>
             <Checkout
-              name={'Classroom Angel'}
-              description={'Subscribe to get 10 more teachers'}
+              name={'10+ Teachers'}
+              description={'Subscribe to get more teachers'}
               amount={29.99}
+           />
+          <h1>Pay a contractor</h1>
+          <p>Step 1: Send this link to your contractor via email to get them connected to our platform (needs to happen only once):</p>
+          <a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_EotNW2K6Nn9nRDf9grdRR6gBaySaVZ3d&scope=read_write">https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_EotNW2K6Nn9nRDf9grdRR6gBaySaVZ3d&scope=read_write</a>
+           <p>Step 2: Fill out this form with the amount you're sending and the contractor's Stripe account number (starts with 'acct_').</p>
+           <form>
+            <input name="amount" placeholder="Amount to send" value={this.state.amount} onChange={this.handleChange}/>
+            <input name="accountId" placeholder="Contractor's Stripe Account ID" value={this.state.accountId} onChange={this.handleChange}/>
+           </form>
+            <p>Step 3: Pay</p>
+           <Connect
+            name="Pay a contractor"
+            description=""
+            amount={Number(this.state.amount)}
+            stripeAccount={this.state.accountId}
            />
         </div>
      </div>
     );
+
+}
 }
 
-export default Payments
+export default Payments;

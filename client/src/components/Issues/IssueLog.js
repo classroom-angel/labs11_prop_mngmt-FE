@@ -1,9 +1,10 @@
 import React from 'react'
 import Sidebar from '../Sidebar/Sidebar';
-import '../../App.css'
-import './Issues.css'
-import axios from '../../axiosInstance'
-import {NavLink} from 'react-router-dom'
+import '../../App.css';
+import './Issues.css';
+import axios from '../../axiosInstance';
+import {NavLink} from 'react-router-dom';
+import Uploader from '../Uploader';
 // import moment from 'moment'
 
 const statuses = [
@@ -69,11 +70,22 @@ export default class IssueLog extends React.Component {
         status: this.state.issueStatus.toLowerCase(),
         isVisit: this.state.isVisit,
         organizationId: this.state.orgID,
-        date: today 
+        date: today
      })
        .then(res => {
-           console.log(res)
-           this.setState({issueName: "", issueNotes: "", issues: [...this.state.issues, res.data.issue]})
+           console.log(res);
+           const id = res.data.issue.id;
+           const formData = new FormData()
+           const files = [...this.state.images];
+           console.log(files);
+           files.forEach((file, i) => {
+             formData.append(i, file);
+           });
+           console.log(formData);
+           axios.post(`issues/${id}/images`, formData).then(res2 => {
+             console.log("RES2", res2);
+             this.setState(prevState => ({...prevState, issueName: "", issueNotes: "", issues: [prevState.issues, res.data.issue], images: []}))
+           }).catch(err => console.log(err))
        })
        .catch(err => console.log(err))
     }
@@ -81,9 +93,8 @@ export default class IssueLog extends React.Component {
     deleteIssue(event) {
         axios.delete(`issues/${event.target.value}`)
         .then(res => {
-            console.log(res.data.issue.id)
             var copy = this.state.issues.filter(function(element) {
-                return element.id !== res.data.issue.id 
+                return element.id !== res.data.issue.id
             })
             this.setState({issues: copy})
         })
@@ -115,7 +126,7 @@ export default class IssueLog extends React.Component {
         .catch(err => {
             console.log(err)
         })
-    } 
+    }
 
     handleTagEdit(id, event) {
         event.preventDefault()
@@ -129,6 +140,14 @@ export default class IssueLog extends React.Component {
           console.log("Tag Edit Error", err);
         })
       }
+
+    imgAdder = (e) => {
+      const files = Array.from(e.target.files);
+      this.setState({
+        images: files,
+        uploading: true
+      })
+    }
 
     visitChange(event) {
         this.setState({[event.target.name]: event.target.checked})
@@ -163,10 +182,10 @@ export default class IssueLog extends React.Component {
     // Populates global tags array with whatever new tags are entered
     arrayTags() {
         this.state.tags.forEach((tag) => {
-            if (!tags.includes(tag.name)) tags.push(tag.name) 
+            if (!tags.includes(tag.name)) tags.push(tag.name)
         })
     }
-    
+
     render() {
         this.arrayTags()
     if (this.state.issuesLoaded) {
@@ -201,7 +220,7 @@ export default class IssueLog extends React.Component {
                             let testArray = []
                             truthArray.forEach(entry => {
                                 testArray.push(entry.issueId)
-                            }) 
+                            })
 
                             if ((issue.status === this.state.filterStatus.toLowerCase() || this.state.filterStatus === 'all') && ((testArray.includes(issue.id)) || this.state.filterTag === 'all'))
                             return (
@@ -232,7 +251,7 @@ export default class IssueLog extends React.Component {
                                           return comment.issueId === issue.id
                                       }).map((comment) => {
                                           return (
-                                              
+
                                               <div key={comment.id}>
                                                   - {comment.content}<span className="delete-button" onClick={this.deleteComment} issue_id={comment.id}> x</span>
                                               </div>
@@ -244,7 +263,7 @@ export default class IssueLog extends React.Component {
                                   </form>
                                   </div>: null}
                                 </div>
-                            ) 
+                            )
                         })}
                         <form onSubmit={this.postIssues} className="issue-card submit-issue">
                         <h1>New Issue +</h1>
@@ -258,12 +277,12 @@ export default class IssueLog extends React.Component {
                                   return <option key={index} value={status}>{status}</option>
                                 })}
                         </select><br/>
-                        
+                        <Uploader uploading={this.state.uploading} imgAdder={this.imgAdder} />
                         <input type="submit" />
                     </form>
                     </div>
                 </div>
-                
+
             </div>
         )
     } else {
@@ -273,9 +292,9 @@ export default class IssueLog extends React.Component {
                 <div className="right-side">
                     <h1>Loading...</h1>
                 </div>
-                
+
             </div>
-            
+
         )
     }
 }

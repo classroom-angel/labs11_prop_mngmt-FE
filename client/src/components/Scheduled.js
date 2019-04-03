@@ -21,20 +21,18 @@ events: [],
 
 componentDidMount() {
 
-axios 
+axios
 .get("solutions")
 .then(response => {
 console.log(response.data)
-this.setState(function(){return{solutions: [...response.data.solutions]}}, 
-this.setEvents    
+this.setState(function(){return{solutions: [...response.data.solutions]}},
+this.setEvents
  );
 })
 .catch(error => {
  console.error("Cannot get solutions",error);
 });
 }
-
-
 
 setEvents = () => {
     const events = []
@@ -49,9 +47,8 @@ setEvents = () => {
         end:  date
         })
     })
-    this.setState({events:events})  
+    this.setState({events:events})
 }
-
 
 
  selectedEvent = (event) => {
@@ -84,4 +81,3 @@ return (
     );
   }
 }
-

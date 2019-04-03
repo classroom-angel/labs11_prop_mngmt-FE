@@ -137,20 +137,3 @@ export default class BoardMemberHub extends React.Component {
 
     }
 }
-
- /* {
-                                this.state.attendanceLoaded ? (
-                                    this.state.attendance.map(function(teacher) {
-                                        return (
-                                        <div key={teacher.id}>
-                                        <p>ID: {teacher.id}</p>
-                                        <p>Name: No name provided by API</p>
-                                        <p>lastIn: {teacher.lastIn}</p>
-                                        <p>lastOut: {teacher.lastOut}</p>
-                                        <p>OrgID: Need a different request</p>
-                                        <p>TMM: {teacher.totalMinutesMissed}</p>
-                                        </div>
-                                        )
-                                    }))
-                                : "Loading..."
-                            } */

@@ -7,7 +7,7 @@ function Sidebar() {
     return (
         <div className="sidebar">
             <h1 className="sidebar-header">Classroom Angel</h1>
-            
+
             <NavLink to="/bm-homepage"><button className="sidebar-button">Board Member Homepage</button></NavLink>
             <NavLink to="/issue-log"><button className="sidebar-button">Issue Log</button></NavLink>
             <NavLink to="/scheduled"><button className="sidebar-button">Scheduled</button></NavLink>
