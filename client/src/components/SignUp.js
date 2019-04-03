@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from '../axiosInstance';
+// import axiox as axios2 from 'axios';
 // import useFormInput from './useFormInput';
 import { NavLink } from 'react-router-dom'
 
@@ -16,65 +17,125 @@ export default class SignUp extends Component {
         username: "",
         firstName: "",
         lastName: "",
-        password: "",
         role: "",
-        organizationName: ""
+        organizationName: "",
+        img: "",
+        creating: false
       }
+      this.orgs = []
     }
 
-    componentDidMount() {
-      this.props.auth.login();
+    componentWillMount() {
+      const userProfile = JSON.parse(localStorage.getItem('profile'));
+      const profName = userProfile.name.split(" ");
+      console.log(profName);
+      const email = userProfile.email;
+      if (profName) {
+        let firstName = profName[0];
+        let lastName = profName[1];
+        let img = userProfile.picture;
+        this.setState({
+          firstName, lastName, img
+        });
+      }
+      if (email) {
+        this.setState({
+          username: email
+      })
     }
+  }
+
+  componentDidMount() {
+    axios.get('organizations').then(res => {
+      console.log(res.data.organizations);
+      this.orgs = res.data.organizations;
+    }).catch(err => {
+      console.log(err);
+    })
+  }
 
     clearState = () => {
       this.setState({
         username: "",
         firstName: "",
         lastName: "",
-        password: "",
         role: "",
-        organizationName: ""
+        organizationName: "",
+        creating: false
       })
     }
 
     change = (e) => {
-      console.log(e.currentTarget.value);
       this.setState({
         [e.currentTarget.name]: e.currentTarget.value
       });
+    };
+
+    toggleCreate = (e) => {
+      this.setState(prevState => ({
+        ...prevState,
+        creating: !prevState.creating
+      }))
+    }
+
+    callback = async (ste) => {
+      if (ste.organizationName !== "") {
+        const tempResponse = await axios.post(`users/register`, ste);
+
+        console.log(tempResponse);
+
+        this.props.history.push("/authload");
+
+      } else {
+        this.props.history.push("/createorg");
+      }
     }
 
     onSubmit = async event => {
+      if (this.state.creating) {
+        this.props.history.push("/createorg")
+      }
       event.preventDefault();
 
       console.log(this.state);
 
-      const tempResponse = await axios.post(`users/register`, this.state);
+      // const tempResponse = await axios.post(`users/register`, this.state);
+      //
+      // console.log(tempResponse);
 
-      console.log(tempResponse);
+      this.props.shareState(this.state, this.callback);
 
       this.clearState();
+
     };
 
     render() {
-      console.log(process.env)
        return (
        <div>
-        <h1>signUp page</h1>
+         <div className="avitar" style={this.state.img ? {backgroundImage: `url(${this.state.img})`, backgroundSize: 'cover', width: '100px', height: '100px', borderRadius: '50px'} : null }>
+         </div>
+        <h1>Welcome, {this.state.firstName} - please tell us a little more about yourself...</h1>
         <form onSubmit={this.onSubmit}>
           <div>
-            <input name="username" value={this.state.username} type="email" placeholder="Email or Phone" onChange={this.change} />
-            <input name="firstName" value={this.state.firstName} type="text" placeholder="First Name..." onChange={this.change} />
-            <input name="lastName" value={this.state.lastName} type="text" placeholder="Last Name..." onChange={this.change} />
-            <select name="role" onChange={this.change} value={this.state.role}>
-              <option selected="true">role...</option>
+            <input required name="username" value={this.state.username} type="email" placeholder="Email or Phone" onChange={this.change} />
+            <input required name="firstName" value={this.state.firstName} type="text" placeholder="First Name..." onChange={this.change} />
+            <input required name="lastName" value={this.state.lastName} type="text" placeholder="Last Name..." onChange={this.change} />
+            <select required name="role" onChange={this.change} value={this.state.role}>
+              <option hidden>role...</option>
               {roles.map(role => {
                 return <option value={role}>{role}</option>
               })}
             </select>
-            <input name="password" value={this.state.password} type="password" placeholder="Password..." onChange={this.change} />
-              {/* <input name="organizationName" value={this.state.organizationName} type="text" placeholder="Organization" onChange={this.change}/> */}
-            </div>
+            {this.state.role === "School administrator" ? <div>
+            <input type="checkbox" name="createOrg" /> <span>Adding an organization?</span> </div> : null
+            }
+            <select required name="organizationName" onChange={this.change} value={this.state.organizationName}>
+              <option hidden>organization...</option>
+              {this.orgs.map(org => {
+                return <option value={org.name}>{org.name}</option>
+              })}
+            </select>
+          </div>
           <button>Submit</button>
         </form>
         <NavLink className='land-link' to="/">Back to home</NavLink>
