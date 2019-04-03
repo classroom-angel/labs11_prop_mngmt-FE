@@ -32,6 +32,7 @@
   }
 }
 
+<<<<<<< HEAD
 .sidebar {
   display: flex;
   flex-direction: column;
@@ -59,15 +60,24 @@
   
 }
 
+=======
+>>>>>>> 96d5928d566d5f88f230157490147dd19660315c
 .page-container {
   display: flex;
   height: 100%;
+}
+
+@media only screen and (max-width: 700px) {
+  .page-container {
+    flex-wrap: wrap;
+  }
 }
 
 .right-side {
   overflow-y: scroll;
   height: 100vh;
   width: 100%;
+<<<<<<< HEAD
 }
 
 .issue-list {
@@ -128,6 +138,9 @@
 
 .tag-container .tag .close:hover::after {
   color: red;
+=======
+  border: 2px solid indigo;
+>>>>>>> 96d5928d566d5f88f230157490147dd19660315c
 }
 
 

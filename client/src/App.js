@@ -6,12 +6,19 @@ import './App.css';
 import {Route} from 'react-router-dom';
 import OnBoard from './components/OnBoard';
 import SignUp from './components/SignUp';
-import Home from './components/Home';
+import Home from './components/Home/Home';
 import JoinOrg from './components/JoinOrg';
 import BoardMemberHub from './components/BoardMember/BoardMember'
+<<<<<<< HEAD
 import IssueLog from './components/IssueLog';
 import ViewIssue from './components/ViewIssue';
+=======
+import IssueLog from './components/Issues/IssueLog';
+import ViewIssue from './components/Issues/ViewIssue';
+>>>>>>> 96d5928d566d5f88f230157490147dd19660315c
 import Scheduled from './components/Scheduled';
+import CreateEventForm from './components/CreateEventForm';
+import EditEventForm from './components/EditEventForm';
 import Visits from './components/Visits';
 import Payments from './components/Payments';
 import TeacherAttendance from './components/TeacherAttendance';
@@ -27,7 +34,8 @@ class App extends React.Component {
     this.state = {
       solutions: [],
       solutionsLoaded: false,
-      orgID: 1
+      orgID: 1,
+      solutionEditId: 1
     }
 
     this.auth = new Auth(props);
@@ -55,6 +63,25 @@ class App extends React.Component {
   }
 
 
+  updateSolutionEditId = (id) => {
+    this.setState({solutionEditId: id})
+  }
+
+  shareState = async (ste, cb) => {
+    this.setState((prevState) => ({
+      ...prevState,
+      profile: {
+        ...prevState.profile,
+        ste
+      }
+    }));
+
+    cb(ste);
+
+  }
+
+
+
   render(){
     let profile = JSON.parse(localStorage.getItem('profile'));
     if (profile == null) {
@@ -64,7 +91,12 @@ class App extends React.Component {
     }
     return (
       <div className="App">
+<<<<<<< HEAD
         <Route exact path='/' render={(props) => <Home {...props} auth={this.auth} name={profile.name} />} />
+=======
+      {/* Should've mentioned earlier but feel free to delete render props if cumbersome or unnecessary */}
+        <Route exact path='/' render={(props) => <Home {...props} auth={this.auth} profile={profile} />} />
+>>>>>>> 96d5928d566d5f88f230157490147dd19660315c
         <Route exact path='/signup' render={(props) => <SignUp {...props} auth={this.auth} shareState={this.shareState} />} />
         <Route exact path='/createorg' render={(props) => <CreateOrg {...props} auth={this.auth} shareState={this.shareState} />} />
         <Route exact path='/authload' render={(props) => <AuthLoad {...props} auth={this.auth} />} />
@@ -73,8 +105,16 @@ class App extends React.Component {
         <Route exact path='/bm-homepage' component={BoardMemberHub}/>
         <Route exact path='/issue-log' component={IssueLog}/>
         <Route exact path='/issue/:id' component={ViewIssue}/>
+<<<<<<< HEAD
         <Route exact path='/scheduled' render={(props) => <Scheduled {...props} solutions={this.state.solutions} solutionsLoaded={this.state.solutionsLoaded} />}/>
         <Route exact path='/attendance' component={TeacherAttendance}/>
+=======
+        <Route exact path='/scheduled' render={(props) => <Scheduled {...props} solutions={this.state.solutions} solutionsLoaded={this.state.solutionsLoaded} update={this.updateSolutionEditId}/>}/>
+        <Route exact path='/CreateEventForm' render={(props) => <CreateEventForm {...props} name={this.state.solution} date={this.state.date} time={this.state.time} organizationId={this.state.orgID} handleChange={this.handleInputChange} />}/>
+        <Route exact path='/events/:id' render={(props) => <EditEventForm  solutionEditId={this.state.solutionEditId} {...props}/>} />
+        <Route exact path='/attendance' component={TeacherAttendance}/>
+        {/* <Route exact path='/attendance' component={TeacherAttendance}/> */}
+>>>>>>> 96d5928d566d5f88f230157490147dd19660315c
         <Route exact path='/visits' component={Visits}/>
         <Route exact path='/payments' component={Payments}/>
       </div>

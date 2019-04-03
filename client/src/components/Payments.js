@@ -2,6 +2,9 @@ import React from 'react'
 import Sidebar from './Sidebar';
 import Checkout from './Checkout';
 import Connect from './Connect';
+import Sidebar from './Sidebar/Sidebar';
+import Checkout from './Checkout';
+
 import '../App.css'
 
 class Payments extends React.Component {
@@ -23,6 +26,7 @@ class Payments extends React.Component {
         <div className="page-container">
           <Sidebar />
             <div className="checkout right-side">
+
             <h1>Upgrade Account</h1>
             <Checkout
               name={'10+ Teachers'}
@@ -44,7 +48,8 @@ class Payments extends React.Component {
         </div>
      </div>
     );
-  }
+  
+}
 }
 
-export default Payments
+export default Payments;

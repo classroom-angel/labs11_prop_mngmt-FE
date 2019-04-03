@@ -38,6 +38,7 @@ const onToken = (amount,description) => token => {
         currency={CURRENCY}
         stripeKey={STRIPE_PUBLISHABLE}
         label="Upgrade Account (monthly charge)"
+
     />
 
   export default Checkout;

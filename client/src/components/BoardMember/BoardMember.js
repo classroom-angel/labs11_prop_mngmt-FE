@@ -1,5 +1,9 @@
 import React from 'react'
+<<<<<<< HEAD
 import Sidebar from '../Sidebar'
+=======
+import Sidebar from '../Sidebar/Sidebar'
+>>>>>>> 96d5928d566d5f88f230157490147dd19660315c
 import '../../App.css'
 // import './BoardMember.css'
 import axios from '../../axiosInstance'
