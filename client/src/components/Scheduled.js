@@ -1,45 +1,73 @@
-import React from 'react'
+import React from 'react';
+import Calendar from 'react-big-calendar';
+import moment from 'moment';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+import axios from '../axiosInstance';
 import Sidebar from './Sidebar';
 import '../App.css'
+const localizer = Calendar.momentLocalizer(moment)
 
-function Scheduled(props) {
-    console.log(props.solutions)
-    if (props.solutionsLoaded) {
-        return (
-            <div className="page-container">
-                <Sidebar />
-                <div className="right-side">
-                        <h1 style={{textAlign: 'center', border: '2px solid green'}}>Scheduled Issues</h1>
-                        <ul>
-                            {props.solutions.map(solution => {
-                                return (
-                                    <div key={solution.id}>
-                                      <h1>Name: {solution.name}</h1>
-                                      <h2>Notes: {solution.notes}</h2>
-                                      <h3>Status: {solution.status}</h3>
-                                      <h4>Date: {solution.date}</h4>
-                                      <h4>Time: {solution.time}</h4>
-                                      <h5>Org. Id: {solution.organization_id}</h5>
-                                    </div>
-                                )
-                            })}
-                        </ul>
-                    </div>
-                
-            </div>
-        )
-    } else {
-        return (
-            <div className="page-container">
-              <Sidebar />
-              <div>
-                  <h1>Loading...</h1>
-              </div>
-            </div>
-        )
-    }
-    
-    
+
+
+export default class Scheduled extends React.Component {
+constructor(props){
+super(props)
+this.state = {
+solutions: [],
+events: []
+}
+};
+
+componentDidMount() {
+
+axios 
+.get("solutions")
+.then(response => {
+console.log(response.data)
+this.setState(function(){return{solutions: [...response.data.solutions]}}, 
+this.setEvents    
+ );
+})
+.catch(error => {
+ console.error("Cannot get solutions",error);
+});
 }
 
-export default Scheduled
+setEvents = () => {
+    const events = []
+    this.state.solutions.map(solution =>{
+        const date = new Date(moment(solution.date,'MM_DD_YY'));
+        events.push({
+        title: solution.name,
+        start: date,
+        end:  date
+        })
+    })
+    this.setState({events:events})  
+}
+
+
+
+
+render() {
+return (
+    <div className ="page-container">
+    <Sidebar />
+    <div className="calendar right-side">
+    <h1 className="calendar-title">Calendar</h1>
+     <div style={{ height: 700 }}>
+      <Calendar
+         localizer={localizer}
+         defaultDate={new Date()}
+         defaultView="month"
+         events={this.state.events}
+         solutions={this.state.solutions}
+         style={{ height: "100vh", width: "80vw"}}
+        />
+      </div>
+   </div>
+  </div>
+    );
+  }
+}
+
