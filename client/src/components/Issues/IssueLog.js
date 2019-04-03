@@ -1,7 +1,7 @@
 import React from 'react'
-import Sidebar from '../Sidebar';
+import Sidebar from '../Sidebar/Sidebar';
 import '../../App.css';
-import './IssueLog.css';
+import './Issues.css';
 import axios from '../../axiosInstance';
 import {NavLink} from 'react-router-dom';
 import Uploader from '../Uploader';
@@ -42,14 +42,8 @@ export default class IssueLog extends React.Component {
             comments: [],
             showComments: false,
             filterStatus: 'all',
-<<<<<<< HEAD
-            filterTag: '',
-            uploading: false,
-
-=======
             filterTag: 'all',
             passes: false
->>>>>>> 666ffcca5fac4e146ccc102c0de2cbbe231eeb6f
         }
         this.postIssues = this.postIssues.bind(this)
         this.deleteIssue = this.deleteIssue.bind(this)
@@ -217,23 +211,6 @@ export default class IssueLog extends React.Component {
                               })
                         }
                     </select>
-<<<<<<< HEAD:client/src/components/IssueLog/IssueLog.js
-                    <form onSubmit={this.postIssues}>
-                        <input name="issueName" value={this.state.issueName} placeholder="Issue Title" onChange={this.handleChange}/>
-                        <input name="issueNotes" value={this.state.issueNotes} placeholder="Additional notes" onChange={this.handleChange}/>
-                        <input type="checkbox" id="isVisit" name="isVisit" value={true} onChange={this.visitChange}/>
-                        <label htmlFor="isVisit">isVisit</label>
-                        <select name="issueStatus" onChange={this.handleChange}>
-                            <option value="">Status...</option>
-                                {statuses.map((status, index) => {
-                                  return <option key={index} value={status}>{status}</option>
-                                })}
-                        </select>
-                        <Uploader uploading={this.state.uploading} imgAdder={this.imgAdder} />
-                        <input type="submit" />
-                    </form>
-=======
->>>>>>> 6e6917f95ffcf5353503e7b83b427a7f61be9840:client/src/components/Issues/IssueLog.js
                     <div className="issue-list">
                         {this.state.issues.map(issue => {
                             // filters tags by filter criteria
@@ -301,7 +278,7 @@ export default class IssueLog extends React.Component {
                                   return <option key={index} value={status}>{status}</option>
                                 })}
                         </select><br/>
-
+                        <Uploader uploading={this.state.uploading} imgAdder={this.imgAdder} />
                         <input type="submit" />
                     </form>
                     </div>
