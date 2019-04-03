@@ -13,7 +13,8 @@ export default class BoardMemberHub extends React.Component {
             attendance: [],
             attendanceLoaded: false,
             issuesLoaded: false,
-            issues: []
+            issues: [],
+            selected: 'ChromeBooks'
         }
     }
 
@@ -41,7 +42,7 @@ export default class BoardMemberHub extends React.Component {
                     <div className="right-side">
                     <h1 style={{textAlign: 'left'}}>School Name Here</h1>
                     <div style={{display:'flex', justifyContent:'center'}}>
-                        <div className="bm-issues" style={{display: 'inline-block', margin: '20px 5%', width: '45%', border: '5px solid firebrick', borderRadius: '10px'}}>
+                        <div className="bm-issues" style={{display: 'inline-block', margin: '20px 1%', width: '35%', border: '5px solid firebrick', borderRadius: '10px'}}>
                         <h2 style={{textAlign:'left'}}>Issue Log</h2>
                         
                         <div style={{overflow: 'scroll', height: '500px'}}>
@@ -56,9 +57,9 @@ export default class BoardMemberHub extends React.Component {
                             }
                         </div>
                         </div>
-                        <div className="bm-devices" style={{display: 'inline-block', border: '5px dotted blue', borderRadius: '10px', height: '500px'}}>
+                        <div className="bm-devices" style={{display: 'inline-block', border: '5px dotted blue', borderRadius: '10px', height: '500px', width: '60%'}}>
                         <div className="dev-condiiton" style={{display:'flex'}}>
-                        <div style={{border:"1px solid", textAlign:"center", width: "80px"}}>
+                        <div style={{border:"1px solid", textAlign:"center", width: "80px", overflow:"scroll"}}>
                             Equipment
                             {
                                 this.state.equipmentLoaded ? (
@@ -71,7 +72,7 @@ export default class BoardMemberHub extends React.Component {
                                 
                             }
                         </div>
-                        <div style={{border:"1px solid", textAlign:"center", width: "80px"}}>
+                        <div style={{border:"1px solid", textAlign:"center", width: "80px", overflow:"scroll"}}>
                             Open Issues
                             {
                                 this.state.equipmentLoaded ? (
@@ -84,7 +85,7 @@ export default class BoardMemberHub extends React.Component {
                                 
                             }
                         </div>
-                        <div style={{border:"1px solid", textAlign:"center", width: "80px"}}>
+                        <div style={{border:"1px solid", textAlign:"center", width: "80px", overflow:"scroll"}}>
                             Working
                             {
                                 this.state.equipmentLoaded ? (
@@ -97,7 +98,7 @@ export default class BoardMemberHub extends React.Component {
                                 
                             }
                         </div>
-                        <div style={{border:"1px solid", textAlign:"center", width: "80px"}}>
+                        <div style={{border:"1px solid", textAlign:"center", width: "80px", overflow:"scroll"}}>
                             Total
                             {
                                 this.state.equipmentLoaded ? (
@@ -110,8 +111,8 @@ export default class BoardMemberHub extends React.Component {
                                 
                             }
                         </div>
-                        </div>
-                        <div className="dev-description" style={{display: 'inline-block', border: '2px solid'}}>
+                        <div className="dev-description" style={{display: 'inline-block', border: '2px solid', overflow:"scroll"}}>
+                            {this.state.selected}
                            {
                                this.state.equipmentLoaded ? (
                                    this.state.equipment.map(function(item) {
@@ -125,6 +126,7 @@ export default class BoardMemberHub extends React.Component {
                                    })
                                ): "Loading...."
                                 }
+                        </div>
                         </div>
                         </div>
                         </div>
