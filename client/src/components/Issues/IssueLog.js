@@ -187,6 +187,7 @@ export default class IssueLog extends React.Component {
     }
 
     render() {
+        console.log(this.props.auth.isAuth())
         this.arrayTags()
     if (this.state.issuesLoaded) {
         return (
