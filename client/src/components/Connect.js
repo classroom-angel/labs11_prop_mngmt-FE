@@ -24,8 +24,9 @@ const onToken = (amount, description, stripeAccount) => token => {
             source: token.id,
             currency: CURRENCY,
             amount: fromDollarToCent(amount),
-        }, {
-            stripe_account: stripeAccount
+            transfer_data: {
+                destination: stripeAccount,
+            }
         })
         .then(successPayment)
         .catch(errorPayment);
