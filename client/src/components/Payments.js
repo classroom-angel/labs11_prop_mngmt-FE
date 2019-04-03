@@ -1,6 +1,4 @@
 import React from 'react'
-import Sidebar from './Sidebar';
-import Checkout from './Checkout';
 import Connect from './Connect';
 import Sidebar from './Sidebar/Sidebar';
 import Checkout from './Checkout';
@@ -39,7 +37,7 @@ class Payments extends React.Component {
             <input name="accountId" placeholder="Contractor's Stripe Account ID" value={this.state.accountId} onChange={this.handleChange}/>
            </form>
 
-           <Connect 
+           <Connect
             name="Pay a contractor"
             description=""
             amount={Number(this.state.amount)}
@@ -48,7 +46,7 @@ class Payments extends React.Component {
         </div>
      </div>
     );
-  
+
 }
 }
 
