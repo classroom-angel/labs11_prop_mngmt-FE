@@ -65,10 +65,8 @@ return (
     <div className ="page-container">
     <Sidebar />
 
+    <div className="calendar right-side">
     <NavLink to="/createEventForm">Create new Event</NavLink>
-   
-
-    <div className="calendar">
   <h1 className="calendar-title">Calendar</h1>
      <div style={{ height: 700 }}>
       <Calendar
