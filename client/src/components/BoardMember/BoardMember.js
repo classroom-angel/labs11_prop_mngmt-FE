@@ -40,8 +40,10 @@ export default class BoardMemberHub extends React.Component {
                     <Sidebar/>
                     <div className="right-side">
                     <h1 style={{textAlign: 'left'}}>School Name Here</h1>
+                    <div style={{display:'flex', justifyContent:'center'}}>
                         <div className="bm-issues" style={{display: 'inline-block', margin: '20px 5%', width: '45%', border: '5px solid firebrick', borderRadius: '10px'}}>
                         <h2 style={{textAlign:'left'}}>Issue Log</h2>
+                        
                         <div style={{overflow: 'scroll', height: '500px'}}>
                         {
                                 this.state.issuesLoaded ? (
@@ -52,23 +54,62 @@ export default class BoardMemberHub extends React.Component {
                                     }))
                                 : "Loading..."
                             }
-                            </div>
                         </div>
-                        <div className="bm-devices" style={{display: 'inline-block', border: '2px solid', height: '500px'}}>
-                        <div className="dev-condiiton">
-                        <p>Equipment Open Issue Working Total</p>
+                        </div>
+                        <div className="bm-devices" style={{display: 'inline-block', border: '5px dotted blue', borderRadius: '10px', height: '500px'}}>
+                        <div className="dev-condiiton" style={{display:'flex'}}>
+                        <div style={{border:"1px solid", textAlign:"center", width: "80px"}}>
+                            Equipment
                             {
                                 this.state.equipmentLoaded ? (
                                     this.state.equipment.map(function(item) {
                                         return (
-                                        <div key={item.id}>
-                                        <p>{item.id} {item.name} {item.working} {item.damaged} {item.working + item.damaged}</p>
-                                        {/* <p>OrgID: {item.organizationId}</p> */}
-                                        </div>
+                                            <p>{item.name}</p>
                                         )
-                                    }))
-                                : "Loading..."
+                                    })
+                                ): "Loading..."
+                                
                             }
+                        </div>
+                        <div style={{border:"1px solid", textAlign:"center", width: "80px"}}>
+                            Open Issues
+                            {
+                                this.state.equipmentLoaded ? (
+                                    this.state.equipment.map(function(item) {
+                                        return (
+                                            <p>{item.damaged}</p>
+                                        )
+                                    })
+                                ): "Loading..."
+                                
+                            }
+                        </div>
+                        <div style={{border:"1px solid", textAlign:"center", width: "80px"}}>
+                            Working
+                            {
+                                this.state.equipmentLoaded ? (
+                                    this.state.equipment.map(function(item) {
+                                        return (
+                                            <p>{item.working}</p>
+                                        )
+                                    })
+                                ): "Loading..."
+                                
+                            }
+                        </div>
+                        <div style={{border:"1px solid", textAlign:"center", width: "80px"}}>
+                            Total
+                            {
+                                this.state.equipmentLoaded ? (
+                                    this.state.equipment.map(function(item) {
+                                        return (
+                                            <p>{item.working + item.damaged}</p>
+                                        )
+                                    })
+                                ): "Loading..."
+                                
+                            }
+                        </div>
                         </div>
                         <div className="dev-description" style={{display: 'inline-block', border: '2px solid'}}>
                            {
@@ -84,6 +125,7 @@ export default class BoardMemberHub extends React.Component {
                                    })
                                ): "Loading...."
                                 }
+                        </div>
                         </div>
                         </div>
                         
