@@ -17,28 +17,28 @@ const errorPayment = data => {
     alert('Payment Error');
 };
 
-const onToken = (amount,description) => token => {
+const onToken = (amount, description, stripeAccount) => token => {
     return axios.post(`${PAYMENT_SERVER_URL}/api/payment`,
         {
             description,
             source: token.id,
             currency: CURRENCY,
-            amount: fromDollarToCent(amount)
+            amount: fromDollarToCent(amount),
+            stripe_account: stripeAccount
         })
         .then(successPayment)
         .catch(errorPayment);
 }
 
-    const Checkout = ({ name, description, amount}) =>
+    const Connect = ({ name, description, amount, stripeAccount}) =>
     <StripeCheckout
         name={name}
         description={description}
         amount={fromDollarToCent(amount)}
-        token={onToken(amount, description)}
+        token={onToken(amount, description, stripeAccount)}
         currency={CURRENCY}
         stripeKey={STRIPE_PUBLISHABLE}
-        label="Upgrade Account (monthly charge)"
-
+        label="Pay Contractor"
     />
 
-  export default Checkout;
+  export default Connect;
