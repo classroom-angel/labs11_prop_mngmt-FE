@@ -6,100 +6,6 @@ import Sidebar from './Sidebar/Sidebar';
 import '../App.css'
 import axios from '../axiosInstance'
 import {NavLink} from 'react-router-dom'
-<<<<<<< HEAD
-
-const statuses = [
-    "Needs Attention",
-    "Resolved",
-    "Scheduled"
-]
-export default class IssueLog extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            issues: [],
-            issuesLoaded: false,
-            issueName: "",
-            issueNotes: "",
-            issueStatus: "Needs Attention",
-            orgID: 1,
-            editingIssue: false,
-            issue: null 
-        }
-        this.postIssues = this.postIssues.bind(this)
-        this.deleteIssue = this.deleteIssue.bind(this)
-        this.handleChange = this.handleChange.bind(this)
-        this.toggleEdit = this.toggleEdit.bind(this)
-        this.fetchIssue = this.fetchIssue.bind(this)
-    }
-
-    componentDidMount() {
-        axios
-        .get('issues')
-        .then(res => {
-            let copy = res.data.issues.filter(function(issue) {
-                return issue.isVisit
-            })
-            this.setState({issues: copy, issuesLoaded: true})
-        })
-        .catch(err => console.log(err))
-    }
-
-    postIssues(event) {
-        console.log('posting...')
-        event.preventDefault()
-        axios.post('issues', {name: this.state.issueName,
-          notes: this.state.issueNotes,
-        status: this.state.issueStatus,
-        isVisit: false,
-        organizationId: this.state.orgID,
-        date: '03-25-20'
-     })
-       .then(res => {
-           console.log(res)
-           this.setState({issueName: "", issueNotes: "", issues: [...this.state.issues, res.data.issue]})
-       })
-       .catch(err => console.log(err))
-    }
-
-    deleteIssue(event) {
-        axios.delete(`issues/${event.target.value}`)
-        .then(res => {
-            console.log(res.data.issue.id)
-            var copy = this.state.issues.filter(function(element) {
-                return element.id !== res.data.issue.id 
-            })
-            this.setState({issues: copy})
-        })
-        .catch(err => console.log(err))
-      }
-
-      handleChange(event) {
-        this.setState({[event.target.name]: event.target.value})
-      }
-
-      toggleEdit() {
-        this.setState({
-          editingIssue: !this.state.editingIssue,
-          title: this.state.note.title,
-          textBody: this.state.note.textBody
-        })
-    }
-
-    fetchIssue(id) {
-        axios.get(`issues/${id}`)
-        .then(res => {
-            console.log('fetched note', res.data)
-            this.setState({issue: res.data.issue})
-        })
-        .catch(err => {
-            console.log(err)
-        })
-    }
-    
-
-    render() {
-=======
 
 const statuses = [
     "Needs Attention",
@@ -169,7 +75,7 @@ export default class Visits extends React.Component {
         status: this.state.issueStatus.toLowerCase(),
         isVisit: this.state.isVisit,
         organizationId: this.state.orgID,
-        date: today 
+        date: today
      })
        .then(res => {
            console.log(res)
@@ -183,7 +89,7 @@ export default class Visits extends React.Component {
         .then(res => {
             console.log(res.data.issue.id)
             var copy = this.state.issues.filter(function(element) {
-                return element.id !== res.data.issue.id 
+                return element.id !== res.data.issue.id
             })
             this.setState({issues: copy})
         })
@@ -215,7 +121,7 @@ export default class Visits extends React.Component {
         .catch(err => {
             console.log(err)
         })
-    } 
+    }
 
     handleTagEdit(id, event) {
         event.preventDefault()
@@ -263,49 +169,18 @@ export default class Visits extends React.Component {
     // Populates global tags array with whatever new tags are entered
     arrayTags() {
         this.state.tags.forEach((tag) => {
-            if (!tags.includes(tag.name)) tags.push(tag.name) 
+            if (!tags.includes(tag.name)) tags.push(tag.name)
         })
     }
-    
+
     render() {
         this.arrayTags()
->>>>>>> 96d5928d566d5f88f230157490147dd19660315c
     if (this.state.issuesLoaded) {
         return (
             <div className="page-container">
                 <Sidebar />
                 <div className="right-side">
                     <h1 style={{textAlign: 'center', border: '2px solid gray'}}>Visits</h1>
-<<<<<<< HEAD
-                    <ul>
-                        {this.state.issues.map(issue => {
-                            return (
-
-                                <div key={issue.id} className="issue-card">
-                                  <h1>Name: {issue.name}</h1>
-                                  <h2>Notes: {issue.notes}</h2>
-                                  <h3>Status: {issue.status}</h3>
-                                  <h4>Date: {issue.date}</h4>
-                                  <h5>Org. Id: {issue.organizationId}</h5>
-                                  <button onClick={this.deleteIssue} value={issue.id} sytle={{backgroundColor:'firebrick', color:'orange'}}>Delete Issue</button>
-                                  <NavLink to={`/issue/${issue.id}`}><div value={issue.id} className="edit-issue-button">Update Issue</div></NavLink>
-                                </div>
-                            ) 
-                        })}
-                    </ul>
-                    <form onSubmit={this.postIssues}>
-                        <input name="issueName" value={this.state.issueName} placeholder="Issue Title" onChange={this.handleChange}/>
-                        <input name="issueNotes" value={this.state.issueNotes} placeholder="Additional notes" onChange={this.handleChange}/>
-                        <select name="role" onChange={this.change} value={this.state.role}>
-                            <option>Status...</option>
-                                {statuses.map((status, index) => {
-                                  return <option key={index} value={status}>{status}</option>
-                                })}
-                        </select>
-                        
-                        <input type="submit" />
-                    </form>
-=======
                     Filter By Status:<select name='filterStatus' onChange={this.handleChange} className='' style={{marginBottom: '20px'}}>
                         <option value="all">Choose...</option>
                         {
@@ -332,7 +207,7 @@ export default class Visits extends React.Component {
                             let testArray = []
                             truthArray.forEach(entry => {
                                 testArray.push(entry.issueId)
-                            }) 
+                            })
 
                             if ((issue.status === this.state.filterStatus.toLowerCase() || this.state.filterStatus === 'all') && ((testArray.includes(issue.id)) || this.state.filterTag === 'all'))
                             return (
@@ -363,7 +238,7 @@ export default class Visits extends React.Component {
                                           return comment.issueId === issue.id
                                       }).map((comment) => {
                                           return (
-                                              
+
                                               <div key={comment.id}>
                                                   - {comment.content}<span className="delete-button" onClick={this.deleteComment} issue_id={comment.id}> x</span>
                                               </div>
@@ -375,7 +250,7 @@ export default class Visits extends React.Component {
                                   </form>
                                   </div>: null}
                                 </div>
-                            ) 
+                            )
                         })}
                         <form onSubmit={this.postIssues} className="issue-card submit-issue">
                         <h1>New Issue +</h1>
@@ -389,13 +264,13 @@ export default class Visits extends React.Component {
                                   return <option key={index} value={status}>{status}</option>
                                 })}
                         </select><br/>
-                        
+
                         <input type="submit" />
                     </form>
                     </div>
 >>>>>>> 96d5928d566d5f88f230157490147dd19660315c
                 </div>
-                
+
             </div>
         )
     } else {
@@ -405,15 +280,10 @@ export default class Visits extends React.Component {
                 <div className="right-side">
                     <h1>Loading...</h1>
                 </div>
-                
+
             </div>
-            
+
         )
     }
-<<<<<<< HEAD
 }
 }
-=======
-}
-}
->>>>>>> 96d5928d566d5f88f230157490147dd19660315c
