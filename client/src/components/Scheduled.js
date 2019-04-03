@@ -4,7 +4,7 @@ import moment from 'moment';
 import { NavLink } from "react-router-dom";
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import axios from '../axiosInstance';
-import Sidebar from './Sidebar';
+import Sidebar from './Sidebar/Sidebar';
 import '../App.css'
 const localizer = Calendar.momentLocalizer(moment)
 
@@ -64,10 +64,12 @@ render() {
 return (
     <div className ="page-container">
     <Sidebar />
+
     <NavLink to="/createEventForm">Create new Event</NavLink>
    
+
     <div className="calendar">
-    <h1 className="calendar-title">Calendar</h1>
+  <h1 className="calendar-title">Calendar</h1>
      <div style={{ height: 700 }}>
       <Calendar
          localizer={localizer}

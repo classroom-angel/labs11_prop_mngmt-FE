@@ -19,7 +19,8 @@ export default class SignUp extends Component {
         lastName: "",
         role: "",
         organizationName: "",
-        img: ""
+        img: "",
+        creating: false
       }
       this.orgs = []
     }
@@ -27,7 +28,6 @@ export default class SignUp extends Component {
     componentWillMount() {
       const userProfile = JSON.parse(localStorage.getItem('profile'));
       const profName = userProfile.name.split(" ");
-      console.log(profName);
       const email = userProfile.email;
       if (profName) {
         let firstName = profName[0];
@@ -46,7 +46,6 @@ export default class SignUp extends Component {
 
   componentDidMount() {
     axios.get('organizations').then(res => {
-      console.log(res.data.organizations);
       this.orgs = res.data.organizations;
     }).catch(err => {
       console.log(err);
@@ -59,33 +58,59 @@ export default class SignUp extends Component {
         firstName: "",
         lastName: "",
         role: "",
-        organizationName: ""
+        organizationName: "",
+        creating: false
       })
     }
 
     change = (e) => {
-      console.log(e.currentTarget.value);
       this.setState({
         [e.currentTarget.name]: e.currentTarget.value
       });
+    };
+
+    toggleCreate = (e) => {
+      this.setState(prevState => ({
+        ...prevState,
+        creating: !prevState.creating
+      }))
+    }
+
+    callback = async (ste) => {
+      if (ste.organizationName !== "") {
+        const tempResponse = await axios.post(`users/register`, ste);
+
+        console.log(tempResponse);
+
+        this.props.history.push("/authload");
+
+      } else {
+        this.props.history.push("/createorg");
+      }
     }
 
     onSubmit = async event => {
+      if (this.state.creating) {
+        this.props.history.push("/createorg")
+      }
       event.preventDefault();
 
       console.log(this.state);
 
-      const tempResponse = await axios.post(`users/register`, this.state);
+      // const tempResponse = await axios.post(`users/register`, this.state);
+      //
+      // console.log(tempResponse);
 
-      console.log(tempResponse);
+      this.props.shareState(this.state, this.callback);
 
       this.clearState();
+
     };
 
     render() {
        return (
        <div>
-         <div className="avitar" style={this.state.img ? {backgroundImage: `url(${this.state.img})`, backgroundSize: 'cover', width: '100px', height: '100px', borderRadius: '50px'} : null }>
+         <div className="avatar" style={this.state.img ? {backgroundImage: `url(${this.state.img})`, backgroundSize: 'cover', width: '100px', height: '100px', borderRadius: '50px'} : null }>
          </div>
         <h1>Welcome, {this.state.firstName} - please tell us a little more about yourself...</h1>
         <form onSubmit={this.onSubmit}>
@@ -99,15 +124,15 @@ export default class SignUp extends Component {
                 return <option value={role}>{role}</option>
               })}
             </select>
-            {this.state.role === "School administrator" ? <div>
-            <input type="checkbox" name="createOrg" /> <span>Adding an organization?</span> </div> : null
-            }
-            <select required name="organizationName" onChange={this.change} value={this.state.organizationName}>
+            {!this.state.creating && <select required name="organizationName" onChange={this.change} value={this.state.organizationName}>
               <option hidden>organization...</option>
               {this.orgs.map(org => {
                 return <option value={org.name}>{org.name}</option>
               })}
-            </select>
+            </select>}
+            {this.state.role === "School administrator" ? <div>
+            <input type="checkbox" name="createOrg" onClick={this.toggleCreate} /> <span>Create new organization?</span> </div> : null
+          }
           </div>
           <button>Submit</button>
         </form>

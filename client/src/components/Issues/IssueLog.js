@@ -1,11 +1,10 @@
-// This page seems superfluous in it's current form, we may just scrap it and add
-// another filter if an issue is an admin visit
-
 import React from 'react'
-import Sidebar from './Sidebar/Sidebar';
-import '../App.css'
-import axios from '../axiosInstance'
+import Sidebar from '../Sidebar/Sidebar';
+import '../../App.css'
+import './Issues.css'
+import axios from '../../axiosInstance'
 import {NavLink} from 'react-router-dom'
+// import moment from 'moment'
 
 const statuses = [
     "Needs Attention",
@@ -22,7 +21,7 @@ var mm = String(today.getMonth() + 1).padStart(2, '0');
 var yyyy = today.getFullYear();
 
 today = mm + '-' + dd + '-' + yyyy;
-export default class Visits extends React.Component {
+export default class IssueLog extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -58,12 +57,7 @@ export default class Visits extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('issues').then(res => {
-            let copy = res.data.issues.filter(function(issue) {
-                return issue.isVisit
-            })
-            this.setState({issues: copy, issuesLoaded: true})
-        }).catch(err => console.log(err))
+        axios.get('issues').then(res => this.setState({issues: res.data.issues, issuesLoaded: true})).catch(err => console.log(err))
         axios.get('tags').then(res => this.setState({tags: res.data.tags})).catch(err => console.log(err))
         axios.get('comments').then(res => this.setState({comments: res.data.comments})).catch(err => console.log(err))
     }
@@ -180,7 +174,7 @@ export default class Visits extends React.Component {
             <div className="page-container">
                 <Sidebar />
                 <div className="right-side">
-                    <h1 style={{textAlign: 'center', border: '2px solid gray'}}>Visits</h1>
+                    <h1 style={{textAlign: 'center', border: '2px solid gray'}}>Issue Log</h1>
                     Filter By Status:<select name='filterStatus' onChange={this.handleChange} className='' style={{marginBottom: '20px'}}>
                         <option value="all">Choose...</option>
                         {

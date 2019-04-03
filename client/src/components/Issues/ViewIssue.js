@@ -1,7 +1,8 @@
 import React from 'react'
-import Sidebar from './Sidebar';
-import '../App.css'
-import axios from '../axiosInstance'
+import Sidebar from '../Sidebar/Sidebar';
+import '../../App.css'
+import './Issues.css'
+import axios from '../../axiosInstance'
 import {NavLink} from 'react-router-dom'
 
 const statuses = [
@@ -13,7 +14,7 @@ const statuses = [
 
 var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
-var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var mm = String(today.getMonth() + 1).padStart(2, '0');
 var yyyy = today.getFullYear();
 
 today = mm + '-' + dd + '-' + yyyy;
@@ -32,7 +33,10 @@ class ViewIssue extends React.Component {
                 noteEdits: '',
                 tag: '',
                 tags: [],
-                modal: false
+                modal: false,
+                comments: [],
+                comment: '',
+                showComments: false
             }
             this.toggleEdit = this.toggleEdit.bind(this)
             this.fetchIssue = this.fetchIssue.bind(this)
@@ -41,6 +45,9 @@ class ViewIssue extends React.Component {
             this.handleTagEdit = this.handleTagEdit.bind(this)
             this.handleTagSubmit = this.handleTagSubmit.bind(this)
             this.deleteTag = this.deleteTag.bind(this)
+            this.toggleShowComments = this.toggleShowComments.bind(this)
+            this.submitComment = this.submitComment.bind(this)
+            this.deleteComment = this.deleteComment.bind(this)
         }
 
         componentDidMount() {
@@ -49,6 +56,8 @@ class ViewIssue extends React.Component {
                 this.setState({
                 tags: res.data.tags})
             }).catch(err => console.log(err))
+
+            axios.get('comments').then(res => this.setState({comments: res.data.comments})).catch(err => console.log(err))
         }
 
         handleChange(event) {
@@ -94,7 +103,8 @@ class ViewIssue extends React.Component {
     }
 
     handleTagEdit(id) {
-        const newTag = {name: this.state.tag, issueId: id}
+        const newTag = {name: this.state.tag, issueId: id, organizationId: 1}
+        console.log(newTag)
         axios.post(`tags`, newTag)
         .then(response => {
           this.setState({tags: [...this.state.tags, {...response.data.tag, issueId: response.data.issueJoinTag.issueId}], tag:''})
@@ -123,6 +133,38 @@ class ViewIssue extends React.Component {
           console.log("Tag Edit Error", err);
         })
       }
+
+      submitComment(event) {
+          event.preventDefault()
+          axios
+          .post('comments', {
+              content: this.state.comment,
+              userId: 1,
+              issueId: event.target[0].attributes[2].value
+          })
+          .then(res => {
+              this.setState({comments: [...this.state.comments, res.data.comment], comment: ''})
+          })
+          .catch(err => console.error(err))
+      }
+  
+      deleteComment(event) {
+          axios
+          .delete(`comments/${event.target.getAttribute('issue_id')}`)
+          .then(res => {
+              let copy = this.state.comments.slice().filter(function(comment) {
+                  return comment.id !== res.data.comment.id
+              })
+              this.setState({comments: copy})
+          })
+          .catch(err => console.error(err))
+      }
+
+    toggleShowComments() {
+        this.setState({showComments: !this.state.showComments})
+    }
+
+
     
 
     render() {
@@ -160,6 +202,22 @@ class ViewIssue extends React.Component {
                               <input className="mainInput" type="text" placeholder="add tag" name="tag" onChange={this.handleChange} value={this.state.tag} />
                             </form>
                         </div>
+                        <div>
+                                      {this.state.comments.filter((comment) => {
+                                          return comment.issueId === this.state.issue.id
+                                      }).map((comment) => {
+                                          return (
+                                              
+                                              <div key={comment.id}>
+                                                  - {comment.content}<span onClick={this.deleteComment} className="delete-button" issue_id={comment.id}> x</span>
+                                              </div>
+                                          )
+                                      })}
+                        </div>                        
+                        <form onSubmit={this.submitComment}>
+                          <input name='comment' placeholder='add comment' value={this.state.comment} issue_id={this.state.issue.id} onChange={this.handleChange} />
+                        </form>
+                        
                       <button onClick={this.deleteIssue} value={this.state.issue.id} sytle={{backgroundColor:'firebrick', color:'orange'}}>Delete Issue</button>
                       <button onClick={this.toggleEdit} value={this.state.issue.id} sytle={{backgroundColor:'firebrick', color:'orange'}}>Edit Issue</button>
                       {this.state.editingIssue ? <button onClick={() => {this.handleEdit(this.props.match.params.id)}} className="view-issue-button">Save</button> : null}
