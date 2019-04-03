@@ -2,7 +2,7 @@ import React from 'react'
 import Connect from './Connect';
 import Sidebar from './Sidebar/Sidebar';
 import Checkout from './Checkout';
-
+import axios from 'axios';
 import '../App.css'
 
 class Payments extends React.Component {
@@ -16,7 +16,16 @@ class Payments extends React.Component {
   }
 
   componentDidMount = () => {
-    this.getCredentials();
+    let code = this.getCredentials();
+    if (code) {
+      axios.post(`https://connect.stripe.com/oauth/token/?client_secret=${process.env.STRIPE_DEV_KEY}&code=${code}&grant_type=authorization_code`)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      })
+    }
   }
 
   handleChange = (e) => {
