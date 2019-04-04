@@ -46,6 +46,7 @@ export default class SignUp extends Component {
 
   componentDidMount() {
     axios.get('organizations').then(res => {
+      this.orgs = res.data.organizations
     }).catch(err => {
       console.log(err);
     })
@@ -83,25 +84,23 @@ export default class SignUp extends Component {
 
         this.props.history.push("/authload");
 
-      } else {
+      } else if (this.state.creating) {
         this.props.history.push("/createorg");
+      } else {
+        this.props.history.push("/signup")
       }
     }
 
     onSubmit = async event => {
-      if (this.state.creating) {
-        this.props.history.push("/createorg")
-      }
       event.preventDefault();
-
-      console.log(this.state);
-
-      // const tempResponse = await axios.post(`users/register`, this.state);
-      //
-      // console.log(tempResponse);
-
-      this.props.shareState(this.state, this.callback);
-
+      const ste = {
+        username: this.state.username,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        role: this.state.role,
+        organizationName: this.state.organizationName
+      }
+      this.props.shareState(ste, this.callback);
       this.clearState();
 
     };

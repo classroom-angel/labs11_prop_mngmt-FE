@@ -44,38 +44,34 @@ class App extends React.Component {
     this.setState({[event.target.name]: event.target.value})
   }
 
-  shareState = async (ste, cb) => {
-    this.setState((prevState) => ({
-      ...prevState,
-      profile: {
-        ...prevState.profile,
-        ste
-      }
-    }));
-
-    cb(ste);
-
-  }
-
-
   updateSolutionEditId = (id) => {
     this.setState({solutionEditId: id})
   }
 
   shareState = async (ste, cb) => {
-    this.setState((prevState) => ({
-      ...prevState,
-      profile: {
-        ...prevState.profile,
-        ste
-      }
-    }));
-
+    let profile = JSON.parse(localStorage.getItem('profile'));
+    const newProfile = {
+      ...profile,
+      ...ste
+    };
+    newProfile.name = newProfile.firstName+" "+newProfile.lastName;
+    localStorage.setItem('profile', JSON.stringify(newProfile));
+    if (newProfile.orgId) {
+      const user = {
+          username: newProfile.username,
+          firstName: newProfile.firstName,
+          lastName: newProfile.lastName,
+          role: newProfile.role,
+          organizationName: newProfile.organizationName
+      };
+      console.log("USER!!!", user);
+      const userConf = await axios.post(`users/register`, user);
+      console.log(userConf);
+    }
+    console.log('***NEW PROFILE!!!***', newProfile);
     cb(ste);
 
   }
-
-
 
   render(){
     let profile = JSON.parse(localStorage.getItem('profile'));
