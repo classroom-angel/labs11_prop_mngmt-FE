@@ -18,7 +18,7 @@ class Payments extends React.Component {
   componentDidMount = () => {
     let code = this.getCredentials();
     if (code) {
-      axios.post(`https://connect.stripe.com/oauth/token/?client_secret=${process.env.STRIPE_DEV_KEY}&code=${code}&grant_type=authorization_code`)
+      axios.post(`https://connect.stripe.com/oauth/token/?client_secret=${process.env.REACT_APP_STRIPE_DEV_KEY}&code=${code}&grant_type=authorization_code`)
       .then(response => {
         console.log(response);
       })
