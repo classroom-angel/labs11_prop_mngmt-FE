@@ -188,6 +188,8 @@ export default class IssueLog extends React.Component {
 
     render() {
         console.log(this.props.auth.isAuth())
+        if (this.props.auth.isAuth()) {
+
         this.arrayTags()
     if (this.state.issuesLoaded) {
         return (
@@ -298,5 +300,10 @@ export default class IssueLog extends React.Component {
 
         )
     }
+} else {
+    return (
+        <h1>Whoops, you must be logged in to view this app</h1>
+    )
+}
 }
 }
