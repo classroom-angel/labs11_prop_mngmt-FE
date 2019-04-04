@@ -31,7 +31,7 @@ class Payments extends React.Component {
     }
 
     if (code) {
-      axios.post('https://connect.stripe.com/oauth/token', sendObj, headers)
+      axios.post('https://connect.stripe.com/oauth/token', sendObj, {headers: headers})
       .then(response => {
         console.log(response);
       })
