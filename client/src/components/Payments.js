@@ -17,8 +17,21 @@ class Payments extends React.Component {
 
   componentDidMount = () => {
     let code = this.getCredentials();
+
+    let sendObj = {
+      client_secret: process.env.REACT_APP_STRIPE_DEV_KEY,
+      code: code,
+      grant_type: "authorization_code"
+    }
+
+    let headers = {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+    }
+
     if (code) {
-      axios.post(`https://connect.stripe.com/oauth/token/?client_secret=${process.env.REACT_APP_STRIPE_DEV_KEY}&code=${code}&grant_type=authorization_code`)
+      axios.post('https://connect.stripe.com/oauth/token', sendObj)
       .then(response => {
         console.log(response);
       })
