@@ -302,7 +302,7 @@ export default class IssueLog extends React.Component {
     }
 } else {
     return (
-        <h1>Whoops, you must be logged in to view this app</h1>
+        <h1>Whoops, you must be logged in to view Issues</h1>
     )
 }
 }

@@ -36,6 +36,7 @@ export default class BoardMemberHub extends React.Component {
     }
 
     render() {
+        if (this.props.auth.isAuth()) {
         return (
             <div className="page-container">
                     <Sidebar/>
@@ -134,6 +135,10 @@ export default class BoardMemberHub extends React.Component {
                     </div>
             </div>
         )
-
+        } else {
+            return (
+                <h1>Whoops, you must be logged in to view the Board Member Homepage</h1>
+            )
+        }
     }
 }
