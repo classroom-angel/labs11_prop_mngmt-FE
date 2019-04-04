@@ -2,7 +2,7 @@ import React from 'react'
 import Connect from './Connect';
 import Sidebar from './Sidebar/Sidebar';
 import Checkout from './Checkout';
-import axios from 'axios';
+import axios from '../axiosInstance';
 import '../App.css'
 
 class Payments extends React.Component {
@@ -22,25 +22,17 @@ class Payments extends React.Component {
     history.push("/payments");
     let code = localStorage.getItem("code");
     let sendObj = {
-      client_secret: process.env.REACT_APP_STRIPE_DEV_KEY,
-      code: code,
-      grant_type: "authorization_code"
-    }
-
-    let headers = {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+      code
     }
 
     if (code) {
-      setTimeout(axios.post('https://connect.stripe.com/oauth/token', sendObj)
+      axios.post('/payments/connect', sendObj)
       .then(response => {
         console.log(response);
       })
       .catch(error => {
         console.log(error);
-      }), 1000)
+      }
     }
   }
 
