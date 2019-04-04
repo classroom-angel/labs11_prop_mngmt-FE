@@ -14,6 +14,7 @@ import ViewIssue from './components/Issues/ViewIssue';
 import Scheduled from './components/Scheduled';
 import CreateEventForm from './components/CreateEventForm';
 import EditEventForm from './components/EditEventForm';
+import Testimonials from './components/Testimonials/Testimonials';
 import Visits from './components/Visits';
 import Payments from './components/Payments';
 import TeacherAttendance from './components/TeacherAttendance';
@@ -98,6 +99,7 @@ class App extends React.Component {
         <Route exact path='/bm-homepage' component={BoardMemberHub}/>
         <Route exact path='/issue-log' render={(props) => <IssueLog {...props} auth={this.auth}/>}/>
         <Route exact path='/issue/:id' component={ViewIssue}/>
+        <Route exact path='/testimonials' component={Testimonials}/>
         <Route exact path='/scheduled' render={(props) => <Scheduled {...props} solutions={this.state.solutions} solutionsLoaded={this.state.solutionsLoaded} update={this.updateSolutionEditId}/>}/>
         <Route exact path='/CreateEventForm' render={(props) => <CreateEventForm {...props} name={this.state.solution} date={this.state.date} time={this.state.time} organizationId={this.state.orgID} handleChange={this.handleInputChange} />}/>
         <Route exact path='/events/:id' render={(props) => <EditEventForm  solutionEditId={this.state.solutionEditId} {...props}/>} />
