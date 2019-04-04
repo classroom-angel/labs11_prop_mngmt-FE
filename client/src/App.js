@@ -84,7 +84,7 @@ class App extends React.Component {
         name: ""
       }
     }
-    console.log("env", process.env)
+    // console.log("env", process.env)
     return (
       
       <div className="App">
