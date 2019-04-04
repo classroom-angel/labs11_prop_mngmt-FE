@@ -44,7 +44,8 @@ export default class IssueLog extends React.Component {
             filterStatus: 'all',
             filterTag: 'all',
             passes: false,
-            images: []
+            images: [],
+            eid: 3
         }
         this.postIssues = this.postIssues.bind(this)
         this.deleteIssue = this.deleteIssue.bind(this)
@@ -71,6 +72,7 @@ export default class IssueLog extends React.Component {
         status: this.state.issueStatus.toLowerCase(),
         isVisit: this.state.isVisit,
         organizationId: this.state.orgID,
+        equipmentId: this.state.eid,
         date: today
      })
        .then(res => {

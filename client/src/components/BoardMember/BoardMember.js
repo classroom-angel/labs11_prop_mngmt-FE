@@ -29,7 +29,9 @@ export default class BoardMemberHub extends React.Component {
 
         axios
         .get('issues')
-        .then(res => this.setState({issues: res.data.issues, issuesLoaded: true}))
+        .then(res => {
+            console.log(res.data)
+            this.setState({issues: res.data.issues, issuesLoaded: true})})
         .catch(err => console.error(err))
     }
 
