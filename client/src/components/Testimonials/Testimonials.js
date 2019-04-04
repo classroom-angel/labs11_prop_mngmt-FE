@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from '../../axiosInstance';
+import { NavLink } from "react-router-dom";
 import './testimonial.css'
 
 class Testimonials extends Component {
@@ -27,13 +28,16 @@ class Testimonials extends Component {
  render(){
      return(
         <div className="testimonials">
+         <NavLink to="/AddTestimonial">Tell us what you think!</NavLink>
         {this.state.testimonials.map(testimonial => {
             return (
+                <div className="testimonials">
                 <div className="card">
                    <h1>{testimonial.name}</h1>
                    <h2>{testimonial.role}</h2> 
                    <h3>{testimonial.text}</h3>
                 </div>
+           </div>
             )
         })}
             
