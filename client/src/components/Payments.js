@@ -62,7 +62,6 @@ class Payments extends React.Component {
   }
 
   render() {
-    if (this.props.auth.isAuth()) {
     return (
         <div className="page-container">
           <Sidebar />
@@ -92,11 +91,7 @@ class Payments extends React.Component {
         </div>
      </div>
     );
-    } else {
-      return (
-        <h1>Whoops, you must be logged in ot view Payments</h1>
-      )
-    }
+    
 }
 }
 
