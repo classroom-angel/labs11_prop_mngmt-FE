@@ -34,7 +34,7 @@ class Payments extends React.Component {
     }
 
     if (code) {
-      this.setTimeout(axios.post('https://connect.stripe.com/oauth/token', sendObj)
+      setTimeout(axios.post('https://connect.stripe.com/oauth/token', sendObj)
       .then(response => {
         console.log(response);
       })
