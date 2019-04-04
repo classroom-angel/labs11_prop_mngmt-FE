@@ -96,7 +96,7 @@ class App extends React.Component {
         <Route exact path='/onboarding' render={(props) => <OnBoard {...props} auth={this.auth} />} />
         <Route exact path='/join-org' component={JoinOrg}/>
         <Route exact path='/bm-homepage' component={BoardMemberHub}/>
-        <Route exact path='/issue-log' component={IssueLog}/>
+        <Route exact path='/issue-log' render={(props) => <IssueLog {...props} auth={this.auth}/>}/>
         <Route exact path='/issue/:id' component={ViewIssue}/>
         <Route exact path='/scheduled' render={(props) => <Scheduled {...props} solutions={this.state.solutions} solutionsLoaded={this.state.solutionsLoaded} update={this.updateSolutionEditId}/>}/>
         <Route exact path='/CreateEventForm' render={(props) => <CreateEventForm {...props} name={this.state.solution} date={this.state.date} time={this.state.time} organizationId={this.state.orgID} handleChange={this.handleInputChange} />}/>

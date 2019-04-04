@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import axios from '../axiosInstance';
+import React from 'react';
+// import axios from '../axiosInstance';
 
 export default function Uploader(props) {
   const { uploading } = props;
