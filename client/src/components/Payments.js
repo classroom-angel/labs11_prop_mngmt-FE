@@ -24,8 +24,14 @@ class Payments extends React.Component {
       grant_type: "authorization"
     }
 
+    let headers = {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+    }
+
     if (code) {
-      axios.post('https://connect.stripe.com/oauth/token', sendObj)
+      axios.post('https://connect.stripe.com/oauth/token', sendObj, headers)
       .then(response => {
         console.log(response);
       })
