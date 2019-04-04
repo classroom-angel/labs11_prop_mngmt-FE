@@ -27,9 +27,9 @@ const onToken = (amount, description, stripeAccount) => token => {
             destination: stripeAccount,
         })
         .then(successPayment)
-        .catch(errorPayment => {
-            console.log(errorPayment)
-        });
+        // .catch(errorPayment => {
+        //     console.log(errorPayment)
+        // });
 }
 
     const Connect = ({ name, description, amount, stripeAccount}) =>
