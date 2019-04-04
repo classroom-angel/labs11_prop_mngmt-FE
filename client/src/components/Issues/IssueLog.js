@@ -245,7 +245,7 @@ export default class IssueLog extends React.Component {
                                       })}
                                   </div>
                                   <button onClick={this.deleteIssue} value={issue.id} sytle={{display: 'inline-block'}}>Delete</button>
-                                  <NavLink to={`/issue/${issue.id}`}><button value={issue.id} className="edit-issue-button">Update</button></NavLink>
+                                  <NavLink to={`/issue/${issue.id}`}><button value={issue.id} className="edit-issue-button">View/Update</button></NavLink>
                                   <button onClick={this.toggleShowComments} value={issue.id} sytle={{display: 'inline-block'}}>Show Comments</button>
                                   {this.state.showComments ?
                                   <div>
