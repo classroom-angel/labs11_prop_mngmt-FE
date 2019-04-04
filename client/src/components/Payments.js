@@ -17,7 +17,9 @@ class Payments extends React.Component {
 
   componentDidMount = () => {
     this.getCredentials();
-    this.context.history.push("/payments");
+    const { history } = this.props;
+    history.push("/");
+    history.push("/payments");
     let code = localStorage.getItem("code");
     let sendObj = {
       client_secret: process.env.REACT_APP_STRIPE_DEV_KEY,
