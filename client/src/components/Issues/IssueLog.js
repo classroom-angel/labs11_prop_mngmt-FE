@@ -43,7 +43,8 @@ export default class IssueLog extends React.Component {
             showComments: false,
             filterStatus: 'all',
             filterTag: 'all',
-            passes: false
+            passes: false,
+            images: []
         }
         this.postIssues = this.postIssues.bind(this)
         this.deleteIssue = this.deleteIssue.bind(this)
@@ -75,10 +76,13 @@ export default class IssueLog extends React.Component {
        .then(res => {
            const id = res.data.issue.id;
            const formData = new FormData()
-           const files = [...this.state.images];
-           files.forEach((file, i) => {
-             formData.append(i, file);
-           });
+        //    if (this.state.image) {
+            const files = [...this.state.images];
+            files.forEach((file, i) => {
+              formData.append(i, file);
+            });
+        //    }
+           
            console.log(formData);
            axios.post(`issues/${id}/images`, formData).then(res2 => {
              this.setState(prevState => ({...prevState, issueName: "", issueNotes: "", issues: [prevState.issues, res.data.issue], images: []}))
