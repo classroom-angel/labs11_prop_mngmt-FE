@@ -84,7 +84,9 @@ class App extends React.Component {
         name: ""
       }
     }
+    console.log("env", process.env)
     return (
+      
       <div className="App">
       {/* Should've mentioned earlier but feel free to delete render props if cumbersome or unnecessary */}
         <Route exact path='/' render={(props) => <Home {...props} auth={this.auth} profile={profile} />} />
