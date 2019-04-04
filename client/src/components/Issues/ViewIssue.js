@@ -180,6 +180,7 @@ class ViewIssue extends React.Component {
 
 
     render() {
+      if (this.props.auth.isAuth()) {
         return (
             <div className="page-container">
                 <Sidebar />
@@ -248,6 +249,13 @@ class ViewIssue extends React.Component {
             </div>
 
         )
+          }
+          else {
+            return (
+              <h1>Whoops, you must be logged in to view this Issue</h1>
+            )
+          } 
+                
     }
 }
 
