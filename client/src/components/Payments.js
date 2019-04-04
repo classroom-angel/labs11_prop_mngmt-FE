@@ -26,7 +26,7 @@ class Payments extends React.Component {
     }
 
     if (code) {
-      axios.post('/payments/connect', sendObj)
+      axios.post('/payment/connect', sendObj)
       .then(response => {
         console.log(response);
       })
