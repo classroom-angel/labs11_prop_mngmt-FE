@@ -174,6 +174,7 @@ export default class Visits extends React.Component {
     }
 
     render() {
+        if (this.props.auth.isAuth()) {
         this.arrayTags()
     if (this.state.issuesLoaded) {
         return (
@@ -285,5 +286,11 @@ export default class Visits extends React.Component {
 
         )
     }
+}
+else {
+    return (
+        <h1>Whoops, you must be logged in to see Visits</h1>
+    )
+}
 }
 }
