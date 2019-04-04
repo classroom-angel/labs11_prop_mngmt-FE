@@ -73,17 +73,14 @@ export default class IssueLog extends React.Component {
         date: today
      })
        .then(res => {
-           console.log(res);
            const id = res.data.issue.id;
            const formData = new FormData()
            const files = [...this.state.images];
-           console.log(files);
            files.forEach((file, i) => {
              formData.append(i, file);
            });
            console.log(formData);
            axios.post(`issues/${id}/images`, formData).then(res2 => {
-             console.log("RES2", res2);
              this.setState(prevState => ({...prevState, issueName: "", issueNotes: "", issues: [prevState.issues, res.data.issue], images: []}))
            }).catch(err => console.log(err))
        })
@@ -187,7 +184,6 @@ export default class IssueLog extends React.Component {
     }
 
     render() {
-        console.log(this.props.auth.isAuth())
         if (this.props.auth.isAuth()) {
 
         this.arrayTags()

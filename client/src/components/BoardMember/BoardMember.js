@@ -16,23 +16,25 @@ export default class BoardMemberHub extends React.Component {
             issues: [],
             selected: 'ChromeBooks'
         }
+        this.equipSelect = this.equipSelect.bind(this)
     }
 
     componentDidMount() {
         axios
         .get('equipment')
-        .then(res => this.setState({equipment: res.data.equipment, equipmentLoaded: true}))
+        .then(res => {
+            console.log(res.data)
+            this.setState({equipment: res.data.equipment, equipmentLoaded: true})})
         .catch(err => console.error(err))
 
         axios
         .get('issues')
         .then(res => this.setState({issues: res.data.issues, issuesLoaded: true}))
         .catch(err => console.error(err))
+    }
 
-        // axios
-        // .get('attendance')
-        // .then(res => this.setState({attendance: res.data.attendance, attendanceLoaded: true}))
-        // .catch(err => console.error(err))
+    equipSelect(event) {
+        this.setState({selected: event.target.innerHTML})
     }
 
     render() {
@@ -64,9 +66,9 @@ export default class BoardMemberHub extends React.Component {
                             Equipment
                             {
                                 this.state.equipmentLoaded ? (
-                                    this.state.equipment.map(function(item) {
+                                    this.state.equipment.map((item) => {
                                         return (
-                                            <p>{item.name}</p>
+                                            <p onClick={this.equipSelect} value={item.name}>{item.name}</p>
                                         )
                                     })
                                 ): "Loading..."
@@ -126,7 +128,7 @@ export default class BoardMemberHub extends React.Component {
                                        )
                                    })
                                ): "Loading...."
-                                }
+                            }
                         </div>
                         </div>
                         </div>
