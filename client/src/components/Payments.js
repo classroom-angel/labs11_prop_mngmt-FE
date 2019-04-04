@@ -19,9 +19,9 @@ class Payments extends React.Component {
     let code = this.getCredentials();
 
     let sendObj = {
-      client_secret: process.env.REACT_APP_STRIPE_DEV_KEY,
-      code: code,
-      grant_type: "authorization"
+      "client_secret": process.env.REACT_APP_STRIPE_DEV_KEY,
+      "code": code,
+      "grant_type": "authorization"
     }
 
     let headers = {
