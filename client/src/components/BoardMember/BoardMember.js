@@ -43,7 +43,7 @@ export default class BoardMemberHub extends React.Component {
                     <Sidebar/>
                     <div className="right-side">
                     <h1 style={{textAlign: 'left'}}>School Name Here</h1>
-                    <div style={{display:'flex', justifyContent:'center'}}>
+                    <div className="hud-box" style={{display:'flex'}}>
                         <div className="bm-issues" style={{display: 'inline-block', margin: '20px 1%', width: '35%', border: '5px solid firebrick', borderRadius: '10px'}}>
                         <h2 style={{textAlign:'left'}}>Issue Log</h2>
                         
