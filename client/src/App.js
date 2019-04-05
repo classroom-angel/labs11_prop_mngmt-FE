@@ -35,6 +35,7 @@ class App extends React.Component {
     }
 
     this.auth = new Auth(props);
+    this.handleChange = this.handleChange.bind(this)
   }
 
   componentDidMount() {
@@ -91,7 +92,7 @@ class App extends React.Component {
         <Route exact path='/authload' render={(props) => <AuthLoad {...props} auth={this.auth} />} />
         <Route exact path='/onboarding' render={(props) => <OnBoard {...props} auth={this.auth} />} />
         <Route exact path='/join-org' component={JoinOrg}/>
-        <Route exact path='/bm-homepage' render={(props) => <BoardMemberHub {...props} auth={this.auth}/>}/>
+        <Route exact path='/bm-homepage' render={(props) => <BoardMemberHub {...props} auth={this.auth} handleChange={this.handleChange}/>}/>
         <Route exact path='/issue-log' render={(props) => <IssueLog {...props} auth={this.auth}/>}/>
         <Route exact path='/issue/:id' render={(props) => <ViewIssue {...props} auth={this.auth}/>}/>
         <Route exact path='/scheduled' render={(props) => <Scheduled {...props} solutions={this.state.solutions} solutionsLoaded={this.state.solutionsLoaded} update={this.updateSolutionEditId} auth={this.auth}/>}/>

@@ -269,7 +269,6 @@ export default class Visits extends React.Component {
                         <input type="submit" />
                     </form>
                     </div>
->>>>>>> 96d5928d566d5f88f230157490147dd19660315c
                 </div>
 
             </div>
