@@ -6,7 +6,7 @@ import './Sidebar.css'
 function Sidebar() {
     return (
         <div className="sidebar">
-            <h1 className="sidebar-header">Classroom Angel</h1>
+            <h3 className="sidebar-header">Classroom Angel</h3>
 
             <NavLink to="/bm-homepage"><button className="sidebar-button">Board Member Homepage</button></NavLink>
             <NavLink to="/issue-log"><button className="sidebar-button">Issue Log</button></NavLink>
