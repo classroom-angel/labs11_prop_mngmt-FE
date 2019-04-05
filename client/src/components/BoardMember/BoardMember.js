@@ -14,7 +14,8 @@ export default class BoardMemberHub extends React.Component {
             attendanceLoaded: false,
             issuesLoaded: false,
             issues: [],
-            selected: 'ChromeBooks'
+            selected: 'Knives',
+            selectedId: 1
         }
         this.equipSelect = this.equipSelect.bind(this)
     }
@@ -22,21 +23,17 @@ export default class BoardMemberHub extends React.Component {
     componentDidMount() {
         axios
         .get('equipment')
-        .then(res => {
-            console.log(res.data)
-            this.setState({equipment: res.data.equipment, equipmentLoaded: true})})
+        .then(res => this.setState({equipment: res.data.equipment, equipmentLoaded: true}))
         .catch(err => console.error(err))
 
         axios
         .get('issues')
-        .then(res => {
-            console.log(res.data)
-            this.setState({issues: res.data.issues, issuesLoaded: true})})
+        .then(res => this.setState({issues: res.data.issues, issuesLoaded: true}))
         .catch(err => console.error(err))
     }
 
     equipSelect(event) {
-        this.setState({selected: event.target.innerHTML})
+        this.setState({selected: event.target.innerHTML, selectedId: event.target.attributes[0].value})
     }
 
     render() {
@@ -70,7 +67,7 @@ export default class BoardMemberHub extends React.Component {
                                 this.state.equipmentLoaded ? (
                                     this.state.equipment.map((item) => {
                                         return (
-                                            <p onClick={this.equipSelect} value={item.name}>{item.name}</p>
+                                            <p onClick={this.equipSelect} value={item.id}>{item.name}</p>
                                         )
                                     })
                                 ): "Loading..."
@@ -117,14 +114,16 @@ export default class BoardMemberHub extends React.Component {
                             }
                         </div>
                         <div className="dev-description" style={{display: 'inline-block', border: '2px solid', overflow:"scroll"}}>
-                            {this.state.selected}
+                            <p style={{borderBottom:"1px solid"}}>{this.state.selected}</p>
                            {
-                               this.state.equipmentLoaded ? (
-                                   this.state.equipment.map(function(item) {
+                               this.state.issuesLoaded? (
+                                   this.state.issues.filter(issue => {
+                                       return issue.equipmentId == this.state.selectedId
+                                   }).map((issue, index) => {
                                        return (
                                            <div>
-                                                <p>{item.name}</p>
-                                                <p>Description: {item.description}</p>
+                                                <p>{`Issue ${index + 1}`}</p>
+                                                <p>Descriptions: {issue.name}</p>
                                            </div>
                                            
                                        )
