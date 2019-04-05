@@ -77,7 +77,6 @@ export default class IssueLog extends React.Component {
      })
        .then(res => {
            const id = res.data.issue.id;
-<<<<<<< HEAD
            if (this.state.images === []) {
              const formData = new FormData()
              const files = [...this.state.images];
@@ -93,20 +92,6 @@ export default class IssueLog extends React.Component {
            } else {
              this.setState(prevState => ({...prevState, issueName: "", issueNotes: "", issues: [...prevState.issues, res.data.issue], images: []}));
            }
-=======
-           const formData = new FormData()
-        //    if (this.state.image) {
-            const files = [...this.state.images];
-            files.forEach((file, i) => {
-              formData.append(i, file);
-            });
-        //    }
-           
-           console.log(formData);
-           axios.post(`issues/${id}/images`, formData).then(res2 => {
-             this.setState(prevState => ({...prevState, issueName: "", issueNotes: "", issues: [prevState.issues, res.data.issue], images: []}))
-           }).catch(err => console.log(err))
->>>>>>> 85459090e393d1c34f8716f0f62acbef1fa6aea6
        })
        .catch(err => console.log(err))
     }
@@ -208,11 +193,7 @@ export default class IssueLog extends React.Component {
     }
 
     render() {
-<<<<<<< HEAD
-=======
         if (this.props.auth.isAuth()) {
-
->>>>>>> 85459090e393d1c34f8716f0f62acbef1fa6aea6
         this.arrayTags()
     if (this.state.issuesLoaded) {
         return (
@@ -323,5 +304,6 @@ export default class IssueLog extends React.Component {
 
         )
     }
+  }
 }
 }
