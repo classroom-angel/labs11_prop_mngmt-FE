@@ -254,8 +254,8 @@ class ViewIssue extends React.Component {
             return (
               <h1>Whoops, you must be logged in to view this Issue</h1>
             )
-          } 
-                
+          }
+
     }
 }
 
