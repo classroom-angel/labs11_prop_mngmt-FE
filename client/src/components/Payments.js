@@ -79,7 +79,7 @@ class Payments extends React.Component {
           </a>
           <p>
             Step 2: Fill out this form with the amount you're sending and the
-            contractor's Stripe account number (starts with 'acct_').
+            contractor's Stripe account number starts with 'acct_'.
           </p>
           <form>
             <input
