@@ -41,7 +41,7 @@ const subscribe = ({ description }) => token => {
 
 const connect = ({ amount, description, stripeAccount }) => token => {
   return axios
-    .post(`${PAYMENT_SERVER_URL}/api/payment/connect`, {
+    .post(`${PAYMENT_SERVER_URL}/api/payment`, {
       description,
       source: token.id,
       currency: CURRENCY,
