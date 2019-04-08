@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from '../../axiosInstance';
+import { Button, Icon, CardPanel, Row, Col } from 'react-materialize';
+import './testimonial.css';
 
 class AddTestimonial extends Component {
   constructor(props) {
@@ -23,7 +25,11 @@ class AddTestimonial extends Component {
       .post('testimonials', newTestimonial)
       .then(response => {
         console.log(response.data);
-        this.setState({ name: '', role: '', text: '' });
+        this.setState({
+          name: '',
+          role: '',
+          text: ''
+        });
 
         this.props.history.push('/testimonials');
       })
@@ -33,33 +39,56 @@ class AddTestimonial extends Component {
   };
 
   handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({
+      [event.target.name]: event.target.value
+    });
   };
 
   render() {
     return (
-      <div className="TestimonialForm">
-        <form onSubmit={this.createTestimonial}>
-          <input
-            onChange={this.handleChange}
-            placeholder="name"
-            value={this.state.name}
-            name="name"
-          />
-          <input
-            onChange={this.handleChange}
-            placeholder="role"
-            value={this.state.role}
-            name="role"
-          />
-          <textarea
-            onChange={this.handleChange}
-            placeholder="text"
-            value={this.state.text}
-            name="text"
-          />
-          <button type="submit">Submit</button>
-        </form>
+      <div>
+        <h3>Add Testimonial</h3>
+        <div className="TestimonialForm cyan darken-2 col s12">
+          <form onSubmit={this.createTestimonial}>
+            <div className="row">
+              <div class="input-field col s12">
+                <input
+                  onChange={this.handleChange}
+                  placeholder="Name"
+                  value={this.state.name}
+                  name="name"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div class="input-field col s12">
+                <input
+                  onChange={this.handleChange}
+                  placeholder="Role"
+                  value={this.state.role}
+                  name="role"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div class="input-field col s12">
+                <textarea
+                  id="textarea1"
+                  className="materialize-textarea"
+                  onChange={this.handleChange}
+                  placeholder="Testimonial"
+                  value={this.state.text}
+                  name="text"
+                />
+              </div>
+            </div>
+
+            <Button className="red lighten-1" type="submit" waves="light">
+              Submit
+              <Icon right>send</Icon>
+            </Button>
+          </form>
+        </div>
       </div>
     );
   }
