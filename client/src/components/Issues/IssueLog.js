@@ -1,11 +1,11 @@
-// This page seems superfluous in it's current form, we may just scrap it and add
-// another filter if an issue is an admin visit
-
 import React from 'react'
-import Sidebar from './Sidebar/Sidebar';
-import '../App.css'
-import axios from '../axiosInstance'
-import {NavLink} from 'react-router-dom'
+import Sidebar from '../Sidebar/Sidebar';
+import '../../App.css';
+import './Issues.css';
+import axios from '../../axiosInstance';
+import {NavLink} from 'react-router-dom';
+import Uploader from '../Uploader';
+// import moment from 'moment'
 
 const statuses = [
     "Needs Attention",
@@ -22,7 +22,7 @@ var mm = String(today.getMonth() + 1).padStart(2, '0');
 var yyyy = today.getFullYear();
 
 today = mm + '-' + dd + '-' + yyyy;
-export default class Visits extends React.Component {
+export default class IssueLog extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -43,7 +43,9 @@ export default class Visits extends React.Component {
             showComments: false,
             filterStatus: 'all',
             filterTag: 'all',
-            passes: false
+            passes: false,
+            images: [],
+            eid: 3
         }
         this.postIssues = this.postIssues.bind(this)
         this.deleteIssue = this.deleteIssue.bind(this)
@@ -58,12 +60,7 @@ export default class Visits extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('issues').then(res => {
-            let copy = res.data.issues.filter(function(issue) {
-                return issue.isVisit
-            })
-            this.setState({issues: copy, issuesLoaded: true})
-        }).catch(err => console.log(err))
+        axios.get('issues').then(res => this.setState({issues: res.data.issues, issuesLoaded: true})).catch(err => console.log(err))
         axios.get('tags').then(res => this.setState({tags: res.data.tags})).catch(err => console.log(err))
         axios.get('comments').then(res => this.setState({comments: res.data.comments})).catch(err => console.log(err))
     }
@@ -75,11 +72,26 @@ export default class Visits extends React.Component {
         status: this.state.issueStatus.toLowerCase(),
         isVisit: this.state.isVisit,
         organizationId: this.state.orgID,
+        equipmentId: this.state.eid,
         date: today
      })
        .then(res => {
-           console.log(res)
-           this.setState({issueName: "", issueNotes: "", issues: [...this.state.issues, res.data.issue]})
+           const id = res.data.issue.id;
+           if (this.state.images === []) {
+             const formData = new FormData()
+             const files = [...this.state.images];
+             console.log(files);
+             files.forEach((file, i) => {
+               formData.append(i, file);
+             });
+             console.log(formData);
+             axios.post(`issues/${id}/images`, formData).then(res2 => {
+               console.log("RES2", res2);
+               this.setState(prevState => ({...prevState, issueName: "", issueNotes: "", issues: [...prevState.issues, res.data.issue], images: []}));
+             }).catch(err => console.log(err))
+           } else {
+             this.setState(prevState => ({...prevState, issueName: "", issueNotes: "", issues: [...prevState.issues, res.data.issue], images: []}));
+           }
        })
        .catch(err => console.log(err))
     }
@@ -87,7 +99,6 @@ export default class Visits extends React.Component {
     deleteIssue(event) {
         axios.delete(`issues/${event.target.value}`)
         .then(res => {
-            console.log(res.data.issue.id)
             var copy = this.state.issues.filter(function(element) {
                 return element.id !== res.data.issue.id
             })
@@ -136,6 +147,14 @@ export default class Visits extends React.Component {
         })
       }
 
+    imgAdder = (e) => {
+      const files = Array.from(e.target.files);
+      this.setState({
+        images: files,
+        uploading: true
+      })
+    }
+
     visitChange(event) {
         this.setState({[event.target.name]: event.target.checked})
     }
@@ -181,7 +200,7 @@ export default class Visits extends React.Component {
             <div className="page-container">
                 <Sidebar />
                 <div className="right-side">
-                    <h1 style={{textAlign: 'center', border: '2px solid gray'}}>Visits</h1>
+                    <h1 style={{textAlign: 'center', border: '2px solid gray'}}>Issue Log</h1>
                     Filter By Status:<select name='filterStatus' onChange={this.handleChange} className='' style={{marginBottom: '20px'}}>
                         <option value="all">Choose...</option>
                         {
@@ -230,7 +249,7 @@ export default class Visits extends React.Component {
                                       })}
                                   </div>
                                   <button onClick={this.deleteIssue} value={issue.id} sytle={{display: 'inline-block'}}>Delete</button>
-                                  <NavLink to={`/issue/${issue.id}`}><button value={issue.id} className="edit-issue-button">Update</button></NavLink>
+                                  <NavLink to={`/issue/${issue.id}`}><button value={issue.id} className="edit-issue-button">View/Update</button></NavLink>
                                   <button onClick={this.toggleShowComments} value={issue.id} sytle={{display: 'inline-block'}}>Show Comments</button>
                                   {this.state.showComments ?
                                   <div>
@@ -265,7 +284,7 @@ export default class Visits extends React.Component {
                                   return <option key={index} value={status}>{status}</option>
                                 })}
                         </select><br/>
-
+                        <Uploader uploading={this.state.uploading} imgAdder={this.imgAdder} />
                         <input type="submit" />
                     </form>
                     </div>
@@ -285,11 +304,6 @@ export default class Visits extends React.Component {
 
         )
     }
-}
-else {
-    return (
-        <h1>Whoops, you must be logged in to see Visits</h1>
-    )
-}
+  }
 }
 }

@@ -1,1 +1,10 @@
 pr.md
+# foolproofing for people adding dependencies in the root directory;
+# CD INTO CLIENT
+/node_modules
+package.json
+package-lock.json
+yarn.lock
+yarn-error.log
+.env
+.gitignore

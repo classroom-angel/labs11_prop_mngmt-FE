@@ -12,7 +12,7 @@ export default class Auth extends Component {
     auth0 = new auth0.WebAuth ({
         domain: 'classroomangel.auth0.com',
         clientID:'aCRKf9uUYcF1v2gFUZf0s3PZtxy6uwvn',
-        redirectUri: 'http://localhost:3000/authload',
+        redirectUri: `${process.env.REACT_APP_URL || 'http://localhost:3000'}/authload`,
         responseType: 'token id_token',
         // audience: 'classroomangel.auth0.com/userinfo',
         scope: 'openid profile email firstName'
@@ -38,10 +38,16 @@ export default class Auth extends Component {
           localStorage.setItem('access_token', JSON.stringify(authResults.accessToken));
           localStorage.setItem('expires', expires);
           localStorage.setItem('profile', JSON.stringify(profile));
-
-          if (users.filter(user => {return (user.username === profile.email || user.firstName+" "+user.lastName === profile.name)}).length)
+          let oldUser = users.filter(user => {return (user.username === profile.email || user.firstName+" "+user.lastName === profile.name)});
+          if (oldUser.length !== 0)
           {
+            let profile = JSON.parse(localStorage.getItem('profile'));
+            profile.orgId = oldUser[0].organizationId;
+            profile.role = oldUser[0].role;
+            profile.name = oldUser[0].firstName + " " + oldUser[0].lastName;
+            localStorage.setItem('profile', JSON.stringify(profile))
             location.pathname = "/"
+            console.log(oldUser);
             console.log(location.pathname)
           } else {
             location.pathname= "/signup";

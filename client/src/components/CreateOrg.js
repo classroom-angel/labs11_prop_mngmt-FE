@@ -1,4 +1,4 @@
-import { React,Component } from 'react'
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import axios from '../axiosInstance';
 
@@ -20,9 +20,9 @@ export default class CreateOrg extends Component {
 
   submit = async (e) => {
     e.preventDefault();
-
-    const org = await axios.post('/createorg', {...this.state, expectedHours: 0});
-    this.props.shareState({organizationName: this.state.orgName}, (ste) => {
+    const org = await axios.post('/organizations', {name: this.state.orgName, city: this.state.orgCity, country: this.state.orgCountry, expectedHours: 0});
+    console.log(org);
+    this.props.shareState({organizationName: org.data.organization.name, orgId: org.data.organization.id}, (ste) => {
       this.setState({
         orgName: "",
         orgCity: "",
@@ -54,7 +54,7 @@ export default class CreateOrg extends Component {
         </form>
 
         {/* JOIN ORGANIZATION */}
-        <p>Looking for an organization? <Link>Join an organization</Link></p>
+        <p>Looking for an organization? <Link to='/signup'>Join an organization</Link></p>
       </div>
     )
   }

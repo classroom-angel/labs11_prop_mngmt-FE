@@ -5,7 +5,7 @@ export default class OnBoard extends Component {
   render() {
     return (
       <div className="onboarding-component">
-      <h1>Onbaording component</h1>
+      <h1>Onboarding component</h1>
 
       </div>
     )
