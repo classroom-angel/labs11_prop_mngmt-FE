@@ -18,7 +18,6 @@ const Checkout = props => (
   />
 );
 
-
 /* Token helpers */
 
 const successPayment = data => {
