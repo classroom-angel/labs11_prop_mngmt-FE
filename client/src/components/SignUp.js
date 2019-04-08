@@ -123,7 +123,7 @@ export default class SignUp extends Component {
               : null
           }
         />
-        <h3>
+        <h3 className="black-text">
           Welcome, <b>{this.state.firstName}</b>,
           please tell us a little more about
           yourself...
