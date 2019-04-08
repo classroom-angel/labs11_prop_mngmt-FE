@@ -53,7 +53,6 @@ class AddTestimonial extends Component {
             <div className="row">
               <div class="input-field col s12">
                 <input
-                  className="validate"
                   onChange={this.handleChange}
                   placeholder="Name"
                   value={this.state.name}
@@ -64,7 +63,6 @@ class AddTestimonial extends Component {
             <div className="row">
               <div class="input-field col s12">
                 <input
-                  className="validate"
                   onChange={this.handleChange}
                   placeholder="Role"
                   value={this.state.role}
@@ -76,7 +74,7 @@ class AddTestimonial extends Component {
               <div class="input-field col s12">
                 <textarea
                   id="textarea1"
-                  className="materialize-textarea validate"
+                  className="materialize-textarea"
                   onChange={this.handleChange}
                   placeholder="Testimonial"
                   value={this.state.text}
