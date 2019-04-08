@@ -1,24 +1,3 @@
-.card {
-  border: 3px solid #30bced;
-  background: #f0efef;
-  box-sizing: border-box;
-  width: 500px;
-  padding: 5px;
-  margin: 10px auto;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-content: center;
-  font-weight: normal;
-  font-style: normal;
-  cursor: pointer;
-}
-
-.card h1 {
-  color: #094d92;
-}
-
-.card h2 {
-  color: #fc5130;
+.testimonials {
+  background-color: #006064
 }
