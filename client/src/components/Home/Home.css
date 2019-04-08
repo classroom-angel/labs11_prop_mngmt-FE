@@ -37,21 +37,27 @@ a:hover {
 .textBox {
   padding-top: 50px;
   width: 400px;
-  background-color: lightblue;
+  background-color: #006064;
   /* border: 1px solid orange; */
   font-size: 20px;
+  color: white;
+  border: 5px solid #0097A7;
+  border-radius: 10px;
+  padding: 10px;
 }
 
 @media (max-width: 1000px) {
   .logoAndText {
     flex-flow: column;
     width: 100vw;
-    margin-bottom: 350px;
+    margin: 20px auto;
+    margin-bottom: 400px;
   }
 
   .textBox {
-    width: 100%;
+    width: 100vw;
     padding-top: 0;
+    padding: 10px;
   }
 
   #logo {
@@ -77,14 +83,14 @@ a:hover {
     height: 100vw;
     width: 100vw;
     flex-flow: column;
-    margin-bottom: 400px;
+    margin-bottom: 450px;
   }
 
 }
 
-@media (max-width: 450px) {
+@media (max-width: 500px) {
   .logoAndText {
-    margin-bottom: 450px;
+    margin-bottom: 500px;
   }
 }
 
