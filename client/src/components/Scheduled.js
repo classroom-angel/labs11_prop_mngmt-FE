@@ -61,15 +61,20 @@ export default class Scheduled extends React.Component {
 
           <div className="calendar right-side">
             <NavLink to="/createEventForm">Create new Event</NavLink>
-            <h1 className="calendar-title">Calendar</h1>
+            <h1 className="calendar-title">Scheduled Issues and Visits</h1>
             <div style={{ height: 700 }}>
               <Calendar
                 localizer={localizer}
                 defaultDate={new Date()}
-                defaultView="month"
+                defaultView="week"
                 events={this.state.events}
                 solutions={this.state.solutions}
-                style={{ height: '100vh', width: '80vw' }}
+                style={{
+                  height: '154%',
+                  width: '95%',
+                  marginLeft: '2.5%',
+                  marginBottom: '2%'
+                }}
                 onSelectEvent={this.selectedEvent}
               />
             </div>

@@ -62,6 +62,7 @@ function Home(props) {
           </NavLink>
         </div>
       )}
+
       <div className="logoAndText">
         <div className="textBox">
           <h4>Manage your <br/>school wisely</h4>
@@ -69,8 +70,9 @@ function Home(props) {
           <p>Sign up or sign in today to get started!</p>
           <NavLink className="land-link" to="/">Sign up/sign in</NavLink>
         </div>
-        <img src={logo} alt="logo" id="logo" width="500"/>
+        <img src={logo} alt="logo" id="logo"/>
       </div>
+
 
       <div className="Footer">
         <p>© {date.getFullYear()}, Classroom Angel. All rights reserved.</p>
