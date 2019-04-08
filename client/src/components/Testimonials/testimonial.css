@@ -1,3 +1,14 @@
 .testimonials {
-  background-color: #006064
+  background-color: #006064;
+}
+
+.TestimonialForm {
+  width: 500px;
+  margin: 0 auto;
+  border: 5px solid #006064;
+  border-radius: 5px;
+}
+
+h3 {
+  color: #b71c1c;
 }

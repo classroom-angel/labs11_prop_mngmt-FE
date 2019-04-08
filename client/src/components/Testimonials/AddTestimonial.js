@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from '../../axiosInstance';
 import { Button, Icon, CardPanel, Row, Col } from 'react-materialize';
-import './AddTestimonial.css';
+import './testimonial.css';
 
 class AddTestimonial extends Component {
   constructor(props) {
@@ -46,45 +46,51 @@ class AddTestimonial extends Component {
 
   render() {
     return (
-      <div className="TestimonialForm white col s12">
-        <form onSubmit={this.createTestimonial} style={{ margin: '0 auto' }}>
-          <div className="row">
-            <div class="input-field col s6">
-              <input
-                onChange={this.handleChange}
-                placeholder="name"
-                value={this.state.name}
-                name="name"
-              />
+      <div>
+        <h3>Add Testimonial</h3>
+        <div className="TestimonialForm cyan darken-2 col s12">
+          <form onSubmit={this.createTestimonial}>
+            <div className="row">
+              <div class="input-field col s12">
+                <input
+                  className="validate"
+                  onChange={this.handleChange}
+                  placeholder="Name"
+                  value={this.state.name}
+                  name="name"
+                />
+              </div>
             </div>
-          </div>
-          <div className="row">
-            <div class="input-field col s6">
-              <input
-                onChange={this.handleChange}
-                placeholder="role"
-                value={this.state.role}
-                name="role"
-              />
+            <div className="row">
+              <div class="input-field col s12">
+                <input
+                  className="validate"
+                  onChange={this.handleChange}
+                  placeholder="Role"
+                  value={this.state.role}
+                  name="role"
+                />
+              </div>
             </div>
-          </div>
-          <div className="row">
-            <div class="input-field col s6">
-              <i class="material-icons prefix">mode_edit</i>
-              <textarea
-                onChange={this.handleChange}
-                placeholder="Testimonial"
-                value={this.state.text}
-                name="text"
-              />
+            <div className="row">
+              <div class="input-field col s12">
+                <textarea
+                  id="textarea1"
+                  className="materialize-textarea validate"
+                  onChange={this.handleChange}
+                  placeholder="Testimonial"
+                  value={this.state.text}
+                  name="text"
+                />
+              </div>
             </div>
-          </div>
 
-          <Button className="red lighten-1" type="submit" waves="light">
-            Submit
-            <Icon right>send</Icon>
-          </Button>
-        </form>
+            <Button className="red lighten-1" type="submit" waves="light">
+              Submit
+              <Icon right>send</Icon>
+            </Button>
+          </form>
+        </div>
       </div>
     );
   }
