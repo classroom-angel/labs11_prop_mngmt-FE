@@ -5,6 +5,7 @@ import './Issues.css';
 import axios from '../../axiosInstance';
 import { NavLink } from 'react-router-dom';
 import Uploader from '../Uploader';
+import { Button, Card, Chip, Checkbox, Carousel } from 'react-materialize';
 // import moment from 'moment'
 
 const statuses = ['Needs Attention', 'Resolved', 'Scheduled', 'Ignored'];
@@ -232,22 +233,25 @@ export default class IssueLog extends React.Component {
               <h1 style={{ textAlign: 'center', border: '2px solid gray' }}>
                 Issue Log
               </h1>
+              <Button>hi</Button>
               Filter By Status:
-              <select
-                name="filterStatus"
-                onChange={this.handleChange}
-                className=""
-                style={{ marginBottom: '20px' }}
-              >
-                <option value="all">Choose...</option>
-                {statuses.map((status, index) => {
-                  return (
-                    <option key={index} value={status}>
-                      {status}
-                    </option>
-                  );
-                })}
-              </select>
+              <div className=".input-field">
+                <select
+                  name="filterStatus"
+                  onChange={this.handleChange}
+                  className=""
+                  style={{ marginBottom: '20px' }}
+                >
+                  <option value="all">Choose...</option>
+                  {statuses.map((status, index) => {
+                    return (
+                      <option key={index} value={status}>
+                        {status}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
               Filter By Tag:
               <select
                 name="filterTag"
@@ -283,7 +287,7 @@ export default class IssueLog extends React.Component {
                       this.state.filterTag === 'all')
                   )
                     return (
-                      <div key={issue.id} className="issue-card">
+                      <Card key={issue.id} className="">
                         <p
                           style={{
                             textAlign: 'left',
@@ -304,34 +308,34 @@ export default class IssueLog extends React.Component {
                             })
                             .map(function(tag) {
                               return (
-                                <div key={tag.id} className="tag">
+                                <Chip key={tag.id} className="blue-grey">
                                   {tag.name}
-                                </div>
+                                </Chip>
                               );
                             })}
                         </div>
-                        <button
+                        <Button
                           onClick={this.deleteIssue}
                           value={issue.id}
-                          sytle={{ display: 'inline-block' }}
+                          className="red"
                         >
                           Delete
-                        </button>
+                        </Button>
                         <NavLink to={`/issue/${issue.id}`}>
-                          <button
+                          <Button
                             value={issue.id}
-                            className="edit-issue-button"
+                            // className="edit-issue-button"
                           >
                             View/Update
-                          </button>
+                          </Button>
                         </NavLink>
-                        <button
+                        <Button
                           onClick={this.toggleShowComments}
                           value={issue.id}
-                          sytle={{ display: 'inline-block' }}
+                          className="blue"
                         >
                           Show Comments
-                        </button>
+                        </Button>
                         {this.state.showComments ? (
                           <div>
                             <div>
@@ -366,54 +370,54 @@ export default class IssueLog extends React.Component {
                             </form>
                           </div>
                         ) : null}
-                      </div>
+                      </Card>
                     );
                 })}
-                <form
-                  onSubmit={this.postIssues}
-                  className="issue-card submit-issue"
-                >
-                  <h1>New Issue +</h1>
-                  <input
-                    name="issueName"
-                    value={this.state.issueName}
-                    placeholder="Issue Title"
-                    onChange={this.handleChange}
-                  />
-                  <br />
-                  <input
-                    name="issueNotes"
-                    value={this.state.issueNotes}
-                    placeholder="Additional notes"
-                    onChange={this.handleChange}
-                  />
-                  <br />
-                  <input
-                    type="checkbox"
-                    id="isVisit"
-                    name="isVisit"
-                    value={true}
-                    onChange={this.visitChange}
-                  />
-                  <label htmlFor="isVisit">isVisit</label>
-                  <br />
-                  <select name="issueStatus" onChange={this.handleChange}>
-                    <option value="">Status...</option>
-                    {statuses.map((status, index) => {
-                      return (
-                        <option key={index} value={status}>
-                          {status}
-                        </option>
-                      );
-                    })}
-                  </select>
-                  <br />
-                  <Uploader
-                    uploading={this.state.uploading}
-                    imgAdder={this.imgAdder}
-                  />
-                  <input type="submit" />
-                </form>
+                <Card className="blue-grey">
+                  <form onSubmit={this.postIssues}>
+                    <h1>New Issue +</h1>
+                    {/* <div className="inpudt-field"> */}
+                    <input
+                      name="issueName"
+                      value={this.state.issueName}
+                      placeholder="Issue Title"
+                      onChange={this.handleChange}
+                    />
+                    {/* </div> */}
+                    <br />
+                    <input
+                      name="issueNotes"
+                      value={this.state.issueNotes}
+                      placeholder="Additional notes"
+                      onChange={this.handleChange}
+                    />
+                    <br />
+                    <Checkbox
+                      id="isVisit"
+                      name="isVisit"
+                      value={true}
+                      onChange={this.visitChange}
+                    />
+                    <label htmlFor="isVisit">isVisit</label>
+                    <br />
+                    <select name="issueStatus" onChange={this.handleChange}>
+                      <option value="">Status...</option>
+                      {statuses.map((status, index) => {
+                        return (
+                          <option key={index} value={status}>
+                            {status}
+                          </option>
+                        );
+                      })}
+                    </select>
+                    <br />
+                    <Uploader
+                      uploading={this.state.uploading}
+                      imgAdder={this.imgAdder}
+                    />
+                    <input type="submit" />
+                  </form>
+                </Card>
               </div>
             </div>
           </div>
