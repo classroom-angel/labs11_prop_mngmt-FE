@@ -4,21 +4,24 @@ import React from 'react';
 export default function Uploader(props) {
   const { uploading } = props;
   const content = () => {
-    switch(true) {
+    switch (true) {
       case uploading:
-        return <div>Images added :)</div>
+        const success = 'Images added :)';
+        return <div>{success}</div>;
       default:
         return (
-          <div className='uploader'>
-            <label htmlFor='files'>Upload Image(s)?</label>
-            <input type='file' id='files' name='files' onChange={props.imgAdder} multiple />
+          <div className="uploader">
+            <label htmlFor="files">Upload Image(s)?</label>
+            <input
+              type="file"
+              id="files"
+              name="files"
+              onChange={props.imgAdder}
+              multiple
+            />
           </div>
-        )
+        );
     }
-  }
-  return (
-    <div>
-      {content()}
-    </div>
-  )
+  };
+  return <div>{content()}</div>;
 }
