@@ -87,12 +87,14 @@ class Payments extends React.Component {
               placeholder="Amount to send"
               value={this.state.amount}
               onChange={this.handleChange}
+              className="paymentsInput"
             />
             <input
               name="accountId"
               placeholder="Contractor's Stripe Account ID"
               value={this.state.accountId}
               onChange={this.handleChange}
+              className="paymentsInput"
             />
           </form>
           <p>Step 3: Pay</p>
