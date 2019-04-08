@@ -62,8 +62,8 @@ function Home(props) {
           </NavLink>
         </div>
       )}
-
-      <img src={logo} alt="logo" width="600"/>
+      
+      <img src={logo} alt="logo" id="logo"/>
 
       <div className="Footer">
         <p>© {date.getFullYear()}, Classroom Angel. All rights reserved.</p>

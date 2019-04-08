@@ -13,3 +13,13 @@ a.land-link {
 a:hover {
   color: firebrick;
 }
+
+#logo {
+  width: 600px;
+}
+
+@media (max-width: 600px) {
+  #logo {
+    width: 100vw;
+  }
+}
