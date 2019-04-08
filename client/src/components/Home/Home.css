@@ -1,4 +1,4 @@
-h1 {
+h1, h4 {
   font-family: 'Quicksand', sans-serif;
 }
 
@@ -12,4 +12,82 @@ a.land-link {
 
 a:hover {
   color: firebrick;
+}
+
+.logoAndText {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 1000px;
+  margin: 0 auto;
+  /* border: 1px solid red; */
+  height: 600px;
+  margin-top: 30px;
+}
+
+#logo {
+  width: 600px;
+}
+
+#logo img {
+  height: auto;
+  width: 100%;
+}
+
+.textBox {
+  padding-top: 50px;
+  width: 400px;
+  background-color: lightblue;
+  /* border: 1px solid orange; */
+  font-size: 20px;
+}
+
+@media (max-width: 1000px) {
+  .logoAndText {
+    flex-flow: column;
+    width: 100vw;
+    margin-bottom: 350px;
+  }
+
+  .textBox {
+    width: 100%;
+    padding-top: 0;
+  }
+
+  #logo {
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 600px) {
+  #logo {
+    width: 100vw;
+  }
+
+  #logo img {
+    width: 100vw;
+  }
+
+  .textBox {
+    margin: 0 auto;
+  }
+
+  .logoAndText {
+    height: 100vw;
+    width: 100vw;
+    flex-flow: column;
+    margin-bottom: 400px;
+  }
+
+}
+
+@media (max-width: 450px) {
+  .logoAndText {
+    margin-bottom: 450px;
+  }
+}
+
+body {
+  background-color: lightblue;
+  box-sizing: border-box;
+  font-family: 'Quicksand', sans-serif;
 }
