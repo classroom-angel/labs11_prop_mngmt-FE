@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from '../axiosInstance';
+import { Button } from 'react-materialize';
 // import axiox as axios2 from 'axios';
 // import useFormInput from './useFormInput';
 import { NavLink } from 'react-router-dom';
@@ -106,7 +107,7 @@ export default class SignUp extends Component {
 
   render() {
     return (
-      <div>
+      <div className="row">
         <div
           className="avatar"
           style={
@@ -114,81 +115,114 @@ export default class SignUp extends Component {
               ? {
                   backgroundImage: `url(${this.state.img})`,
                   backgroundSize: 'cover',
-                  width: '100px',
-                  height: '100px',
-                  borderRadius: '50px'
+                  width: '150px',
+                  height: '150px',
+                  borderRadius: '75px',
+                  margin: '40px auto 0'
                 }
               : null
           }
         />
-        <h1>
-          Welcome, {this.state.firstName} - please tell us a little more about
+        <h3>
+          Welcome, <b>{this.state.firstName}</b>,
+          please tell us a little more about
           yourself...
-        </h1>
-        <form onSubmit={this.onSubmit}>
-          <div>
+        </h3>
+        <form className="col s10 red lighten-3 offset-s1 z-depth-4">
+          <div className="col s12 l6">
+          <div className="input-field">
+            <label className="white-text" htmlFor="username">Email Address</label>
             <input
+              id="username"
               required
               name="username"
               value={this.state.username}
               type="email"
-              placeholder="Email or Phone"
               onChange={this.change}
+              className="validate"
             />
+          </div>
+          <div className="input-field">
+            <label className="white-text" htmlFor="first_name">First Name</label>
             <input
+              id="first_name"
               required
               name="firstName"
               value={this.state.firstName}
               type="text"
-              placeholder="First Name..."
               onChange={this.change}
+              className="validate"
             />
+          </div>
+          <div className="input-field">
+            <label className="white-text" htmlFor="last_name">Last Name</label>
             <input
+              id="last_name"
               required
               name="lastName"
               value={this.state.lastName}
               type="text"
-              placeholder="Last Name..."
               onChange={this.change}
+              className="validate"
             />
-            <select
-              required
-              name="role"
-              onChange={this.change}
-              value={this.state.role}
-            >
-              <option hidden>role...</option>
-              {roles.map(role => {
-                return <option value={role}>{role}</option>;
-              })}
-            </select>
-            {!this.state.creating && (
-              <select
-                required
-                name="organizationName"
-                onChange={this.change}
-                value={this.state.organizationName}
-              >
-                <option hidden>organization...</option>
-                {this.orgs.map(org => {
-                  return <option value={org.name}>{org.name}</option>;
-                })}
-              </select>
-            )}
-            {this.state.role === 'School administrator' ? (
-              <div>
-                <input
-                  type="checkbox"
-                  name="createOrg"
-                  onClick={this.toggleCreate}
-                />{' '}
-                <span>Create new organization?</span>{' '}
-              </div>
-            ) : null}
           </div>
-          <button>Submit</button>
+          </div>
+          <form className="col s12 l3 left-align">
+            <p><b>Role...</b></p>
+            {roles.map(role => {
+              return <p>
+                  <label className="white-text">
+                    <input name="role" type="radio" value={role} onClick={this.change} />
+                    <span>{role}</span>
+                  </label>
+                </p>
+
+            })}
+          </form>
+          <form className="col s12 l3 left-align">
+            {!this.state.creating && (
+              <div>
+                <p><b>Organization...</b></p>
+                {this.orgs.map(org => {
+                  return <p>
+                    <label className="white-text">
+                      <input name="organizationName" type="radio" value={org.name} onClick={this.change} />
+                      <span>{org.name}</span>
+                    </label>
+                  </p>
+                })}
+                </div>
+            )}
+          </form>
+          {this.state.role === 'School administrator' && (
+            <div className="input-field col s12 l3">
+              <label className="white-text">
+                <input
+                id="create"
+                className="validate"
+                type="checkbox"
+                name="createOrg"
+                onClick={this.toggleCreate}
+                />
+                <span>Create new organization?</span>
+              </label>
+              <br/>
+              <br className="hide-on-large-and-up"/>
+            </div>
+          )}
         </form>
-        <NavLink className="land-link" to="/">
+        <Button
+        className="cyan darken-2"
+        waves="light"
+        type="submit"
+        style={{marginTop: '20px', marginRight: '10px'}}
+        onClick={this.onSubmit}>Submit
+          <i class="material-icons right">send</i>
+        </Button>
+        <NavLink
+        style={{marginTop: '20px'}}
+        className="cyan darken-2 btn"
+        to="/">
           Back to home
         </NavLink>
       </div>
