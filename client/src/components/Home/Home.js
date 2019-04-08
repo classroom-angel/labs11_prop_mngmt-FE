@@ -1,9 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './Home.css';
+import logo from '../../img/logo.png'
 
 function Home(props) {
   const isAuth = props.auth.isAuth();
+  const date = new Date();
   return (
     <div>
       <div className="onboarding-component">
@@ -61,8 +63,10 @@ function Home(props) {
         </div>
       )}
 
+      <img src={logo} alt="logo" width="600"/>
+
       <div className="Footer">
-        <p>©Classroom Angel</p>
+        <p>© {date.getFullYear()}, Classroom Angel. All rights reserved.</p>
         <NavLink to="/team">Meet The Team</NavLink>
       </div>
       {/*<div>
