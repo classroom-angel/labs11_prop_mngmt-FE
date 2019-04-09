@@ -5,8 +5,16 @@ import './Issues.css';
 import axios from '../../axiosInstance';
 import { NavLink } from 'react-router-dom';
 import Uploader from '../Uploader';
-import { Button, Card, Chip, Checkbox, Carousel } from 'react-materialize';
-// import moment from 'moment'
+import {
+  Button,
+  Card,
+  Chip,
+  Checkbox,
+  Carousel,
+  Icon,
+  Row,
+  Col
+} from 'react-materialize';
 
 const statuses = ['Needs Attention', 'Resolved', 'Scheduled', 'Ignored'];
 
@@ -18,6 +26,7 @@ var mm = String(today.getMonth() + 1).padStart(2, '0');
 var yyyy = today.getFullYear();
 
 today = mm + '-' + dd + '-' + yyyy;
+
 export default class IssueLog extends React.Component {
   constructor(props) {
     super(props);
@@ -233,7 +242,6 @@ export default class IssueLog extends React.Component {
               <h1 style={{ textAlign: 'center', border: '2px solid gray' }}>
                 Issue Log
               </h1>
-              <Button>hi</Button>
               Filter By Status:
               <div className=".input-field">
                 <select
@@ -253,6 +261,19 @@ export default class IssueLog extends React.Component {
                 </select>
               </div>
               Filter By Tag:
+              <div className="row">
+                <div className="input-field col s12">
+                  <select>
+                    <option value="" disabled selected>
+                      Choose your option
+                    </option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                  </select>
+                  <label>Materialize Select</label>
+                </div>
+              </div>
               <select
                 name="filterTag"
                 onChange={this.handleChange}
@@ -373,7 +394,7 @@ export default class IssueLog extends React.Component {
                       </Card>
                     );
                 })}
-                <Card className="blue-grey">
+                <Card>
                   <form onSubmit={this.postIssues}>
                     <h1>New Issue +</h1>
                     {/* <div className="inpudt-field"> */}
@@ -392,13 +413,23 @@ export default class IssueLog extends React.Component {
                       onChange={this.handleChange}
                     />
                     <br />
-                    <Checkbox
+                    {/* <Checkbox
                       id="isVisit"
                       name="isVisit"
                       value={true}
                       onChange={this.visitChange}
-                    />
-                    <label htmlFor="isVisit">isVisit</label>
+                    /> */}
+
+                    <label>
+                      <input
+                        type="checkbox"
+                        id="isVisit"
+                        name="isVisit"
+                        value={true}
+                        onChange={this.visitChange}
+                      />
+                      <span>isVisit</span>
+                    </label>
                     <br />
                     <select name="issueStatus" onChange={this.handleChange}>
                       <option value="">Status...</option>
@@ -415,7 +446,10 @@ export default class IssueLog extends React.Component {
                       uploading={this.state.uploading}
                       imgAdder={this.imgAdder}
                     />
-                    <input type="submit" />
+                    <Button type="submit" waves="light">
+                      Submit
+                      <Icon right>send</Icon>
+                    </Button>
                   </form>
                 </Card>
               </div>
