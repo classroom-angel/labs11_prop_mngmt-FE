@@ -26,29 +26,31 @@ function Home(props) {
             />
           </div>
         )}
-        <NavLink className="land-link" to="/ourmission">
+        <NavLink className="cyan darken-2 btn" to="/ourmission" style={{margin: '15px'}}>
           Our Mission
         </NavLink>
-        <NavLink className="land-link" to="/testimonials">
+        <NavLink className="cyan darken-2 btn" to="/testimonials" style={{margin: '15px'}}>
           Testimonials
         </NavLink>
         {isAuth ? (
           <NavLink
-            className="land-link"
+            className="cyan darken-2 btn"
             to="/"
             onClick={function(e) {
               props.auth.logout();
             }}
+            style={{margin: '15px'}}
           >
             Sign out
           </NavLink>
         ) : (
           <NavLink
-            className="land-link"
+            className="cyan darken-2 btn"
             to="/"
             onClick={function(e) {
               props.auth.login();
             }}
+            style={{margin: '15px'}}
           >
             Sign up/Sign in
           </NavLink>
@@ -56,8 +58,8 @@ function Home(props) {
       </div>
       {isAuth && (
         <div className="Main">
-          <NavLink to="/onboarding">Get Started</NavLink>
-          <NavLink className="land-link" to="/bm-homepage">
+          {/*<NavLink to="/onboarding">Get Started</NavLink>*/}
+          <NavLink className="red lighten-3 btn" to="/bm-homepage" style={{margin: '15px', width: '200px', fontSize: '20px', fontWeight: 'bold'}}>
             View App
           </NavLink>
         </div>
@@ -76,14 +78,13 @@ function Home(props) {
             need to be resolved, be able to pay contractors for their work with
             Stripe, and see when an administrator is set to visit.
           </p>
-          {!isAuth ? (
+
+          {!isAuth &&
             <>
-              <p>Sign up or sign in today to get started!</p>
-              <NavLink className="land-link" to="/">
-                Sign up/sign in
-              </NavLink>
-            </>
-          ) : null}
+            <p>Sign up or sign in today to get started!</p>
+            <NavLink className="cyan darken-2 btn" to="/" style={{margin: '15px'}}>
+            Sign up/sign in
+          </NavLink> </>}
         </div>
         <img src={logo} alt="Classroom Angel's logo" id="logo" />
       </div>
@@ -93,8 +94,8 @@ function Home(props) {
         <NavLink to="/team">Meet The Team</NavLink>
       </div>
       {/*<div>
-        <NavLink className='land-link' to="/" onClick={function(e) {props.auth.login()}}>Signup?</NavLink>
-        <NavLink className='land-link' to="/" onClick={function(e) {props.auth.login()}}>Login?</NavLink>
+        <NavLink className='cyan darken-2 btn' to="/" onClick={function(e) {props.auth.login()}}>Signup?</NavLink>
+        <NavLink className='cyan darken-2 btn' to="/" onClick={function(e) {props.auth.login()}}>Login?</NavLink>
         </div>*/}
     </div>
   );
