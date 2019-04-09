@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from '../axiosInstance';
-import { Button } from 'react-materialize';
+import { Button, Modal } from 'react-materialize';
 // import axiox as axios2 from 'axios';
 // import useFormInput from './useFormInput';
 import { NavLink } from 'react-router-dom';
@@ -44,6 +44,10 @@ export default class SignUp extends Component {
   }
 
   componentDidMount() {
+    const prof = JSON.parse(localStorage.getItem('profile'));
+    if (prof.orgId) {
+      this.props.history.push('/');
+    }
     axios
       .get('organizations')
       .then(res => {
@@ -65,10 +69,21 @@ export default class SignUp extends Component {
     });
   };
 
+  goHome = () => {
+    this.props.history.push('/')
+  }
+
   change = e => {
-    this.setState({
-      [e.currentTarget.name]: e.currentTarget.value
-    });
+    if (e.currentTarget.name === "role" && e.currentTarget.value !== "School administrator") {
+      this.setState({
+        [e.currentTarget.name]: e.currentTarget.value,
+        creating: false
+      });
+    } else {
+      this.setState({
+        [e.currentTarget.name]: e.currentTarget.value
+      });
+    }
   };
 
   toggleCreate = e => {
@@ -94,15 +109,19 @@ export default class SignUp extends Component {
 
   onSubmit = async event => {
     event.preventDefault();
-    const ste = {
-      username: this.state.username,
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      role: this.state.role,
-      organizationName: this.state.organizationName
-    };
-    this.props.shareState(ste, this.callback);
-    this.clearState();
+    if (this.state.username !== '' && this.state.firstName !== '' && this.state.lastName !== '' && this.state.role !== '') {
+      const ste = {
+        username: this.state.username,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        role: this.state.role,
+        organizationName: this.state.organizationName
+      };
+      this.props.shareState(ste, this.callback);
+      this.clearState();
+    } else {
+      return;
+    }
   };
 
   render() {
