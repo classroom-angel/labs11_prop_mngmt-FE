@@ -76,10 +76,14 @@ function Home(props) {
             need to be resolved, be able to pay contractors for their work with
             Stripe, and see when an administrator is set to visit.
           </p>
-          <p>Sign up or sign in today to get started!</p>
-          <NavLink className="land-link" to="/">
-            Sign up/sign in
-          </NavLink>
+          {!isAuth ? (
+            <>
+              <p>Sign up or sign in today to get started!</p>
+              <NavLink className="land-link" to="/">
+                Sign up/sign in
+              </NavLink>
+            </>
+          ) : null}
         </div>
         <img src={logo} alt="Classroom Angel's logo" id="logo" />
       </div>
