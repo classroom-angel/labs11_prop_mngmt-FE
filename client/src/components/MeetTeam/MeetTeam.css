@@ -1,0 +1,12 @@
+.meet-team {
+  width: 650px;
+  margin: 0 auto;
+}
+
+.row {
+  display: flex !important;
+  justify-content: center !important;
+}
+.fab fa-github-square {
+  font-size: 15px;
+}
