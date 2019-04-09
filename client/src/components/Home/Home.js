@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './Home.css';
-import logo from '../../img/logo.png'
+import logo from '../../img/logo.png';
 
 function Home(props) {
   const isAuth = props.auth.isAuth();
@@ -65,14 +65,24 @@ function Home(props) {
 
       <div className="logoAndText">
         <div className="textBox">
-          <h4>Manage your <br/>school wisely</h4>
-          <p>It's easy to manage your school with Classroom Angel! As a teacher or a school administrator overseas, or a board member in the United States, you will get all the information you need about issues that need to be resolved, be able to pay contractors for their work with Stripe, and see when an administrator is set to visit.</p>
+          <h4>
+            Manage your <br />
+            school wisely
+          </h4>
+          <p>
+            It's easy to manage your school with Classroom Angel! As a teacher
+            or a school administrator overseas, or a board member in the United
+            States, you will get all the information you need about issues that
+            need to be resolved, be able to pay contractors for their work with
+            Stripe, and see when an administrator is set to visit.
+          </p>
           <p>Sign up or sign in today to get started!</p>
-          <NavLink className="land-link" to="/">Sign up/sign in</NavLink>
+          <NavLink className="land-link" to="/">
+            Sign up/sign in
+          </NavLink>
         </div>
-        <img src={logo} alt="logo" id="logo"/>
+        <img src={logo} alt="Classroom Angel's logo" id="logo" />
       </div>
-
 
       <div className="Footer">
         <p>© {date.getFullYear()}, Classroom Angel. All rights reserved.</p>
