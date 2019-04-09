@@ -11,6 +11,7 @@ import JoinOrg from './components/JoinOrg';
 import BoardMemberHub from './components/BoardMember/BoardMember';
 import IssueLog from './components/Issues/IssueLog';
 import ViewIssue from './components/Issues/ViewIssue';
+import MeetTeam from './components/MeetTeam/MeetTeam';
 import Scheduled from './components/Scheduled/Scheduled';
 import CreateEventForm from './components/Scheduled/CreateEventForm';
 import EditEventForm from './components/Scheduled/EditEventForm';
@@ -206,6 +207,7 @@ class App extends React.Component {
           path="/payments"
           render={props => <Payments {...props} auth={this.auth} />}
         />
+        <Route exact path="/MeetTeam" component={MeetTeam} />
       </div>
     );
   }
