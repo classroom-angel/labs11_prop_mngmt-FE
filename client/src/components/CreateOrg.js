@@ -61,6 +61,7 @@ export default class CreateOrg extends Component {
         </p>
         <Row>
           <form className="col s10 red lighten-3 offset-s1 z-depth-4" onSubmit={this.submit} style={{padding: '20px', marginBottom: '20px'}}>
+            <h4>Please complete this form to add a new organization</h4>
             <Col s={12} l={8} className="input-field offset-l2">
               <label className="white-text" htmlFor="orgName">Organization Name</label>
               <input
