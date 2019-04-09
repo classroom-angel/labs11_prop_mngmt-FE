@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from '../axiosInstance';
+import axios from '../../axiosInstance';
 
 class EditEventForm extends Component {
   constructor(props) {
