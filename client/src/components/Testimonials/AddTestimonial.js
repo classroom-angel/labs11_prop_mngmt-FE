@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from '../../axiosInstance';
-import { Button, Icon, CardPanel, Row, Col } from 'react-materialize';
+import { Button, Icon } from 'react-materialize';
 import './testimonial.css';
 
 class AddTestimonial extends Component {

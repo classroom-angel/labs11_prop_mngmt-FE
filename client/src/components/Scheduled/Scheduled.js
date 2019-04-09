@@ -69,11 +69,13 @@ export default class Scheduled extends React.Component {
                   waves="light"
                   style={{ marginRight: '5px' }}
                 >
-                  Add Event
+                  Schedule Issue or Visit
                 </Button>
               </Link>
 
-              <Button className="cyan darken-2">Click event to edit</Button>
+              <Button className="cyan darken-2">
+                Click event or Issue to edit
+              </Button>
             </div>
             <div style={{ height: 700 }}>
               <Calendar
