@@ -1,11 +1,12 @@
 import React from 'react';
 import Calendar from 'react-big-calendar';
 import moment from 'moment';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Button } from 'react-materialize';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import axios from '../axiosInstance';
-import Sidebar from './Sidebar/Sidebar';
-import '../App.css';
+import axios from '../../axiosInstance';
+import Sidebar from '../Sidebar/Sidebar';
+
 const localizer = Calendar.momentLocalizer(moment);
 
 export default class Scheduled extends React.Component {
@@ -60,10 +61,23 @@ export default class Scheduled extends React.Component {
           <Sidebar />
 
           <div className="calendar right-side">
-            <NavLink to="/createEventForm">Create new Event</NavLink>
-            <h1 className="calendar-title">Scheduled Issues and Visits</h1>
+            <h3 className="calendar-title">Scheduled Issues and Visits</h3>
+            <div>
+              <Link to="/createEventForm">
+                <Button
+                  className="cyan darken-2"
+                  waves="light"
+                  style={{ marginRight: '5px' }}
+                >
+                  Add Event
+                </Button>
+              </Link>
+
+              <Button className="cyan darken-2">Click event to edit</Button>
+            </div>
             <div style={{ height: 700 }}>
               <Calendar
+                className="white"
                 localizer={localizer}
                 defaultDate={new Date()}
                 defaultView="week"
