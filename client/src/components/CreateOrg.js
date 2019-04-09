@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from '../axiosInstance';
+import { Modal, Button } from 'react-materialize';
 
 export default class CreateOrg extends Component {
   constructor(props) {
@@ -17,6 +18,10 @@ export default class CreateOrg extends Component {
       [e.currentTarget.name]: e.currentTarget.value
     });
   };
+
+  goHome = () => {
+    this.props.history.push('/')
+  }
 
   submit = async e => {
     e.preventDefault();
@@ -44,8 +49,10 @@ export default class CreateOrg extends Component {
   };
 
   render() {
+    const profile = JSON.parse(localStorage.getItem('profile'));
     return (
       <div>
+      {profile.role !== "School administrator" && <Modal id='modal1' options={{dismissible: false, onCloseEnd: () => this.goHome()}} open actions={[<Button onClick={this.goHome}>Close</Button>]}>Sorry! You don't have access to this area :)</Modal>}
         <h1>Create an organization</h1>
         <p>
           Once you create a school, you can invite members, send notifications,
