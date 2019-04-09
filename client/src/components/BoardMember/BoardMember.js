@@ -1,5 +1,6 @@
 import React from 'react';
 import Sidebar from '../Sidebar/Sidebar';
+import { Button, Modal } from 'react-materialize';
 import '../../App.css';
 // import './BoardMember.css'
 import axios from '../../axiosInstance';
@@ -45,11 +46,22 @@ export default class BoardMemberHub extends React.Component {
 
   render() {
     if (this.props.auth.isAuth()) {
+      const profile = JSON.parse(localStorage.getItem('profile'));
       return (
         <div className="page-container">
+          {profile.role !== 'Board member' && (
+            <Modal id="modal1" open>
+              Sorry! You don't have access to this area :)
+            </Modal>
+          )}
           <Sidebar />
+          {/*<ul id="slide-out" className="sidenav">
+            <li><a href="#!">First Sidebar Link</a></li>
+            <li><a href="#!">Second Sidebar Link</a></li>
+          </ul>
+          <a href="#!" className="sidenav-trigger show-on-large cyan darken-2 btn" data-target="slide-out" waves="light">sidenav</a>*/}
           <div className="right-side">
-            <h1 style={{ textAlign: 'left' }}>School Name Here</h1>
+            <h1 style={{ textAlign: 'left' }}>{profile.organizationName}</h1>
             <div className="hud-box" style={{ display: 'flex' }}>
               <div
                 className="bm-issues"

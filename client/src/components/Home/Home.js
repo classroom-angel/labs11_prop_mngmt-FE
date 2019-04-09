@@ -86,7 +86,7 @@ function Home(props) {
             Sign up/sign in
           </NavLink> </>}
         </div>
-        <img src={logo} alt="Classroom Angel's logo" id="logo" />
+        <img src={logo} alt="Classroom Angel's logo" id="logo" className="hide-on-med-and-down" />
       </div>
 
       <div className="Footer">
