@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from '../../axiosInstance';
+import { Button, Icon } from 'react-materialize';
+import './Form.css';
 
 class CreateEventForm extends Component {
   constructor(props) {
@@ -44,35 +46,57 @@ class CreateEventForm extends Component {
 
   render() {
     return (
-      <div className="EventForm">
-        <form onSubmit={this.createEvent}>
-          <input
-            onChange={this.handleChange}
-            placeholder="name"
-            value={this.state.name}
-            name="name"
-          />
-          <input
-            onChange={this.handleChange}
-            placeholder="date"
-            value={this.state.date}
-            name="date"
-          />
-          <input
-            onChange={this.handleChange}
-            placeholder="time"
-            value={this.state.time}
-            name="time"
-          />
-          <input
-            onChange={this.handleChange}
-            name="organizationId"
-            type="number"
-            value={this.state.organizationId}
-            placeholder="Enter Organization Id"
-          />
-          <button type="submit">Add Event</button>
-        </form>
+      <div>
+        <h3>Schedule Issue</h3>
+        <div className="EventForm cyan darken-2">
+          <form onSubmit={this.createEvent}>
+            <div className="row">
+              <div class="input-field col s12">
+                <input
+                  onChange={this.handleChange}
+                  placeholder="Name"
+                  value={this.state.name}
+                  name="name"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div class="input-field col s12">
+                <input
+                  onChange={this.handleChange}
+                  placeholder="MM_DD_YY"
+                  value={this.state.date}
+                  name="date"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div class="input-field col s12">
+                <input
+                  onChange={this.handleChange}
+                  placeholder="12:00 PM"
+                  value={this.state.time}
+                  name="time"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div class="input-field col s12">
+                <input
+                  onChange={this.handleChange}
+                  name="organizationId"
+                  type="number"
+                  value={this.state.organizationId}
+                  placeholder="Select Organization Id"
+                />
+              </div>
+            </div>
+            <Button className="red lighten-1" type="submit" waves="light">
+              Submit
+              <Icon right>send</Icon>
+            </Button>
+          </form>
+        </div>
       </div>
     );
   }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from '../../axiosInstance';
-
+import { Button, Icon } from 'react-materialize';
+import './Form.css';
 class EditEventForm extends Component {
   constructor(props) {
     super(props);
@@ -62,28 +63,59 @@ class EditEventForm extends Component {
     console.log(this.state);
     return (
       <div>
-        <form onSubmit={this.updateEvent}>
-          <input
-            onChange={this.handleChange}
-            placeholder="name"
-            value={this.state.name}
-            name="name"
-          />
-          <input
-            onChange={this.handleChange}
-            placeholder="date"
-            value={this.state.date}
-            name="date"
-          />
-          <input
-            onChange={this.handleChange}
-            placeholder="time"
-            value={this.state.time}
-            name="time"
-          />
-          <button>Submit</button>
-        </form>
-        <button onClick={this.deleteEvent}>Delete Event</button>
+        <h3>Edit Issue</h3>
+        <div className="EditForm cyan darken-2">
+          <form onSubmit={this.updateEvent}>
+            <div className="row">
+              <div class="input-field col s12">
+                <input
+                  onChange={this.handleChange}
+                  placeholder="name"
+                  value={this.state.name}
+                  name="name"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div class="input-field col s12">
+                <input
+                  onChange={this.handleChange}
+                  placeholder="date"
+                  value={this.state.date}
+                  name="date"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div class="input-field col s12">
+                <input
+                  onChange={this.handleChange}
+                  placeholder="time"
+                  value={this.state.time}
+                  name="time"
+                />
+              </div>
+            </div>
+            <div>
+              <Button
+                className="red lighten-1"
+                type="submit"
+                waves="light"
+                style={{ margin: '10px' }}
+              >
+                Submit
+                <Icon right>send</Icon>
+              </Button>
+              <Button
+                className="red darken-4"
+                onClick={this.deleteEvent}
+                style={{ margin: '10px' }}
+              >
+                Delete Issue
+              </Button>
+            </div>
+          </form>
+        </div>
       </div>
     );
   }
