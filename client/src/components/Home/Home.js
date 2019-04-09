@@ -26,10 +26,18 @@ function Home(props) {
             />
           </div>
         )}
-        <NavLink className="cyan darken-2 btn" to="/ourmission" style={{margin: '15px'}}>
+        <NavLink
+          className="cyan darken-2 btn"
+          to="/ourmission"
+          style={{ margin: '15px' }}
+        >
           Our Mission
         </NavLink>
-        <NavLink className="cyan darken-2 btn" to="/testimonials" style={{margin: '15px'}}>
+        <NavLink
+          className="cyan darken-2 btn"
+          to="/testimonials"
+          style={{ margin: '15px' }}
+        >
           Testimonials
         </NavLink>
         {isAuth ? (
@@ -39,7 +47,7 @@ function Home(props) {
             onClick={function(e) {
               props.auth.logout();
             }}
-            style={{margin: '15px'}}
+            style={{ margin: '15px' }}
           >
             Sign out
           </NavLink>
@@ -50,7 +58,7 @@ function Home(props) {
             onClick={function(e) {
               props.auth.login();
             }}
-            style={{margin: '15px'}}
+            style={{ margin: '15px' }}
           >
             Sign up/Sign in
           </NavLink>
@@ -59,7 +67,16 @@ function Home(props) {
       {isAuth && (
         <div className="Main">
           {/*<NavLink to="/onboarding">Get Started</NavLink>*/}
-          <NavLink className="red lighten-3 btn" to="/bm-homepage" style={{margin: '15px', width: '200px', fontSize: '20px', fontWeight: 'bold'}}>
+          <NavLink
+            className="red lighten-3 btn"
+            to="/bm-homepage"
+            style={{
+              margin: '15px',
+              width: '200px',
+              fontSize: '20px',
+              fontWeight: 'bold'
+            }}
+          >
             View App
           </NavLink>
         </div>
@@ -79,19 +96,25 @@ function Home(props) {
             Stripe, and see when an administrator is set to visit.
           </p>
 
-          {!isAuth &&
+          {!isAuth && (
             <>
-            <p>Sign up or sign in today to get started!</p>
-            <NavLink className="cyan darken-2 btn" to="/" style={{margin: '15px'}}>
-            Sign up/sign in
-          </NavLink> </>}
+              <p>Sign up or sign in today to get started!</p>
+              <NavLink
+                className="cyan darken-2 btn"
+                to="/"
+                style={{ margin: '15px' }}
+              >
+                Sign up/sign in
+              </NavLink>{' '}
+            </>
+          )}
         </div>
         <img src={logo} alt="Classroom Angel's logo" id="logo" className="hide-on-med-and-down" />
       </div>
 
       <div className="Footer">
         <p>© {date.getFullYear()}, Classroom Angel. All rights reserved.</p>
-        <NavLink to="/team">Meet The Team</NavLink>
+        <NavLink to="/MeetTeam">Meet The Team</NavLink>
       </div>
       {/*<div>
         <NavLink className='cyan darken-2 btn' to="/" onClick={function(e) {props.auth.login()}}>Signup?</NavLink>
