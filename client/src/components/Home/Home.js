@@ -40,7 +40,7 @@ function Home(props) {
               props.auth.logout();
             }}
           >
-            Signout
+            Sign out
           </NavLink>
         ) : (
           <NavLink
@@ -50,7 +50,7 @@ function Home(props) {
               props.auth.login();
             }}
           >
-            Signin/Signup
+            Sign up/Sign in
           </NavLink>
         )}
       </div>
@@ -66,7 +66,7 @@ function Home(props) {
       <div className="logoAndText">
         <div className="textBox">
           <h4>Manage your <br/>school wisely</h4>
-          <p>It's easy to manage your school with Classroom Angel! As a teacher, a school administrator, or a board member in the United States, you will get all the information you need about issues that need to be resolved, be able to pay contractors for their work with Stripe, and see when an administrator is set to visit.</p>
+          <p>It's easy to manage your school with Classroom Angel! As a teacher or a school administrator overseas, or a board member in the United States, you will get all the information you need about issues that need to be resolved, be able to pay contractors for their work with Stripe, and see when an administrator is set to visit.</p>
           <p>Sign up or sign in today to get started!</p>
           <NavLink className="land-link" to="/">Sign up/sign in</NavLink>
         </div>
