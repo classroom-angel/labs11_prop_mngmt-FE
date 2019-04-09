@@ -100,3 +100,6 @@ body {
   font-family: 'Quicksand', sans-serif;
 }
 
+::placeholder {
+  color: black;
+}
