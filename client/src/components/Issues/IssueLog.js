@@ -244,6 +244,9 @@ export default class IssueLog extends React.Component {
         });
       })
       .catch(err => console.error(err));
+    const commentsObj = this.state.commentsObj;
+    commentsObj[`issue${id}`] = '';
+    this.setState({ commentsObj });
   }
 
   deleteComment(event) {
