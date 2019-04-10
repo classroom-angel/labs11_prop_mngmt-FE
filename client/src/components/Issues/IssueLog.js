@@ -5,15 +5,22 @@ import './Issues.css';
 import axios from '../../axiosInstance';
 import { NavLink } from 'react-router-dom';
 import Uploader from '../Uploader';
+import $ from 'jquery';
+import M from 'materialize-css';
+// import 'materialize-css/dist/js/materialize.js';
+// import 'materialize-css/dist/css/materialize.css';
+
 import {
   Button,
   Card,
   Chip,
-  Checkbox,
-  Carousel,
+  // Checkbox,
+  // Carousel,
   Icon,
-  Row,
-  Col
+  // Row,
+  // Col,
+  Dropdown,
+  Divider
 } from 'react-materialize';
 
 const statuses = ['Needs Attention', 'Resolved', 'Scheduled', 'Ignored'];
@@ -62,6 +69,7 @@ export default class IssueLog extends React.Component {
     this.submitComment = this.submitComment.bind(this);
     this.deleteComment = this.deleteComment.bind(this);
     this.arrayTags = this.arrayTags.bind(this);
+    this.handleDropChange = this.handleDropChange.bind(this);
   }
 
   componentDidMount() {
@@ -142,7 +150,15 @@ export default class IssueLog extends React.Component {
   }
 
   handleChange(event) {
+    console.log(event.target.value);
     this.setState({ [event.target.name]: event.target.value });
+  }
+
+  handleDropChange(event) {
+    console.log(event.target.attributes[1].value);
+    this.setState({
+      [event.target.attributes[0].value]: event.target.attributes[1].value
+    });
   }
 
   toggleEdit() {
@@ -232,9 +248,15 @@ export default class IssueLog extends React.Component {
   }
 
   render() {
+    console.log('status', this.state.filterStatus);
     if (this.props.auth.isAuth()) {
       this.arrayTags();
       if (this.state.issuesLoaded) {
+        var elem = document.querySelectorAll('.dropdown-trigger');
+        if (elem) {
+          M.Dropdown.init(elem, {});
+        }
+
         return (
           <div className="page-container">
             <Sidebar />
@@ -243,52 +265,41 @@ export default class IssueLog extends React.Component {
                 Issue Log
               </h1>
               Filter By Status:
-              <div className=".input-field">
-                <select
-                  name="filterStatus"
-                  onChange={this.handleChange}
-                  className=""
-                  style={{ marginBottom: '20px' }}
-                >
-                  <option value="all">Choose...</option>
-                  {statuses.map((status, index) => {
-                    return (
-                      <option key={index} value={status}>
-                        {status}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
-              Filter By Tag:
-              <div className="row">
-                <div className="input-field col s12">
-                  <select>
-                    <option value="" disabled selected>
-                      Choose your option
-                    </option>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
-                  </select>
-                  <label>Materialize Select</label>
-                </div>
-              </div>
-              <select
-                name="filterTag"
-                onChange={this.handleChange}
-                className=""
-                style={{ marginBottom: '20px' }}
-              >
-                <option value="all">Choose...</option>
-                {tags.map((tag, index) => {
+              {/*Dropdown Trigger */}
+              <button className="dropdown-trigger btn" data-target="dropdown1">
+                Choose
+              </button>
+              {/* Dropdown Structure */}
+              <ul id="dropdown1" className="dropdown-content">
+                <li key={0} onClick={this.handleDropChange}>
+                  <p name="filterStatus" value="all">
+                    All
+                  </p>
+                </li>
+                {statuses.map((status, index) => {
                   return (
-                    <option key={index} value={tag}>
-                      {tag}
-                    </option>
+                    <li key={index + 1} onClick={this.handleDropChange}>
+                      <p name="filterStatus" value={status}>
+                        {status}
+                      </p>
+                    </li>
                   );
                 })}
-              </select>
+              </ul>
+              Filter By Tag:
+              <button className="dropdown-trigger btn" data-target="dropdown2">
+                Choose
+              </button>
+              {/* Dropdown Structure */}
+              <ul id="dropdown2" className="dropdown-content">
+                {tags.map((tag, index) => {
+                  return (
+                    <li key={index} value={tag}>
+                      <p>{tag}</p>
+                    </li>
+                  );
+                })}
+              </ul>
               <div className="issue-list">
                 {this.state.issues.map(issue => {
                   // filters tags by filter criteria
