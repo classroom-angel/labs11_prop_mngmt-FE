@@ -1,6 +1,6 @@
 import React from 'react';
 import Sidebar from '../Sidebar/Sidebar';
-import { Button, Modal } from 'react-materialize';
+import { Button, Modal, Collection, CollectionItem } from 'react-materialize';
 import '../../App.css';
 // import './BoardMember.css'
 import axios from '../../axiosInstance';
@@ -39,6 +39,10 @@ export default class BoardMemberHub extends React.Component {
       }
       )
       .catch(err => console.error(err));
+  }
+
+  goToIssue = (id) => {
+    this.props.history.push(`/issue/${id}`)
   }
 
   equipSelect(event) {
@@ -80,9 +84,11 @@ export default class BoardMemberHub extends React.Component {
 
                 <div style={{ overflow: 'auto', height: '500px' }}>
                   {this.state.issuesLoaded
-                    ? this.state.issues.map(function(issue) {
+                    ?
+                    <Collection>
+                    {this.state.issues.map(issue => {
                         return (
-                          <p key={issue.id}>
+                          <CollectionItem href='#!' key={issue.id} onClick={e => {this.goToIssue(issue.id)}} >
                             <span style={{ margin: '2px 10px' }}>
                               {' '}
                               {issue.name}
@@ -93,9 +99,10 @@ export default class BoardMemberHub extends React.Component {
                             <span style={{ margin: '2px 10px' }}>
                               {issue.status.toUpperCase()}
                             </span>
-                          </p>
+                          </CollectionItem>
                         );
-                      })
+                      })}
+                      </Collection>
                     : 'Loading...'}
                 </div>
               </div>
