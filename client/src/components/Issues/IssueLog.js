@@ -244,6 +244,9 @@ export default class IssueLog extends React.Component {
         });
       })
       .catch(err => console.error(err));
+    const commentsObj = this.state.commentsObj;
+    commentsObj[`issue${id}`] = '';
+    this.setState({ commentsObj });
   }
 
   deleteComment(event) {
@@ -381,13 +384,13 @@ export default class IssueLog extends React.Component {
                           </Button>
                         </NavLink>
                         <Button
-                          onClick={this.toggleShowComments}
+                          onClick={() => this.toggleShowComments(issue.id)}
                           value={issue.id}
                           className="blue"
                         >
                           Show Comments
                         </Button>
-                        {this.state.showComments ? (
+                        {this.state.showCommentsObj[`issue${issue.id}`] ? (
                           <div>
                             <div>
                               {this.state.comments
@@ -431,7 +434,7 @@ export default class IssueLog extends React.Component {
                     );
                 })}
 
-                <Card>
+                <Card style={{ order: '-1' }}>
                   <form onSubmit={this.postIssues}>
                     <h1>New Issue +</h1>
                     {/* <div className="inpudt-field"> */}
