@@ -4,19 +4,6 @@
   flex-wrap: wrap;
 }
 
-.issue-card {
-  border: 1px solid orange;
-  margin: 40px 10px;
-  width: 300px;
-  height: 250px;
-  padding-bottom: 5px;
-}
-
-.submit-issue {
-  border: 1px solid green;
-  height: 250px;
-}
-
 .edit-issue-button {
   border: 1px solid gold;
   width: 70px;
@@ -29,16 +16,6 @@
 
 .edit-issue-button:hover {
   cursor: pointer;
-}
-
-.tag {
-  border: 1px solid;
-  width: 110px;
-  background: blue;
-  color: silver;
-  font-weight: 800;
-  display: inline-block;
-  margin: 10px;
 }
 
 .tag-container .tag .close::after {

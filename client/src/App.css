@@ -27,6 +27,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -113,15 +114,6 @@
   display: inline-block;
   margin: 10px;
 }
-
-/* .tag-container .tag {
-  font-size: 85%;
-  padding: 5px 10px;
-  display: inline-block;
-  margin: 0.25em 0.1em;
-  background: #ddd;
-  transition: all 0.1s linear;
-} */
 
 .tag-container .tag .close::after {
   content: '\00d7';
