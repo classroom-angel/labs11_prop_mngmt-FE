@@ -51,7 +51,6 @@ export default class BoardMemberHub extends React.Component {
   render() {
     if (this.props.auth.isAuth()) {
       const profile = JSON.parse(localStorage.getItem('profile'));
-      console.log(profile);
       return (
         <div>
           {profile.role !== 'Board member' && (
@@ -70,7 +69,7 @@ export default class BoardMemberHub extends React.Component {
           <div className="row">
             <div className="col s12" style={{ marginTop: '20px' }}>
               <div
-                className="col s10 offset-s1 offset-l1 l4 red lighten-3"
+                className="col s10 offset-s1 l4 red lighten-3"
                 style={{
                   borderRadius: '10px',
                   marginBottom: '20px'
@@ -101,21 +100,23 @@ export default class BoardMemberHub extends React.Component {
                 </div>
               </div>
               <div
-                className="col s10 offset-s1 l6 offset-l1 cyan darken-2 white-text"
+                className="col s10 offset-s1 l7 offset-l1 cyan darken-2 white-text"
                 style={{
                   borderRadius: '10px',
                 }}
               >
-                <div className="dev-condiiton" style={{ display: 'flex', width: '100%', height: '500px', justifyContent: 'space-evenly' }}>
+                <div className="dev-condiiton" style={{ display: 'flex', width: '100%', height: '500px', justifyContent: 'space-between' }}>
                   <div
                     style={{
-                      border: '1px solid',
+                      borderLeft: '1px solid gray',
                       textAlign: 'center',
                       width: '15%',
                       overflow: 'auto'
                     }}
                   >
                     Equipment
+                    <div className="divider"></div>
+
                     {this.state.equipmentLoaded
                       ? this.state.equipment.map(item => {
                           return (
@@ -128,13 +129,15 @@ export default class BoardMemberHub extends React.Component {
                   </div>
                   <div
                     style={{
-                      border: '1px solid',
+                      borderLeft: '1px solid gray',
                       textAlign: 'center',
                       width: '15%',
                       overflow: 'auto'
                     }}
                   >
                     Open Issues
+                    <div className="divider"></div>
+
                     {this.state.equipmentLoaded
                       ? this.state.equipment.map(function(item) {
                           return <p>{item.damaged}</p>;
@@ -143,13 +146,15 @@ export default class BoardMemberHub extends React.Component {
                   </div>
                   <div
                     style={{
-                      border: '1px solid',
+                      borderLeft: '1px solid gray',
                       textAlign: 'center',
                       width: '15%',
                       overflow: 'auto'
                     }}
                   >
                     Working
+                    <div className="divider"></div>
+
                     {this.state.equipmentLoaded
                       ? this.state.equipment.map(function(item) {
                           return <p>{item.working}</p>;
@@ -158,13 +163,15 @@ export default class BoardMemberHub extends React.Component {
                   </div>
                   <div
                     style={{
-                      border: '1px solid',
+                      borderLeft: '1px solid gray',
                       textAlign: 'center',
                       width: '15%',
                       overflow: 'auto'
                     }}
                   >
                     Total
+                    <div className="divider"></div>
+
                     {this.state.equipmentLoaded
                       ? this.state.equipment.map(function(item) {
                           return <p>{item.working + item.damaged}</p>;
@@ -175,11 +182,13 @@ export default class BoardMemberHub extends React.Component {
                     className="dev-description"
                     style={{
                       display: 'inline-block',
-                      border: '1px solid',
+                      borderLeft: '1px solid gray',
                       overflow: 'auto',
                       width: '25%'
                     }}
                   >Equipment Details
+                  <div className="divider"></div>
+
                     {this.state.selected !== "" && <><p style={{ borderBottom: '1px solid' }}>
                       {this.state.selected}
                     </p>

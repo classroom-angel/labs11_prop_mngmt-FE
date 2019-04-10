@@ -49,6 +49,7 @@ class Sidebar extends Component {
   }
 
   render() {
+    const profile = JSON.parse(localStorage.getItem('profile'));
     return (
       <div>
         <ul id="slide-out" className="sidenav sidebar">
@@ -58,16 +59,16 @@ class Sidebar extends Component {
             style={{ height: '200px', width: '300px' }}
           />
           <h3 className="sidebar-header">Classroom Angel</h3>
-          <li>
+          {profile.role === "Board member" && <li>
             <NavLink to="/bm-homepage">
               <p className="black-text waves-effect">Board Member Homepage</p>
             </NavLink>
-          </li>
-          <li>
+          </li>}
+          {(profile.role === "School administrator" || profile.role === "Teacher") && <li>
             <NavLink to="/issue-log">
               <p className="black-text waves-effect">Issue Log</p>
             </NavLink>
-          </li>
+          </li>}
           <li>
             <NavLink to="/scheduled">
               <p className="black-text waves-effect">Scheduled Issues</p>
@@ -78,11 +79,11 @@ class Sidebar extends Component {
               <p className="black-text waves-effect">Admin Visits</p>
             </NavLink>
           </li>
-          <li>
+          {profile.role === "Board member" && <li>
             <NavLink to="/payments">
               <p className="black-text waves-effect">Payments</p>
             </NavLink>
-          </li>
+          </li>}
           <li>
             <NavLink to="/">
               <p className="black-text waves-effect">Landing Page</p>
