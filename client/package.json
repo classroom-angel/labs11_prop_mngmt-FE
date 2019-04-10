@@ -5,9 +5,11 @@
   "dependencies": {
     "auth0-js": "^9.10.1",
     "axios": "^0.18.0",
+    "bundle-js": "^1.0.3",
     "cloudinary-react": "^1.1.0",
     "date-fns": "^1.30.1",
     "dotenv": "^7.0.0",
+    "jquery": "^3.3.1",
     "materialize-css": "^1.0.0",
     "moment": "^2.24.0",
     "react": "^16.8.4",

@@ -85,8 +85,8 @@ class App extends React.Component {
     if (profile == null) {
       profile = {
         name: ''
-      };
     }
+  }
     // console.log("env", process.env)
     return (
       <div className="App">

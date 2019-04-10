@@ -117,7 +117,7 @@ function Home(props) {
             </>
           )}
         </div>
-        <img src={logo} alt="Classroom Angel's logo" id="logo" />
+        <img src={logo} alt="Classroom Angel's logo" id="logo" className="hide-on-med-and-down" />
       </div>
       <div className="Footer">
         <p>© {date.getFullYear()}, Classroom Angel. All rights reserved.</p>
