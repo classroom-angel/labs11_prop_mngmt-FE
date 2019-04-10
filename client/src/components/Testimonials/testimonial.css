@@ -1,24 +1,15 @@
-.card {
-  border: 3px solid #30bced;
-  background: #f0efef;
-  box-sizing: border-box;
+.testimonials {
+  background-color: #006064;
+}
+
+.TestimonialForm {
   width: 500px;
-  padding: 5px;
-  margin: 10px auto;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-content: center;
-  font-weight: normal;
-  font-style: normal;
-  cursor: pointer;
+  margin: 0 auto;
+  border: 5px solid #006064;
+  border-radius: 5px;
+  padding: 10px;
 }
 
-.card h1 {
-  color: #094d92;
-}
-
-.card h2 {
-  color: #fc5130;
+h3 {
+  color: #b71c1c;
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from '../../axiosInstance';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Button, CardPanel, Row, Col } from 'react-materialize';
 import './testimonial.css';
 
@@ -30,13 +30,24 @@ class Testimonials extends Component {
   render() {
     return (
       <div className="testimonials">
-        <NavLink to="/AddTestimonial">Tell us what you think!</NavLink>
+        <div>
+          <Link to="/AddTestimonial">
+            <Button
+              className="red lighten-1"
+              waves="light"
+              style={{ marginRight: '5px' }}
+            >
+              Tell us what you think!
+            </Button>
+          </Link>
+        </div>
+
         {this.state.testimonials.map(testimonial => {
           return (
-            <Row>
+            <Row className="valign-wrapper">
               <Col style={{ margin: '0 auto' }} m={6} s={12}>
-                <CardPanel className="teal">
-                  <span className="white-text">
+                <CardPanel className="cyan darken-2">
+                  <span className="white-text ">
                     <h5>{testimonial.name}</h5>
                     <h6>{testimonial.role}</h6>
                     <p>{testimonial.text}</p>

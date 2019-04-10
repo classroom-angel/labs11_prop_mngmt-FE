@@ -127,3 +127,11 @@
   color: red;
   border: 2px solid indigo;
 }
+
+.paymentsInput {
+  width: 250px !important;
+  color: black !important;
+  background-color: white !important;
+  border: 1px solid grey !important;
+  padding-left: 10px !important;
+}
