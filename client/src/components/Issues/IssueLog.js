@@ -40,7 +40,8 @@ export default class IssueLog extends React.Component {
       filterTag: 'all',
       passes: false,
       images: [],
-      eid: 3
+      eid: 3,
+      showCommentsObj: {}
     };
     this.postIssues = this.postIssues.bind(this);
     this.deleteIssue = this.deleteIssue.bind(this);
@@ -57,9 +58,14 @@ export default class IssueLog extends React.Component {
   componentDidMount() {
     axios
       .get('issues')
-      .then(res =>
+      .then(res => {
         this.setState({ issues: res.data.issues, issuesLoaded: true })
-      )
+        const showCommentsObj = {};
+        this.state.issues.map(issue => {
+          showCommentsObj[`issue${issue.id}`] = false;
+        })
+        this.setState({showCommentsObj});
+      })
       .catch(err => console.log(err));
     axios
       .get('tags')
@@ -143,8 +149,10 @@ export default class IssueLog extends React.Component {
     });
   }
 
-  toggleShowComments() {
-    this.setState({ showComments: !this.state.showComments });
+  toggleShowComments(id) {
+    const showCommentsObj = this.state.showCommentsObj;
+    showCommentsObj[`issue${id}`] = !showCommentsObj[`issue${id}`];
+    this.setState({ showCommentsObj });
   }
 
   fetchIssue(id) {
@@ -224,6 +232,7 @@ export default class IssueLog extends React.Component {
   render() {
     if (this.props.auth.isAuth()) {
       this.arrayTags();
+      
       if (this.state.issuesLoaded) {
         return (
           <div className="page-container">
@@ -265,6 +274,7 @@ export default class IssueLog extends React.Component {
                 })}
               </select>
               <div className="issue-list">
+                
                 {this.state.issues.map(issue => {
                   // filters tags by filter criteria
                   let truthArray = this.state.tags.filter(tag => {
@@ -313,7 +323,7 @@ export default class IssueLog extends React.Component {
                         <button
                           onClick={this.deleteIssue}
                           value={issue.id}
-                          sytle={{ display: 'inline-block' }}
+                          style={{ display: 'inline-block' }}
                         >
                           Delete
                         </button>
@@ -326,13 +336,13 @@ export default class IssueLog extends React.Component {
                           </button>
                         </NavLink>
                         <button
-                          onClick={this.toggleShowComments}
+                          onClick={() => this.toggleShowComments(issue.id)}
                           value={issue.id}
-                          sytle={{ display: 'inline-block' }}
+                          style={{ display: 'inline-block' }}
                         >
                           Show Comments
                         </button>
-                        {this.state.showComments ? (
+                        {this.state.showCommentsObj[`issue${issue.id}`] ? (
                           <div>
                             <div>
                               {this.state.comments
