@@ -32,6 +32,7 @@ export default class Auth extends Component {
   handleAuth = () => {
     this.auth0.parseHash(async (err, authResults) => {
       let users = await axios.get('/users');
+      let orgs = await axios.get('/organizations');
       users = users.data.users;
       if (authResults && authResults.accessToken && authResults.idToken) {
         let expires = JSON.stringify(

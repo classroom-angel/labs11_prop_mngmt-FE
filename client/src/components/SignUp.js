@@ -134,8 +134,7 @@ export default class SignUp extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="row">
+        <div className="container">
           <div
             className="avatar"
             style={
@@ -155,7 +154,7 @@ export default class SignUp extends Component {
             Welcome, <b>{this.state.firstName}</b>, please tell us a little more
             about yourself...
           </h3>
-          <form className="col s10 red lighten-3 offset-s1 z-depth-4">
+          <form className="col s12 red lighten-3 z-depth-4" style={{padding: '20px'}}>
             <div className="col s12 l6">
               <div className="input-field">
                 <label className="white-text" htmlFor="username">
@@ -279,7 +278,6 @@ export default class SignUp extends Component {
             Back to home
           </NavLink>
         </div>
-      </div>
     );
   }
 }

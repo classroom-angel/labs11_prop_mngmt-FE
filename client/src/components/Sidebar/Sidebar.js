@@ -37,6 +37,7 @@ import React, { Component } from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import { BrowserRouter, Route } from 'react-router-dom';
 import 'materialize-css/dist/css/materialize.min.css';
+import Kid from "../../img/oneboyinclass.jpg"
 
 class Sidebar extends Component {
   componentDidMount() {
@@ -52,9 +53,9 @@ class Sidebar extends Component {
       <div>
         <ul id="slide-out" className="sidenav sidebar">
           <img
-            src="../../img/oneboyinclass.jpg"
+            src={Kid}
             alt="A child in class"
-            style={{ height: '100px', width: '100px' }}
+            style={{ height: '200px', width: '300px' }}
           />
           <h3 className="sidebar-header">Classroom Angel</h3>
           <li>
@@ -88,7 +89,7 @@ class Sidebar extends Component {
             </NavLink>
           </li>
         </ul>
-        <a href="#" data-target="slide-out" className="sidenav-trigger">
+        <a href="#" data-target="slide-out" className="sidenav-trigger" style={{position: 'fixed', left: '5px', top: '10px'}}>
           <i className="material-icons white-text">menu</i>
         </a>
       </div>
