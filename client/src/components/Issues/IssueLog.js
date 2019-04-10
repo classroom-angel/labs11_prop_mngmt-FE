@@ -78,14 +78,15 @@ export default class IssueLog extends React.Component {
     axios
       .get('issues')
       .then(res => {
-        this.setState({ issues: res.data.issues, issuesLoaded: true })
+        console.log(res.data.issues);
+        this.setState({ issues: res.data.issues, issuesLoaded: true });
         const showCommentsObj = {};
         const commentsObj = {};
         this.state.issues.map(issue => {
           showCommentsObj[`issue${issue.id}`] = false;
           commentsObj[`issue${issue.id}`] = '';
-        })
-        this.setState({showCommentsObj, commentsObj});
+        });
+        this.setState({ showCommentsObj, commentsObj });
       })
       .catch(err => console.log(err));
     axios
@@ -187,8 +188,8 @@ export default class IssueLog extends React.Component {
   handleCommentChange = (id, event) => {
     const commentsObj = this.state.commentsObj;
     commentsObj[`issue${id}`] = event.target.value;
-    this.setState({commentsObj});
-  }
+    this.setState({ commentsObj });
+  };
 
   fetchIssue(id) {
     axios
@@ -268,7 +269,7 @@ export default class IssueLog extends React.Component {
     console.log('status', this.state.filterStatus);
     if (this.props.auth.isAuth()) {
       this.arrayTags();
-      
+
       if (this.state.issuesLoaded) {
         var elem = document.querySelectorAll('.dropdown-trigger');
         if (elem) {
@@ -319,7 +320,6 @@ export default class IssueLog extends React.Component {
                 })}
               </ul>
               <div className="issue-list">
-                
                 {this.state.issues.map(issue => {
                   // filters tags by filter criteria
                   let truthArray = this.state.tags.filter(tag => {
@@ -410,13 +410,19 @@ export default class IssueLog extends React.Component {
                                   );
                                 })}
                             </div>
-                            <form onSubmit={(e) => this.submitComment(issue.id, e)}>
+                            <form
+                              onSubmit={e => this.submitComment(issue.id, e)}
+                            >
                               <input
                                 name="comment"
                                 placeholder="add comment"
-                                value={this.state.commentsObj[`issue${issue.id}`]}
+                                value={
+                                  this.state.commentsObj[`issue${issue.id}`]
+                                }
                                 issue_id={issue.id}
-                                onChange={(e) => this.handleCommentChange(issue.id, e)}
+                                onChange={e =>
+                                  this.handleCommentChange(issue.id, e)
+                                }
                               />
                             </form>
                           </div>
@@ -424,6 +430,7 @@ export default class IssueLog extends React.Component {
                       </Card>
                     );
                 })}
+
                 <Card>
                   <form onSubmit={this.postIssues}>
                     <h1>New Issue +</h1>
