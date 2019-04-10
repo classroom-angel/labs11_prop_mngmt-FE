@@ -40,7 +40,9 @@ export default class IssueLog extends React.Component {
       filterTag: 'all',
       passes: false,
       images: [],
-      eid: 3
+      eid: 3,
+      showCommentsObj: {},
+      commentsObj: {}
     };
     this.postIssues = this.postIssues.bind(this);
     this.deleteIssue = this.deleteIssue.bind(this);
@@ -57,9 +59,16 @@ export default class IssueLog extends React.Component {
   componentDidMount() {
     axios
       .get('issues')
-      .then(res =>
+      .then(res => {
         this.setState({ issues: res.data.issues, issuesLoaded: true })
-      )
+        const showCommentsObj = {};
+        const commentsObj = {};
+        this.state.issues.map(issue => {
+          showCommentsObj[`issue${issue.id}`] = false;
+          commentsObj[`issue${issue.id}`] = '';
+        })
+        this.setState({showCommentsObj, commentsObj});
+      })
       .catch(err => console.log(err));
     axios
       .get('tags')
@@ -143,8 +152,16 @@ export default class IssueLog extends React.Component {
     });
   }
 
-  toggleShowComments() {
-    this.setState({ showComments: !this.state.showComments });
+  toggleShowComments(id) {
+    const showCommentsObj = this.state.showCommentsObj;
+    showCommentsObj[`issue${id}`] = !showCommentsObj[`issue${id}`];
+    this.setState({ showCommentsObj });
+  }
+
+  handleCommentChange = (id, event) => {
+    const commentsObj = this.state.commentsObj;
+    commentsObj[`issue${id}`] = event.target.value;
+    this.setState({commentsObj});
   }
 
   fetchIssue(id) {
@@ -185,11 +202,11 @@ export default class IssueLog extends React.Component {
     this.setState({ [event.target.name]: event.target.checked });
   }
 
-  submitComment(event) {
+  submitComment(id, event) {
     event.preventDefault();
     axios
       .post('comments', {
-        content: this.state.comment,
+        content: this.state.commentsObj[`issue${id}`],
         userId: 1,
         issueId: event.target[0].attributes[2].value
       })
@@ -224,6 +241,7 @@ export default class IssueLog extends React.Component {
   render() {
     if (this.props.auth.isAuth()) {
       this.arrayTags();
+      
       if (this.state.issuesLoaded) {
         return (
           <div className="page-container">
@@ -265,6 +283,7 @@ export default class IssueLog extends React.Component {
                 })}
               </select>
               <div className="issue-list">
+                
                 {this.state.issues.map(issue => {
                   // filters tags by filter criteria
                   let truthArray = this.state.tags.filter(tag => {
@@ -313,7 +332,7 @@ export default class IssueLog extends React.Component {
                         <button
                           onClick={this.deleteIssue}
                           value={issue.id}
-                          sytle={{ display: 'inline-block' }}
+                          style={{ display: 'inline-block' }}
                         >
                           Delete
                         </button>
@@ -326,13 +345,13 @@ export default class IssueLog extends React.Component {
                           </button>
                         </NavLink>
                         <button
-                          onClick={this.toggleShowComments}
+                          onClick={() => this.toggleShowComments(issue.id)}
                           value={issue.id}
-                          sytle={{ display: 'inline-block' }}
+                          style={{ display: 'inline-block' }}
                         >
                           Show Comments
                         </button>
-                        {this.state.showComments ? (
+                        {this.state.showCommentsObj[`issue${issue.id}`] ? (
                           <div>
                             <div>
                               {this.state.comments
@@ -355,13 +374,13 @@ export default class IssueLog extends React.Component {
                                   );
                                 })}
                             </div>
-                            <form onSubmit={this.submitComment}>
+                            <form onSubmit={(e) => this.submitComment(issue.id, e)}>
                               <input
                                 name="comment"
                                 placeholder="add comment"
-                                value={this.state.comment}
+                                value={this.state.commentsObj[`issue${issue.id}`]}
                                 issue_id={issue.id}
-                                onChange={this.handleChange}
+                                onChange={(e) => this.handleCommentChange(issue.id, e)}
                               />
                             </form>
                           </div>
