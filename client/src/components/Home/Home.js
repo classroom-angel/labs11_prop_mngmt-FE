@@ -28,7 +28,15 @@ function Home(props) {
         )}
         <NavLink
           className="cyan darken-2 btn"
-          to="/ourmission"
+          to="/MeetTeam"
+          style={{ margin: '15px' }}
+        >
+          Meet The Team
+        </NavLink>
+
+        <NavLink
+          className="cyan darken-2 btn"
+          to="/OurMission"
           style={{ margin: '15px' }}
         >
           Our Mission
@@ -111,10 +119,8 @@ function Home(props) {
         </div>
         <img src={logo} alt="Classroom Angel's logo" id="logo" />
       </div>
-
       <div className="Footer">
         <p>© {date.getFullYear()}, Classroom Angel. All rights reserved.</p>
-        <NavLink to="/MeetTeam">Meet The Team</NavLink>
       </div>
       {/*<div>
         <NavLink className='cyan darken-2 btn' to="/" onClick={function(e) {props.auth.login()}}>Signup?</NavLink>
