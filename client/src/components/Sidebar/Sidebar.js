@@ -44,12 +44,43 @@ class Sidebar extends Component {
     super(props);
   }
   componentDidMount() {
+    // var elem = document.querySelector('.sidenav');
+    // var instance = M.Sidenav.init(elem, {
+    //   edge: 'left',
+    //   inDuration: 250,
+    //   onOpenStart: () => {
+    //     elem.classList = 'sidenav sidebar';
+    //   },
+    //   onCloseEnd: () => {
+    //     elem.classList = 'sidenav sidebar sideTransparent';
+    //   }
+    // });
+    // if (instance.isOpen) {
+    //   elem.classList = 'sidenav sidebar';
+    // } else {
+    //   elem.classList = 'sidenav sidebar sideTransparent';
+    // }
+  }
+
+  componentDidUpdate = () => {
     var elem = document.querySelector('.sidenav');
     var instance = M.Sidenav.init(elem, {
       edge: 'left',
-      inDuration: 250
+      inDuration: 250,
+      onOpenStart: () => {
+        elem.classList = 'sidenav sidebar';
+      },
+      onCloseEnd: () => {
+        elem.classList = 'sidenav sidebar sideTransparent';
+      }
     });
-  }
+    let side = document.querySelector('.sidenav-overlay');
+    if (instance.isOpen) {
+      side.classList = 'sidenav sidebar';
+    } else {
+      side.classList = 'sidenav sidebar sideTransparent';
+    }
+  };
 
   render() {
     const profile = JSON.parse(localStorage.getItem('profile'));
