@@ -2,6 +2,8 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Comments from '../Comments';
 
+import { Button, Card, Chip } from 'react-materialize';
+
 const Issue = ({
   issue,
   tags,
@@ -31,7 +33,7 @@ const Issue = ({
     (testArray.includes(issue.id) || filterTag === 'all')
   )
     return (
-      <div key={issue.id} className="issue-card">
+      <Card key={issue.id} className="">
         <p
           style={{
             textAlign: 'left',
@@ -52,31 +54,25 @@ const Issue = ({
             })
             .map(function(tag) {
               return (
-                <div key={tag.id} className="tag">
+                <Chip key={tag.id} className="blue-grey">
                   {tag.name}
-                </div>
+                </Chip>
               );
             })}
         </div>
-        <button
-          onClick={deleteIssue}
-          value={issue.id}
-          style={{ display: 'inline-block' }}
-        >
+        <Button onClick={deleteIssue} value={issue.id} className="red">
           Delete
-        </button>
+        </Button>
         <NavLink to={`/issue/${issue.id}`}>
-          <button value={issue.id} className="edit-issue-button">
-            View/Update
-          </button>
+          <Button value={issue.id}>View/Update</Button>
         </NavLink>
-        <button
+        <Button
           onClick={() => toggleShowComments(issue.id)}
           value={issue.id}
-          style={{ display: 'inline-block' }}
+          className="blue"
         >
           Show Comments
-        </button>
+        </Button>
         {showCommentsObj[`issue${issue.id}`] ? (
           <div>
             <Comments
@@ -95,7 +91,7 @@ const Issue = ({
             </form>
           </div>
         ) : null}
-      </div>
+      </Card>
     );
 };
 
