@@ -37,16 +37,47 @@ import React, { Component } from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import { BrowserRouter, Route } from 'react-router-dom';
 import 'materialize-css/dist/css/materialize.min.css';
-import Kid from "../../img/oneboyinclass.jpg"
+import Kid from '../../img/oneboyinclass.jpg';
 
 class Sidebar extends Component {
   componentDidMount() {
+    // var elem = document.querySelector('.sidenav');
+    // var instance = M.Sidenav.init(elem, {
+    //   edge: 'left',
+    //   inDuration: 250,
+    //   onOpenStart: () => {
+    //     elem.classList = 'sidenav sidebar';
+    //   },
+    //   onCloseEnd: () => {
+    //     elem.classList = 'sidenav sidebar sideTransparent';
+    //   }
+    // });
+    // if (instance.isOpen) {
+    //   elem.classList = 'sidenav sidebar';
+    // } else {
+    //   elem.classList = 'sidenav sidebar sideTransparent';
+    // }
+  }
+
+  componentDidUpdate = () => {
     var elem = document.querySelector('.sidenav');
     var instance = M.Sidenav.init(elem, {
       edge: 'left',
-      inDuration: 250
+      inDuration: 250,
+      onOpenStart: () => {
+        elem.classList = 'sidenav sidebar';
+      },
+      onCloseEnd: () => {
+        elem.classList = 'sidenav sidebar sideTransparent';
+      }
     });
-  }
+    let side = document.querySelector('.sidenav-overlay');
+    if (instance.isOpen) {
+      side.classList = 'sidenav sidebar';
+    } else {
+      side.classList = 'sidenav sidebar sideTransparent';
+    }
+  };
 
   render() {
     const profile = JSON.parse(localStorage.getItem('profile'));
@@ -59,16 +90,21 @@ class Sidebar extends Component {
             style={{ height: '200px', width: '300px' }}
           />
           <h3 className="sidebar-header">Classroom Angel</h3>
-          {profile.role === "Board member" && <li>
-            <NavLink to="/bm-homepage">
-              <p className="black-text waves-effect">Board Member Homepage</p>
-            </NavLink>
-          </li>}
-          {(profile.role === "School administrator" || profile.role === "Teacher") && <li>
-            <NavLink to="/issue-log">
-              <p className="black-text waves-effect">Issue Log</p>
-            </NavLink>
-          </li>}
+          {profile.role === 'Board member' && (
+            <li>
+              <NavLink to="/bm-homepage">
+                <p className="black-text waves-effect">Board Member Homepage</p>
+              </NavLink>
+            </li>
+          )}
+          {(profile.role === 'School administrator' ||
+            profile.role === 'Teacher') && (
+            <li>
+              <NavLink to="/issue-log">
+                <p className="black-text waves-effect">Issue Log</p>
+              </NavLink>
+            </li>
+          )}
           <li>
             <NavLink to="/scheduled">
               <p className="black-text waves-effect">Scheduled Issues</p>
@@ -79,18 +115,25 @@ class Sidebar extends Component {
               <p className="black-text waves-effect">Admin Visits</p>
             </NavLink>
           </li>
-          {profile.role === "Board member" && <li>
-            <NavLink to="/payments">
-              <p className="black-text waves-effect">Payments</p>
-            </NavLink>
-          </li>}
+          {profile.role === 'Board member' && (
+            <li>
+              <NavLink to="/payments">
+                <p className="black-text waves-effect">Payments</p>
+              </NavLink>
+            </li>
+          )}
           <li>
             <NavLink to="/">
               <p className="black-text waves-effect">Landing Page</p>
             </NavLink>
           </li>
         </ul>
-        <a href="#" data-target="slide-out" className="sidenav-trigger" style={{position: 'fixed', left: '5px', top: '10px'}}>
+        <a
+          href="#"
+          data-target="slide-out"
+          className="sidenav-trigger"
+          style={{ position: 'fixed', left: '5px', top: '10px' }}
+        >
           <i className="material-icons white-text">menu</i>
         </a>
       </div>

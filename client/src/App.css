@@ -135,3 +135,7 @@
   border: 1px solid grey !important;
   padding-left: 10px !important;
 }
+
+.sideTransparent {
+  background-color: transparent !important;
+}
