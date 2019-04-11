@@ -1,7 +1,6 @@
 import React from 'react';
 import Sidebar from '../../Sidebar/Sidebar';
 import '../Issues.css';
-import axios from '../../../axiosInstance';
 import { NavLink } from 'react-router-dom';
 import { Image, Transformation } from 'cloudinary-react';
 import Comments from '../Comments';
@@ -135,14 +134,12 @@ class ViewIssue extends React.Component {
   };
 
   deleteTag = event => {
-    let newArray = this.state.tags.slice();
     delTag(event.target.getAttribute('id'))
       .then(response => {
         let deleteId = response.data.tag.id;
-        newArray = newArray.filter(function(tag) {
-          return tag.id !== deleteId;
-        });
-        this.setState({ tags: newArray });
+        this.setState(prevState => ({
+          tags: prevState.tags.filter(tag => tag.id !== deleteId)
+        }));
       })
       .catch(err => {
         console.log('Tag Edit Error', err);

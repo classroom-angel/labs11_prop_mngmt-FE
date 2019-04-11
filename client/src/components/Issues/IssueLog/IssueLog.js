@@ -55,7 +55,7 @@ export default class IssueLog extends React.Component {
         this.setState({ issues: res.data.issues, issuesLoaded: true });
         const showCommentsObj = {};
         const commentsObj = {};
-        this.state.issues.map(issue => {
+        this.state.issues.forEach(issue => {
           showCommentsObj[`issue${issue.id}`] = false;
           commentsObj[`issue${issue.id}`] = '';
         });
