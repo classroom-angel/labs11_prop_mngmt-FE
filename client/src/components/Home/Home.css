@@ -167,3 +167,9 @@ body {
     margin-top: 300px;
   }
 }
+
+@media (max-width: 1000px) and (min-width: 992px) {
+  .Footer {
+    margin-top: 500px;
+  }
+}
