@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Member from './Member';
 import alec from '../../img/alec.png';
 import grant from '../../img/grant.png';
 import john from '../../img/john.png';
@@ -9,86 +10,49 @@ import { Card, CardTitle, Row, Col } from 'react-materialize';
 
 class MeetTeam extends Component {
   render() {
-    const imgstyle = { width: '200px', height: '200px' };
     return (
       <div className="meet-team">
         <div>
           <h3>Meet The Team</h3>
         </div>
         <div className="row valign-wrapper center-align">
-          <div className="alec col s4" style={{ margin: '15px' }}>
-            <h5>Alec Jordan</h5>
-            <img style={imgstyle} src={alec} alt="alec" />
-            <a target="_blank" href="https://github.com/TheDeterminator">
-              <i
-                style={{ color: '#e57373', margin: '10px' }}
-                class="fab fa-github-square fa-2x"
-              />
-            </a>
-            <a target="_blank" href="https://www.linkedin.com/in/alec-jordan1/">
-              <i class="fab fa-linkedin fa-2x cyan-text" />
-            </a>
-          </div>
-          <div className="grant col s4" style={{ margin: '15px' }}>
-            <h5>Grant Reighard</h5>
-            <img style={imgstyle} src={grant} alt="grant" />
-            <a target="_blank" href="https://www.github.com/grantreighard">
-              <i
-                style={{ color: '#e57373', margin: '10px' }}
-                class="fab fa-github-square fa-2x"
-              />
-            </a>
-            <a target="_blank" href="https://www.linkedin.com/in/grantreighard">
-              <i class="fab fa-linkedin fa-2x cyan-text" />
-            </a>
-          </div>
-          <div className="john col s4" style={{ margin: '15px' }}>
-            <h5>John O'Rourke</h5>
-            <img style={imgstyle} src={john} alt="john" />
-            <a target="_blank" href="https://github.com/johnoro">
-              <i
-                style={{ color: '#e57373', margin: '10px' }}
-                class="fab fa-github-square fa-2x"
-              />
-            </a>
-            <a target="_blank" href="https://www.linkedin.com/in/john-o-rourke">
-              <i class="fab fa-linkedin fa-2x cyan-text" />
-            </a>
-          </div>
+          <Member
+            firstName="Alec"
+            lastName="Jordan"
+            src={alec}
+            gitHub={'https://github.com/TheDeterminator'}
+            linkedIn={'https://www.linkedin.com/in/alec-jordan1'}
+          />
+          <Member
+            firstName="Grant"
+            lastName="Reighard"
+            src={grant}
+            gitHub={'https://www.github.com/grantreighard'}
+            linkedIn={'https://www.linkedin.com/in/grantreighard'}
+          />
+          <Member
+            firstName="John"
+            lastName="O'Rourke"
+            src={john}
+            gitHub={'https://github.com/johnoro'}
+            linkedIn={'https://www.linkedin.com/in/john-o-rourke'}
+          />
         </div>
         <div className="row valign-wrapper center-align">
-          <div className="jordan col s4" style={{ margin: '15px' }}>
-            <h5>Jordan Massingill</h5>
-            <img style={imgstyle} src={jordan} alt="jordan" />
-            <a target="_blank" href="https://github.com/jordan-massingill">
-              <i
-                style={{ color: '#e57373', margin: '10px' }}
-                class="fab fa-github-square fa-2x"
-              />
-            </a>
-            <a
-              target="_blank"
-              href="https://www.linkedin.com/in/jordan-massingill/"
-            >
-              <i class="fab fa-linkedin fa-2x cyan-text" />
-            </a>
-          </div>
-          <div className="rachel col s4" style={{ margin: '15px' }}>
-            <h5>Rachel DiCesare</h5>
-            <img style={imgstyle} src={rachel} alt="rachel" />
-            <a target="_blank" href="https://github.com/RachelDiCesare93">
-              <i
-                style={{ color: '#e57373', margin: '10px' }}
-                class="fab fa-github-square fa-2x"
-              />
-            </a>
-            <a
-              target="_blank"
-              href="https://www.linkedin.com/in/racheldicesare"
-            >
-              <i className="fab fa-linkedin fa-2x cyan-text" />
-            </a>
-          </div>
+          <Member
+            firstName="Jordan"
+            lastName="Massingill"
+            src={jordan}
+            gitHub={'https://github.com/jordan-massingill'}
+            linkedIn={'https://www.linkedin.com/in/jordan-massingill'}
+          />
+          <Member
+            firstName="Rachel"
+            lastName="DiCesare"
+            src={rachel}
+            gitHub={'https://github.com/RachelDiCesare93'}
+            linkedIn={'https://www.linkedin.com/in/racheldicesare'}
+          />
         </div>
         <div>
           <Row>

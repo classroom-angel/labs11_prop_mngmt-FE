@@ -1,4 +1,5 @@
-h1, h4 {
+h1,
+h4 {
   font-family: 'Quicksand', sans-serif;
 }
 
@@ -28,7 +29,6 @@ a:hover {
   width: 600px;
 }
 
-
 #logo img {
   height: auto;
   width: 100%;
@@ -41,7 +41,7 @@ a:hover {
   /* border: 1px solid orange; */
   font-size: 20px;
   color: white;
-  border: 5px solid #0097A7;
+  border: 5px solid #0097a7;
   border-radius: 10px;
   padding: 10px;
 }
@@ -51,7 +51,8 @@ a:hover {
     flex-flow: column;
     width: 100vw;
     margin: 20px auto;
-    margin-bottom: 400px;
+    margin-bottom: -200px;
+    height: 550px;
   }
 
   .textBox {
@@ -70,7 +71,6 @@ a:hover {
     width: 100vw;
   }
 
-
   #logo img {
     width: 100vw;
   }
@@ -80,12 +80,11 @@ a:hover {
   }
 
   .logoAndText {
-    height: 100vw;
+    height: 50vw;
     width: 100vw;
     flex-flow: column;
-    margin-bottom: 450px;
+    margin-bottom: 200px;
   }
-
 }
 
 body {
@@ -96,4 +95,59 @@ body {
 
 ::placeholder {
   color: black;
+}
+
+.navbar {
+  position: fixed;
+  /* border: 1px solid red; */
+  width: 75vw;
+  height: 70px;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+}
+
+.topbar {
+  width: 100vw;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+@media (max-width: 1200px) {
+  .topbar {
+    flex-flow: column wrap;
+  }
+
+  .navbar {
+    position: relative;
+    margin: 0 auto;
+    height: 140px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 700px) {
+  .navbar {
+    height: 210px;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 450px) {
+  .navbar {
+    height: 320px;
+    width: 100vw;
+  }
+
+  .navbtn {
+    width: 100vw !important;
+    margin: 0 auto !important;
+  }
+}
+
+.landingTitle {
+  margin-left: 20px;
 }
