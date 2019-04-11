@@ -14,7 +14,7 @@ class Home extends Component {
 
   componentDidUpdate = () => {
     let footer = document.querySelector('.Footer');
-    if (this.isAuth) {
+    if (!this.isAuth) {
       footer.classList = 'Footer extraSpace';
     } else {
       footer.classList = 'Footer';
