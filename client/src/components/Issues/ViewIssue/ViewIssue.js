@@ -1,19 +1,24 @@
 import React from 'react';
-import Sidebar from '../Sidebar/Sidebar';
-import '../../App.css';
-import './Issues.css';
-import axios from '../../axiosInstance';
+import Sidebar from '../../Sidebar/Sidebar';
+import '../Issues.css';
 import { NavLink } from 'react-router-dom';
 import { Image, Transformation } from 'cloudinary-react';
+import Comments from '../Comments';
+import IssueBtn from './IssueBtn';
+import helpers, {
+  getIssue,
+  putIssue,
+  delIssue,
+  postTag,
+  delTag,
+  postComment,
+  delComment,
+  getImages
+} from '../axiosHelpers';
+import { statuses, today } from '../data';
 
-const statuses = ['Needs Attention', 'Resolved', 'Scheduled', 'Ignored'];
+const { getTags, getComments } = helpers;
 
-var today = new Date();
-var dd = String(today.getDate()).padStart(2, '0');
-var mm = String(today.getMonth() + 1).padStart(2, '0');
-var yyyy = today.getFullYear();
-
-today = mm + '-' + dd + '-' + yyyy;
 class ViewIssue extends React.Component {
   constructor(props) {
     super(props);
@@ -35,28 +40,16 @@ class ViewIssue extends React.Component {
       showComments: false,
       imageIds: []
     };
-    this.toggleEdit = this.toggleEdit.bind(this);
-    this.fetchIssue = this.fetchIssue.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleEdit = this.handleEdit.bind(this);
-    this.handleTagEdit = this.handleTagEdit.bind(this);
-    this.handleTagSubmit = this.handleTagSubmit.bind(this);
-    this.deleteTag = this.deleteTag.bind(this);
-    this.toggleShowComments = this.toggleShowComments.bind(this);
-    this.submitComment = this.submitComment.bind(this);
-    this.deleteComment = this.deleteComment.bind(this);
   }
 
   componentDidMount() {
     this.fetchIssue(this.props.match.params.id);
-    axios
-      .get('tags')
+    getTags()
       .then(res => {
         this.setState({
           tags: res.data.tags
         });
-        axios
-          .get(`issues/${this.props.match.params.id}/images`)
+        getImages(this.props.match.params.id)
           .then(res => {
             let images = res.data.images;
             const imageIds = images.map(image => {
@@ -69,39 +62,35 @@ class ViewIssue extends React.Component {
           })
           .catch(err => console.log('CRAP!!!'));
       })
-      .catch(err => console.log(err));
+      .catch(console.log);
 
-    axios
-      .get('comments')
+    getComments()
       .then(res => this.setState({ comments: res.data.comments }))
-      .catch(err => console.log(err));
+      .catch(console.log);
   }
 
-  handleChange(event) {
+  handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
-  }
+  };
 
-  toggleEdit() {
+  toggleEdit = () => {
     this.setState({
       editingIssue: !this.state.editingIssue,
       nameEdits: this.state.issue.name,
       noteEdits: this.state.issue.notes
     });
-  }
+  };
 
-  fetchIssue(id) {
-    axios
-      .get(`issues/${id}`)
+  fetchIssue = id => {
+    getIssue(id)
       .then(res => {
         this.setState({ issue: res.data.issue });
       })
-      .catch(err => {
-        console.log(err);
-      });
+      .catch(console.log);
     // this.setState({issueStatus: this.state.issue.status})s
-  }
+  };
 
-  handleEdit(id) {
+  handleEdit = id => {
     const newEdits = {};
     // if (this.state.tag.length > 0){
     //   newEdits.tags = this.state.note.tags;
@@ -111,21 +100,30 @@ class ViewIssue extends React.Component {
     if (this.state.noteEdits.length > 0) newEdits.notes = this.state.noteEdits;
     newEdits.status = this.state.issueStatus;
     newEdits.date = today;
-    axios
-      .put(`issues/${id}`, newEdits)
+    putIssue(id, newEdits)
       .then(response => {
         this.setState({ issue: response.data.issue, editingIssue: false });
       })
       .catch(err => {
         console.log('Edit Error:', err);
       });
-  }
+  };
 
-  handleTagEdit(id) {
+  deleteIssue = event => {
+    delIssue(event.target.value)
+      .then(res => {
+        var copy = this.state.issues.filter(function(element) {
+          return element.id !== res.data.issue.id;
+        });
+        this.setState({ issues: copy });
+      })
+      .catch(console.error);
+  };
+
+  handleTagEdit = id => {
     const newTag = { name: this.state.tag, issueId: id, organizationId: 1 };
     console.log(newTag);
-    axios
-      .post(`tags`, newTag)
+    postTag(newTag)
       .then(response => {
         this.setState({
           tags: [
@@ -141,61 +139,56 @@ class ViewIssue extends React.Component {
       .catch(err => {
         console.log('Tag Edit Error', err);
       });
-  }
+  };
 
-  handleTagSubmit(e) {
+  handleTagSubmit = e => {
     e.preventDefault();
     this.handleTagEdit(this.state.issue.id);
-  }
+  };
 
-  deleteTag(event) {
-    let newArray = this.state.tags.slice();
-    axios
-      .delete(`tags/${event.target.getAttribute('id')}`)
+  deleteTag = event => {
+    delTag(event.target.getAttribute('id'))
       .then(response => {
         let deleteId = response.data.tag.id;
-        newArray = newArray.filter(function(tag) {
-          return tag.id !== deleteId;
-        });
-        this.setState({ tags: newArray });
+        this.setState(prevState => ({
+          tags: prevState.tags.filter(tag => tag.id !== deleteId)
+        }));
       })
       .catch(err => {
         console.log('Tag Edit Error', err);
       });
-  }
+  };
 
-  submitComment(event) {
+  submitComment = event => {
     event.preventDefault();
-    axios
-      .post('comments', {
-        content: this.state.comment,
-        userId: 1,
-        issueId: event.target[0].attributes[2].value
-      })
+    postComment({
+      content: this.state.comment,
+      userId: 1,
+      issueId: event.target[0].attributes[2].value
+    })
       .then(res => {
         this.setState({
           comments: [...this.state.comments, res.data.comment],
           comment: ''
         });
       })
-      .catch(err => console.error(err));
-  }
+      .catch(console.error);
+  };
 
-  deleteComment(event) {
-    axios
-      .delete(`comments/${event.target.getAttribute('issue_id')}`)
+  deleteComment = event => {
+    delComment(event.target.getAttribute('id'))
       .then(res => {
         let copy = this.state.comments.slice().filter(function(comment) {
           return comment.id !== res.data.comment.id;
         });
         this.setState({ comments: copy });
       })
-      .catch(err => console.error(err));
-  }
+      .catch(console.error);
+  };
 
-  toggleShowComments() {
+  toggleShowComments = () => {
     this.setState({ showComments: !this.state.showComments });
-  }
+  };
 
   render() {
     if (this.props.auth.isAuth()) {
@@ -204,15 +197,12 @@ class ViewIssue extends React.Component {
           <Sidebar />
           <div className="right-side">
             {this.state.issue ? (
-              <div
-                style={{
-                  width: '50%',
-                  margin: 'auto'
-                }}
-              >
-                <h1 style={{ textAlign: 'center' }}>Issue</h1>
+              <div>
+                <h1 style={{ textAlign: 'center', border: '2px solid gray' }}>
+                  Issue
+                </h1>
                 <div key={this.state.issue.id}>
-                  <p>
+                  <h1>
                     Name:{' '}
                     {this.state.editingIssue ? (
                       <input
@@ -220,13 +210,12 @@ class ViewIssue extends React.Component {
                         className="issue-input"
                         value={this.state.nameEdits}
                         onChange={this.handleChange}
-                        style={{ width: '300px', margin: 'auto' }}
                       />
                     ) : (
                       this.state.issue.name
                     )}
-                  </p>
-                  <p>
+                  </h1>
+                  <h2>
                     Notes:{' '}
                     {this.state.editingIssue ? (
                       <input
@@ -234,13 +223,12 @@ class ViewIssue extends React.Component {
                         className="issue-input"
                         value={this.state.noteEdits}
                         onChange={this.handleChange}
-                        style={{ width: '300px', margin: 'auto' }}
                       />
                     ) : (
                       this.state.issue.notes
                     )}
-                  </p>
-                  <p>
+                  </h2>
+                  <h3>
                     Status:{' '}
                     {this.state.editingIssue ? (
                       <select name="issueStatus" onChange={this.handleChange}>
@@ -256,9 +244,9 @@ class ViewIssue extends React.Component {
                     ) : (
                       this.state.issue.status
                     )}
-                  </p>
-                  <p>Date: {this.state.issue.date}</p>
-                  <p>Org. Id: {this.state.issue.organizationId}</p>
+                  </h3>
+                  <h4>Date: {this.state.issue.date}</h4>
+                  <h5>Org. Id: {this.state.issue.organizationId}</h5>
                   {this.state.imageIds.map(id => {
                     return (
                       <Image cloudName="dzeio0al7" publicId={id}>
@@ -297,31 +285,14 @@ class ViewIssue extends React.Component {
                         name="tag"
                         onChange={this.handleChange}
                         value={this.state.tag}
-                        style={{ width: '100px', margin: 'auto' }}
                       />
                     </form>
                   </div>
-                  <div>
-                    {this.state.comments
-                      .filter(comment => {
-                        return comment.issueId === this.state.issue.id;
-                      })
-                      .map(comment => {
-                        return (
-                          <div key={comment.id}>
-                            - {comment.content}
-                            <span
-                              onClick={this.deleteComment}
-                              className="delete-button"
-                              issue_id={comment.id}
-                            >
-                              {' '}
-                              x
-                            </span>
-                          </div>
-                        );
-                      })}
-                  </div>
+                  <Comments
+                    comments={this.state.comments}
+                    issueId={this.state.issue.id}
+                    deleteComment={this.deleteComment}
+                  />
                   <form onSubmit={this.submitComment}>
                     <input
                       name="comment"
@@ -332,20 +303,16 @@ class ViewIssue extends React.Component {
                     />
                   </form>
 
-                  <button
+                  <IssueBtn
                     onClick={this.deleteIssue}
-                    value={this.state.issue.id}
-                    sytle={{ backgroundColor: 'firebrick', color: 'orange' }}
-                  >
-                    Delete Issue
-                  </button>
-                  <button
+                    issueId={this.state.issue.id}
+                    action="Delete"
+                  />
+                  <IssueBtn
                     onClick={this.toggleEdit}
-                    value={this.state.issue.id}
-                    sytle={{ backgroundColor: 'firebrick', color: 'orange' }}
-                  >
-                    Edit Issue
-                  </button>
+                    issueId={this.state.issue.id}
+                    action="Edit"
+                  />
                   {this.state.editingIssue ? (
                     <button
                       onClick={() => {
