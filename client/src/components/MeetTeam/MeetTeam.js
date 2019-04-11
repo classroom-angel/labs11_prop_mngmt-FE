@@ -5,6 +5,7 @@ import john from '../../img/john.png';
 import jordan from '../../img/jordan.png';
 import rachel from '../../img/rachel.png';
 import './MeetTeam.css';
+import { Card, CardTitle, Row, Col } from 'react-materialize';
 
 class MeetTeam extends Component {
   render() {
@@ -88,6 +89,34 @@ class MeetTeam extends Component {
               <i className="fab fa-linkedin fa-2x cyan-text" />
             </a>
           </div>
+        </div>
+        <div>
+          <Row>
+            <Col m={6} s={12}>
+              <Card
+                header={<CardTitle />}
+                title="Rachel DiCesare"
+                reveal={<p>hello</p>}
+              >
+                <img style={imgstyle} src={rachel} alt="rachel" />
+                <p>
+                  {' '}
+                  <a target="_blank" href="https://github.com/RachelDiCesare93">
+                    <i
+                      style={{ color: '#e57373', margin: '10px' }}
+                      class="fab fa-github-square fa-2x"
+                    />
+                  </a>
+                  <a
+                    target="_blank"
+                    href="https://www.linkedin.com/in/racheldicesare"
+                  >
+                    <i className="fab fa-linkedin fa-2x cyan-text" />
+                  </a>
+                </p>
+              </Card>
+            </Col>
+          </Row>
         </div>
       </div>
     );
