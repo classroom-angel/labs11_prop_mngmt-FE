@@ -12,6 +12,7 @@ import BoardMemberHub from './components/BoardMember/BoardMember';
 import IssueLog from './components/Issues/IssueLog';
 import ViewIssue from './components/Issues/ViewIssue';
 import MeetTeam from './components/MeetTeam/MeetTeam';
+import OurMission from './components/OurMission/OurMission';
 import Scheduled from './components/Scheduled/Scheduled';
 import CreateEventForm from './components/Scheduled/CreateEventForm';
 import EditEventForm from './components/Scheduled/EditEventForm';
@@ -84,8 +85,8 @@ class App extends React.Component {
     if (profile == null) {
       profile = {
         name: ''
-      };
     }
+  }
     // console.log("env", process.env)
     return (
       <div className="App">
@@ -208,6 +209,7 @@ class App extends React.Component {
           render={props => <Payments {...props} auth={this.auth} />}
         />
         <Route exact path="/MeetTeam" component={MeetTeam} />
+        <Route exact path="/OurMission" component={OurMission} />
       </div>
     );
   }

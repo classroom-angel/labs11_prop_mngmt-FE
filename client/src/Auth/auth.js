@@ -34,6 +34,7 @@ export default class Auth extends Component {
       let users = await axios.get('/users');
       let orgs = await axios.get('/organizations');
       users = users.data.users;
+      orgs = orgs.data.organizations;
       if (authResults && authResults.accessToken && authResults.idToken) {
         let expires = JSON.stringify(
           authResults.expiresIn * 1000 + new Date().getTime()
@@ -52,17 +53,16 @@ export default class Auth extends Component {
           );
         });
         if (oldUser.length !== 0) {
+          let userOrg = orgs.filter(org => org.id == oldUser[0].organizationId);
           let profile = JSON.parse(localStorage.getItem('profile'));
           profile.orgId = oldUser[0].organizationId;
           profile.role = oldUser[0].role;
           profile.name = oldUser[0].firstName + ' ' + oldUser[0].lastName;
+          profile.organizationName = userOrg[0].name
           localStorage.setItem('profile', JSON.stringify(profile));
           location.pathname = '/';
-          console.log(oldUser);
-          console.log(location.pathname);
         } else {
           location.pathname = '/signup';
-          console.log(location.pathname);
         }
       } else if (err) {
         location.pathname = '/';

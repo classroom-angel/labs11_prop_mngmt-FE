@@ -9,7 +9,78 @@ function Home(props) {
   return (
     <div>
       <div className="onboarding-component">
-        <h1>Classroom Angel</h1>
+        <div className="topbar">
+          <div className="landingTitle">
+            <h4>Classroom Angel</h4>
+          </div>
+
+          <div className="navbar">
+            <NavLink
+              className="cyan darken-2 btn navbtn"
+              to="/MeetTeam"
+              style={{ margin: '15px' }}
+            >
+              Meet The Team
+            </NavLink>
+
+            <NavLink
+              className="cyan darken-2 btn navbtn"
+              to="/OurMission"
+              style={{ margin: '15px' }}
+            >
+              Our Mission
+            </NavLink>
+            <NavLink
+              className="cyan darken-2 btn navbtn"
+              to="/testimonials"
+              style={{ margin: '15px' }}
+            >
+              Testimonials
+            </NavLink>
+            {isAuth ? (
+              <NavLink
+                className="cyan darken-2 btn navbtn"
+                to="/"
+                onClick={function(e) {
+                  props.auth.logout();
+                }}
+                style={{ margin: '15px' }}
+              >
+                Sign out
+              </NavLink>
+            ) : (
+              <NavLink
+                className="cyan darken-2 btn navbtn"
+                to="/"
+                onClick={function(e) {
+                  props.auth.login();
+                }}
+                style={{ margin: '15px' }}
+              >
+                Sign up/Sign in
+              </NavLink>
+            )}
+
+            {isAuth && (
+              <div className="Main">
+                {/*<NavLink to="/onboarding">Get Started</NavLink>*/}
+                <NavLink
+                  className="red lighten-3 btn navbtn"
+                  to="/bm-homepage"
+                  style={{
+                    margin: '15px',
+                    width: '200px',
+                    fontSize: '20px',
+                    fontWeight: 'bold'
+                  }}
+                >
+                  View App
+                </NavLink>
+              </div>
+            )}
+          </div>
+        </div>
+
         {isAuth && (
           <div>
             <h3>Welcome, {props.profile.name.split(' ')[0]}</h3>
@@ -26,61 +97,7 @@ function Home(props) {
             />
           </div>
         )}
-        <NavLink
-          className="cyan darken-2 btn"
-          to="/ourmission"
-          style={{ margin: '15px' }}
-        >
-          Our Mission
-        </NavLink>
-        <NavLink
-          className="cyan darken-2 btn"
-          to="/testimonials"
-          style={{ margin: '15px' }}
-        >
-          Testimonials
-        </NavLink>
-        {isAuth ? (
-          <NavLink
-            className="cyan darken-2 btn"
-            to="/"
-            onClick={function(e) {
-              props.auth.logout();
-            }}
-            style={{ margin: '15px' }}
-          >
-            Sign out
-          </NavLink>
-        ) : (
-          <NavLink
-            className="cyan darken-2 btn"
-            to="/"
-            onClick={function(e) {
-              props.auth.login();
-            }}
-            style={{ margin: '15px' }}
-          >
-            Sign up/Sign in
-          </NavLink>
-        )}
       </div>
-      {isAuth && (
-        <div className="Main">
-          {/*<NavLink to="/onboarding">Get Started</NavLink>*/}
-          <NavLink
-            className="red lighten-3 btn"
-            to="/bm-homepage"
-            style={{
-              margin: '15px',
-              width: '200px',
-              fontSize: '20px',
-              fontWeight: 'bold'
-            }}
-          >
-            View App
-          </NavLink>
-        </div>
-      )}
 
       <div className="logoAndText">
         <div className="textBox">
@@ -109,12 +126,15 @@ function Home(props) {
             </>
           )}
         </div>
-        <img src={logo} alt="Classroom Angel's logo" id="logo" className="hide-on-med-and-down" />
+        <img
+          src={logo}
+          alt="Classroom Angel's logo"
+          id="logo"
+          className="hide-on-med-and-down"
+        />
       </div>
-
       <div className="Footer">
         <p>© {date.getFullYear()}, Classroom Angel. All rights reserved.</p>
-        <NavLink to="/MeetTeam">Meet The Team</NavLink>
       </div>
       {/*<div>
         <NavLink className='cyan darken-2 btn' to="/" onClick={function(e) {props.auth.login()}}>Signup?</NavLink>

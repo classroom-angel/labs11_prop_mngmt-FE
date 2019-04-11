@@ -204,12 +204,15 @@ class ViewIssue extends React.Component {
           <Sidebar />
           <div className="right-side">
             {this.state.issue ? (
-              <div>
-                <h1 style={{ textAlign: 'center', border: '2px solid gray' }}>
-                  Issue
-                </h1>
+              <div
+                style={{
+                  width: '50%',
+                  margin: 'auto'
+                }}
+              >
+                <h1 style={{ textAlign: 'center' }}>Issue</h1>
                 <div key={this.state.issue.id}>
-                  <h1>
+                  <p>
                     Name:{' '}
                     {this.state.editingIssue ? (
                       <input
@@ -217,12 +220,13 @@ class ViewIssue extends React.Component {
                         className="issue-input"
                         value={this.state.nameEdits}
                         onChange={this.handleChange}
+                        style={{ width: '300px', margin: 'auto' }}
                       />
                     ) : (
                       this.state.issue.name
                     )}
-                  </h1>
-                  <h2>
+                  </p>
+                  <p>
                     Notes:{' '}
                     {this.state.editingIssue ? (
                       <input
@@ -230,12 +234,13 @@ class ViewIssue extends React.Component {
                         className="issue-input"
                         value={this.state.noteEdits}
                         onChange={this.handleChange}
+                        style={{ width: '300px', margin: 'auto' }}
                       />
                     ) : (
                       this.state.issue.notes
                     )}
-                  </h2>
-                  <h3>
+                  </p>
+                  <p>
                     Status:{' '}
                     {this.state.editingIssue ? (
                       <select name="issueStatus" onChange={this.handleChange}>
@@ -251,9 +256,9 @@ class ViewIssue extends React.Component {
                     ) : (
                       this.state.issue.status
                     )}
-                  </h3>
-                  <h4>Date: {this.state.issue.date}</h4>
-                  <h5>Org. Id: {this.state.issue.organizationId}</h5>
+                  </p>
+                  <p>Date: {this.state.issue.date}</p>
+                  <p>Org. Id: {this.state.issue.organizationId}</p>
                   {this.state.imageIds.map(id => {
                     return (
                       <Image cloudName="dzeio0al7" publicId={id}>
@@ -292,6 +297,7 @@ class ViewIssue extends React.Component {
                         name="tag"
                         onChange={this.handleChange}
                         value={this.state.tag}
+                        style={{ width: '100px', margin: 'auto' }}
                       />
                     </form>
                   </div>

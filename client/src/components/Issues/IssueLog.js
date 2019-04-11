@@ -5,7 +5,23 @@ import './Issues.css';
 import axios from '../../axiosInstance';
 import { NavLink } from 'react-router-dom';
 import Uploader from '../Uploader';
-// import moment from 'moment'
+import $ from 'jquery';
+import M from 'materialize-css';
+// import 'materialize-css/dist/js/materialize.js';
+// import 'materialize-css/dist/css/materialize.css';
+
+import {
+  Button,
+  Card,
+  Chip,
+  // Checkbox,
+  // Carousel,
+  Icon,
+  // Row,
+  // Col,
+  Dropdown,
+  Divider
+} from 'react-materialize';
 
 const statuses = ['Needs Attention', 'Resolved', 'Scheduled', 'Ignored'];
 
@@ -17,6 +33,7 @@ var mm = String(today.getMonth() + 1).padStart(2, '0');
 var yyyy = today.getFullYear();
 
 today = mm + '-' + dd + '-' + yyyy;
+
 export default class IssueLog extends React.Component {
   constructor(props) {
     super(props);
@@ -54,20 +71,22 @@ export default class IssueLog extends React.Component {
     this.submitComment = this.submitComment.bind(this);
     this.deleteComment = this.deleteComment.bind(this);
     this.arrayTags = this.arrayTags.bind(this);
+    this.handleDropChange = this.handleDropChange.bind(this);
   }
 
   componentDidMount() {
     axios
       .get('issues')
       .then(res => {
-        this.setState({ issues: res.data.issues, issuesLoaded: true })
+        console.log(res.data.issues);
+        this.setState({ issues: res.data.issues, issuesLoaded: true });
         const showCommentsObj = {};
         const commentsObj = {};
         this.state.issues.map(issue => {
           showCommentsObj[`issue${issue.id}`] = false;
           commentsObj[`issue${issue.id}`] = '';
-        })
-        this.setState({showCommentsObj, commentsObj});
+        });
+        this.setState({ showCommentsObj, commentsObj });
       })
       .catch(err => console.log(err));
     axios
@@ -141,7 +160,15 @@ export default class IssueLog extends React.Component {
   }
 
   handleChange(event) {
+    console.log(event.target.value);
     this.setState({ [event.target.name]: event.target.value });
+  }
+
+  handleDropChange(event) {
+    console.log(event.target.attributes[1].value);
+    this.setState({
+      [event.target.attributes[0].value]: event.target.attributes[1].value
+    });
   }
 
   toggleEdit() {
@@ -161,8 +188,8 @@ export default class IssueLog extends React.Component {
   handleCommentChange = (id, event) => {
     const commentsObj = this.state.commentsObj;
     commentsObj[`issue${id}`] = event.target.value;
-    this.setState({commentsObj});
-  }
+    this.setState({ commentsObj });
+  };
 
   fetchIssue(id) {
     axios
@@ -217,6 +244,9 @@ export default class IssueLog extends React.Component {
         });
       })
       .catch(err => console.error(err));
+    const commentsObj = this.state.commentsObj;
+    commentsObj[`issue${id}`] = '';
+    this.setState({ commentsObj });
   }
 
   deleteComment(event) {
@@ -239,10 +269,16 @@ export default class IssueLog extends React.Component {
   }
 
   render() {
+    console.log('status', this.state.filterStatus);
     if (this.props.auth.isAuth()) {
       this.arrayTags();
-      
+
       if (this.state.issuesLoaded) {
+        var elem = document.querySelectorAll('.dropdown-trigger');
+        if (elem) {
+          M.Dropdown.init(elem, {});
+        }
+
         return (
           <div className="page-container">
             <Sidebar />
@@ -251,39 +287,42 @@ export default class IssueLog extends React.Component {
                 Issue Log
               </h1>
               Filter By Status:
-              <select
-                name="filterStatus"
-                onChange={this.handleChange}
-                className=""
-                style={{ marginBottom: '20px' }}
-              >
-                <option value="all">Choose...</option>
+              {/*Dropdown Trigger */}
+              <button className="dropdown-trigger btn" data-target="dropdown1">
+                Choose
+              </button>
+              {/* Dropdown Structure */}
+              <ul id="dropdown1" className="dropdown-content">
+                <li key={0} onClick={this.handleDropChange}>
+                  <p name="filterStatus" value="all">
+                    All
+                  </p>
+                </li>
                 {statuses.map((status, index) => {
                   return (
-                    <option key={index} value={status}>
-                      {status}
-                    </option>
+                    <li key={index + 1} onClick={this.handleDropChange}>
+                      <p name="filterStatus" value={status}>
+                        {status}
+                      </p>
+                    </li>
                   );
                 })}
-              </select>
+              </ul>
               Filter By Tag:
-              <select
-                name="filterTag"
-                onChange={this.handleChange}
-                className=""
-                style={{ marginBottom: '20px' }}
-              >
-                <option value="all">Choose...</option>
+              <button className="dropdown-trigger btn" data-target="dropdown2">
+                Choose
+              </button>
+              {/* Dropdown Structure */}
+              <ul id="dropdown2" className="dropdown-content">
                 {tags.map((tag, index) => {
                   return (
-                    <option key={index} value={tag}>
-                      {tag}
-                    </option>
+                    <li key={index} value={tag}>
+                      <p>{tag}</p>
+                    </li>
                   );
                 })}
-              </select>
+              </ul>
               <div className="issue-list">
-                
                 {this.state.issues.map(issue => {
                   // filters tags by filter criteria
                   let truthArray = this.state.tags.filter(tag => {
@@ -302,7 +341,7 @@ export default class IssueLog extends React.Component {
                       this.state.filterTag === 'all')
                   )
                     return (
-                      <div key={issue.id} className="issue-card">
+                      <Card key={issue.id} className="">
                         <p
                           style={{
                             textAlign: 'left',
@@ -323,34 +362,34 @@ export default class IssueLog extends React.Component {
                             })
                             .map(function(tag) {
                               return (
-                                <div key={tag.id} className="tag">
+                                <Chip key={tag.id} className="blue-grey">
                                   {tag.name}
-                                </div>
+                                </Chip>
                               );
                             })}
                         </div>
-                        <button
+                        <Button
                           onClick={this.deleteIssue}
                           value={issue.id}
-                          style={{ display: 'inline-block' }}
+                          className="red"
                         >
                           Delete
-                        </button>
+                        </Button>
                         <NavLink to={`/issue/${issue.id}`}>
-                          <button
+                          <Button
                             value={issue.id}
-                            className="edit-issue-button"
+                            // className="edit-issue-button"
                           >
                             View/Update
-                          </button>
+                          </Button>
                         </NavLink>
-                        <button
+                        <Button
                           onClick={() => this.toggleShowComments(issue.id)}
                           value={issue.id}
-                          style={{ display: 'inline-block' }}
+                          className="blue"
                         >
                           Show Comments
-                        </button>
+                        </Button>
                         {this.state.showCommentsObj[`issue${issue.id}`] ? (
                           <div>
                             <div>
@@ -374,65 +413,85 @@ export default class IssueLog extends React.Component {
                                   );
                                 })}
                             </div>
-                            <form onSubmit={(e) => this.submitComment(issue.id, e)}>
+                            <form
+                              onSubmit={e => this.submitComment(issue.id, e)}
+                            >
                               <input
                                 name="comment"
                                 placeholder="add comment"
-                                value={this.state.commentsObj[`issue${issue.id}`]}
+                                value={
+                                  this.state.commentsObj[`issue${issue.id}`]
+                                }
                                 issue_id={issue.id}
-                                onChange={(e) => this.handleCommentChange(issue.id, e)}
+                                onChange={e =>
+                                  this.handleCommentChange(issue.id, e)
+                                }
                               />
                             </form>
                           </div>
                         ) : null}
-                      </div>
+                      </Card>
                     );
                 })}
-                <form
-                  onSubmit={this.postIssues}
-                  className="issue-card submit-issue"
-                >
-                  <h1>New Issue +</h1>
-                  <input
-                    name="issueName"
-                    value={this.state.issueName}
-                    placeholder="Issue Title"
-                    onChange={this.handleChange}
-                  />
-                  <br />
-                  <input
-                    name="issueNotes"
-                    value={this.state.issueNotes}
-                    placeholder="Additional notes"
-                    onChange={this.handleChange}
-                  />
-                  <br />
-                  <input
-                    type="checkbox"
-                    id="isVisit"
-                    name="isVisit"
-                    value={true}
-                    onChange={this.visitChange}
-                  />
-                  <label htmlFor="isVisit">isVisit</label>
-                  <br />
-                  <select name="issueStatus" onChange={this.handleChange}>
-                    <option value="">Status...</option>
-                    {statuses.map((status, index) => {
-                      return (
-                        <option key={index} value={status}>
-                          {status}
-                        </option>
-                      );
-                    })}
-                  </select>
-                  <br />
-                  <Uploader
-                    uploading={this.state.uploading}
-                    imgAdder={this.imgAdder}
-                  />
-                  <input type="submit" />
-                </form>
+
+                <Card style={{ order: '-1' }}>
+                  <form onSubmit={this.postIssues}>
+                    <h1>New Issue +</h1>
+                    {/* <div className="inpudt-field"> */}
+                    <input
+                      name="issueName"
+                      value={this.state.issueName}
+                      placeholder="Issue Title"
+                      onChange={this.handleChange}
+                    />
+                    {/* </div> */}
+                    <br />
+                    <input
+                      name="issueNotes"
+                      value={this.state.issueNotes}
+                      placeholder="Additional notes"
+                      onChange={this.handleChange}
+                    />
+                    <br />
+                    {/* <Checkbox
+                      id="isVisit"
+                      name="isVisit"
+                      value={true}
+                      onChange={this.visitChange}
+                    /> */}
+
+                    <label>
+                      <input
+                        type="checkbox"
+                        id="isVisit"
+                        name="isVisit"
+                        value={true}
+                        onChange={this.visitChange}
+                      />
+                      <span>isVisit</span>
+                    </label>
+                    <br />
+                    <select name="issueStatus" onChange={this.handleChange}>
+                      <option value="">Status...</option>
+                      {statuses.map((status, index) => {
+                        return (
+                          <option key={index} value={status}>
+                            {status}
+                          </option>
+                        );
+                      })}
+                    </select>
+                    <br />
+                    <Uploader
+                      uploading={this.state.uploading}
+                      imgAdder={this.imgAdder}
+                    />
+                    <Button type="submit" waves="light">
+                      Submit
+                      <Icon right>send</Icon>
+                    </Button>
+                  </form>
+                </Card>
               </div>
             </div>
           </div>
