@@ -95,14 +95,18 @@ class Sidebar extends Component {
           <ul id="slide-out" className="sidenav sidebar">
             <div
               className="avatar"
-              style={profile ? {
-                backgroundImage: `url(${profile.picture})`,
-                backgroundSize: 'cover',
-                width: '150px',
-                height: '150px',
-                borderRadius: '75px',
-                margin: '40px auto 0'
-              } : null}
+              style={
+                profile
+                  ? {
+                      backgroundImage: `url(${profile.picture})`,
+                      backgroundSize: 'cover',
+                      width: '150px',
+                      height: '150px',
+                      borderRadius: '75px',
+                      margin: '40px auto 0'
+                    }
+                  : null
+              }
             />
             <h3 className="sidebar-header">Classroom Angel</h3>
             {profile.role === 'Board member' && (
@@ -151,7 +155,7 @@ class Sidebar extends Component {
             className="sidenav-trigger sidenav-close"
             style={{ position: 'fixed', left: '5px', top: '10px' }}
           >
-            <i className="material-icons white-text">menu</i>
+            <i className="material-icons black-text">menu</i>
           </a>
         </div>
       );
