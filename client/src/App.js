@@ -76,7 +76,7 @@ class App extends React.Component {
       };
       console.log('USER!!!', user);
       const userConf = await axios.post(`users/register`, user);
-      console.log(userConf);
+      console.log('userConf', userConf);
     }
     console.log('***NEW PROFILE!!!***', newProfile);
     cb(ste);
