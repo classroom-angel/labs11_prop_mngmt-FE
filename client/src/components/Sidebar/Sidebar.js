@@ -75,10 +75,12 @@ class Sidebar extends Component {
       }
     });
     let side = document.querySelector('.sidenav-overlay');
-    if (instance.isOpen) {
-      side.classList = 'sidenav sidebar';
-    } else {
-      side.classList = 'sidenav sidebar sideTransparent';
+    if (instance) {
+      if (instance.isOpen) {
+        side.classList = 'sidenav sidebar';
+      } else {
+        side.classList = 'sidenav sidebar sideTransparent';
+      }
     }
   };
 
