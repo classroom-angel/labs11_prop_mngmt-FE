@@ -15,7 +15,7 @@ export default class BoardMemberHub extends React.Component {
       attendanceLoaded: false,
       issuesLoaded: false,
       issues: [],
-      selected: "",
+      selected: '',
       selectedId: 1
     };
     this.equipSelect = this.equipSelect.bind(this);
@@ -26,24 +26,27 @@ export default class BoardMemberHub extends React.Component {
     axios
       .get('equipment')
       .then(res => {
-        const equipment = res.data.equipment.filter(thing => thing.organizationId === prof.orgId);
-        this.setState({ equipment: equipment, equipmentLoaded: true })}
-      )
+        const equipment = res.data.equipment.filter(
+          thing => thing.organizationId === prof.orgId
+        );
+        this.setState({ equipment: equipment, equipmentLoaded: true });
+      })
       .catch(err => console.error(err));
 
     axios
       .get('issues')
       .then(res => {
-        const issues = res.data.issues.filter(issue => issue.organizationId === prof.orgId);
-        this.setState({ issues: issues, issuesLoaded: true })
-      }
-      )
+        const issues = res.data.issues.filter(
+          issue => issue.organizationId === prof.orgId
+        );
+        this.setState({ issues: issues, issuesLoaded: true });
+      })
       .catch(err => console.error(err));
   }
 
-  goToIssue = (id) => {
-    this.props.history.push(`/issue/${id}`)
-  }
+  goToIssue = id => {
+    this.props.history.push(`/issue/${id}`);
+  };
 
   equipSelect(event) {
     this.setState({
@@ -62,33 +65,32 @@ export default class BoardMemberHub extends React.Component {
               Sorry! You don't have access to this area :)
             </Modal>
           )}
-          <Sidebar />
-          {/*<ul id="slide-out" className="sidenav">
-            <li><a href="#!">First Sidebar Link</a></li>
-            <li><a href="#!">Second Sidebar Link</a></li>
-          </ul>
-          <a href="#!" className="sidenav-trigger show-on-large cyan darken-2 btn" data-target="slide-out" waves="light">sidenav</a>*/}
           <h2 style={{ textAlign: 'left' }}>{profile.organizationName}</h2>
-          <div className="divider"></div>
+          <div className="divider" />
           <div className="row">
             <div className="col s12" style={{ marginTop: '20px' }}>
               <div
-                className="col s10 offset-s1 l4 red lighten-3"
+                className="col s10 offset-s1 l4 red lighten-3 z-depth-4"
                 style={{
                   borderRadius: '10px',
                   marginBottom: '20px'
                 }}
               >
                 <h2 style={{ textAlign: 'left' }}>Issue Log</h2>
-                <div className="divider"></div>
+                <div className="divider" />
 
                 <div style={{ overflow: 'auto', height: '500px' }}>
-                  {this.state.issuesLoaded
-                    ?
+                  {this.state.issuesLoaded ? (
                     <Collection>
-                    {this.state.issues.map(issue => {
+                      {this.state.issues.map(issue => {
                         return (
-                          <CollectionItem href='#!' key={issue.id} onClick={e => {this.goToIssue(issue.id)}} >
+                          <CollectionItem
+                            href="#!"
+                            key={issue.id}
+                            onClick={e => {
+                              this.goToIssue(issue.id);
+                            }}
+                          >
                             <span style={{ margin: '2px 10px' }}>
                               {' '}
                               {issue.name}
@@ -102,17 +104,27 @@ export default class BoardMemberHub extends React.Component {
                           </CollectionItem>
                         );
                       })}
-                      </Collection>
-                    : 'Loading...'}
+                    </Collection>
+                  ) : (
+                    'Loading...'
+                  )}
                 </div>
               </div>
               <div
-                className="col s10 offset-s1 l7 offset-l1 cyan darken-2 white-text"
+                className="col s10 offset-s1 l7 offset-l1 cyan darken-2 white-text z-depth-4"
                 style={{
-                  borderRadius: '10px',
+                  borderRadius: '10px'
                 }}
               >
-                <div className="dev-condiiton" style={{ display: 'flex', width: '100%', height: '500px', justifyContent: 'space-between' }}>
+                <div
+                  className="dev-condiiton"
+                  style={{
+                    display: 'flex',
+                    width: '100%',
+                    height: '500px',
+                    justifyContent: 'space-between'
+                  }}
+                >
                   <div
                     style={{
                       borderLeft: '1px solid gray',
@@ -122,8 +134,7 @@ export default class BoardMemberHub extends React.Component {
                     }}
                   >
                     Equipment
-                    <div className="divider"></div>
-
+                    <div className="divider" />
                     {this.state.equipmentLoaded
                       ? this.state.equipment.map(item => {
                           return (
@@ -143,8 +154,7 @@ export default class BoardMemberHub extends React.Component {
                     }}
                   >
                     Open Issues
-                    <div className="divider"></div>
-
+                    <div className="divider" />
                     {this.state.equipmentLoaded
                       ? this.state.equipment.map(function(item) {
                           return <p>{item.damaged}</p>;
@@ -160,8 +170,7 @@ export default class BoardMemberHub extends React.Component {
                     }}
                   >
                     Working
-                    <div className="divider"></div>
-
+                    <div className="divider" />
                     {this.state.equipmentLoaded
                       ? this.state.equipment.map(function(item) {
                           return <p>{item.working}</p>;
@@ -177,8 +186,7 @@ export default class BoardMemberHub extends React.Component {
                     }}
                   >
                     Total
-                    <div className="divider"></div>
-
+                    <div className="divider" />
                     {this.state.equipmentLoaded
                       ? this.state.equipment.map(function(item) {
                           return <p>{item.working + item.damaged}</p>;
@@ -193,26 +201,32 @@ export default class BoardMemberHub extends React.Component {
                       overflow: 'auto',
                       width: '25%'
                     }}
-                  >Equipment Details
-                  <div className="divider"></div>
-
-                    {this.state.selected !== "" && <><p style={{ borderBottom: '1px solid' }}>
-                      {this.state.selected}
-                    </p>
-                    {this.state.issuesLoaded
-                      ? this.state.issues
-                          .filter(issue => {
-                            return issue.equipmentId == this.state.selectedId;
-                          })
-                          .map((issue, index) => {
-                            return (
-                              <div>
-                                <p>{`Issue ${index + 1}`}</p>
-                                <p>Descriptions: {issue.name}</p>
-                              </div>
-                            );
-                          })
-                      : 'Loading....'} </>}
+                  >
+                    Equipment Details
+                    <div className="divider" />
+                    {this.state.selected !== '' && (
+                      <>
+                        <p style={{ borderBottom: '1px solid' }}>
+                          {this.state.selected}
+                        </p>
+                        {this.state.issuesLoaded
+                          ? this.state.issues
+                              .filter(issue => {
+                                return (
+                                  issue.equipmentId == this.state.selectedId
+                                );
+                              })
+                              .map((issue, index) => {
+                                return (
+                                  <div>
+                                    <p>{`Issue ${index + 1}`}</p>
+                                    <p>Descriptions: {issue.name}</p>
+                                  </div>
+                                );
+                              })
+                          : 'Loading....'}{' '}
+                      </>
+                    )}
                   </div>
                 </div>
               </div>

@@ -220,7 +220,6 @@ export default class IssueLog extends React.Component {
       if (this.state.issuesLoaded) {
         return (
           <div className="page-container">
-            <Sidebar />
             <div className="right-side">
               <h1 style={{ textAlign: 'center', border: '2px solid gray' }}>
                 Issue Log
@@ -259,7 +258,6 @@ export default class IssueLog extends React.Component {
       } else {
         return (
           <div className="page-container">
-            <Sidebar />
             <div className="right-side">
               <h1>Loading...</h1>
             </div>
