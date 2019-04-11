@@ -4,9 +4,11 @@ import '../Issues.css';
 import { NavLink } from 'react-router-dom';
 import { Image, Transformation } from 'cloudinary-react';
 import Comments from '../Comments';
+import IssueBtn from './IssueBtn';
 import helpers, {
   getIssue,
   putIssue,
+  delIssue,
   postTag,
   delTag,
   postComment,
@@ -105,6 +107,17 @@ class ViewIssue extends React.Component {
       .catch(err => {
         console.log('Edit Error:', err);
       });
+  };
+
+  deleteIssue = event => {
+    delIssue(event.target.value)
+      .then(res => {
+        var copy = this.state.issues.filter(function(element) {
+          return element.id !== res.data.issue.id;
+        });
+        this.setState({ issues: copy });
+      })
+      .catch(console.error);
   };
 
   handleTagEdit = id => {
@@ -290,20 +303,16 @@ class ViewIssue extends React.Component {
                     />
                   </form>
 
-                  <button
+                  <IssueBtn
                     onClick={this.deleteIssue}
-                    value={this.state.issue.id}
-                    sytle={{ backgroundColor: 'firebrick', color: 'orange' }}
-                  >
-                    Delete Issue
-                  </button>
-                  <button
+                    issueId={this.state.issue.id}
+                    action="Delete"
+                  />
+                  <IssueBtn
                     onClick={this.toggleEdit}
-                    value={this.state.issue.id}
-                    sytle={{ backgroundColor: 'firebrick', color: 'orange' }}
-                  >
-                    Edit Issue
-                  </button>
+                    issueId={this.state.issue.id}
+                    action="Edit"
+                  />
                   {this.state.editingIssue ? (
                     <button
                       onClick={() => {
