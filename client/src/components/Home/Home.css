@@ -151,3 +151,7 @@ body {
 .landingTitle {
   margin-left: 20px;
 }
+
+.extraSpace {
+  border: 0px solid red;
+}
