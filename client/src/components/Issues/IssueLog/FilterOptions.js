@@ -1,39 +1,43 @@
 import React from 'react';
 
-const FilterOptions = ({ handleChange, statuses, tags }) => (
+const FilterOptions = ({ handleDropChange, statuses, tags }) => (
   <>
     Filter By Status:
-    <select
-      name="filterStatus"
-      onChange={handleChange}
-      className=""
-      style={{ marginBottom: '20px' }}
-    >
-      <option value="all">Choose...</option>
+    {/*Dropdown Trigger */}
+    <button className="dropdown-trigger btn" data-target="dropdown1">
+      Choose
+    </button>
+    {/* Dropdown Structure */}
+    <ul id="dropdown1" className="dropdown-content">
+      <li key={0} onClick={handleDropChange}>
+        <p name="filterStatus" value="all">
+          All
+        </p>
+      </li>
       {statuses.map((status, index) => {
         return (
-          <option key={index} value={status}>
-            {status}
-          </option>
+          <li key={index + 1} onClick={handleDropChange}>
+            <p name="filterStatus" value={status}>
+              {status}
+            </p>
+          </li>
         );
       })}
-    </select>
+    </ul>
     Filter By Tag:
-    <select
-      name="filterTag"
-      onChange={handleChange}
-      className=""
-      style={{ marginBottom: '20px' }}
-    >
-      <option value="all">Choose...</option>
+    <button className="dropdown-trigger btn" data-target="dropdown2">
+      Choose
+    </button>
+    {/* Dropdown Structure */}
+    <ul id="dropdown2" className="dropdown-content">
       {tags.map((tag, index) => {
         return (
-          <option key={index} value={tag}>
-            {tag}
-          </option>
+          <li key={index} value={tag}>
+            <p>{tag}</p>
+          </li>
         );
       })}
-    </select>
+    </ul>
   </>
 );
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import M from 'materialize-css';
 import Sidebar from '../../Sidebar/Sidebar';
 import '../Issues.css';
 import Issue from './Issue';
@@ -13,7 +14,6 @@ import helpers, {
   postComment,
   delComment
 } from '../axiosHelpers';
-// import moment from 'moment'
 import { statuses, today } from '../data';
 
 const { getIssues, getTags, getComments } = helpers;
@@ -124,6 +124,13 @@ export default class IssueLog extends React.Component {
     this.setState({ [name]: value });
   };
 
+  handleDropChange = ({ target }) => {
+    console.log(target.attributes[1].value);
+    this.setState({
+      [target.attributes[0].value]: target.attributes[1].value
+    });
+  };
+
   toggleEdit = () => {
     this.setState({
       editingIssue: !this.state.editingIssue,
@@ -218,6 +225,11 @@ export default class IssueLog extends React.Component {
       this.arrayTags();
 
       if (this.state.issuesLoaded) {
+        var elem = document.querySelectorAll('.dropdown-trigger');
+        if (elem) {
+          M.Dropdown.init(elem, {});
+        }
+
         return (
           <div className="page-container">
             <div className="right-side">
@@ -227,7 +239,7 @@ export default class IssueLog extends React.Component {
               <FilterOptions
                 statuses={statuses}
                 tags={tags}
-                handleChange={this.handleChange}
+                handleDropChange={this.handleDropChange}
               />
               <div className="issue-list">
                 {this.state.issues.map(issue => (
