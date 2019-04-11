@@ -48,7 +48,7 @@ class AddTestimonial extends Component {
     return (
       <div>
         <h3>Add Testimonial</h3>
-        <div className="TestimonialForm cyan darken-2 col s12">
+        <div className="TestimonialForm col s12  cyan">
           <form onSubmit={this.createTestimonial}>
             <div className="row">
               <div class="input-field col s12">
@@ -83,7 +83,7 @@ class AddTestimonial extends Component {
               </div>
             </div>
 
-            <Button className="red lighten-1" type="submit" waves="light">
+            <Button className="amber black-text" type="submit" waves="light">
               Submit
               <Icon right>send</Icon>
             </Button>

@@ -33,7 +33,7 @@ class Testimonials extends Component {
         <div>
           <Link to="/AddTestimonial">
             <Button
-              className="red lighten-1"
+              className="amber"
               waves="light"
               style={{ marginRight: '5px' }}
             >
@@ -41,23 +41,22 @@ class Testimonials extends Component {
             </Button>
           </Link>
         </div>
-        <div className="testimonial-card">
-          <Row className="valign-wrapper">
-            {this.state.testimonials.map(testimonial => {
-              return (
-                <Col style={{ margin: '0 auto' }} m={4} s={8}>
-                  <CardPanel className="cyan darken-2" style={{}}>
-                    <span className="white-text ">
-                      <h5>{testimonial.name}</h5>
-                      <h6>{testimonial.role}</h6>
-                      <p>{testimonial.text}</p>
-                    </span>
-                  </CardPanel>
-                </Col>
-              );
-            })}
-          </Row>
-        </div>
+
+        {this.state.testimonials.map(testimonial => {
+          return (
+            <Row className="valign-wrapper">
+              <Col className="s12 m5" style={{ margin: '0 auto' }}>
+                <CardPanel className=" cyan">
+                  <span className="white-text ">
+                    <h5>{testimonial.name}</h5>
+                    <h6>{testimonial.role}</h6>
+                    <p>{testimonial.text}</p>
+                  </span>
+                </CardPanel>
+              </Col>
+            </Row>
+          );
+        })}
       </div>
     );
   }
