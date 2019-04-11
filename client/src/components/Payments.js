@@ -60,7 +60,6 @@ class Payments extends React.Component {
   render() {
     return (
       <div className="page-container">
-        <Sidebar />
         <div className="checkout right-side">
           <h1>Upgrade Account</h1>
           <Checkout
