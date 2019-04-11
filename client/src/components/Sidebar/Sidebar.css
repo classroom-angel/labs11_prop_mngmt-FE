@@ -3,6 +3,7 @@
   flex-direction: column;
   /* background-color: #094d92;
   width: 21.5%; */
+  z-index: 9999;
   font-family: 'Roboto', sans-serif;
   padding: 0px 20px;
   /* min-height: 100vh; */

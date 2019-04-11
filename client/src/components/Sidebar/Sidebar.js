@@ -53,7 +53,7 @@ class Sidebar extends Component {
 
   render() {
     const profile = JSON.parse(localStorage.getItem('profile'));
-    if (this.props.location.pathname === '/') {
+    if (this.props.location.pathname === '/' || !profile) {
       console.log(this.props.location.pathname);
       return null;
     } else {
@@ -62,14 +62,14 @@ class Sidebar extends Component {
           <ul id="slide-out" className="sidenav sidebar">
             <div
               className="avatar"
-              style={{
+              style={profile ? {
                 backgroundImage: `url(${profile.picture})`,
                 backgroundSize: 'cover',
                 width: '150px',
                 height: '150px',
                 borderRadius: '75px',
                 margin: '40px auto 0'
-              }}
+              } : null}
             />
             <h3 className="sidebar-header">Classroom Angel</h3>
             {profile.role === 'Board member' && (
@@ -115,7 +115,7 @@ class Sidebar extends Component {
           <a
             href="#"
             data-target="slide-out"
-            className="sidenav-trigger"
+            className="sidenav-trigger sidenav-close"
             style={{ position: 'fixed', left: '5px', top: '10px' }}
           >
             <i className="material-icons white-text">menu</i>
