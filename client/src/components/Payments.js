@@ -68,6 +68,7 @@ class Payments extends React.Component {
             amount={this.fromDollarToCent(29.99)}
             sendToken={subscribe}
           />
+          <hr />
           <h1>Pay a contractor</h1>
           <p>
             Step 1: Send this link to your contractor via email to get them
