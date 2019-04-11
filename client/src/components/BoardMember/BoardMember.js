@@ -26,8 +26,6 @@ export default class BoardMemberHub extends React.Component {
     axios
       .get('equipment')
       .then(res => {
-        console.log('equp', res.data);
-        console.log('prof', prof);
         const equipment = res.data.equipment.filter(
           thing => thing.organizationId === prof.orgId
         );
@@ -67,18 +65,12 @@ export default class BoardMemberHub extends React.Component {
               Sorry! You don't have access to this area :)
             </Modal>
           )}
-          <Sidebar />
-          {/*<ul id="slide-out" className="sidenav">
-            <li><a href="#!">First Sidebar Link</a></li>
-            <li><a href="#!">Second Sidebar Link</a></li>
-          </ul>
-          <a href="#!" className="sidenav-trigger show-on-large cyan darken-2 btn" data-target="slide-out" waves="light">sidenav</a>*/}
           <h2 style={{ textAlign: 'left' }}>{profile.organizationName}</h2>
           <div className="divider" />
           <div className="row">
             <div className="col s12" style={{ marginTop: '20px' }}>
               <div
-                className="col s10 offset-s1 l4 red lighten-3"
+                className="col s10 offset-s1 l4 red lighten-3 z-depth-4"
                 style={{
                   borderRadius: '10px',
                   marginBottom: '20px'
@@ -119,7 +111,7 @@ export default class BoardMemberHub extends React.Component {
                 </div>
               </div>
               <div
-                className="col s10 offset-s1 l7 offset-l1 cyan darken-2 white-text"
+                className="col s10 offset-s1 l7 offset-l1 cyan darken-2 white-text z-depth-4"
                 style={{
                   borderRadius: '10px'
                 }}
