@@ -9,8 +9,8 @@ import SignUp from './components/SignUp';
 import Home from './components/Home/Home';
 import JoinOrg from './components/JoinOrg';
 import BoardMemberHub from './components/BoardMember/BoardMember';
-import IssueLog from './components/Issues/IssueLog';
-import ViewIssue from './components/Issues/ViewIssue';
+import IssueLog from './components/Issues/IssueLog/IssueLog';
+import ViewIssue from './components/Issues/ViewIssue/ViewIssue';
 import MeetTeam from './components/MeetTeam/MeetTeam';
 import OurMission from './components/OurMission/OurMission';
 import Scheduled from './components/Scheduled/Scheduled';
@@ -85,8 +85,8 @@ class App extends React.Component {
     if (profile == null) {
       profile = {
         name: ''
+      };
     }
-  }
     // console.log("env", process.env)
     return (
       <div className="App">
