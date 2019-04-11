@@ -4,7 +4,19 @@ import '../Issues.css';
 import axios from '../../../axiosInstance';
 import { NavLink } from 'react-router-dom';
 import { Image, Transformation } from 'cloudinary-react';
+import Comments from '../Comments';
+import helpers, {
+  getIssue,
+  putIssue,
+  postTag,
+  delTag,
+  postComment,
+  delComment,
+  getImages
+} from '../axiosHelpers';
 import { statuses, today } from '../data';
+
+const { getTags, getComments } = helpers;
 
 class ViewIssue extends React.Component {
   constructor(props) {
@@ -31,14 +43,12 @@ class ViewIssue extends React.Component {
 
   componentDidMount() {
     this.fetchIssue(this.props.match.params.id);
-    axios
-      .get('tags')
+    getTags()
       .then(res => {
         this.setState({
           tags: res.data.tags
         });
-        axios
-          .get(`issues/${this.props.match.params.id}/images`)
+        getImages(this.props.match.params.id)
           .then(res => {
             let images = res.data.images;
             const imageIds = images.map(image => {
@@ -53,8 +63,7 @@ class ViewIssue extends React.Component {
       })
       .catch(console.log);
 
-    axios
-      .get('comments')
+    getComments()
       .then(res => this.setState({ comments: res.data.comments }))
       .catch(console.log);
   }
@@ -72,8 +81,7 @@ class ViewIssue extends React.Component {
   };
 
   fetchIssue = id => {
-    axios
-      .get(`issues/${id}`)
+    getIssue(id)
       .then(res => {
         this.setState({ issue: res.data.issue });
       })
@@ -91,8 +99,7 @@ class ViewIssue extends React.Component {
     if (this.state.noteEdits.length > 0) newEdits.notes = this.state.noteEdits;
     newEdits.status = this.state.issueStatus;
     newEdits.date = today;
-    axios
-      .put(`issues/${id}`, newEdits)
+    putIssue(id, newEdits)
       .then(response => {
         this.setState({ issue: response.data.issue, editingIssue: false });
       })
@@ -104,8 +111,7 @@ class ViewIssue extends React.Component {
   handleTagEdit = id => {
     const newTag = { name: this.state.tag, issueId: id, organizationId: 1 };
     console.log(newTag);
-    axios
-      .post(`tags`, newTag)
+    postTag(newTag)
       .then(response => {
         this.setState({
           tags: [
@@ -130,8 +136,7 @@ class ViewIssue extends React.Component {
 
   deleteTag = event => {
     let newArray = this.state.tags.slice();
-    axios
-      .delete(`tags/${event.target.getAttribute('id')}`)
+    delTag(event.target.getAttribute('id'))
       .then(response => {
         let deleteId = response.data.tag.id;
         newArray = newArray.filter(function(tag) {
@@ -146,12 +151,11 @@ class ViewIssue extends React.Component {
 
   submitComment = event => {
     event.preventDefault();
-    axios
-      .post('comments', {
-        content: this.state.comment,
-        userId: 1,
-        issueId: event.target[0].attributes[2].value
-      })
+    postComment({
+      content: this.state.comment,
+      userId: 1,
+      issueId: event.target[0].attributes[2].value
+    })
       .then(res => {
         this.setState({
           comments: [...this.state.comments, res.data.comment],
@@ -162,8 +166,7 @@ class ViewIssue extends React.Component {
   };
 
   deleteComment = event => {
-    axios
-      .delete(`comments/${event.target.getAttribute('issue_id')}`)
+    delComment(event.target.getAttribute('id'))
       .then(res => {
         let copy = this.state.comments.slice().filter(function(comment) {
           return comment.id !== res.data.comment.id;
@@ -275,27 +278,11 @@ class ViewIssue extends React.Component {
                       />
                     </form>
                   </div>
-                  <div>
-                    {this.state.comments
-                      .filter(comment => {
-                        return comment.issueId === this.state.issue.id;
-                      })
-                      .map(comment => {
-                        return (
-                          <div key={comment.id}>
-                            - {comment.content}
-                            <span
-                              onClick={this.deleteComment}
-                              className="delete-button"
-                              issue_id={comment.id}
-                            >
-                              {' '}
-                              x
-                            </span>
-                          </div>
-                        );
-                      })}
-                  </div>
+                  <Comments
+                    comments={this.state.comments}
+                    issueId={this.state.issue.id}
+                    deleteComment={this.deleteComment}
+                  />
                   <form onSubmit={this.submitComment}>
                     <input
                       name="comment"
