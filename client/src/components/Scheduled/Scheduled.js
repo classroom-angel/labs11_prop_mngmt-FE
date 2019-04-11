@@ -72,10 +72,6 @@ export default class Scheduled extends React.Component {
                   Schedule Issue or Visit
                 </Button>
               </Link>
-
-              <Button className="cyan darken-2" style={{ margin: '10px' }}>
-                Click event or Issue to edit
-              </Button>
             </div>
             <div style={{ height: 700 }}>
               <Calendar
