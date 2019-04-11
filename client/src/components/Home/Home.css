@@ -151,3 +151,25 @@ body {
 .landingTitle {
   margin-left: 20px;
 }
+
+.extraSpace {
+  border: 0px solid red;
+}
+
+@media (max-width: 1000px) {
+  .extraSpace {
+    margin-top: 100px;
+  }
+}
+
+@media (max-width: 530px) {
+  .extraSpace {
+    margin-top: 300px;
+  }
+}
+
+@media (max-width: 1000px) and (min-width: 992px) {
+  .Footer {
+    margin-top: 500px;
+  }
+}

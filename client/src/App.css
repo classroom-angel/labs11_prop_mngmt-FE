@@ -126,9 +126,12 @@
   padding-left: 10px !important;
 }
 
-
 /* Tried to add this to darken the placeholder text but it's not working... */
 /* ::placeholder {
   opacity: 1;
   color: red;
 } */
+
+.sideTransparent {
+  background-color: transparent !important;
+}
