@@ -23,6 +23,8 @@ import Payments from './components/Payments';
 import Auth from './Auth/auth';
 import AuthLoad from './components/AuthLoad';
 import CreateOrg from './components/CreateOrg';
+import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar/Sidebar';
 
 class App extends React.Component {
   constructor(props) {
@@ -90,6 +92,17 @@ class App extends React.Component {
     // console.log("env", process.env)
     return (
       <div className="App">
+        <Route
+          exact
+          path="/"
+          render={props => (
+            <Navbar {...props} auth={this.auth} />
+          )}/>
+          <Route
+            path="/"
+            render={props => (
+              <Sidebar {...props} auth={this.auth} />
+            )}/>
         <Route
           exact
           path="/"

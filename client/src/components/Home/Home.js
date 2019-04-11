@@ -13,72 +13,6 @@ function Home(props) {
           <div className="landingTitle">
             <h4>Classroom Angel</h4>
           </div>
-
-          <div className="navbar">
-            <NavLink
-              className="cyan darken-2 btn navbtn"
-              to="/MeetTeam"
-              style={{ margin: '15px' }}
-            >
-              Meet The Team
-            </NavLink>
-
-            <NavLink
-              className="cyan darken-2 btn navbtn"
-              to="/OurMission"
-              style={{ margin: '15px' }}
-            >
-              Our Mission
-            </NavLink>
-            <NavLink
-              className="cyan darken-2 btn navbtn"
-              to="/testimonials"
-              style={{ margin: '15px' }}
-            >
-              Testimonials
-            </NavLink>
-            {isAuth ? (
-              <NavLink
-                className="cyan darken-2 btn navbtn"
-                to="/"
-                onClick={function(e) {
-                  props.auth.logout();
-                }}
-                style={{ margin: '15px' }}
-              >
-                Sign out
-              </NavLink>
-            ) : (
-              <NavLink
-                className="cyan darken-2 btn navbtn"
-                to="/"
-                onClick={function(e) {
-                  props.auth.login();
-                }}
-                style={{ margin: '15px' }}
-              >
-                Sign up/Sign in
-              </NavLink>
-            )}
-
-            {isAuth && (
-              <div className="Main">
-                {/*<NavLink to="/onboarding">Get Started</NavLink>*/}
-                <NavLink
-                  className="red lighten-3 btn navbtn"
-                  to="/bm-homepage"
-                  style={{
-                    margin: '15px',
-                    width: '200px',
-                    fontSize: '20px',
-                    fontWeight: 'bold'
-                  }}
-                >
-                  View App
-                </NavLink>
-              </div>
-            )}
-          </div>
         </div>
 
         {isAuth && (
@@ -100,7 +34,7 @@ function Home(props) {
       </div>
 
       <div className="logoAndText">
-        <div className="textBox">
+        <div className="textBox z-depth-5">
           <h4>
             Manage your <br />
             school wisely
@@ -120,6 +54,7 @@ function Home(props) {
                 className="cyan darken-2 btn"
                 to="/"
                 style={{ margin: '15px' }}
+                onClick={props.auth.login}
               >
                 Sign up/sign in
               </NavLink>{' '}
