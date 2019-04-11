@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import Comments from '../Comments';
 
 const Issue = ({
   issue,
@@ -78,27 +79,11 @@ const Issue = ({
         </button>
         {showCommentsObj[`issue${issue.id}`] ? (
           <div>
-            <div>
-              {comments
-                .filter(function(comment) {
-                  return comment.issueId === issue.id;
-                })
-                .map(comment => {
-                  return (
-                    <div key={comment.id}>
-                      - {comment.content}
-                      <span
-                        className="delete-button"
-                        onClick={deleteComment}
-                        issue_id={comment.id}
-                      >
-                        {' '}
-                        x
-                      </span>
-                    </div>
-                  );
-                })}
-            </div>
+            <Comments
+              comments={comments}
+              issueId={issue.id}
+              deleteComment={deleteComment}
+            />
             <form onSubmit={e => submitComment(issue.id, e)}>
               <input
                 name="comment"

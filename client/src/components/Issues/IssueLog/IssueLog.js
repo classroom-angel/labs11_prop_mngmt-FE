@@ -1,11 +1,18 @@
 import React from 'react';
 import Sidebar from '../../Sidebar/Sidebar';
 import '../Issues.css';
-import axios from '../../../axiosInstance';
-import helpers, { postIssue, postImages, delIssue } from '../axiosHelpers';
 import Issue from './Issue';
 import NewIssue from './NewIssue';
 import FilterOptions from './FilterOptions';
+import helpers, {
+  getIssue,
+  postIssue,
+  delIssue,
+  postImages,
+  postTag,
+  postComment,
+  delComment
+} from '../axiosHelpers';
 // import moment from 'moment'
 import { statuses, today } from '../data';
 
@@ -102,7 +109,7 @@ export default class IssueLog extends React.Component {
   };
 
   deleteIssue = event => {
-    delIssue({ id: event.target.value })
+    delIssue(event.target.value)
       .then(res => {
         var copy = this.state.issues.filter(function(element) {
           return element.id !== res.data.issue.id;
@@ -138,8 +145,7 @@ export default class IssueLog extends React.Component {
   };
 
   fetchIssue = id => {
-    axios
-      .get(`issues/${id}`)
+    getIssue(id)
       .then(res => {
         console.log('fetched note', res.data);
         this.setState({ issue: res.data.issue });
@@ -150,8 +156,7 @@ export default class IssueLog extends React.Component {
   handleTagEdit = (id, event) => {
     event.preventDefault();
     const newTag = { name: this.state.tag, issueId: id };
-    axios
-      .post(`tag`, newTag)
+    postTag(newTag)
       .then(response => {
         console.log('axios response', response.data);
         this.setState({ tags: response.data, tag: '' });
@@ -176,12 +181,11 @@ export default class IssueLog extends React.Component {
 
   submitComment = (id, event) => {
     event.preventDefault();
-    axios
-      .post('comments', {
-        content: this.state.commentsObj[`issue${id}`],
-        userId: 1,
-        issueId: event.target[0].attributes[2].value
-      })
+    postComment({
+      content: this.state.commentsObj[`issue${id}`],
+      userId: 1,
+      issueId: event.target[0].attributes[2].value
+    })
       .then(res => {
         this.setState({
           comments: [...this.state.comments, res.data.comment],
@@ -192,8 +196,7 @@ export default class IssueLog extends React.Component {
   };
 
   deleteComment = event => {
-    axios
-      .delete(`comments/${event.target.getAttribute('issue_id')}`)
+    delComment(event)
       .then(res => {
         let copy = this.state.comments.slice().filter(function(comment) {
           return comment.id !== res.data.comment.id;
