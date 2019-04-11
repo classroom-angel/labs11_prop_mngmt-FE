@@ -12,7 +12,14 @@ const NewIssue = ({
   imgAdder,
   statuses
 }) => (
-  <Card style={{ order: '-1', width: '350px', height: '400px' }}>
+  <Card
+    style={{
+      order: '-1',
+      width: '350px',
+      height: '400px',
+      border: '2px solid #00b8d4'
+    }}
+  >
     <form onSubmit={postIssues} className="issue-card submit-issue">
       <h4>New Issue +</h4>
       <input
@@ -53,7 +60,7 @@ const NewIssue = ({
       </select>
       <br />
       <Uploader uploading={uploading} imgAdder={imgAdder} />
-      <Button type="submit" waves="light">
+      <Button type="submit" waves="light" className="cyan darken-4">
         Submit
         <Icon right>send</Icon>
       </Button>

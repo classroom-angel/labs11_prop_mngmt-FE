@@ -238,42 +238,55 @@ export default class IssueLog extends React.Component {
         return (
           <div className="page-container">
             <div className="right-side">
-              <h1 style={{ textAlign: 'center', border: '2px solid gray' }}>
+              <h1 style={{ textAlign: 'center', color: '#333333' }}>
                 Issue Log
               </h1>
               {/* Modal Trigger */}
-              <button data-target="modal1" className="btn modal-trigger">
-                + New Issue
-              </button>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-evenly',
+                  width: '500px',
+                  marginBottom: '25px',
+                  float: 'right'
+                }}
+              >
+                <button
+                  data-target="modal1"
+                  className="btn modal-trigger cyan darken-4"
+                >
+                  + New Issue
+                </button>
 
-              <div id="modal1" className="modal">
-                <div className="modal-content">
-                  <NewIssue
-                    postIssues={this.postIssues}
-                    issueName={this.state.issueName}
-                    handleChange={this.handleChange}
-                    issueNotes={this.state.issueNotes}
-                    visitChange={this.visitChange}
-                    uploading={this.state.uploading}
-                    imgAdder={this.imgAdder}
-                    statuses={statuses}
-                  />
+                <div id="modal1" className="modal">
+                  <div className="modal-content">
+                    <NewIssue
+                      postIssues={this.postIssues}
+                      issueName={this.state.issueName}
+                      handleChange={this.handleChange}
+                      issueNotes={this.state.issueNotes}
+                      visitChange={this.visitChange}
+                      uploading={this.state.uploading}
+                      imgAdder={this.imgAdder}
+                      statuses={statuses}
+                    />
+                  </div>
+                  <div className="modal-footer">
+                    <a
+                      href="#!"
+                      className="modal-close waves-effect waves-green btn-flat"
+                    >
+                      Agree
+                    </a>
+                  </div>
                 </div>
-                <div className="modal-footer">
-                  <a
-                    href="#!"
-                    className="modal-close waves-effect waves-green btn-flat"
-                  >
-                    Agree
-                  </a>
-                </div>
+
+                <FilterOptions
+                  statuses={statuses}
+                  tags={tags}
+                  handleDropChange={this.handleDropChange}
+                />
               </div>
-
-              <FilterOptions
-                statuses={statuses}
-                tags={tags}
-                handleDropChange={this.handleDropChange}
-              />
               <div className="issue-list">
                 {this.state.issues.map(issue => (
                   <Issue

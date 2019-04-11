@@ -33,7 +33,11 @@ const Issue = ({
     (testArray.includes(issue.id) || filterTag === 'all')
   )
     return (
-      <Card key={issue.id} className="" style={{ width: '350px' }}>
+      <Card
+        key={issue.id}
+        className=""
+        style={{ width: '350px', border: '2px solid #00b8d4' }}
+      >
         <p
           style={{
             textAlign: 'left',
@@ -53,7 +57,7 @@ const Issue = ({
             })
             .map(function(tag) {
               return (
-                <Chip key={tag.id} className="blue-grey">
+                <Chip key={tag.id} className="cyan lighten-5">
                   {tag.name}
                 </Chip>
               );
@@ -62,20 +66,20 @@ const Issue = ({
         <Button
           onClick={deleteIssue}
           value={issue.id}
-          className="red darken-1"
+          className="amber darken-4"
           style={{ margin: '5px 10px' }}
         >
           X
         </Button>
         <NavLink to={`/issue/${issue.id}`}>
-          <Button value={issue.id} className="cyan darken-2">
+          <Button value={issue.id} className="cyan lighten-2">
             View/Update
           </Button>
         </NavLink>
         <Button
           onClick={() => toggleShowComments(issue.id)}
           value={issue.id}
-          className="cyan darken-3"
+          className="cyan lighten-3"
         >
           Show Comments
         </Button>
