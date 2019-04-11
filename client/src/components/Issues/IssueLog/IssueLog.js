@@ -225,9 +225,14 @@ export default class IssueLog extends React.Component {
       this.arrayTags();
 
       if (this.state.issuesLoaded) {
-        var elem = document.querySelectorAll('.dropdown-trigger');
-        if (elem) {
-          M.Dropdown.init(elem, {});
+        var dd = document.querySelectorAll('.dropdown-trigger'); // Select the dropdown elements
+        if (dd) {
+          M.Dropdown.init(dd, {});
+        }
+
+        var mod = document.querySelectorAll('.modal');
+        if (mod) {
+          M.Modal.init(mod, {});
         }
 
         return (
@@ -236,6 +241,34 @@ export default class IssueLog extends React.Component {
               <h1 style={{ textAlign: 'center', border: '2px solid gray' }}>
                 Issue Log
               </h1>
+              {/* Modal Trigger */}
+              <button data-target="modal1" className="btn modal-trigger">
+                + New Issue
+              </button>
+
+              <div id="modal1" className="modal">
+                <div className="modal-content">
+                  <NewIssue
+                    postIssues={this.postIssues}
+                    issueName={this.state.issueName}
+                    handleChange={this.handleChange}
+                    issueNotes={this.state.issueNotes}
+                    visitChange={this.visitChange}
+                    uploading={this.state.uploading}
+                    imgAdder={this.imgAdder}
+                    statuses={statuses}
+                  />
+                </div>
+                <div className="modal-footer">
+                  <a
+                    href="#!"
+                    className="modal-close waves-effect waves-green btn-flat"
+                  >
+                    Agree
+                  </a>
+                </div>
+              </div>
+
               <FilterOptions
                 statuses={statuses}
                 tags={tags}

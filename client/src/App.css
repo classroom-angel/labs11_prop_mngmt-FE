@@ -36,11 +36,8 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  /* background-color: #094d92; */
-  /* width: 21.5%; */
   font-family: 'Roboto', sans-serif;
   padding: 0px 20px;
-  /* min-height: 100vh; */
   box-shadow: 2px 0px;
 }
 
@@ -80,14 +77,11 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  /* justify-content: space-evenly; */
+  justify-content: space-evenly;
 }
 
 .issue-card {
   text-align: center;
-  border: 1px solid orange;
-  margin: 40px 20px;
-  width: 300px;
   padding-bottom: 20px;
   font-size: 14px;
 }
@@ -100,10 +94,6 @@
   color: white;
   font-weight: 800;
 }
-
-/* a {
-  text-decoration: none;
-} */
 
 .tag {
   border: 1px solid;
@@ -135,6 +125,12 @@
   border: 1px solid grey !important;
   padding-left: 10px !important;
 }
+
+/* Tried to add this to darken the placeholder text but it's not working... */
+/* ::placeholder {
+  opacity: 1;
+  color: red;
+} */
 
 .sideTransparent {
   background-color: transparent !important;
