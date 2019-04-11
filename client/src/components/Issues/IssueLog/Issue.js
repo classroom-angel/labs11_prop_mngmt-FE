@@ -33,11 +33,10 @@ const Issue = ({
     (testArray.includes(issue.id) || filterTag === 'all')
   )
     return (
-      <Card key={issue.id} className="">
+      <Card key={issue.id} className="" style={{ width: '350px' }}>
         <p
           style={{
             textAlign: 'left',
-            marginLeft: '20px',
             fontSize: '18px'
           }}
         >
@@ -60,16 +59,23 @@ const Issue = ({
               );
             })}
         </div>
-        <Button onClick={deleteIssue} value={issue.id} className="red">
-          Delete
+        <Button
+          onClick={deleteIssue}
+          value={issue.id}
+          className="red darken-1"
+          style={{ margin: '5px 10px' }}
+        >
+          X
         </Button>
         <NavLink to={`/issue/${issue.id}`}>
-          <Button value={issue.id}>View/Update</Button>
+          <Button value={issue.id} className="cyan darken-2">
+            View/Update
+          </Button>
         </NavLink>
         <Button
           onClick={() => toggleShowComments(issue.id)}
           value={issue.id}
-          className="blue"
+          className="cyan darken-3"
         >
           Show Comments
         </Button>
