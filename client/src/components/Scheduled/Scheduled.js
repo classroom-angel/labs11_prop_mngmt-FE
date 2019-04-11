@@ -58,7 +58,6 @@ export default class Scheduled extends React.Component {
     if (this.props.auth.isAuth()) {
       return (
         <div className="page-container">
-          <Sidebar />
 
           <div className="calendar right-side">
             <h3 className="calendar-title">Scheduled Issues and Visits</h3>
@@ -73,10 +72,6 @@ export default class Scheduled extends React.Component {
                   Schedule Issue or Visit
                 </Button>
               </Link>
-
-              <Button className="cyan darken-2" style={{ margin: '10px' }}>
-                Click event or Issue to edit
-              </Button>
             </div>
             <div style={{ height: 700 }}>
               <Calendar

@@ -9,8 +9,8 @@ import SignUp from './components/SignUp';
 import Home from './components/Home/Home';
 import JoinOrg from './components/JoinOrg';
 import BoardMemberHub from './components/BoardMember/BoardMember';
-import IssueLog from './components/Issues/IssueLog';
-import ViewIssue from './components/Issues/ViewIssue';
+import IssueLog from './components/Issues/IssueLog/IssueLog';
+import ViewIssue from './components/Issues/ViewIssue/ViewIssue';
 import MeetTeam from './components/MeetTeam/MeetTeam';
 import OurMission from './components/OurMission/OurMission';
 import Scheduled from './components/Scheduled/Scheduled';
@@ -23,6 +23,8 @@ import Payments from './components/Payments';
 import Auth from './Auth/auth';
 import AuthLoad from './components/AuthLoad';
 import CreateOrg from './components/CreateOrg';
+import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar/Sidebar';
 
 class App extends React.Component {
   constructor(props) {
@@ -74,7 +76,7 @@ class App extends React.Component {
       };
       console.log('USER!!!', user);
       const userConf = await axios.post(`users/register`, user);
-      console.log(userConf);
+      console.log('userConf', userConf);
     }
     console.log('***NEW PROFILE!!!***', newProfile);
     cb(ste);
@@ -85,11 +87,22 @@ class App extends React.Component {
     if (profile == null) {
       profile = {
         name: ''
+      };
     }
-  }
     // console.log("env", process.env)
     return (
       <div className="App">
+        <Route
+          exact
+          path="/"
+          render={props => (
+            <Navbar {...props} auth={this.auth} />
+          )}/>
+          <Route
+            path="/"
+            render={props => (
+              <Sidebar {...props} auth={this.auth} />
+            )}/>
         <Route
           exact
           path="/"

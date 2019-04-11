@@ -5,6 +5,7 @@ import john from '../../img/john.png';
 import jordan from '../../img/jordan.png';
 import rachel from '../../img/rachel.png';
 import './MeetTeam.css';
+import { Card, CardTitle, Col } from 'react-materialize';
 
 class MeetTeam extends Component {
   render() {
@@ -12,81 +13,180 @@ class MeetTeam extends Component {
     return (
       <div className="meet-team">
         <div>
-          <h3>Meet The Team</h3>
+          <h3 style={{ textAlign: 'center' }}>Meet The Team</h3>
         </div>
         <div className="row valign-wrapper center-align">
-          <div className="alec col s4" style={{ margin: '15px' }}>
-            <h5>Alec Jordan</h5>
-            <img style={imgstyle} src={alec} alt="alec" />
-            <a target="_blank" href="https://github.com/TheDeterminator">
-              <i
-                style={{ color: '#e57373', margin: '10px' }}
-                class="fab fa-github-square fa-2x"
-              />
-            </a>
-            <a target="_blank" href="https://www.linkedin.com/in/alec-jordan1/">
-              <i class="fab fa-linkedin fa-2x cyan-text" />
-            </a>
+          <div className="alec col s5" style={{ margin: '15px' }}>
+            <Col>
+              <Card
+                style={{ margin: '15px' }}
+                header={<CardTitle />}
+                title="Aleczander Jordan"
+                reveal={
+                  <p style={{ textAlign: 'left' }}>
+                    Alec is a Software Engineer who specializes in Front End Web
+                    Dev. He hopes to one day work at a top company like Google
+                    or DeepMind and maybe start his own business. In his free
+                    time, he enjoys filmmaking, health and fitness and learning
+                    about A.I.
+                  </p>
+                }
+              >
+                <img style={imgstyle} src={alec} alt="alec" />
+                <p>
+                  <a target="_blank" href="https://github.com/TheDeterminator">
+                    <i
+                      style={{ color: '#e57373', margin: '10px' }}
+                      class="fab fa-github-square fa-2x"
+                    />
+                  </a>
+                  <a
+                    target="_blank"
+                    href="https://www.linkedin.com/in/alec-jordan1/"
+                  >
+                    <i className="fab fa-linkedin fa-2x cyan-text" />
+                  </a>
+                </p>
+              </Card>
+            </Col>
           </div>
-          <div className="grant col s4" style={{ margin: '15px' }}>
-            <h5>Grant Reighard</h5>
-            <img style={imgstyle} src={grant} alt="grant" />
-            <a target="_blank" href="https://www.github.com/grantreighard">
-              <i
-                style={{ color: '#e57373', margin: '10px' }}
-                class="fab fa-github-square fa-2x"
-              />
-            </a>
-            <a target="_blank" href="https://www.linkedin.com/in/grantreighard">
-              <i class="fab fa-linkedin fa-2x cyan-text" />
-            </a>
+          <div className="grant col s5" style={{ margin: '15px' }}>
+            <Col>
+              <Card
+                style={{ margin: '15px' }}
+                header={<CardTitle />}
+                title="Grant Reighard"
+                reveal={
+                  <p style={{ marginTop: '30px', textAlign: 'left' }}>
+                    Like most Lambda students, Grant comes from a
+                    non-traditional Computer Science background. He has a BA in
+                    Film and Media Arts from Temple University. He enjoys
+                    playing, watching, and developing video games.
+                  </p>
+                }
+              >
+                <img style={imgstyle} src={grant} alt="grant" />
+                <p>
+                  <a
+                    target="_blank"
+                    href="https://www.github.com/grantreighard"
+                  >
+                    <i
+                      style={{ color: '#e57373', margin: '10px' }}
+                      class="fab fa-github-square fa-2x"
+                    />
+                  </a>
+                  <a
+                    target="_blank"
+                    href="https://www.linkedin.com/in/grantreighard"
+                  >
+                    <i className="fab fa-linkedin fa-2x cyan-text" />
+                  </a>
+                </p>
+              </Card>
+            </Col>
           </div>
-          <div className="john col s4" style={{ margin: '15px' }}>
-            <h5>John O'Rourke</h5>
-            <img style={imgstyle} src={john} alt="john" />
-            <a target="_blank" href="https://github.com/johnoro">
-              <i
-                style={{ color: '#e57373', margin: '10px' }}
-                class="fab fa-github-square fa-2x"
-              />
-            </a>
-            <a target="_blank" href="https://www.linkedin.com/in/john-o-rourke">
-              <i class="fab fa-linkedin fa-2x cyan-text" />
-            </a>
+          <div className="john col s5" style={{ margin: '15px' }}>
+            <Col>
+              <Card
+                style={{ margin: '15px' }}
+                header={<CardTitle />}
+                title="John O'Rourke"
+                reveal={
+                  <p>
+                    Besides programming, John likes to hike, learn new things ,
+                    and play games.
+                  </p>
+                }
+              >
+                <img style={imgstyle} src={john} alt="john" />
+                <p>
+                  <a target="_blank" href="https://github.com/johnoro">
+                    <i
+                      style={{ color: '#e57373', margin: '10px' }}
+                      class="fab fa-github-square fa-2x"
+                    />
+                  </a>
+                  <a
+                    target="_blank"
+                    href="https://www.linkedin.com/in/john-o-rourke"
+                  >
+                    <i className="fab fa-linkedin fa-2x cyan-text" />
+                  </a>
+                </p>
+              </Card>
+            </Col>
           </div>
         </div>
         <div className="row valign-wrapper center-align">
-          <div className="jordan col s4" style={{ margin: '15px' }}>
-            <h5>Jordan Massingill</h5>
-            <img style={imgstyle} src={jordan} alt="jordan" />
-            <a target="_blank" href="https://github.com/jordan-massingill">
-              <i
-                style={{ color: '#e57373', margin: '10px' }}
-                class="fab fa-github-square fa-2x"
-              />
-            </a>
-            <a
-              target="_blank"
-              href="https://www.linkedin.com/in/jordan-massingill/"
-            >
-              <i class="fab fa-linkedin fa-2x cyan-text" />
-            </a>
+          <div className="jordan col s5" style={{ margin: '15px' }}>
+            <Col>
+              <Card
+                style={{ margin: '15px' }}
+                header={<CardTitle />}
+                title="Jordan Massingill"
+                reveal={
+                  <p style={{ marginTop: '30px', textAlign: 'left' }}>
+                    Texan, tenacious, and technically savvy. Background in
+                    biological and social sciences, future in full-stack
+                    engineering. Strong love of music, the ocean, furbabies of
+                    all kinds, and STEM
+                  </p>
+                }
+              >
+                <img style={imgstyle} src={jordan} alt="jordan" />
+                <p>
+                  <a
+                    target="_blank"
+                    href="https://github.com/jordan-massingill"
+                  >
+                    <i
+                      style={{ color: '#e57373', margin: '10px' }}
+                      class="fab fa-github-square fa-2x"
+                    />
+                  </a>
+                  <a
+                    target="_blank"
+                    href="https://www.linkedin.com/in/jordan-massingill/"
+                  >
+                    <i className="fab fa-linkedin fa-2x cyan-text" />
+                  </a>
+                </p>
+              </Card>
+            </Col>
           </div>
-          <div className="rachel col s4" style={{ margin: '15px' }}>
-            <h5>Rachel DiCesare</h5>
-            <img style={imgstyle} src={rachel} alt="rachel" />
-            <a target="_blank" href="https://github.com/RachelDiCesare93">
-              <i
-                style={{ color: '#e57373', margin: '10px' }}
-                class="fab fa-github-square fa-2x"
-              />
-            </a>
-            <a
-              target="_blank"
-              href="https://www.linkedin.com/in/racheldicesare"
-            >
-              <i className="fab fa-linkedin fa-2x cyan-text" />
-            </a>
+          <div className="rachel col s5" style={{ margin: '15px' }}>
+            <Col>
+              <Card
+                style={{ margin: '15px' }}
+                header={<CardTitle />}
+                title="Rachel DiCesare"
+                reveal={
+                  <p style={{ marginTop: '30px', textAlign: 'left' }}>
+                    Rachel comes from a non-tradional Computer Science
+                    background. After working with children for 5 years , she
+                    was ready for a big change.Rachel loves building projects
+                    with her technical skills and imagination.
+                  </p>
+                }
+              >
+                <img style={imgstyle} src={rachel} alt="rachel" />
+                <p>
+                  <a target="_blank" href="https://github.com/RachelDiCesare93">
+                    <i
+                      style={{ color: '#e57373', margin: '10px' }}
+                      class="fab fa-github-square fa-2x"
+                    />
+                  </a>
+                  <a
+                    target="_blank"
+                    href="https://www.linkedin.com/in/racheldicesare"
+                  >
+                    <i className="fab fa-linkedin fa-2x cyan-text" />
+                  </a>
+                </p>
+              </Card>
+            </Col>
           </div>
         </div>
       </div>
