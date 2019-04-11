@@ -33,7 +33,9 @@ class Home extends Component {
 
           {this.isAuth && (
             <div>
-              <h3>Welcome, {this.props.profile.name.split(' ')[0]}</h3>
+              <h3 className="welcomeTitle">
+                Welcome, {this.props.profile.name.split(' ')[0]}
+              </h3>
               <div
                 className="avatar"
                 style={{
@@ -50,7 +52,7 @@ class Home extends Component {
         </div>
 
         <div className="logoAndText">
-          <div className="textBox z-depth-5">
+          <div className="textBox z-depth-5 cyan">
             <h4>
               Manage your <br />
               school wisely
