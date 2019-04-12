@@ -64,7 +64,7 @@ class EditEventForm extends Component {
     return (
       <div>
         <h3>Edit Issue</h3>
-        <div className="EditForm cyan">
+        <div className="EditForm cyan  z-depth-4">
           <form onSubmit={this.updateEvent}>
             <div className="row">
               <div class="input-field col s12">

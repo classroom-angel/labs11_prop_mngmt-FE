@@ -48,10 +48,10 @@ class CreateEventForm extends Component {
     return (
       <div>
         <h3>Schedule Issue</h3>
-        <div className="EventForm cyan">
+        <div className="EventForm cyan z-depth-4">
           <form onSubmit={this.createEvent}>
             <div className="row">
-              <div class="input-field col s12 black-text">
+              <div className="input-field col s12 black-text">
                 <input
                   onChange={this.handleChange}
                   placeholder="Name"

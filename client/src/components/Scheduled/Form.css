@@ -1,19 +1,13 @@
 .EventForm {
   width: 500px;
   margin: 0 auto;
-  border: 5px solid #00acc1;
   border-radius: 5px;
   padding: 10px;
 }
 
-/* h3 {
-  color: #b71c1c;
-} */
-
 .EditForm {
   width: 500px;
   margin: 0 auto;
-  border: 5px solid #00acc1;
   border-radius: 5px;
   padding: 10px;
 }
