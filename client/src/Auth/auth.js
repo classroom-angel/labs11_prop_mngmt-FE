@@ -58,9 +58,9 @@ export default class Auth extends Component {
           profile.orgId = oldUser[0].organizationId;
           profile.role = oldUser[0].role;
           profile.name = oldUser[0].firstName + ' ' + oldUser[0].lastName;
-          profile.organizationName = userOrg[0].name
+          profile.organizationName = userOrg[0].name;
           localStorage.setItem('profile', JSON.stringify(profile));
-          if (profile.role === "Board member") {
+          if (profile.role === 'Board member') {
             location.pathname = '/bm-homepage';
           } else {
             location.pathname = '/issue-log';

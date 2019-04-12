@@ -75,8 +75,8 @@ class Sidebar extends Component {
       }
     });
     let side = document.querySelector('.sidenav-overlay');
-    if (side && (this.props.location && this.props.location.pathname === "/")) {
-      side.classList = 'hidden'
+    if (side && (this.props.location && this.props.location.pathname === '/')) {
+      side.classList = 'hidden';
     }
     if (instance) {
       if (instance.isOpen) {
@@ -92,7 +92,10 @@ class Sidebar extends Component {
 
   render() {
     const profile = JSON.parse(localStorage.getItem('profile'));
-    if (this.props.location && (this.props.location.pathname === '/' || !profile)) {
+    if (
+      this.props.location &&
+      (this.props.location.pathname === '/' || !profile)
+    ) {
       console.log(this.props.location.pathname);
       return null;
     } else {
@@ -101,7 +104,7 @@ class Sidebar extends Component {
           <ul id="slide-out" className="sidenav sidebar">
             <div
               className="cyan lighten-4"
-              style={{ width: '110%', height: '250px' }}
+              style={{ width: '110%', height: '270px' }}
             >
               <div
                 className="avatar"
@@ -124,7 +127,10 @@ class Sidebar extends Component {
             {profile.role === 'Board member' && (
               <li>
                 <NavLink to="/bm-homepage">
-                  <p className="black-text waves-effect">
+                  <p
+                    className="black-text waves-effect"
+                    style={{ margin: 'auto' }}
+                  >
                     Board Member Homepage
                   </p>
                 </NavLink>
@@ -134,30 +140,55 @@ class Sidebar extends Component {
               profile.role === 'Teacher') && (
               <li>
                 <NavLink to="/issue-log">
-                  <p className="black-text waves-effect">Issue Log</p>
+                  <p
+                    className="black-text waves-effect"
+                    style={{ margin: 'auto' }}
+                  >
+                    Issue Log
+                  </p>
                 </NavLink>
               </li>
             )}
             <li>
               <NavLink to="/scheduled">
-                <p className="black-text waves-effect">Scheduled Issues</p>
+                <p
+                  className="black-text waves-effect"
+                  style={{ margin: 'auto' }}
+                >
+                  Scheduled Issues
+                </p>
               </NavLink>
             </li>
             <li>
               <NavLink to="/visits">
-                <p className="black-text waves-effect">Admin Visits</p>
+                <p
+                  className="black-text waves-effect"
+                  style={{ margin: 'auto' }}
+                >
+                  Admin Visits
+                </p>
               </NavLink>
             </li>
             {profile.role === 'Board member' && (
               <li>
                 <NavLink to="/payments">
-                  <p className="black-text waves-effect">Payments</p>
+                  <p
+                    className="black-text waves-effect"
+                    style={{ margin: 'auto' }}
+                  >
+                    Payments
+                  </p>
                 </NavLink>
               </li>
             )}
             <li>
               <NavLink to="/">
-                <p className="black-text waves-effect">Landing Page</p>
+                <p
+                  className="black-text waves-effect"
+                  style={{ margin: 'auto' }}
+                >
+                  Landing Page
+                </p>
               </NavLink>
             </li>
           </ul>

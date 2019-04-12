@@ -60,7 +60,7 @@ class ViewIssue extends React.Component {
               imageIds
             });
           })
-          .catch(err => console.log('CRAP!!!'));
+          .catch(err => console.log(err.data));
       })
       .catch(console.log);
 
