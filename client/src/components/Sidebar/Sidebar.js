@@ -94,20 +94,25 @@ class Sidebar extends Component {
         <div>
           <ul id="slide-out" className="sidenav sidebar">
             <div
-              className="avatar"
-              style={
-                profile
-                  ? {
-                      backgroundImage: `url(${profile.picture})`,
-                      backgroundSize: 'cover',
-                      width: '150px',
-                      height: '150px',
-                      borderRadius: '75px',
-                      margin: '40px auto 0'
-                    }
-                  : null
-              }
-            />
+              className="cyan lighten-4"
+              style={{ width: '110%', height: '250px' }}
+            >
+              <div
+                className="avatar"
+                style={
+                  profile
+                    ? {
+                        backgroundImage: `url(${profile.picture})`,
+                        backgroundSize: 'cover',
+                        width: '150px',
+                        height: '150px',
+                        borderRadius: '75px',
+                        margin: '40px auto 0'
+                      }
+                    : null
+                }
+              />
+            </div>
             <h3 className="sidebar-header">Classroom Angel</h3>
             {profile.role === 'Board member' && (
               <li>

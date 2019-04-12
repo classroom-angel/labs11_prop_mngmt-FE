@@ -4,6 +4,7 @@ import './Home/Home.css';
 
 export default function Navbar(props) {
   const isAuth = props.auth.isAuth();
+  const profile = JSON.parse(localStorage.getItem('profile'));
   return (
     <div className="navbar">
       <NavLink
@@ -54,8 +55,7 @@ export default function Navbar(props) {
 
       {isAuth && (
         <div className="Main">
-          {/*<NavLink to="/onboarding">Get Started</NavLink>*/}
-          <NavLink
+          {profile.role === "Board member" ? <NavLink
             className="amber darken-2 btn navbtn"
             to="/bm-homepage"
             style={{
@@ -67,6 +67,20 @@ export default function Navbar(props) {
           >
             View App
           </NavLink>
+          :
+          <NavLink
+            className="amber darken-2 btn navbtn"
+            to="/issue-log"
+            style={{
+              margin: '15px',
+              width: '200px',
+              fontSize: '20px',
+              fontWeight: 'bold'
+            }}
+          >
+            View App
+          </NavLink>
+        }
         </div>
       )}
     </div>
