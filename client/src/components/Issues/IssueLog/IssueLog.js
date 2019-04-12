@@ -133,9 +133,7 @@ export default class IssueLog extends React.Component {
 
   toggleEdit = () => {
     this.setState({
-      editingIssue: !this.state.editingIssue,
-      title: this.state.note.title,
-      textBody: this.state.note.textBody
+      editingIssue: !this.state.editingIssue
     });
   };
 
@@ -232,7 +230,8 @@ export default class IssueLog extends React.Component {
 
         var mod = document.querySelectorAll('.modal');
         if (mod) {
-          M.Modal.init(mod, {});
+          const instance = M.Modal.init(mod, {dismissible: false});
+          console.log(instance);
         }
 
         return (
@@ -270,6 +269,9 @@ export default class IssueLog extends React.Component {
                       imgAdder={this.imgAdder}
                       statuses={statuses}
                     />
+                  </div>
+                  <div class="modal-footer">
+                    <a class=" modal-action modal-close waves-effect btn-flat" onClick={this.postIssues}>Submit</a>
                   </div>
                 </div>
 

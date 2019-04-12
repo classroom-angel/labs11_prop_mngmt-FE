@@ -158,12 +158,12 @@ export default class SignUp extends Component {
           about yourself...
         </h3>
         <form
-          className="col s12 red lighten-3 z-depth-4"
+          className="col s12 z-depth-4"
           style={{ padding: '20px' }}
         >
           <div className="col s12 l6">
             <div className="input-field">
-              <label className="white-text" htmlFor="username">
+              <label htmlFor="username">
                 Email Address
               </label>
               <input
@@ -177,7 +177,7 @@ export default class SignUp extends Component {
               />
             </div>
             <div className="input-field">
-              <label className="white-text" htmlFor="first_name">
+              <label htmlFor="first_name">
                 First Name
               </label>
               <input
@@ -191,7 +191,7 @@ export default class SignUp extends Component {
               />
             </div>
             <div className="input-field">
-              <label className="white-text" htmlFor="last_name">
+              <label htmlFor="last_name">
                 Last Name
               </label>
               <input
@@ -212,7 +212,7 @@ export default class SignUp extends Component {
             {roles.map(role => {
               return (
                 <p>
-                  <label className="white-text">
+                  <label>
                     <input
                       name="role"
                       type="radio"
@@ -234,7 +234,7 @@ export default class SignUp extends Component {
                 {this.orgs.map(org => {
                   return (
                     <p>
-                      <label className="white-text">
+                      <label>
                         <input
                           name="organizationName"
                           type="radio"

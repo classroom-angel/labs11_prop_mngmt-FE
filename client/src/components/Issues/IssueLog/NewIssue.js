@@ -16,7 +16,7 @@ const NewIssue = ({
   statuses.forEach(status => options.push({ label: status, value: status }));
   return (
     <Card>
-      <form onSubmit={postIssues} className="issue-card submit-issue">
+      <form className="issue-card submit-issue">
         <h4>New Issue +</h4>
         <input
           name="issueName"
@@ -44,12 +44,16 @@ const NewIssue = ({
           <span>isVisit</span>
         </label>
         <br />
-          <form>
+        {/*<select name="issueStatus" onChange={handleChange}>
+          <option value="">Status...</option>
           {statuses.map((status, index) => {
             return (
-              <input type='radio' onChange={handleChange} key={index} value={status}/>
+              <option key={index} value={status}>
+                {status}
+              </option>
             );
-          })} </form>
+          })}
+        </select>*/}
         {/*<RadioGroup
           name="issueStatus"
           onChange={handleChange}
@@ -58,10 +62,6 @@ const NewIssue = ({
           />*/}
         <br />
         <Uploader uploading={uploading} imgAdder={imgAdder} />
-        <Button type="submit" waves="light" className="cyan darken-4">
-          Submit
-          <Icon right>send</Icon>
-        </Button>
       </form>
     </Card>
   );
