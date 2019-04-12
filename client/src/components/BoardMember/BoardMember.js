@@ -70,7 +70,7 @@ export default class BoardMemberHub extends React.Component {
           <div className="row">
             <div className="col s12" style={{ marginTop: '20px' }}>
               <div
-                className="col s10 offset-s1 l4 red lighten-3 z-depth-4"
+                className="col s10 offset-s1 l4 z-depth-4"
                 style={{
                   borderRadius: '10px',
                   marginBottom: '20px'
@@ -111,7 +111,7 @@ export default class BoardMemberHub extends React.Component {
                 </div>
               </div>
               <div
-                className="col s10 offset-s1 l7 offset-l1 cyan darken-2 white-text z-depth-4"
+                className="col s10 offset-s1 l7 offset-l1 z-depth-4"
                 style={{
                   borderRadius: '10px'
                 }}
