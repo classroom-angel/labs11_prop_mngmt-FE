@@ -56,7 +56,7 @@ export default function Navbar(props) {
         <div className="Main">
           {/*<NavLink to="/onboarding">Get Started</NavLink>*/}
           <NavLink
-            className="red lighten-3 btn navbtn"
+            className="amber darken-2 btn navbtn"
             to="/bm-homepage"
             style={{
               margin: '15px',

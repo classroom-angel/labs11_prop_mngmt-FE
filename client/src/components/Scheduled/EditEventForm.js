@@ -64,7 +64,7 @@ class EditEventForm extends Component {
     return (
       <div>
         <h3>Edit Issue</h3>
-        <div className="EditForm cyan darken-2">
+        <div className="EditForm cyan  z-depth-4">
           <form onSubmit={this.updateEvent}>
             <div className="row">
               <div class="input-field col s12">
@@ -98,7 +98,7 @@ class EditEventForm extends Component {
             </div>
             <div>
               <Button
-                className="red lighten-1"
+                className="amber black-text"
                 type="submit"
                 waves="light"
                 style={{ margin: '10px' }}

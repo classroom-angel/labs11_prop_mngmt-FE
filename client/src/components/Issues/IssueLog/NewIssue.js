@@ -12,9 +12,16 @@ const NewIssue = ({
   imgAdder,
   statuses
 }) => (
-  <Card style={{ order: '-1' }}>
+  <Card
+    style={{
+      order: '-1',
+      width: '350px',
+      height: '400px',
+      border: '2px solid #00b8d4'
+    }}
+  >
     <form onSubmit={postIssues} className="issue-card submit-issue">
-      <h1>New Issue +</h1>
+      <h4>New Issue +</h4>
       <input
         name="issueName"
         value={issueName}
@@ -29,14 +36,17 @@ const NewIssue = ({
         onChange={handleChange}
       />
       <br />
-      <input
-        type="checkbox"
-        id="isVisit"
-        name="isVisit"
-        value={true}
-        onChange={visitChange}
-      />
-      <label htmlFor="isVisit">isVisit</label>
+      <label>
+        <input
+          type="checkbox"
+          id="isVisit"
+          name="isVisit"
+          value={true}
+          onChange={visitChange}
+          sytle={{ color: 'black' }}
+        />
+        <span>isVisit</span>
+      </label>
       <br />
       <select name="issueStatus" onChange={handleChange}>
         <option value="">Status...</option>
@@ -50,7 +60,7 @@ const NewIssue = ({
       </select>
       <br />
       <Uploader uploading={uploading} imgAdder={imgAdder} />
-      <Button type="submit" waves="light">
+      <Button type="submit" waves="light" className="cyan darken-4">
         Submit
         <Icon right>send</Icon>
       </Button>

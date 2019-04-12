@@ -2,10 +2,12 @@ import React from 'react';
 
 const FilterOptions = ({ handleDropChange, statuses, tags }) => (
   <>
-    Filter By Status:
     {/*Dropdown Trigger */}
-    <button className="dropdown-trigger btn" data-target="dropdown1">
-      Choose
+    <button
+      className="dropdown-trigger btn cyan darken-4"
+      data-target="dropdown1"
+    >
+      Status
     </button>
     {/* Dropdown Structure */}
     <ul id="dropdown1" className="dropdown-content">
@@ -24,9 +26,12 @@ const FilterOptions = ({ handleDropChange, statuses, tags }) => (
         );
       })}
     </ul>
-    Filter By Tag:
-    <button className="dropdown-trigger btn" data-target="dropdown2">
-      Choose
+    {/* <div style={{ display: 'inline-block', margin: '25px' }} /> */}
+    <button
+      className="dropdown-trigger btn cyan darken-4"
+      data-target="dropdown2"
+    >
+      Tags
     </button>
     {/* Dropdown Structure */}
     <ul id="dropdown2" className="dropdown-content">

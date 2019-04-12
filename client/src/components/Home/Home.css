@@ -40,7 +40,7 @@ a:hover {
   background-color: #006064;
   /* border: 1px solid orange; */
   font-size: 20px;
-  color: white;
+  color: #fafafa;
   /* border: 5px solid #0097a7; */
   border-radius: 10px;
   padding: 10px;
@@ -88,7 +88,7 @@ a:hover {
 }
 
 body {
-  background-color: lightblue;
+  background-color: #fafafa;
   box-sizing: border-box;
   font-family: 'Quicksand', sans-serif;
 }
@@ -150,4 +150,30 @@ body {
 
 .landingTitle {
   margin-left: 20px;
+}
+
+.extraSpace {
+  border: 0px solid red;
+}
+
+@media (max-width: 1000px) {
+  .extraSpace {
+    margin-top: 100px;
+  }
+}
+
+@media (max-width: 530px) {
+  .extraSpace {
+    margin-top: 300px;
+  }
+}
+
+@media (max-width: 1000px) and (min-width: 992px) {
+  .Footer {
+    margin-top: 650px;
+  }
+}
+
+.welcomeTitle {
+  color: #00bcd4;
 }

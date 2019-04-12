@@ -58,14 +58,13 @@ export default class Scheduled extends React.Component {
     if (this.props.auth.isAuth()) {
       return (
         <div className="page-container">
-
           <div className="calendar right-side">
             <h3 className="calendar-title">Scheduled Issues and Visits</h3>
             <div>
               <Link to="/createEventForm">
                 <Button
                   style={{ margin: '10px' }}
-                  className="cyan darken-2"
+                  className="amber black-text"
                   waves="light"
                   style={{ marginRight: '5px' }}
                 >

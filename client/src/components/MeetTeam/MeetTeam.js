@@ -19,6 +19,7 @@ class MeetTeam extends Component {
           <div className="alec col s5" style={{ margin: '15px' }}>
             <Col>
               <Card
+                className="cyan lighten-4"
                 style={{ margin: '15px' }}
                 header={<CardTitle />}
                 title="Aleczander Jordan"
@@ -36,7 +37,7 @@ class MeetTeam extends Component {
                 <p>
                   <a target="_blank" href="https://github.com/TheDeterminator">
                     <i
-                      style={{ color: '#e57373', margin: '10px' }}
+                      style={{ color: 'black', margin: '10px' }}
                       class="fab fa-github-square fa-2x"
                     />
                   </a>
@@ -44,7 +45,10 @@ class MeetTeam extends Component {
                     target="_blank"
                     href="https://www.linkedin.com/in/alec-jordan1/"
                   >
-                    <i className="fab fa-linkedin fa-2x cyan-text" />
+                    <i
+                      style={{ color: ' #0077B5' }}
+                      className="fab fa-linkedin fa-2x"
+                    />
                   </a>
                 </p>
               </Card>
@@ -53,12 +57,13 @@ class MeetTeam extends Component {
           <div className="grant col s5" style={{ margin: '15px' }}>
             <Col>
               <Card
+                className="cyan lighten-4"
                 style={{ margin: '15px' }}
                 header={<CardTitle />}
                 title="Grant Reighard"
                 reveal={
                   <p style={{ marginTop: '30px', textAlign: 'left' }}>
-                    Like most Lambda students, Grant comes from a
+                    Like most Lambda school students, Grant comes from a
                     non-traditional Computer Science background. He has a BA in
                     Film and Media Arts from Temple University. He enjoys
                     playing, watching, and developing video games.
@@ -72,7 +77,7 @@ class MeetTeam extends Component {
                     href="https://www.github.com/grantreighard"
                   >
                     <i
-                      style={{ color: '#e57373', margin: '10px' }}
+                      style={{ color: 'black', margin: '10px' }}
                       class="fab fa-github-square fa-2x"
                     />
                   </a>
@@ -80,7 +85,10 @@ class MeetTeam extends Component {
                     target="_blank"
                     href="https://www.linkedin.com/in/grantreighard"
                   >
-                    <i className="fab fa-linkedin fa-2x cyan-text" />
+                    <i
+                      style={{ color: ' #0077B5' }}
+                      className="fab fa-linkedin fa-2x"
+                    />
                   </a>
                 </p>
               </Card>
@@ -89,6 +97,7 @@ class MeetTeam extends Component {
           <div className="john col s5" style={{ margin: '15px' }}>
             <Col>
               <Card
+                className="cyan lighten-4"
                 style={{ margin: '15px' }}
                 header={<CardTitle />}
                 title="John O'Rourke"
@@ -103,7 +112,7 @@ class MeetTeam extends Component {
                 <p>
                   <a target="_blank" href="https://github.com/johnoro">
                     <i
-                      style={{ color: '#e57373', margin: '10px' }}
+                      style={{ color: 'black', margin: '10px' }}
                       class="fab fa-github-square fa-2x"
                     />
                   </a>
@@ -111,7 +120,10 @@ class MeetTeam extends Component {
                     target="_blank"
                     href="https://www.linkedin.com/in/john-o-rourke"
                   >
-                    <i className="fab fa-linkedin fa-2x cyan-text" />
+                    <i
+                      style={{ color: ' #0077B5' }}
+                      className="fab fa-linkedin fa-2x"
+                    />
                   </a>
                 </p>
               </Card>
@@ -122,6 +134,7 @@ class MeetTeam extends Component {
           <div className="jordan col s5" style={{ margin: '15px' }}>
             <Col>
               <Card
+                className="cyan lighten-4"
                 style={{ margin: '15px' }}
                 header={<CardTitle />}
                 title="Jordan Massingill"
@@ -141,7 +154,7 @@ class MeetTeam extends Component {
                     href="https://github.com/jordan-massingill"
                   >
                     <i
-                      style={{ color: '#e57373', margin: '10px' }}
+                      style={{ color: 'black', margin: '10px' }}
                       class="fab fa-github-square fa-2x"
                     />
                   </a>
@@ -149,7 +162,10 @@ class MeetTeam extends Component {
                     target="_blank"
                     href="https://www.linkedin.com/in/jordan-massingill/"
                   >
-                    <i className="fab fa-linkedin fa-2x cyan-text" />
+                    <i
+                      style={{ color: ' #0077B5' }}
+                      className="fab fa-linkedin fa-2x"
+                    />
                   </a>
                 </p>
               </Card>
@@ -158,6 +174,7 @@ class MeetTeam extends Component {
           <div className="rachel col s5" style={{ margin: '15px' }}>
             <Col>
               <Card
+                className="cyan lighten-4"
                 style={{ margin: '15px' }}
                 header={<CardTitle />}
                 title="Rachel DiCesare"
@@ -174,7 +191,7 @@ class MeetTeam extends Component {
                 <p>
                   <a target="_blank" href="https://github.com/RachelDiCesare93">
                     <i
-                      style={{ color: '#e57373', margin: '10px' }}
+                      style={{ color: 'black', margin: '10px' }}
                       class="fab fa-github-square fa-2x"
                     />
                   </a>
@@ -182,7 +199,10 @@ class MeetTeam extends Component {
                     target="_blank"
                     href="https://www.linkedin.com/in/racheldicesare"
                   >
-                    <i className="fab fa-linkedin fa-2x cyan-text" />
+                    <i
+                      style={{ color: ' #0077B5' }}
+                      className="fab fa-linkedin fa-2x"
+                    />
                   </a>
                 </p>
               </Card>

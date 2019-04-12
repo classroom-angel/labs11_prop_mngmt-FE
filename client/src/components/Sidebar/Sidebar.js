@@ -44,12 +44,45 @@ class Sidebar extends Component {
     super(props);
   }
   componentDidMount() {
+    // var elem = document.querySelector('.sidenav');
+    // var instance = M.Sidenav.init(elem, {
+    //   edge: 'left',
+    //   inDuration: 250,
+    //   onOpenStart: () => {
+    //     elem.classList = 'sidenav sidebar';
+    //   },
+    //   onCloseEnd: () => {
+    //     elem.classList = 'sidenav sidebar sideTransparent';
+    //   }
+    // });
+    // if (instance.isOpen) {
+    //   elem.classList = 'sidenav sidebar';
+    // } else {
+    //   elem.classList = 'sidenav sidebar sideTransparent';
+    // }
+  }
+
+  componentDidUpdate = () => {
     var elem = document.querySelector('.sidenav');
     var instance = M.Sidenav.init(elem, {
       edge: 'left',
-      inDuration: 250
+      inDuration: 250,
+      onOpenStart: () => {
+        elem.classList = 'sidenav sidebar';
+      },
+      onCloseEnd: () => {
+        elem.classList = 'sidenav sidebar sideTransparent';
+      }
     });
-  }
+    let side = document.querySelector('.sidenav-overlay');
+    if (instance) {
+      if (instance.isOpen) {
+        side.classList = 'sidenav sidebar';
+      } else {
+        side.classList = 'sidenav sidebar sideTransparent';
+      }
+    }
+  };
 
   render() {
     const profile = JSON.parse(localStorage.getItem('profile'));
@@ -60,18 +93,26 @@ class Sidebar extends Component {
       return (
         <div>
           <ul id="slide-out" className="sidenav sidebar">
-            <div className="cyan lighten-4" style={{width: '110%', height: '250px'}}>
             <div
-              className="avatar"
-              style={profile ? {
-                backgroundImage: `url(${profile.picture})`,
-                backgroundSize: 'cover',
-                width: '150px',
-                height: '150px',
-                borderRadius: '75px',
-                margin: '40px auto 0'
-              } : null}
-            /></div>
+              className="cyan lighten-4"
+              style={{ width: '110%', height: '250px' }}
+            >
+              <div
+                className="avatar"
+                style={
+                  profile
+                    ? {
+                        backgroundImage: `url(${profile.picture})`,
+                        backgroundSize: 'cover',
+                        width: '150px',
+                        height: '150px',
+                        borderRadius: '75px',
+                        margin: '40px auto 0'
+                      }
+                    : null
+                }
+              />
+            </div>
             <h3 className="sidebar-header">Classroom Angel</h3>
             {profile.role === 'Board member' && (
               <li>
@@ -119,7 +160,7 @@ class Sidebar extends Component {
             className="sidenav-trigger sidenav-close"
             style={{ position: 'fixed', left: '5px', top: '10px' }}
           >
-            <i className="material-icons white-text">menu</i>
+            <i className="material-icons black-text">menu</i>
           </a>
         </div>
       );
