@@ -55,32 +55,33 @@ export default function Navbar(props) {
 
       {isAuth && (
         <div className="Main">
-          {profile.role === "Board member" ? <NavLink
-            className="amber darken-2 btn navbtn"
-            to="/bm-homepage"
-            style={{
-              margin: '15px',
-              width: '200px',
-              fontSize: '20px',
-              fontWeight: 'bold'
-            }}
-          >
-            View App
-          </NavLink>
-          :
-          <NavLink
-            className="amber darken-2 btn navbtn"
-            to="/issue-log"
-            style={{
-              margin: '15px',
-              width: '200px',
-              fontSize: '20px',
-              fontWeight: 'bold'
-            }}
-          >
-            View App
-          </NavLink>
-        }
+          {profile.role === 'Board member' ? (
+            <NavLink
+              className="amber darken-2 btn navbtn"
+              to="/bm-homepage"
+              style={{
+                margin: '15px',
+                width: '200px',
+                fontSize: '20px',
+                fontWeight: 'bold'
+              }}
+            >
+              View App
+            </NavLink>
+          ) : (
+            <NavLink
+              className="amber darken-2 btn navbtn"
+              to="/issue-log"
+              style={{
+                margin: '15px',
+                width: '200px',
+                fontSize: '20px',
+                fontWeight: 'bold'
+              }}
+            >
+              View App
+            </NavLink>
+          )}
         </div>
       )}
     </div>

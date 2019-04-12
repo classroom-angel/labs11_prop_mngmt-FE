@@ -15,7 +15,7 @@ export default class AuthLoad extends Component {
   }
 
   render() {
-    const loading = 'Loading :) ...'
+    const loading = 'Loading :) ...';
     return (
       <div>
         <h1>{loading}</h1>

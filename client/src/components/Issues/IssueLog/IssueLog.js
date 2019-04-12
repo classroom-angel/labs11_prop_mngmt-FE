@@ -271,14 +271,6 @@ export default class IssueLog extends React.Component {
                       statuses={statuses}
                     />
                   </div>
-                  <div className="modal-footer">
-                    <a
-                      href="#!"
-                      className="modal-close waves-effect waves-green btn-flat"
-                    >
-                      Agree
-                    </a>
-                  </div>
                 </div>
 
                 <FilterOptions
@@ -299,7 +291,7 @@ export default class IssueLog extends React.Component {
                     handleCommentChange={this.handleCommentChange}
                   />
                 ))}
-                <NewIssue
+                {/*<NewIssue
                   postIssues={this.postIssues}
                   issueName={this.state.issueName}
                   handleChange={this.handleChange}
@@ -308,7 +300,7 @@ export default class IssueLog extends React.Component {
                   uploading={this.state.uploading}
                   imgAdder={this.imgAdder}
                   statuses={statuses}
-                />
+                />*/}
               </div>
             </div>
           </div>
