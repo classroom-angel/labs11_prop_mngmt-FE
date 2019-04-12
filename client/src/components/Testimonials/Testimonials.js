@@ -42,21 +42,20 @@ class Testimonials extends Component {
           </Link>
         </div>
 
+        <Row className="valign-wrapper container" style={{flexWrap: 'wrap', marginTop: '30px'}}>
         {this.state.testimonials.map(testimonial => {
           return (
-            <Row className="valign-wrapper">
               <Col className="s12 m5" style={{ margin: '0 auto' }}>
                 <CardPanel className=" cyan">
                   <span className="white-text ">
-                    <h5>{testimonial.name}</h5>
-                    <h6>{testimonial.role}</h6>
-                    <p>{testimonial.text}</p>
+                    <p style={{fontSize: '22px'}}><i>"{testimonial.text}"</i></p>
+                    <p><b>-{testimonial.name}, {testimonial.role}</b></p>
                   </span>
                 </CardPanel>
               </Col>
-            </Row>
           );
         })}
+        </Row>
       </div>
     );
   }

@@ -92,7 +92,7 @@ class Sidebar extends Component {
 
   render() {
     const profile = JSON.parse(localStorage.getItem('profile'));
-    if (this.props.location.pathname === '/' || !profile) {
+    if (this.props.location && (this.props.location.pathname === '/' || !profile)) {
       console.log(this.props.location.pathname);
       return null;
     } else {

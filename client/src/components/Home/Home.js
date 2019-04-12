@@ -72,7 +72,7 @@ class Home extends Component {
                 <NavLink
                   className="cyan darken-2 btn"
                   to="/"
-                  style={{ margin: '15px' }}
+                  style={{ margin: '0 15px' }}
                   onClick={this.props.auth.login}
                 >
                   Sign up/sign in
