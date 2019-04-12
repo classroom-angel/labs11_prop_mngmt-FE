@@ -44,12 +44,17 @@ const NewIssue = ({
           <span>isVisit</span>
         </label>
         <br />
-          <form>
-          {statuses.map((status, index) => {
-            return (
-              <input type='radio' onChange={handleChange} key={index} value={status}/>
-            );
-          })} </form>
+
+        {statuses.map((status, index) => {
+          return (
+            <input
+              type="radio"
+              onChange={handleChange}
+              key={index}
+              value={status}
+            />
+          );
+        })}
         {/*<RadioGroup
           name="issueStatus"
           onChange={handleChange}
