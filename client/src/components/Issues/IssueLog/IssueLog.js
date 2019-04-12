@@ -125,7 +125,6 @@ export default class IssueLog extends React.Component {
   };
 
   handleDropChange = ({ target }) => {
-    console.log(target.attributes[1].value);
     this.setState({
       [target.attributes[0].value]: target.attributes[1].value
     });
@@ -280,17 +279,45 @@ export default class IssueLog extends React.Component {
                 />
               </div>
               <div className="issue-list">
-                {this.state.issues.map(issue => (
-                  <Issue
-                    {...this.state}
-                    issue={issue}
-                    deleteIssue={this.deleteIssue}
-                    toggleShowComments={this.toggleShowComments}
-                    deleteComment={this.deleteComment}
-                    submitComment={this.submitComment}
-                    handleCommentChange={this.handleCommentChange}
-                  />
-                ))}
+                {this.state.issues
+                  .filter(issue => {
+                    return (
+                      issue.status === this.state.filterStatus.toLowerCase() ||
+                      this.state.filterStatus === 'all'
+                    );
+                  })
+                  .filter((issue, i, array) => {
+                    let filteredTags = this.state.tags.filter(tag => {
+                      if (!(this.state.filterTag === 'all')) {
+                        return tag.name === this.state.filterTag;
+                      }
+                      return true;
+                    });
+
+                    let tagIds = [];
+                    filteredTags.forEach(function(tag) {
+                      tagIds.push(tag.issueId);
+                    });
+
+                    if (!(this.state.filterTag === 'all')) {
+                      return tagIds.includes(issue.id);
+                    }
+                    return true;
+                  })
+                  .map((issue, index) => {
+                    return (
+                      <Issue
+                        {...this.state}
+                        key={index}
+                        issue={issue}
+                        deleteIssue={this.deleteIssue}
+                        toggleShowComments={this.toggleShowComments}
+                        deleteComment={this.deleteComment}
+                        submitComment={this.submitComment}
+                        handleCommentChange={this.handleCommentChange}
+                      />
+                    );
+                  })}
                 {/*<NewIssue
                   postIssues={this.postIssues}
                   issueName={this.state.issueName}

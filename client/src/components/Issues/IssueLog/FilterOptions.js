@@ -11,22 +11,22 @@ const FilterOptions = ({ handleDropChange, statuses, tags }) => (
     </button>
     {/* Dropdown Structure */}
     <ul id="dropdown1" className="dropdown-content">
-      <li key={0} onClick={handleDropChange}>
-        <p name="filterStatus" value="all">
-          All
-        </p>
+      <li key={0} onClick={handleDropChange} name="filterStatus" value="all">
+        All
       </li>
       {statuses.map((status, index) => {
         return (
-          <li key={index + 1} onClick={handleDropChange}>
-            <p name="filterStatus" value={status}>
-              {status}
-            </p>
+          <li
+            key={index + 1}
+            onClick={handleDropChange}
+            name="filterStatus"
+            value={status}
+          >
+            {status}
           </li>
         );
       })}
     </ul>
-    {/* <div style={{ display: 'inline-block', margin: '25px' }} /> */}
     <button
       className="dropdown-trigger btn cyan darken-4"
       data-target="dropdown2"
@@ -35,10 +35,18 @@ const FilterOptions = ({ handleDropChange, statuses, tags }) => (
     </button>
     {/* Dropdown Structure */}
     <ul id="dropdown2" className="dropdown-content">
+      <li key={0} onClick={handleDropChange} name="filterTag" value="all">
+        All
+      </li>
       {tags.map((tag, index) => {
         return (
-          <li key={index} value={tag}>
-            <p>{tag}</p>
+          <li
+            key={index + 1}
+            onClick={handleDropChange}
+            name="filterTag"
+            value={tag}
+          >
+            {tag}
           </li>
         );
       })}
