@@ -20,8 +20,8 @@ export default class CreateOrg extends Component {
   };
 
   goHome = () => {
-    this.props.history.push('/')
-  }
+    this.props.history.push('/');
+  };
 
   submit = async e => {
     e.preventDefault();
@@ -52,18 +52,21 @@ export default class CreateOrg extends Component {
     const profile = JSON.parse(localStorage.getItem('profile'));
     return (
       <div>
-      {profile.role !== "School administrator" && <Modal id='modal1' open actions={[<Button className="cyan darken-2"
-      waves="light" onClick={this.goHome}>Close</Button>]}>Sorry! You don't have access to this area :)</Modal>}
+        {/*{profile.role !== "School administrator" && <Modal id='modal1' open actions={[<Button className="cyan darken-2"
+      waves="light" onClick={this.goHome}>Close</Button>]}>Sorry! You don't have access to this area :)</Modal>}*/}
         <h1>Create an organization</h1>
         <p>
           Once you create a school, you can invite members, send notifications,
           and start conversations
         </p>
         <Row>
-          <form className="col s10 red lighten-3 offset-s1 z-depth-4" style={{padding: '20px', marginBottom: '20px'}}>
+          <form
+            className="col s10 offset-s1 z-depth-4"
+            style={{ padding: '20px', marginBottom: '20px' }}
+          >
             <h4>Please complete this form to add a new organization</h4>
             <Col s={12} l={8} className="input-field offset-l2">
-              <label className="white-text" htmlFor="orgName">Organization Name</label>
+              <label htmlFor="orgName">Organization Name</label>
               <input
                 id="orgName"
                 required
@@ -75,19 +78,19 @@ export default class CreateOrg extends Component {
               />
             </Col>
             <Col s={12} l={8} className="input-field offset-l2">
-            <label className="white-text" htmlFor="orgCity">Organization City</label>
-            <input
-              id="orgCity"
-              required
-              name="orgCity"
-              value={this.state.orgCity}
-              type="text"
-              onChange={this.change}
-              className="validate"
-            />
+              <label htmlFor="orgCity">Organization City</label>
+              <input
+                id="orgCity"
+                required
+                name="orgCity"
+                value={this.state.orgCity}
+                type="text"
+                onChange={this.change}
+                className="validate"
+              />
             </Col>
             <Col s={12} l={8} className="input-field offset-l2">
-              <label className="white-text" htmlFor="orgCountry">Organization Country</label>
+              <label htmlFor="orgCountry">Organization Country</label>
               <input
                 id="orgCountry"
                 required
@@ -99,17 +102,16 @@ export default class CreateOrg extends Component {
               />
             </Col>
           </form>
-          <Button
-          onClick={this.submit}
-          style={{margin: '10px'}}
-          type="submit"
-          waves="light">
-            Create Organization
-            <Icon right>
-            send
-            </Icon>
-          </Button>
         </Row>
+        <Button
+          onClick={this.submit}
+          style={{ margin: '10px' }}
+          type="submit"
+          waves="light"
+        >
+          Create Organization
+          <Icon right>send</Icon>
+        </Button>
 
         {/* JOIN ORGANIZATION */}
         <p>
