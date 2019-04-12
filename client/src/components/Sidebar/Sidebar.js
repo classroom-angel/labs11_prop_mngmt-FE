@@ -75,11 +75,17 @@ class Sidebar extends Component {
       }
     });
     let side = document.querySelector('.sidenav-overlay');
+    if (side && this.props.location.pathname === "/") {
+      side.classList = 'hidden'
+    }
     if (instance) {
       if (instance.isOpen) {
+        elem.classList = 'sidenav sidebar';
         side.classList = 'sidenav sidebar';
       } else {
-        side.classList = 'sidenav sidebar sideTransparent';
+        elem.classList = 'sidenav sidebar sideTransparent';
+        console.log(side.classList);
+        // side.classList = 'sidenave sidebar sideTransparent';
       }
     }
   };
@@ -112,6 +118,7 @@ class Sidebar extends Component {
                     : null
                 }
               />
+              {profile && <h4>{profile.name}</h4>}
             </div>
             <h3 className="sidebar-header">Classroom Angel</h3>
             {profile.role === 'Board member' && (
