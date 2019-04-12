@@ -102,9 +102,12 @@ class MeetTeam extends Component {
                 header={<CardTitle />}
                 title="John O'Rourke"
                 reveal={
-                  <p>
+                  <p style={{ marginTop: '30px', textAlign: 'left' }}>
                     Besides programming, John likes to hike, learn new things ,
-                    and play games.
+                    and play games.His dream is to work remotely from some
+                    mountain beach island. He comes from a small town in rural
+                    Tennessee. He enjoys the nitty gritty when it comes to
+                    coding.If you need someone adaptable, he's your guy.
                   </p>
                 }
               >
@@ -180,10 +183,11 @@ class MeetTeam extends Component {
                 title="Rachel DiCesare"
                 reveal={
                   <p style={{ marginTop: '30px', textAlign: 'left' }}>
-                    Rachel comes from a non-tradional Computer Science
-                    background. After working with children for 5 years , she
-                    was ready for a big change.Rachel loves building projects
-                    with her technical skills and imagination.
+                    Rachel has a unique and heart-warming personality that
+                    brings a happy work environment for her colleagues. After
+                    working with children for 5 years , she was ready for a
+                    career change and came to Lambda School. Rachel loves
+                    building projects with her technical skills and imagination.
                   </p>
                 }
               >
