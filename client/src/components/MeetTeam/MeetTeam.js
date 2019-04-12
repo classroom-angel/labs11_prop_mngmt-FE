@@ -19,6 +19,7 @@ class MeetTeam extends Component {
           <div className="alec col s5" style={{ margin: '15px' }}>
             <Col>
               <Card
+                className="cyan lighten-4"
                 style={{ margin: '15px' }}
                 header={<CardTitle />}
                 title="Aleczander Jordan"
@@ -56,6 +57,7 @@ class MeetTeam extends Component {
           <div className="grant col s5" style={{ margin: '15px' }}>
             <Col>
               <Card
+                className="cyan lighten-4"
                 style={{ margin: '15px' }}
                 header={<CardTitle />}
                 title="Grant Reighard"
@@ -95,6 +97,7 @@ class MeetTeam extends Component {
           <div className="john col s5" style={{ margin: '15px' }}>
             <Col>
               <Card
+                className="cyan lighten-4"
                 style={{ margin: '15px' }}
                 header={<CardTitle />}
                 title="John O'Rourke"
@@ -131,6 +134,7 @@ class MeetTeam extends Component {
           <div className="jordan col s5" style={{ margin: '15px' }}>
             <Col>
               <Card
+                className="cyan lighten-4"
                 style={{ margin: '15px' }}
                 header={<CardTitle />}
                 title="Jordan Massingill"
@@ -170,6 +174,7 @@ class MeetTeam extends Component {
           <div className="rachel col s5" style={{ margin: '15px' }}>
             <Col>
               <Card
+                className="cyan lighten-4"
                 style={{ margin: '15px' }}
                 header={<CardTitle />}
                 title="Rachel DiCesare"

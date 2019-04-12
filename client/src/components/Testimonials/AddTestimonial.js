@@ -48,7 +48,7 @@ class AddTestimonial extends Component {
     return (
       <div>
         <h3>Add Testimonial</h3>
-        <div className="TestimonialForm col s12  cyan">
+        <div className="TestimonialForm col s12  cyan  z-depth-4">
           <form onSubmit={this.createTestimonial}>
             <div className="row">
               <div class="input-field col s12">
