@@ -15,7 +15,7 @@ const NewIssue = ({
   const options = [];
   statuses.forEach(status => options.push({ label: status, value: status }));
   return (
-    <Card>
+    <Card style={{ width: '350px', border: '2px solid #00b8d4' }}>
       <form onSubmit={postIssues} className="issue-card submit-issue">
         <h4>New Issue +</h4>
         <input
