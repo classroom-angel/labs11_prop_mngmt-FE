@@ -271,14 +271,6 @@ export default class IssueLog extends React.Component {
                       statuses={statuses}
                     />
                   </div>
-                  <div className="modal-footer">
-                    <a
-                      href="#!"
-                      className="modal-close waves-effect waves-green btn-flat"
-                    >
-                      Agree
-                    </a>
-                  </div>
                 </div>
 
                 <FilterOptions
