@@ -15,8 +15,11 @@ class MeetTeam extends Component {
         <div>
           <h3 style={{ textAlign: 'center' }}>Meet The Team</h3>
         </div>
-        <div className="row valign-wrapper center-align">
-          <div className="alec col s5" style={{ margin: '15px' }}>
+        <div
+          className="row valign-wrapper center-align"
+          style={{ flexWrap: 'wrap' }}
+        >
+          <div className="alec col s12 l5" style={{ margin: '15px' }}>
             <Col>
               <Card
                 className="cyan lighten-4"
@@ -54,7 +57,7 @@ class MeetTeam extends Component {
               </Card>
             </Col>
           </div>
-          <div className="grant col s5" style={{ margin: '15px' }}>
+          <div className="grant col s12 l5" style={{ margin: '15px' }}>
             <Col>
               <Card
                 className="cyan lighten-4"
@@ -94,7 +97,7 @@ class MeetTeam extends Component {
               </Card>
             </Col>
           </div>
-          <div className="john col s5" style={{ margin: '15px' }}>
+          <div className="john col s12 l5" style={{ margin: '15px' }}>
             <Col>
               <Card
                 className="cyan lighten-4"
@@ -133,8 +136,11 @@ class MeetTeam extends Component {
             </Col>
           </div>
         </div>
-        <div className="row valign-wrapper center-align">
-          <div className="jordan col s5" style={{ margin: '15px' }}>
+        <div
+          className="row valign-wrapper center-align"
+          style={{ flexWrap: 'wrap' }}
+        >
+          <div className="jordan col s12 l5" style={{ margin: '15px' }}>
             <Col>
               <Card
                 className="cyan lighten-4"
@@ -174,7 +180,7 @@ class MeetTeam extends Component {
               </Card>
             </Col>
           </div>
-          <div className="rachel col s5" style={{ margin: '15px' }}>
+          <div className="rachel col s12 l5" style={{ margin: '15px' }}>
             <Col>
               <Card
                 className="cyan lighten-4"
