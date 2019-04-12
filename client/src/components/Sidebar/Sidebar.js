@@ -75,7 +75,7 @@ class Sidebar extends Component {
       }
     });
     let side = document.querySelector('.sidenav-overlay');
-    if (side && this.props.location.pathname === "/") {
+    if (side && (this.props.location && this.props.location.pathname === "/")) {
       side.classList = 'hidden'
     }
     if (instance) {
