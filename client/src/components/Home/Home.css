@@ -12,7 +12,8 @@ a.land-link {
 }
 
 a:hover {
-  color: black;
+  /* color: black; */
+  background-color: #ffa000 !important;
 }
 
 .logoAndText {
