@@ -26,6 +26,18 @@
   width: 165px;
 }
 
+.sidebar ul li {
+  text-align: left;
+}
+
+.side-item:hover {
+  background-color: #ffa000 !important;
+}
+
+.side-item {
+  text-align: left;
+}
+
 .sidebar-button {
   background: #fc5130;
   color: white;

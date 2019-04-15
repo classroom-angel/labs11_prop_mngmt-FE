@@ -11,7 +11,7 @@ a.land-link {
   border: 2px solid blue;
 }
 
-a:hover {
+.navbar a:hover {
   /* color: black; */
   background-color: #ffa000 !important;
 }
