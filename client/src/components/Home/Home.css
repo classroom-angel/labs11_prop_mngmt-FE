@@ -109,18 +109,29 @@ body {
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-end;
+  background-color: #fafafa;
 }
 
 .topbar {
+  background-color: #fafafa;
   width: 100vw;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
+  border: 0px solid pink;
+  position: fixed;
+  top: 0;
+}
+
+.welcomeTitle {
+  color: #00bcd4;
+  margin-top: 70px;
 }
 
 @media (max-width: 1200px) {
   .topbar {
     flex-flow: column wrap;
+    position: relative;
   }
 
   .navbar {
@@ -128,6 +139,10 @@ body {
     margin: 0 auto;
     height: auto;
     justify-content: center;
+  }
+
+  .welcomeTitle {
+    margin-top: 0px;
   }
 }
 
@@ -153,6 +168,7 @@ body {
 
 .landingTitle {
   margin-left: 20px;
+  margin-top: -5px;
 }
 
 .extraSpace {
@@ -164,13 +180,3 @@ body {
     margin-top: 600px;
   }
 }
-
-.welcomeTitle {
-  color: #00bcd4;
-}
-
-/* @media (max-width: 1200px) and (min-width: 900px) {
-  .navbar {
-    height: 70px;
-  }
-} */
