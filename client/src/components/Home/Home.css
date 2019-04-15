@@ -103,7 +103,7 @@ body {
   position: fixed;
   /* border: 1px solid red; */
   width: 75vw;
-  height: 70px;
+  height: 60px;
   top: 0;
   right: 0;
   display: flex;
@@ -126,14 +126,14 @@ body {
   .navbar {
     position: relative;
     margin: 0 auto;
-    height: 140px;
+    height: 120px;
     justify-content: center;
   }
 }
 
 @media (max-width: 700px) {
   .navbar {
-    height: 140px;
+    height: 180px;
     align-items: flex-start;
   }
 }
@@ -168,8 +168,8 @@ body {
   color: #00bcd4;
 }
 
-@media (max-width: 1200px) and (min-width: 900px) {
+/* @media (max-width: 1200px) and (min-width: 900px) {
   .navbar {
     height: 70px;
   }
-}
+} */
