@@ -74,6 +74,8 @@ export default class IssueLog extends React.Component {
 
   postIssues = event => {
     event.preventDefault();
+    console.log('fomrdta', new FormData());
+    console.log('SUB MIT', event);
     postIssue({ state: this.state, today })
       .then(res => {
         const id = res.data.issue.id;
@@ -186,11 +188,6 @@ export default class IssueLog extends React.Component {
     this.setState({ [name]: checked });
   };
 
-  // toggleShowVisits = ({ target }) => {
-  //   const { name, checked } = target;
-  //   this.setState({ [name]: checked });
-  // };
-
   submitComment = (id, event) => {
     event.preventDefault();
     postComment({
@@ -226,9 +223,6 @@ export default class IssueLog extends React.Component {
   };
 
   render() {
-    console.log('showadvis', this.state.showOnlyAdminVisits);
-    console.log('issues', this.state.issues);
-    console.log('isVisit', this.state.isVisit);
     if (this.props.auth.isAuth()) {
       this.arrayTags();
 
@@ -264,41 +258,9 @@ export default class IssueLog extends React.Component {
                 </li>
               </ul>
               <div className="start-issue" id="is-test-1">
-                <h1 style={{ textAlign: 'center', color: '#333333' }}>
+                <h3 style={{ textAlign: 'center', color: '#333333' }}>
                   Issue Log
-                </h1>
-
-                {/* <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Open Login Modal</a>
-
-              <div id="modal1" class="modal">
-                <div class="modal-content">
-                  <h4>Login</h4>
-            	 <div class="col s6">
-            		<form class="">
-                  <div class="row">
-            		 <div class="input-field col s12">
-                      <input id="Email" type="email" class="validate" />
-                      <label for="Email">Email</label>
-                    </div>
-                    <div class="input-field col s12">
-                      <input id="Password" type="text" class="validate" />
-                      <label for="Password">Password</label>
-                    </div>
-            		 <div class="input-field col s12">
-                      <button type="submit" class="waves-effect waves-light btn">Login</button>
-                    </div>
-            		<div class="input-field col s12">
-            			<a href="#">Forgot Password?</a>
-            		</div>
-
-                  </div>
-                  </form>
-                 </div>
-                </div>
-                <div class="modal-footer">
-                  <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
-                </div>
-              </div> */}
+                </h3>
 
                 {/* Modal Trigger */}
                 <div
@@ -312,33 +274,25 @@ export default class IssueLog extends React.Component {
                 >
                   <button
                     data-target="modal1"
-                    className="btn modal-trigger cyan darken-2"
+                    className="btn modal-trigger amber darken-1"
                   >
                     + New Issue
                   </button>
 
-                  {/* <div id="modal1" className="modal">
-                  <div className="modal-content">
-                    <NewIssue
-                      postIssues={this.postIssues}
-                      issueName={this.state.issueName}
-                      handleChange={this.handleChange}
-                      issueNotes={this.state.issueNotes}
-                      visitChange={this.visitChange}
-                      uploading={this.state.uploading}
-                      imgAdder={this.imgAdder}
-                      statuses={statuses}
-                    />
+                  <div id="modal1" className="modal">
+                    <div className="modal-content">
+                      <NewIssue
+                        postIssues={this.postIssues}
+                        issueName={this.state.issueName}
+                        handleChange={this.handleChange}
+                        issueNotes={this.state.issueNotes}
+                        visitChange={this.visitChange}
+                        uploading={this.state.uploading}
+                        imgAdder={this.imgAdder}
+                        statuses={statuses}
+                      />
+                    </div>
                   </div>
-                  <div class="modal-footer">
-                    <a
-                      class=" modal-action modal-close waves-effect btn-flat"
-                      onClick={this.postIssues}
-                    >
-                      Submit
-                    </a>
-                  </div>
-                </div> */}
 
                   <FilterOptions
                     statuses={statuses}
@@ -350,7 +304,7 @@ export default class IssueLog extends React.Component {
 
                 <div style={{ width: '85%', margin: 'auto' }}>
                   <div className="issue-list">
-                    <NewIssue
+                    {/* <NewIssue
                       postIssues={this.postIssues}
                       issueName={this.state.issueName}
                       handleChange={this.handleChange}
@@ -359,7 +313,7 @@ export default class IssueLog extends React.Component {
                       uploading={this.state.uploading}
                       imgAdder={this.imgAdder}
                       statuses={statuses}
-                    />
+                    /> */}
                     {this.state.issues
                       .filter(issue => {
                         return !issue.isVisit;

@@ -24,16 +24,16 @@ const NewIssue = ({
           <h4>New Issue +</h4>
           <input
             name="issueName"
-            value={issueName}
+            // value={issueName}
             placeholder="Issue Title"
-            onChange={handleChange}
+            // onChange={handleChange}
           />
           <br />
           <input
             name="issueNotes"
-            value={issueNotes}
+            // value={issueNotes}
             placeholder="Additional notes"
-            onChange={handleChange}
+            // onChange={handleChange}
           />
           <br />
 
@@ -41,24 +41,25 @@ const NewIssue = ({
             return (
               <input
                 type="radio"
-                onChange={handleChange}
+                // onChange={handleChange}
                 key={index}
-                value={status}
+                // value={status}
               />
             );
           })}
           <br />
           <Uploader uploading={uploading} imgAdder={imgAdder} />
-          {/* <div className="card-action"></div> */}
+          {/* <div className="card-action"> */}
           <Button
             type="submit"
             waves="light"
-            className="cyan darken-2"
+            className="amber darken-1"
             style={{ marginTop: '10px' }}
           >
             Submit
             <Icon right>send</Icon>
           </Button>
+          {/* </div> */}
         </form>
       </div>
     </div>
