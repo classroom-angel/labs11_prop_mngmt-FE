@@ -132,7 +132,7 @@ body {
 
 @media (max-width: 700px) {
   .navbar {
-    height: 210px;
+    height: 140px;
     align-items: flex-start;
   }
 }
@@ -177,4 +177,10 @@ body {
 
 .welcomeTitle {
   color: #00bcd4;
+}
+
+@media (max-width: 1200px) and (min-width: 900px) {
+  .navbar {
+    height: 70px;
+  }
 }
