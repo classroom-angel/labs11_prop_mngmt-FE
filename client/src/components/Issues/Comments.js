@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Comments = ({ comments, issueId, deleteComment }) => (
-  <div>
+  <div style={{ marginTop: '20px' }}>
     {comments
       .filter(comment => {
         return comment.issueId === issueId;
@@ -9,14 +9,14 @@ const Comments = ({ comments, issueId, deleteComment }) => (
       .map(comment => {
         return (
           <div key={comment.id}>
-            - {comment.content}
+            • {comment.content}
             <span
               onClick={deleteComment}
               className="delete-button"
               issue_id={comment.id}
             >
               {' '}
-              x
+              X
             </span>
           </div>
         );
