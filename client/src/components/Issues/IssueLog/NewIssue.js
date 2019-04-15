@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, Icon, RadioGroup } from 'react-materialize';
+import { Button, Icon } from 'react-materialize';
 import Uploader from '../../Uploader';
 
 const NewIssue = ({
@@ -15,65 +15,53 @@ const NewIssue = ({
   const options = [];
   statuses.forEach(status => options.push({ label: status, value: status }));
   return (
-    <Card style={{ width: '350px', border: '2px solid #00b8d4' }}>
-      <form onSubmit={postIssues} className="issue-card submit-issue">
-        <h4>New Issue +</h4>
-        <input
-          name="issueName"
-          value={issueName}
-          placeholder="Issue Title"
-          onChange={handleChange}
-        />
-        <br />
-        <input
-          name="issueNotes"
-          value={issueNotes}
-          placeholder="Additional notes"
-          onChange={handleChange}
-        />
-        <br />
-        <label>
+    <div
+      className="card"
+      style={{ width: '350px', border: '1px solid #8d8d8d' }}
+    >
+      <div className="card-content">
+        <form onSubmit={postIssues} className="issue-card submit-issue">
+          <h4>New Issue +</h4>
           <input
-            type="checkbox"
-            id="isVisit"
-            name="isVisit"
-            value={true}
-            onChange={visitChange}
-            sytle={{ color: 'black' }}
+            name="issueName"
+            value={issueName}
+            placeholder="Issue Title"
+            onChange={handleChange}
           />
-          <span>isVisit</span>
-        </label>
-        <br />
+          <br />
+          <input
+            name="issueNotes"
+            value={issueNotes}
+            placeholder="Additional notes"
+            onChange={handleChange}
+          />
+          <br />
 
-        {statuses.map((status, index) => {
-          return (
-            <input
-              type="radio"
-              onChange={handleChange}
-              key={index}
-              value={status}
-            />
-          );
-        })}
-        {/*<RadioGroup
-          name="issueStatus"
-          onChange={handleChange}
-          label="Status"
-          options={options}
-          />*/}
-        <br />
-        <Uploader uploading={uploading} imgAdder={imgAdder} />
-        <Button
-          type="submit"
-          waves="light"
-          className="cyan darken-2"
-          style={{ marginTop: '10px' }}
-        >
-          Submit
-          <Icon right>send</Icon>
-        </Button>
-      </form>
-    </Card>
+          {statuses.map((status, index) => {
+            return (
+              <input
+                type="radio"
+                onChange={handleChange}
+                key={index}
+                value={status}
+              />
+            );
+          })}
+          <br />
+          <Uploader uploading={uploading} imgAdder={imgAdder} />
+          {/* <div className="card-action"></div> */}
+          <Button
+            type="submit"
+            waves="light"
+            className="cyan darken-2"
+            style={{ marginTop: '10px' }}
+          >
+            Submit
+            <Icon right>send</Icon>
+          </Button>
+        </form>
+      </div>
+    </div>
   );
 };
 
