@@ -290,7 +290,7 @@ export default class IssueLog extends React.Component {
                 />
               </div>
               <div className="issue-list">
-                <NewIssue
+                {/* <NewIssue
                   postIssues={this.postIssues}
                   issueName={this.state.issueName}
                   handleChange={this.handleChange}
@@ -299,7 +299,7 @@ export default class IssueLog extends React.Component {
                   uploading={this.state.uploading}
                   imgAdder={this.imgAdder}
                   statuses={statuses}
-                />
+                /> */}
                 {this.state.issues
                   .filter(issue => {
                     return (
