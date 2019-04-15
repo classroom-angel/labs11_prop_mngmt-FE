@@ -75,9 +75,6 @@ class Sidebar extends Component {
       }
     });
     let side = document.querySelector('.sidenav-overlay');
-    if (side && (this.props.location && this.props.location.pathname === '/')) {
-      side.classList = 'hidden';
-    }
     if (instance) {
       if (instance.isOpen) {
         elem.classList = 'sidenav sidebar';
@@ -92,11 +89,11 @@ class Sidebar extends Component {
 
   render() {
     const profile = JSON.parse(localStorage.getItem('profile'));
+    const loc = this.props.location;
     if (
-      this.props.location &&
-      (this.props.location.pathname === '/' || !profile)
+      loc &&
+      (loc.pathname === '/' || !profile  || loc.pathname === '/MeetTeam' || loc.pathname === 'OurMission' || loc.pathname === '/testimonials' || loc.pathname === '/AddTestimonial')
     ) {
-      console.log(this.props.location.pathname);
       return null;
     } else {
       return (

@@ -93,7 +93,6 @@ class App extends React.Component {
     return (
       <div className="App">
         <Route
-          exact
           path="/"
           render={props => (
             <Navbar {...props} auth={this.auth} />

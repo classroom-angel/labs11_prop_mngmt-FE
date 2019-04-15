@@ -133,9 +133,7 @@ export default class IssueLog extends React.Component {
 
   toggleEdit = () => {
     this.setState({
-      editingIssue: !this.state.editingIssue,
-      title: this.state.note.title,
-      textBody: this.state.note.textBody
+      editingIssue: !this.state.editingIssue
     });
   };
 
@@ -241,7 +239,8 @@ export default class IssueLog extends React.Component {
 
         var mod = document.querySelectorAll('.modal');
         if (mod) {
-          M.Modal.init(mod, {});
+          const instance = M.Modal.init(mod, {dismissible: false});
+          console.log(instance);
         }
 
         return (
@@ -250,6 +249,41 @@ export default class IssueLog extends React.Component {
               <h1 style={{ textAlign: 'center', color: '#333333' }}>
                 Issue Log
               </h1>
+
+              <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Open Login Modal</a>
+
+              <div id="modal1" class="modal">
+                <div class="modal-content">
+                  <h4>Login</h4>
+            	 <div class="col s6">
+            		<form class="">
+                  <div class="row">
+            		 <div class="input-field col s12">
+                      <input id="Email" type="email" class="validate" />
+                      <label for="Email">Email</label>
+                    </div>
+                    <div class="input-field col s12">
+                      <input id="Password" type="text" class="validate" />
+                      <label for="Password">Password</label>
+                    </div>
+            		 <div class="input-field col s12">
+                      <button type="submit" class="waves-effect waves-light btn">Login</button>
+                    </div>
+            		<div class="input-field col s12">
+            			<a href="#">Forgot Password?</a>
+            		</div>
+
+                  </div>
+                  </form>
+                 </div>
+                </div>
+                <div class="modal-footer">
+                  <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+                </div>
+              </div>
+
+
+
               {/* Modal Trigger */}
               <div
                 style={{
@@ -279,6 +313,9 @@ export default class IssueLog extends React.Component {
                       imgAdder={this.imgAdder}
                       statuses={statuses}
                     />
+                  </div>
+                  <div class="modal-footer">
+                    <a class=" modal-action modal-close waves-effect btn-flat" onClick={this.postIssues}>Submit</a>
                   </div>
                 </div>
 
