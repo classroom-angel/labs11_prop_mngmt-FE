@@ -35,7 +35,7 @@ class Testimonials extends Component {
             <Button
               className="amber"
               waves="light"
-              style={{ position: "fixed", top: "15px", left: "0" }}
+              style={{ position: 'fixed', top: '15px', left: '0' }}
             >
               Tell us what you think!
             </Button>
@@ -48,8 +48,8 @@ class Testimonials extends Component {
         >
           {this.state.testimonials.map(testimonial => {
             return (
-              <Col className="s12 m5" style={{ margin: '0 auto' }}>
-                <CardPanel className=" cyan">
+              <Col className="s12 m5" style={{ margin: '0' }}>
+                <CardPanel className=" cyan" style={{ height: '350px' }}>
                   <span className="white-text ">
                     <p style={{ fontSize: '22px' }}>
                       <i>"{testimonial.text}"</i>
