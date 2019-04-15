@@ -7,21 +7,47 @@ import './OurMission.css';
 
 class OurMission extends Component {
   render() {
-    const imgstyle = { width: '250px', height: '200px', marginRight: '15px' };
+    const imgstyle = {
+      width: '300px',
+      height: '300px'
+    };
     return (
-      <div className="mission container" style={{ margin: '15px auto' }}>
+      <div className="mission">
         <div>
           <h3>Our Mission</h3>
           <h5>
             We help you meet classroom needs so you can focus on what really
             matters.
           </h5>
+          <div className="pictures" style={{ margin: '0 auto' }}>
+            <div
+              style={{
+                backgroundImage: `url(${kidsinclass})`,
+                backgroundSize: 'cover',
+                height: '200px',
+                width: '200px'
+              }}
+            />
+
+            <div
+              style={{
+                backgroundImage: `url(${oneboyinclass})`,
+                backgroundSize: 'cover',
+                height: '200px',
+                width: '200px'
+              }}
+            />
+
+            <div
+              style={{
+                backgroundImage: `url(${groupofkids})`,
+                backgroundSize: 'cover',
+                height: '200px',
+                width: '200px'
+              }}
+            />
+          </div>
           <div>
-            <div className="pictures">
-              <img style={imgstyle} src={kidsinclass} alt="kidsinclass" />
-              <img style={imgstyle} src={oneboyinclass} alt="oneboyinclass" />
-              <img style={imgstyle} src={groupofkids} alt="groupofkids" />
-            </div>
             <p>
               In the past, teachers, and administrators had to submit issues by
               sending emails to their board members that would, unfortunately,
