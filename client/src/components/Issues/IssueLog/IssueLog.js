@@ -45,7 +45,8 @@ export default class IssueLog extends React.Component {
       images: [],
       eid: 3,
       showCommentsObj: {},
-      commentsObj: {}
+      commentsObj: {},
+      showOnlyAdminVisits: false
     };
   }
 
@@ -125,7 +126,6 @@ export default class IssueLog extends React.Component {
   };
 
   handleDropChange = ({ target }) => {
-    console.log(target.attributes[1].value);
     this.setState({
       [target.attributes[0].value]: target.attributes[1].value
     });
@@ -180,9 +180,15 @@ export default class IssueLog extends React.Component {
   };
 
   visitChange = ({ target }) => {
+    console.log(target);
     const { name, checked } = target;
     this.setState({ [name]: checked });
   };
+
+  // toggleShowVisits = ({ target }) => {
+  //   const { name, checked } = target;
+  //   this.setState({ [name]: checked });
+  // };
 
   submitComment = (id, event) => {
     event.preventDefault();
@@ -219,6 +225,9 @@ export default class IssueLog extends React.Component {
   };
 
   render() {
+    console.log('showadvis', this.state.showOnlyAdminVisits);
+    console.log('issues', this.state.issues);
+    console.log('isVisit', this.state.isVisit);
     if (this.props.auth.isAuth()) {
       this.arrayTags();
 
@@ -287,7 +296,7 @@ export default class IssueLog extends React.Component {
               >
                 <button
                   data-target="modal1"
-                  className="btn modal-trigger cyan darken-4"
+                  className="btn modal-trigger cyan darken-2"
                 >
                   + New Issue
                 </button>
@@ -314,21 +323,11 @@ export default class IssueLog extends React.Component {
                   statuses={statuses}
                   tags={tags}
                   handleDropChange={this.handleDropChange}
+                  visitChange={this.state.visitChange}
                 />
               </div>
               <div className="issue-list">
-                {this.state.issues.map(issue => (
-                  <Issue
-                    {...this.state}
-                    issue={issue}
-                    deleteIssue={this.deleteIssue}
-                    toggleShowComments={this.toggleShowComments}
-                    deleteComment={this.deleteComment}
-                    submitComment={this.submitComment}
-                    handleCommentChange={this.handleCommentChange}
-                  />
-                ))}
-                {/*<NewIssue
+                <NewIssue
                   postIssues={this.postIssues}
                   issueName={this.state.issueName}
                   handleChange={this.handleChange}
@@ -337,7 +336,52 @@ export default class IssueLog extends React.Component {
                   uploading={this.state.uploading}
                   imgAdder={this.imgAdder}
                   statuses={statuses}
-                />*/}
+                />
+                {this.state.issues
+                  .filter(issue => {
+                    return (
+                      issue.status === this.state.filterStatus.toLowerCase() ||
+                      this.state.filterStatus === 'all'
+                    );
+                  })
+                  .filter((issue, i, array) => {
+                    let filteredTags = this.state.tags.filter(tag => {
+                      if (!(this.state.filterTag === 'all')) {
+                        return tag.name === this.state.filterTag;
+                      }
+                      return true;
+                    });
+
+                    let tagIds = [];
+                    filteredTags.forEach(function(tag) {
+                      tagIds.push(tag.issueId);
+                    });
+
+                    if (!(this.state.filterTag === 'all')) {
+                      return tagIds.includes(issue.id);
+                    }
+                    return true;
+                  })
+                  .filter(issue => {
+                    if (this.state.showOnlyAdminVisits) {
+                      return issue.isVisit;
+                    }
+                    return true;
+                  })
+                  .map((issue, index) => {
+                    return (
+                      <Issue
+                        {...this.state}
+                        key={index}
+                        issue={issue}
+                        deleteIssue={this.deleteIssue}
+                        toggleShowComments={this.toggleShowComments}
+                        deleteComment={this.deleteComment}
+                        submitComment={this.submitComment}
+                        handleCommentChange={this.handleCommentChange}
+                      />
+                    );
+                  })}
               </div>
             </div>
           </div>
