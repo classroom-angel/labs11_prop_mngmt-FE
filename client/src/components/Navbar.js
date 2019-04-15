@@ -9,7 +9,7 @@ export default function Navbar(props) {
   if (loc === "/" || loc === "/testimonials" || loc === "/MeetTeam" || loc === "/AddTestimonial" || loc === "/OurMission") {
     return (
       <div className="navbar" style={{zIndex: "5"}}>
-      {props.location.pathname !== "/" &&
+      {loc !== "/" &&
       <NavLink
       className="cyan btn navbtn"
       to="/"
@@ -18,28 +18,31 @@ export default function Navbar(props) {
       Home
       </NavLink>
     }
+      {loc !== "/MeetTeam" &&
       <NavLink
       className="cyan btn navbtn"
       to="/MeetTeam"
       style={{ margin: '15px' }}
       >
       Meet The Team
-      </NavLink>
+      </NavLink>}
 
-      <NavLink
+      {loc !== "/OurMission" &&
+        <NavLink
       className="cyan btn navbtn"
       to="/OurMission"
       style={{ margin: '15px' }}
       >
       Our Mission
-      </NavLink>
-      <NavLink
+      </NavLink>}
+      {loc !== "/testimonials" && 
+        <NavLink
       className="cyan btn navbtn"
       to="/testimonials"
       style={{ margin: '15px' }}
       >
       Testimonials
-      </NavLink>
+      </NavLink>}
       {isAuth ? (
         <NavLink
         className="cyan btn navbtn"

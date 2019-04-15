@@ -35,7 +35,7 @@ class Testimonials extends Component {
             <Button
               className="amber"
               waves="light"
-              style={{ marginRight: '5px' }}
+              style={{ position: "fixed", top: "15px", left: "0" }}
             >
               Tell us what you think!
             </Button>
