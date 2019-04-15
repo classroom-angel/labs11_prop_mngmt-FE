@@ -70,7 +70,7 @@ class Home extends Component {
               <>
                 <p>Sign up or sign in today to get started!</p>
                 <NavLink
-                  className="cyan darken-2 btn"
+                  className="amber darken-2 btn"
                   to="/"
                   style={{ margin: '0 15px' }}
                   onClick={this.props.auth.login}
