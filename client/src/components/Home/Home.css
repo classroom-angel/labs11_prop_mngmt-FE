@@ -126,15 +126,15 @@ body {
   .navbar {
     position: relative;
     margin: 0 auto;
-    height: 120px;
-    width: 100%;
+    height: auto;
     justify-content: center;
   }
 }
 
 @media (max-width: 700px) {
   .navbar {
-    height: 180px;
+    margin: 0 auto;
+    height: auto;
     align-items: flex-start;
   }
 }
