@@ -49,8 +49,8 @@ class Testimonials extends Component {
         >
           {this.state.testimonials.map(testimonial => {
             return (
-              <Col className="s12 m10 l5" style={{ margin: '0 auto' }}>
-                <CardPanel className=" cyan">
+              <Col className="s12 m10 l5" style={{ margin: '0' }}>
+                <CardPanel className="cyan panel">
                   <span className="white-text ">
                     <p style={{ fontSize: '22px' }}>
                       <i>"{testimonial.text}"</i>

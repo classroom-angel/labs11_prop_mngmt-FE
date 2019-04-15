@@ -1,5 +1,4 @@
 .testimonials {
-  background-color: #00acc1;
   padding-top: 60px;
 }
 
@@ -12,6 +11,10 @@
 
 .input-field textarea:focus {
   border-bottom: 1px solid white !important;
+}
+
+.panel {
+  height: 350px;
 }
 
 
@@ -33,4 +36,13 @@
     margin: 0 auto;
   }
 
+  .panel {
+    height: 400px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .panel {
+    height: auto;
+  }
 }
