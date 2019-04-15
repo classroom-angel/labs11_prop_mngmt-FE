@@ -126,6 +126,7 @@ body {
     position: relative;
     margin: 0 auto;
     height: 140px;
+    width: 100%;
     justify-content: center;
   }
 }

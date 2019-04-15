@@ -30,12 +30,13 @@ class Testimonials extends Component {
   render() {
     return (
       <div className="testimonials">
-        <div>
+        <div
+        className="addbtn"
+        >
           <Link to="/AddTestimonial">
             <Button
               className="amber"
               waves="light"
-              style={{ position: "fixed", top: "15px", left: "0" }}
             >
               Tell us what you think!
             </Button>
@@ -48,7 +49,7 @@ class Testimonials extends Component {
         >
           {this.state.testimonials.map(testimonial => {
             return (
-              <Col className="s12 m5" style={{ margin: '0 auto' }}>
+              <Col className="s12 m10 l5" style={{ margin: '0 auto' }}>
                 <CardPanel className=" cyan">
                   <span className="white-text ">
                     <p style={{ fontSize: '22px' }}>
