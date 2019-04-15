@@ -67,8 +67,9 @@ class EditEventForm extends Component {
         <div className="EditForm cyan  z-depth-4">
           <form onSubmit={this.updateEvent}>
             <div className="row">
-              <div class="input-field col s12">
+              <div class="input-field col s12 ">
                 <input
+                  className="white-text"
                   onChange={this.handleChange}
                   placeholder="name"
                   value={this.state.name}
@@ -77,8 +78,9 @@ class EditEventForm extends Component {
               </div>
             </div>
             <div className="row">
-              <div class="input-field col s12">
+              <div class="input-field col s12 ">
                 <input
+                  className="white-text"
                   onChange={this.handleChange}
                   placeholder="date"
                   value={this.state.date}
@@ -89,6 +91,7 @@ class EditEventForm extends Component {
             <div className="row">
               <div class="input-field col s12">
                 <input
+                  className="white-text"
                   onChange={this.handleChange}
                   placeholder="time"
                   value={this.state.time}
@@ -98,7 +101,7 @@ class EditEventForm extends Component {
             </div>
             <div>
               <Button
-                className="amber black-text"
+                className="amber white-text"
                 type="submit"
                 waves="light"
                 style={{ margin: '10px' }}
