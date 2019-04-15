@@ -91,7 +91,7 @@ class CreateEventForm extends Component {
                 />
               </div>
             </div>
-            <Button className="amber black-text" type="submit" waves="light">
+            <Button className="amber white-text" type="submit" waves="light">
               Submit
               <Icon right>send</Icon>
             </Button>

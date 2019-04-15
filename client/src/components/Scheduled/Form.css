@@ -11,3 +11,7 @@
   border-radius: 5px;
   padding: 10px;
 }
+
+.input-field input:focus {
+  border-bottom: 1px solid white !important;
+}
