@@ -13,3 +13,7 @@
 .input-field textarea:focus {
   border-bottom: 1px solid white !important;
 }
+
+.input-field textarea {
+  border-bottom: 1px solid white !important;
+}

@@ -12,6 +12,13 @@
   padding: 10px;
 }
 
+.input-field .placeholder {
+  color: white;
+}
+.input-field input {
+  border-bottom: 1px solid white !important;
+}
+
 .input-field input:focus {
   border-bottom: 1px solid white !important;
 }
