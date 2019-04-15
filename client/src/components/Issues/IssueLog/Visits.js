@@ -2,6 +2,7 @@ import React from 'react';
 import M from 'materialize-css';
 import Sidebar from '../../Sidebar/Sidebar';
 import '../Issues.css';
+import '../../../App.css';
 import Issue from './Issue';
 import NewIssue from './NewIssue';
 import FilterOptions from './FilterOptions';
@@ -15,13 +16,12 @@ import helpers, {
   delComment
 } from '../axiosHelpers';
 import { statuses, today } from '../data';
-import Visits from './Visits';
 
 const { getIssues, getTags, getComments } = helpers;
 
 let tags = [];
 
-export default class IssueLog extends React.Component {
+export default class Visits extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,7 +36,7 @@ export default class IssueLog extends React.Component {
       tag: '',
       tags: [],
       modal: false,
-      isVisit: false,
+      isVisit: true,
       comment: '',
       comments: [],
       showComments: false,
@@ -226,9 +226,6 @@ export default class IssueLog extends React.Component {
   };
 
   render() {
-    console.log('showadvis', this.state.showOnlyAdminVisits);
-    console.log('issues', this.state.issues);
-    console.log('isVisit', this.state.isVisit);
     if (this.props.auth.isAuth()) {
       this.arrayTags();
 
@@ -244,32 +241,13 @@ export default class IssueLog extends React.Component {
           console.log(instance);
         }
 
-        var t = document.querySelectorAll('.tabs');
-        if (t) {
-          M.Tabs.init(t, {
-            onShow: () => {
-              this.setState({ isVisit: !this.state.isVisit });
-            }
-          });
-        }
-
         return (
-          <div className="page-container">
-            <div className="right-side">
-              <ul class="tabs" style={{ width: '400px' }}>
-                <li class="tab">
-                  <a href="#is-test-1">Issue Log</a>
-                </li>
-                <li class="tab">
-                  <a href="#ad-test-1">Admin Visits</a>
-                </li>
-              </ul>
-              <div className="start-issue" id="is-test-1">
-                <h1 style={{ textAlign: 'center', color: '#333333' }}>
-                  Issue Log
-                </h1>
+          <div className="start-issue">
+            <h1 style={{ textAlign: 'center', color: '#333333' }}>
+              Admin Visits
+            </h1>
 
-                {/* <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Open Login Modal</a>
+            {/* <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Open Login Modal</a>
 
               <div id="modal1" class="modal">
                 <div class="modal-content">
@@ -301,24 +279,24 @@ export default class IssueLog extends React.Component {
                 </div>
               </div> */}
 
-                {/* Modal Trigger */}
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-evenly',
-                    width: '500px',
-                    marginBottom: '25px',
-                    float: 'right'
-                  }}
-                >
-                  <button
-                    data-target="modal1"
-                    className="btn modal-trigger cyan darken-2"
-                  >
-                    + New Issue
-                  </button>
+            {/* Modal Trigger */}
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-evenly',
+                width: '500px',
+                marginBottom: '25px',
+                float: 'right'
+              }}
+            >
+              <button
+                data-target="modal1"
+                className="btn modal-trigger cyan darken-2"
+              >
+                + New Issue
+              </button>
 
-                  {/* <div id="modal1" className="modal">
+              {/* <div id="modal1" className="modal">
                   <div className="modal-content">
                     <NewIssue
                       postIssues={this.postIssues}
@@ -341,80 +319,74 @@ export default class IssueLog extends React.Component {
                   </div>
                 </div> */}
 
-                  <FilterOptions
-                    statuses={statuses}
-                    tags={tags}
-                    handleDropChange={this.handleDropChange}
-                    visitChange={this.state.visitChange}
-                  />
-                </div>
+              <FilterOptions
+                statuses={statuses}
+                tags={tags}
+                handleDropChange={this.handleDropChange}
+                visitChange={this.state.visitChange}
+              />
+            </div>
 
-                <div style={{ width: '85%', margin: 'auto' }}>
-                  <div className="issue-list">
-                    <NewIssue
-                      postIssues={this.postIssues}
-                      issueName={this.state.issueName}
-                      handleChange={this.handleChange}
-                      issueNotes={this.state.issueNotes}
-                      visitChange={this.visitChange}
-                      uploading={this.state.uploading}
-                      imgAdder={this.imgAdder}
-                      statuses={statuses}
-                    />
-                    {this.state.issues
-                      .filter(issue => {
-                        return !issue.isVisit;
-                      })
-                      .filter(issue => {
-                        return (
-                          issue.status ===
-                            this.state.filterStatus.toLowerCase() ||
-                          this.state.filterStatus === 'all'
-                        );
-                      })
-                      .filter((issue, i, array) => {
-                        let filteredTags = this.state.tags.filter(tag => {
-                          if (!(this.state.filterTag === 'all')) {
-                            return tag.name === this.state.filterTag;
-                          }
-                          return true;
-                        });
+            <div style={{ width: '85%', margin: 'auto' }}>
+              <div className="issue-list">
+                <NewIssue
+                  postIssues={this.postIssues}
+                  issueName={this.state.issueName}
+                  handleChange={this.handleChange}
+                  issueNotes={this.state.issueNotes}
+                  visitChange={this.visitChange}
+                  uploading={this.state.uploading}
+                  imgAdder={this.imgAdder}
+                  statuses={statuses}
+                />
+                {this.state.issues
+                  .filter(issue => {
+                    return issue.isVisit;
+                  })
+                  .filter(issue => {
+                    return (
+                      issue.status === this.state.filterStatus.toLowerCase() ||
+                      this.state.filterStatus === 'all'
+                    );
+                  })
+                  .filter((issue, i, array) => {
+                    let filteredTags = this.state.tags.filter(tag => {
+                      if (!(this.state.filterTag === 'all')) {
+                        return tag.name === this.state.filterTag;
+                      }
+                      return true;
+                    });
 
-                        let tagIds = [];
-                        filteredTags.forEach(function(tag) {
-                          tagIds.push(tag.issueId);
-                        });
+                    let tagIds = [];
+                    filteredTags.forEach(function(tag) {
+                      tagIds.push(tag.issueId);
+                    });
 
-                        if (!(this.state.filterTag === 'all')) {
-                          return tagIds.includes(issue.id);
-                        }
-                        return true;
-                      })
-                      .filter(issue => {
-                        if (this.state.showOnlyAdminVisits) {
-                          return issue.isVisit;
-                        }
-                        return true;
-                      })
-                      .map((issue, index) => {
-                        return (
-                          <Issue
-                            {...this.state}
-                            key={index}
-                            issue={issue}
-                            deleteIssue={this.deleteIssue}
-                            toggleShowComments={this.toggleShowComments}
-                            deleteComment={this.deleteComment}
-                            submitComment={this.submitComment}
-                            handleCommentChange={this.handleCommentChange}
-                          />
-                        );
-                      })}
-                  </div>
-                </div>
-              </div>
-              <div id="ad-test-1">
-                <Visits auth={this.props.auth} />
+                    if (!(this.state.filterTag === 'all')) {
+                      return tagIds.includes(issue.id);
+                    }
+                    return true;
+                  })
+                  .filter(issue => {
+                    if (this.state.showOnlyAdminVisits) {
+                      return issue.isVisit;
+                    }
+                    return true;
+                  })
+                  .map((issue, index) => {
+                    return (
+                      <Issue
+                        {...this.state}
+                        key={index}
+                        issue={issue}
+                        deleteIssue={this.deleteIssue}
+                        toggleShowComments={this.toggleShowComments}
+                        deleteComment={this.deleteComment}
+                        submitComment={this.submitComment}
+                        handleCommentChange={this.handleCommentChange}
+                      />
+                    );
+                  })}
               </div>
             </div>
           </div>
@@ -428,8 +400,6 @@ export default class IssueLog extends React.Component {
           </div>
         );
       }
-    } else {
-      return <h1>You must be logged in to view this page</h1>;
     }
   }
 }
