@@ -27,8 +27,6 @@ export default class IssueLog extends React.Component {
     this.state = {
       issues: [],
       issuesLoaded: false,
-      issueName: '',
-      issueNotes: '',
       issueStatus: '',
       orgID: 1,
       editingIssue: false,
@@ -74,10 +72,18 @@ export default class IssueLog extends React.Component {
 
   postIssues = event => {
     event.preventDefault();
-    console.log('fomrdta', new FormData());
-    console.log('SUB MIT', event);
-    postIssue({ state: this.state, today })
+    const issueFormData = document.querySelector('.submit-issue');
+    console.log(issueFormData[0].value);
+    console.log(issueFormData[1].value);
+    postIssue({
+      state: this.state,
+      // If anyone can explain why the name and notes don't take on these values upon posting, that would be very useful
+      name: issueFormData[0].value,
+      notes: issueFormData[1].value,
+      today
+    })
       .then(res => {
+        console.log('coming back', res.data.issue);
         const id = res.data.issue.id;
         if (this.state.images === []) {
           const formData = new FormData();
@@ -302,7 +308,7 @@ export default class IssueLog extends React.Component {
                   />
                 </div>
 
-                <div style={{ width: '85%', margin: 'auto' }}>
+                <div style={{ width: '78%', margin: 'auto' }}>
                   <div className="issue-list">
                     {/* <NewIssue
                       postIssues={this.postIssues}

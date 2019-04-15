@@ -1,7 +1,14 @@
 import React from 'react';
 
 const Comments = ({ comments, issueId, deleteComment }) => (
-  <div style={{ marginTop: '20px', textAlign: 'left' }}>
+  <div
+    style={{
+      marginTop: '20px',
+      textAlign: 'left',
+      overflowY: 'scroll',
+      height: '112.5px'
+    }}
+  >
     {comments
       .filter(comment => {
         return comment.issueId === issueId;
