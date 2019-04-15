@@ -51,18 +51,6 @@ const FilterOptions = ({ handleDropChange, statuses, tags, visitChange }) => (
         );
       })}
     </ul>
-    <form>
-      <label htmlFor="showOnlyAdminVisits">
-        <input
-          type="checkbox"
-          name="showOnlyAdminVisits"
-          id="showOnlyAdminVisits"
-          onClick={visitChange}
-          value={true}
-        />
-        <span>Show admin visits</span>
-      </label>
-    </form>
   </>
 );
 

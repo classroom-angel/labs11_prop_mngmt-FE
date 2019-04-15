@@ -326,8 +326,9 @@ export default class IssueLog extends React.Component {
                   visitChange={this.state.visitChange}
                 />
               </div>
-              <div className="issue-list">
-                <NewIssue
+              <div style={{ width: '85%', margin: 'auto' }}>
+                <div className="issue-list">
+                  {/* <NewIssue
                   postIssues={this.postIssues}
                   issueName={this.state.issueName}
                   handleChange={this.handleChange}
@@ -336,52 +337,54 @@ export default class IssueLog extends React.Component {
                   uploading={this.state.uploading}
                   imgAdder={this.imgAdder}
                   statuses={statuses}
-                />
-                {this.state.issues
-                  .filter(issue => {
-                    return (
-                      issue.status === this.state.filterStatus.toLowerCase() ||
-                      this.state.filterStatus === 'all'
-                    );
-                  })
-                  .filter((issue, i, array) => {
-                    let filteredTags = this.state.tags.filter(tag => {
+                /> */}
+                  {this.state.issues
+                    .filter(issue => {
+                      return (
+                        issue.status ===
+                          this.state.filterStatus.toLowerCase() ||
+                        this.state.filterStatus === 'all'
+                      );
+                    })
+                    .filter((issue, i, array) => {
+                      let filteredTags = this.state.tags.filter(tag => {
+                        if (!(this.state.filterTag === 'all')) {
+                          return tag.name === this.state.filterTag;
+                        }
+                        return true;
+                      });
+
+                      let tagIds = [];
+                      filteredTags.forEach(function(tag) {
+                        tagIds.push(tag.issueId);
+                      });
+
                       if (!(this.state.filterTag === 'all')) {
-                        return tag.name === this.state.filterTag;
+                        return tagIds.includes(issue.id);
                       }
                       return true;
-                    });
-
-                    let tagIds = [];
-                    filteredTags.forEach(function(tag) {
-                      tagIds.push(tag.issueId);
-                    });
-
-                    if (!(this.state.filterTag === 'all')) {
-                      return tagIds.includes(issue.id);
-                    }
-                    return true;
-                  })
-                  .filter(issue => {
-                    if (this.state.showOnlyAdminVisits) {
-                      return issue.isVisit;
-                    }
-                    return true;
-                  })
-                  .map((issue, index) => {
-                    return (
-                      <Issue
-                        {...this.state}
-                        key={index}
-                        issue={issue}
-                        deleteIssue={this.deleteIssue}
-                        toggleShowComments={this.toggleShowComments}
-                        deleteComment={this.deleteComment}
-                        submitComment={this.submitComment}
-                        handleCommentChange={this.handleCommentChange}
-                      />
-                    );
-                  })}
+                    })
+                    .filter(issue => {
+                      if (this.state.showOnlyAdminVisits) {
+                        return issue.isVisit;
+                      }
+                      return true;
+                    })
+                    .map((issue, index) => {
+                      return (
+                        <Issue
+                          {...this.state}
+                          key={index}
+                          issue={issue}
+                          deleteIssue={this.deleteIssue}
+                          toggleShowComments={this.toggleShowComments}
+                          deleteComment={this.deleteComment}
+                          submitComment={this.submitComment}
+                          handleCommentChange={this.handleCommentChange}
+                        />
+                      );
+                    })}
+                </div>
               </div>
             </div>
           </div>
