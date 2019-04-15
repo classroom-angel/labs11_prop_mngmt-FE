@@ -23,7 +23,7 @@ const Issue = ({
     <Card
       key={issue.id}
       className=""
-      style={{ width: '350px', border: '2px solid #00b8d4' }}
+      style={{ width: '350px', border: '1px solid #8d8d8d' }}
     >
       <p
         style={{
