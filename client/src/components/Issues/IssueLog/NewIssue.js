@@ -63,7 +63,12 @@ const NewIssue = ({
           />*/}
         <br />
         <Uploader uploading={uploading} imgAdder={imgAdder} />
-        <Button type="submit" waves="light" className="cyan darken-4">
+        <Button
+          type="submit"
+          waves="light"
+          className="cyan darken-2"
+          style={{ marginTop: '10px' }}
+        >
           Submit
           <Icon right>send</Icon>
         </Button>

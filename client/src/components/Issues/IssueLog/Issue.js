@@ -19,6 +19,7 @@ const Issue = ({
   handleCommentChange
 }) => {
   return (
+    // <a href={`/issue/${issue.id}`}>
     <Card
       key={issue.id}
       className=""
@@ -31,10 +32,20 @@ const Issue = ({
         }}
       >
         {issue.name}
+        <span>
+          <Button
+            onClick={deleteIssue}
+            value={issue.id}
+            className="red darken-4"
+            style={{ margin: '5px 10px', float: 'right' }}
+          >
+            X
+          </Button>
+        </span>
       </p>
-      <p>{issue.notes}</p>
+      <p style={{ textAlign: 'left' }}>{issue.notes}</p>
       {/* <p>Status: {issue.status}</p> */}
-      <p>Date: {issue.date}</p>
+      <p style={{ textAlign: 'left' }}>Date: {issue.date}</p>
       {/* <p>Org. Id: {issue.organizationId}</p> */}
       <div>
         {tags
@@ -49,45 +60,38 @@ const Issue = ({
             );
           })}
       </div>
-      <Button
-        onClick={deleteIssue}
-        value={issue.id}
-        className="amber darken-4"
-        style={{ margin: '5px 10px' }}
-      >
-        X
-      </Button>
-      <NavLink to={`/issue/${issue.id}`}>
-        <Button value={issue.id} className="cyan lighten-2">
-          View/Update
-        </Button>
-      </NavLink>
-      <Button
+      {/* <Button
         onClick={() => toggleShowComments(issue.id)}
         value={issue.id}
         className="cyan lighten-3"
       >
         Show Comments
-      </Button>
-      {showCommentsObj[`issue${issue.id}`] ? (
-        <div>
-          <Comments
-            comments={comments}
-            issueId={issue.id}
-            deleteComment={deleteComment}
-          />
-          <form onSubmit={e => submitComment(issue.id, e)}>
-            <input
-              name="comment"
-              placeholder="add comment"
-              value={commentsObj[`issue${issue.id}`]}
-              issue_id={issue.id}
-              onChange={e => handleCommentChange(issue.id, e)}
-            />
-          </form>
-        </div>
-      ) : null}
+      </Button> */}
+      {/* {showCommentsObj[`issue${issue.id}`] ? ( */}
+      {/* <div> */}
+      <Comments
+        comments={comments}
+        issueId={issue.id}
+        deleteComment={deleteComment}
+      />
+      <form onSubmit={e => submitComment(issue.id, e)}>
+        <input
+          name="comment"
+          placeholder="add comment"
+          value={commentsObj[`issue${issue.id}`]}
+          issue_id={issue.id}
+          onChange={e => handleCommentChange(issue.id, e)}
+        />
+      </form>
+      {/* </div> */}
+      {/* ) : null} */}
+      <NavLink to={`/issue/${issue.id}`}>
+        <Button value={issue.id} className="cyan lighten-2">
+          View/Update
+        </Button>
+      </NavLink>
     </Card>
+    // </a>
   );
   // }
 };

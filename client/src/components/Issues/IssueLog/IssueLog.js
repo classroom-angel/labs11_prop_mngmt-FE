@@ -45,7 +45,8 @@ export default class IssueLog extends React.Component {
       images: [],
       eid: 3,
       showCommentsObj: {},
-      commentsObj: {}
+      commentsObj: {},
+      showOnlyAdminVisits: false
     };
   }
 
@@ -181,9 +182,15 @@ export default class IssueLog extends React.Component {
   };
 
   visitChange = ({ target }) => {
+    console.log(target);
     const { name, checked } = target;
     this.setState({ [name]: checked });
   };
+
+  // toggleShowVisits = ({ target }) => {
+  //   const { name, checked } = target;
+  //   this.setState({ [name]: checked });
+  // };
 
   submitComment = (id, event) => {
     event.preventDefault();
@@ -220,6 +227,9 @@ export default class IssueLog extends React.Component {
   };
 
   render() {
+    console.log('showadvis', this.state.showOnlyAdminVisits);
+    console.log('issues', this.state.issues);
+    console.log('isVisit', this.state.isVisit);
     if (this.props.auth.isAuth()) {
       this.arrayTags();
 
@@ -252,7 +262,7 @@ export default class IssueLog extends React.Component {
               >
                 <button
                   data-target="modal1"
-                  className="btn modal-trigger cyan darken-4"
+                  className="btn modal-trigger cyan darken-2"
                 >
                   + New Issue
                 </button>
@@ -276,6 +286,7 @@ export default class IssueLog extends React.Component {
                   statuses={statuses}
                   tags={tags}
                   handleDropChange={this.handleDropChange}
+                  visitChange={this.state.visitChange}
                 />
               </div>
               <div className="issue-list">
@@ -311,6 +322,12 @@ export default class IssueLog extends React.Component {
 
                     if (!(this.state.filterTag === 'all')) {
                       return tagIds.includes(issue.id);
+                    }
+                    return true;
+                  })
+                  .filter(issue => {
+                    if (this.state.showOnlyAdminVisits) {
+                      return issue.isVisit;
                     }
                     return true;
                   })

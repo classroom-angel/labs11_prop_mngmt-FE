@@ -1,10 +1,10 @@
 import React from 'react';
 
-const FilterOptions = ({ handleDropChange, statuses, tags }) => (
+const FilterOptions = ({ handleDropChange, statuses, tags, visitChange }) => (
   <>
     {/*Dropdown Trigger */}
     <button
-      className="dropdown-trigger btn cyan darken-4"
+      className="dropdown-trigger btn cyan darken-2"
       data-target="dropdown1"
     >
       Status
@@ -28,7 +28,7 @@ const FilterOptions = ({ handleDropChange, statuses, tags }) => (
       })}
     </ul>
     <button
-      className="dropdown-trigger btn cyan darken-4"
+      className="dropdown-trigger btn cyan darken-2"
       data-target="dropdown2"
     >
       Tags
@@ -51,6 +51,18 @@ const FilterOptions = ({ handleDropChange, statuses, tags }) => (
         );
       })}
     </ul>
+    <form>
+      <label htmlFor="showOnlyAdminVisits">
+        <input
+          type="checkbox"
+          name="showOnlyAdminVisits"
+          id="showOnlyAdminVisits"
+          onClick={visitChange}
+          value={true}
+        />
+        <span>Show admin visits</span>
+      </label>
+    </form>
   </>
 );
 
