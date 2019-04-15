@@ -22,16 +22,17 @@ a.land-link {
   width: 1000px;
   margin: 0 auto;
   /* border: 1px solid red; */
-  height: 600px;
+  min-height: 650px;
   margin-top: 30px;
 }
 
 #logo {
+  height: 600px;
   width: 600px;
 }
 
 #logo img {
-  height: auto;
+  height: 600px;
   width: 100%;
 }
 
@@ -81,10 +82,10 @@ a.land-link {
   }
 
   .logoAndText {
-    height: 50vw;
+    min-height: 500px;
     width: 100vw;
     flex-flow: column;
-    margin-bottom: 200px;
+    margin-bottom: 0px;
   }
 }
 
@@ -171,7 +172,7 @@ body {
 
 @media (max-width: 1000px) and (min-width: 992px) {
   .Footer {
-    margin-top: 650px;
+    margin-top: 600px;
   }
 }
 
