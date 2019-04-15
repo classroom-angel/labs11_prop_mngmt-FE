@@ -233,17 +233,6 @@ export default class IssueLog extends React.Component {
       this.arrayTags();
 
       if (this.state.issuesLoaded) {
-        var dd = document.querySelectorAll('.dropdown-trigger'); // Select the dropdown elements
-        if (dd) {
-          M.Dropdown.init(dd, {});
-        }
-
-        var mod = document.querySelectorAll('.modal');
-        if (mod) {
-          const instance = M.Modal.init(mod, { dismissible: false });
-          console.log(instance);
-        }
-
         var t = document.querySelectorAll('.tabs');
         if (t) {
           M.Tabs.init(t, {
@@ -253,14 +242,24 @@ export default class IssueLog extends React.Component {
           });
         }
 
+        var mod = document.querySelectorAll('.modal');
+        if (mod) {
+          M.Modal.init(mod, { dismissible: false });
+        }
+
+        var dd = document.querySelectorAll('.dropdown-trigger'); // Select the dropdown elements
+        if (dd) {
+          M.Dropdown.init(dd, {});
+        }
+
         return (
           <div className="page-container">
             <div className="right-side">
-              <ul class="tabs" style={{ width: '400px' }}>
-                <li class="tab">
+              <ul className="tabs" style={{ width: '400px' }}>
+                <li className="tab">
                   <a href="#is-test-1">Issue Log</a>
                 </li>
-                <li class="tab">
+                <li className="tab">
                   <a href="#ad-test-1">Admin Visits</a>
                 </li>
               </ul>
