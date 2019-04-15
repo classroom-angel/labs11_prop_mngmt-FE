@@ -18,7 +18,7 @@ import CreateEventForm from './components/Scheduled/CreateEventForm';
 import EditEventForm from './components/Scheduled/EditEventForm';
 import Testimonials from './components/Testimonials/Testimonials';
 import AddTestimonial from './components/Testimonials/AddTestimonial';
-import Visits from './components/Visits';
+import Visits from './components/Issues/IssueLog/Visits';
 import Payments from './components/Payments';
 import Auth from './Auth/auth';
 import AuthLoad from './components/AuthLoad';
@@ -94,14 +94,12 @@ class App extends React.Component {
       <div className="App">
         <Route
           path="/"
-          render={props => (
-            <Navbar {...props} auth={this.auth} />
-          )}/>
-          <Route
-            path="/"
-            render={props => (
-              <Sidebar {...props} auth={this.auth} />
-            )}/>
+          render={props => <Navbar {...props} auth={this.auth} />}
+        />
+        <Route
+          path="/"
+          render={props => <Sidebar {...props} auth={this.auth} />}
+        />
         <Route
           exact
           path="/"
