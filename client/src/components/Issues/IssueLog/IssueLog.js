@@ -253,12 +253,22 @@ export default class IssueLog extends React.Component {
         return (
           <div className="page-container">
             <div className="right-side">
-              <ul className="tabs" style={{ width: '260px' }}>
+              <ul className="tabs" style={{ width: '265px' }}>
                 <li className="tab">
-                  <a href="#is-test-1">Issue Log</a>
+                  <a
+                    href="#is-test-1"
+                    style={{ fontSize: '15px', color: '#c1b507' }}
+                  >
+                    Issue Log
+                  </a>
                 </li>
                 <li className="tab">
-                  <a href="#ad-test-1">Admin Visits</a>
+                  <a
+                    href="#ad-test-1"
+                    style={{ fontSize: '15px', color: '#c1b507' }}
+                  >
+                    Admin Visits
+                  </a>
                 </li>
               </ul>
               <div className="start-issue" id="is-test-1">
