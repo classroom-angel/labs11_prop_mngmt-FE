@@ -125,16 +125,16 @@ body {
 
 }
 
+.welcomeTitle {
+  color: #00bcd4;
+  margin-top: 70px;
+}
 
 @media (min-width: 1201px) {
   .topbar {
     display: none;
   }
 
-  .welcomeTitle {
-    color: #00bcd4;
-    margin-top: 70px;
-  }
 }
 
 @media (max-width: 1200px) {
@@ -182,12 +182,8 @@ body {
 }
 
 .landingTitle {
-<<<<<<< HEAD
-  margin-left: 5px;
-=======
   margin-left: 20px;
   margin-top: -5px;
->>>>>>> fa433a91a9a086bf988f6b92bb3aa25983130a44
 }
 
 .extraSpace {

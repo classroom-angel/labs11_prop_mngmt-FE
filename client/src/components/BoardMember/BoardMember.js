@@ -1,6 +1,6 @@
 import React from 'react';
 import Sidebar from '../Sidebar/Sidebar';
-import { Button, Modal, Collection, CollectionItem } from 'react-materialize';
+import { Button, Modal, Collection, CollectionItem, Collapsible, CollapsibleItem } from 'react-materialize';
 import '../../App.css';
 // import './BoardMember.css'
 import axios from '../../axiosInstance';
@@ -49,9 +49,10 @@ export default class BoardMemberHub extends React.Component {
   };
 
   equipSelect(event) {
+    console.log(event.target);
     this.setState({
       selected: event.target.innerHTML,
-      selectedId: event.target.attributes[0].value
+      selectedId: event.target.value
     });
   }
 
@@ -118,119 +119,161 @@ export default class BoardMemberHub extends React.Component {
                   borderRadius: '10px'
                 }}
               >
-                <div
-                  className="dev-condiiton"
-                  style={{
-                    display: 'flex',
-                    width: '100%',
-                    height: '500px',
-                    justifyContent: 'space-between'
-                  }}
-                >
-                  <div
-                    style={{
-                      borderLeft: '1px solid gray',
-                      textAlign: 'center',
-                      width: '15%',
-                      overflow: 'auto'
-                    }}
-                  >
-                    Equipment
-                    <div className="divider" />
-                    {this.state.equipmentLoaded
-                      ? this.state.equipment.map(item => {
-                          return (
-                            <p onClick={this.equipSelect} value={item.id}>
-                              {item.name}
-                            </p>
-                          );
-                        })
-                      : 'Loading...'}
-                  </div>
-                  <div
-                    style={{
-                      borderLeft: '1px solid gray',
-                      textAlign: 'center',
-                      width: '15%',
-                      overflow: 'auto'
-                    }}
-                  >
-                    Open Issues
-                    <div className="divider" />
-                    {this.state.equipmentLoaded
-                      ? this.state.equipment.map(function(item) {
-                          return <p>{item.damaged}</p>;
-                        })
-                      : 'Loading...'}
-                  </div>
-                  <div
-                    style={{
-                      borderLeft: '1px solid gray',
-                      textAlign: 'center',
-                      width: '15%',
-                      overflow: 'auto'
-                    }}
-                  >
-                    Working
-                    <div className="divider" />
-                    {this.state.equipmentLoaded
-                      ? this.state.equipment.map(function(item) {
-                          return <p>{item.working}</p>;
-                        })
-                      : 'Loading...'}
-                  </div>
-                  <div
-                    style={{
-                      borderLeft: '1px solid gray',
-                      textAlign: 'center',
-                      width: '15%',
-                      overflow: 'auto'
-                    }}
-                  >
-                    Total
-                    <div className="divider" />
-                    {this.state.equipmentLoaded
-                      ? this.state.equipment.map(function(item) {
-                          return <p>{item.working + item.damaged}</p>;
-                        })
-                      : 'Loading...'}
-                  </div>
-                  <div
-                    className="dev-description"
-                    style={{
-                      display: 'inline-block',
-                      borderLeft: '1px solid gray',
-                      overflow: 'auto',
-                      width: '25%'
-                    }}
-                  >
-                    Equipment Details
-                    <div className="divider" />
-                    {this.state.selected !== '' && (
-                      <>
-                        <p style={{ borderBottom: '1px solid' }}>
-                          {this.state.selected}
-                        </p>
-                        {this.state.issuesLoaded
-                          ? this.state.issues
-                              .filter(issue => {
-                                return (
-                                  issue.equipmentId == this.state.selectedId
-                                );
-                              })
-                              .map((issue, index) => {
-                                return (
-                                  <div>
-                                    <p>{`Issue ${index + 1}`}</p>
-                                    <p>Descriptions: {issue.name}</p>
-                                  </div>
-                                );
-                              })
-                          : 'Loading....'}{' '}
-                      </>
+                {/*// <div
+                //   className="dev-condition"
+                //   style={{
+                //     display: 'flex',
+                //     width: '100%',
+                //     height: '500px',
+                //     justifyContent: 'space-between'
+                //   }}
+                // >
+                //   <div
+                //     style={{
+                //       borderLeft: '1px solid gray',
+                //       textAlign: 'center',
+                //       width: '15%',
+                //       overflow: 'auto'
+                //     }}
+                //   >
+                //     Equipment
+                //     <div className="divider" />
+                //     {this.state.equipmentLoaded
+                //       ? this.state.equipment.map(item => {
+                //           return (
+                //             <p onClick={this.equipSelect} value={item.id}>
+                //               {item.name}
+                //             </p>
+                //           );
+                //         })
+                //       : 'Loading...'}
+                //   </div>
+                //   <div
+                //     style={{
+                //       borderLeft: '1px solid gray',
+                //       textAlign: 'center',
+                //       width: '15%',
+                //       overflow: 'auto'
+                //     }}
+                //   >
+                //     Open Issues
+                //     <div className="divider" />
+                //     {this.state.equipmentLoaded
+                //       ? this.state.equipment.map(function(item) {
+                //           return <p>{item.damaged}</p>;
+                //         })
+                //       : 'Loading...'}
+                //   </div>
+                //   <div
+                //     style={{
+                //       borderLeft: '1px solid gray',
+                //       textAlign: 'center',
+                //       width: '15%',
+                //       overflow: 'auto'
+                //     }}
+                //   >
+                //     Working
+                //     <div className="divider" />
+                //     {this.state.equipmentLoaded
+                //       ? this.state.equipment.map(function(item) {
+                //           return <p>{item.working}</p>;
+                //         })
+                //       : 'Loading...'}
+                //   </div>
+                //   <div
+                //     style={{
+                //       borderLeft: '1px solid gray',
+                //       textAlign: 'center',
+                //       width: '15%',
+                //       overflow: 'auto'
+                //     }}
+                //   >
+                //     Total
+                //     <div className="divider" />
+                //     {this.state.equipmentLoaded
+                //       ? this.state.equipment.map(function(item) {
+                //           return <p>{item.working + item.damaged}</p>;
+                //         })
+                //       : 'Loading...'}
+                //   </div>
+                //   <div
+                //     className="dev-description"
+                //     style={{
+                //       display: 'inline-block',
+                //       borderLeft: '1px solid gray',
+                //       overflow: 'auto',
+                //       width: '25%'
+                //     }}
+                //   >
+                //     Equipment Details
+                //     <div className="divider" />
+                //     {this.state.selected !== '' && (
+                //       <>
+                //         <p style={{ borderBottom: '1px solid' }}>
+                //           {this.state.selected}
+                //         </p>
+                //         {this.state.issuesLoaded
+                //           ? this.state.issues
+                //               .filter(issue => {
+                //                 return (
+                //                   issue.equipmentId == this.state.selectedId
+                //                 );
+                //               })
+                //               .map((issue, index) => {
+                //                 return (
+                //                   <div>
+                //                     <p>{`Issue ${index + 1}`}</p>
+                //                     <p>Descriptions: {issue.name}</p>
+                //                   </div>
+                //                 );
+                //               })
+                //           : 'Loading....'}{' '}
+                //       </>
+                //     )}
+                //   </div>
+                // </div>*/}
+                <Collapsible>
+                  {this.state.equipmentLoaded
+                  && this.state.equipment.map(item =>
+                        <CollapsibleItem header={item.name} value={item.id} onClick={this.equipSelect}>
+                          <table>
+                            <tr>
+                              <th>Open Issues</th>
+                              <th>Working</th>
+                              <th>Total</th>
+                            </tr>
+                            <tr>
+                              <td>{item.damaged}</td>
+                              <td>{item.working}</td>
+                              <td>{item.working + item.damaged}</td>
+                            </tr>
+                          </table>
+                          {this.state.selected !== "" && this.state.issues
+                                        .filter(issue => {
+                                          return (
+                                            issue.equipmentId == this.state.selectedId
+                                          );
+                                        })
+                                        .map((issue, index) => {
+                                          return (
+                                            <div>
+                                              <p>{`Issue ${index + 1}`}</p>
+                                              <p>Descriptions: {issue.name}</p>
+                                            </div>
+                                          );
+                                        })}
+                        </CollapsibleItem>
                     )}
-                  </div>
-                </div>
+                  {/*<CollapsibleItem header="Better safe than sorry. That's my motto." icon="filter_drama">
+                  Better safe than sorry. That's my motto.
+                  </CollapsibleItem>
+                  <CollapsibleItem header="Yeah, you do seem to have a little 'shit creek' ac…" icon="place">
+                  Yeah, you do seem to have a little 'shit creek' action going.
+                  </CollapsibleItem>
+                  <CollapsibleItem header="You know, FYI, you can buy a paddle. Did you not p…" icon="whatshot">
+                  You know, FYI, you can buy a paddle. Did you not plan for this contingency?
+                  </CollapsibleItem>*/}
+                </Collapsible>
               </div>
             </div>
           </div>
