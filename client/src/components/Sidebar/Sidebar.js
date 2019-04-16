@@ -134,10 +134,7 @@ class Sidebar extends Component {
             {profile.role === 'Board member' && (
               <li className="side-item">
                 <NavLink to="/bm-homepage">
-                  <p
-                    className="black-text waves-effect"
-                    style={{ margin: 'auto' }}
-                  >
+                  <p className="black-text" style={{ margin: 'auto' }}>
                     Board Member Homepage
                   </p>
                 </NavLink>
@@ -147,10 +144,7 @@ class Sidebar extends Component {
               profile.role === 'Teacher') && (
               <li className="side-item">
                 <NavLink to="/issue-log">
-                  <p
-                    className="black-text waves-effect"
-                    style={{ margin: 'auto' }}
-                  >
+                  <p className="black-text" style={{ margin: 'auto' }}>
                     Issue Log
                   </p>
                 </NavLink>
@@ -158,10 +152,7 @@ class Sidebar extends Component {
             )}
             <li className="side-item">
               <NavLink to="/scheduled">
-                <p
-                  className="black-text waves-effect"
-                  style={{ margin: 'auto' }}
-                >
+                <p className="black-text" style={{ margin: 'auto' }}>
                   Scheduled Issues
                 </p>
               </NavLink>
@@ -169,10 +160,7 @@ class Sidebar extends Component {
             {profile.role === 'Board member' && (
               <li className="side-item">
                 <NavLink to="/payments">
-                  <p
-                    className="black-text waves-effect"
-                    style={{ margin: 'auto' }}
-                  >
+                  <p className="black-text" style={{ margin: 'auto' }}>
                     Payments
                   </p>
                 </NavLink>
