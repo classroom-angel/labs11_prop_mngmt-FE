@@ -28,6 +28,10 @@
 
 
 @media (max-width: 1200px) {
+  .testimonials {
+    padding-top: 0;
+  }
+
   .addbtn {
     position: fixed;
     bottom: 0;

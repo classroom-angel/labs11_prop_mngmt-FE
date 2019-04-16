@@ -95,7 +95,7 @@ class Sidebar extends Component {
     const loc = this.props.location;
     if (
       loc &&
-      (loc.pathname === '/' || !profile  || loc.pathname === '/MeetTeam' || loc.pathname === 'OurMission' || loc.pathname === '/testimonials' || loc.pathname === '/AddTestimonial')
+      (loc.pathname === '/' || !profile  || loc.pathname === '/MeetTeam' || loc.pathname === '/OurMission' || loc.pathname === '/testimonials' || loc.pathname === '/AddTestimonial')
     ) {
       return null;
     } else {

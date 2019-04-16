@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import logo from '../img/logo.png';
 import './Home/Home.css';
 
 export default function Navbar(props) {
@@ -9,6 +10,12 @@ export default function Navbar(props) {
   if (loc === "/" || loc === "/testimonials" || loc === "/MeetTeam" || loc === "/AddTestimonial" || loc === "/OurMission") {
     return (
       <div className="navbar" style={{zIndex: "5"}}>
+      <div className="topbar2">
+        <img src={logo} style={{ height: "40px", width: "auto", marginLeft: "10px"}}/>
+        <div className="landingTitle">
+          <h4>Classroom Angel</h4>
+        </div>
+      </div>
       {loc !== "/" &&
       <NavLink
       className="cyan btn navbtn"
@@ -35,7 +42,7 @@ export default function Navbar(props) {
       >
       Our Mission
       </NavLink>}
-      {loc !== "/testimonials" && 
+      {loc !== "/testimonials" &&
         <NavLink
       className="cyan btn navbtn"
       to="/testimonials"
