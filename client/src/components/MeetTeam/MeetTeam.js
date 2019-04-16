@@ -140,10 +140,9 @@ class MeetTeam extends Component {
               reveal={
                 <p style={{ marginTop: '30px', textAlign: 'left' }}>
                   Besides programming, John likes to hike, learn new things, and
-                  play games. His dream is to work remotely from some mountain
-                  beach island. He comes from a small town in rural Tennessee.
-                  He enjoys the nitty gritty when it comes to coding. If you
-                  need someone adaptable, he's your guy.
+                  play games. He aspires to work remotely from a mountainous
+                  beach island. He enjoys the nitty gritty when it comes to
+                  coding. If you need someone adaptable, he's your guy.
                 </p>
               }
             >
