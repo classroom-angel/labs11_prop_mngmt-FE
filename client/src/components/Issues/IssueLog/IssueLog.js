@@ -27,6 +27,8 @@ export default class IssueLog extends React.Component {
     this.state = {
       issues: [],
       issuesLoaded: false,
+      issueName: '',
+      issueNotes: '',
       issueStatus: '',
       orgID: 1,
       editingIssue: false,
@@ -73,29 +75,22 @@ export default class IssueLog extends React.Component {
   postIssues = event => {
     event.preventDefault();
     const issueFormData = document.querySelector('.submit-issue');
-    console.log(issueFormData[0].value);
-    console.log(issueFormData[1].value);
     postIssue({
-      state: this.state,
-      // If anyone can explain why the name and notes don't take on these values upon posting, that would be very useful
       name: issueFormData[0].value,
       notes: issueFormData[1].value,
+      state: this.state,
       today
     })
       .then(res => {
-        console.log('coming back', res.data.issue);
         const id = res.data.issue.id;
         if (this.state.images === []) {
           const formData = new FormData();
           const files = [...this.state.images];
-          console.log(files);
           files.forEach((file, i) => {
             formData.append(i, file);
           });
-          console.log(formData);
           postImages({ id, formData })
             .then(res2 => {
-              console.log('RES2', res2);
               this.setState(prevState => ({
                 ...prevState,
                 issueName: '',
@@ -161,7 +156,6 @@ export default class IssueLog extends React.Component {
   fetchIssue = id => {
     getIssue(id)
       .then(res => {
-        console.log('fetched note', res.data);
         this.setState({ issue: res.data.issue });
       })
       .catch(console.error);
@@ -172,7 +166,6 @@ export default class IssueLog extends React.Component {
     const newTag = { name: this.state.tag, issueId: id };
     postTag(newTag)
       .then(response => {
-        console.log('axios response', response.data);
         this.setState({ tags: response.data, tag: '' });
       })
       .catch(err => {
@@ -189,7 +182,6 @@ export default class IssueLog extends React.Component {
   };
 
   visitChange = ({ target }) => {
-    console.log(target);
     const { name, checked } = target;
     this.setState({ [name]: checked });
   };
@@ -310,16 +302,6 @@ export default class IssueLog extends React.Component {
 
                 <div style={{ width: '78%', margin: 'auto' }}>
                   <div className="issue-list">
-                    {/* <NewIssue
-                      postIssues={this.postIssues}
-                      issueName={this.state.issueName}
-                      handleChange={this.handleChange}
-                      issueNotes={this.state.issueNotes}
-                      visitChange={this.visitChange}
-                      uploading={this.state.uploading}
-                      imgAdder={this.imgAdder}
-                      statuses={statuses}
-                    /> */}
                     {this.state.issues
                       .filter(issue => {
                         return !issue.isVisit;
