@@ -22,7 +22,12 @@ const Issue = ({
     <div
       key={issue.id}
       className="card medium"
-      style={{ border: '1px solid #8d8d8d', width: '295px' }}
+      style={{
+        border: '1px solid #8d8d8d',
+        width: '295px',
+        marginLeft: '10px',
+        marginRight: '10px'
+      }}
     >
       <Button
         onClick={deleteIssue}
@@ -58,7 +63,7 @@ const Issue = ({
             })
             .map(function(tag) {
               return (
-                <Chip key={tag.id} className="cyan lighten-5">
+                <Chip key={tag.id} className="amber lighten-3">
                   {tag.name}
                 </Chip>
               );
