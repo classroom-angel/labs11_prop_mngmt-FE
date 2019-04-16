@@ -110,7 +110,7 @@ class EditEventForm extends Component {
                 <Icon right>send</Icon>
               </Button>
               <Button
-                className="red darken-4"
+                className="red lighten-1"
                 onClick={this.deleteEvent}
                 style={{ margin: '10px' }}
               >

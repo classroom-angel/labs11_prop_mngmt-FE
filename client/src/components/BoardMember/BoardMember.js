@@ -65,7 +65,9 @@ export default class BoardMemberHub extends React.Component {
               Sorry! You don't have access to this area :)
             </Modal>
           )}
-          <h2 style={{ textAlign: 'left' }}>{profile.organizationName}</h2>
+          <h2 style={{ textAlign: 'left', margin: '-7px 0 0 45px' }}>
+            {profile.organizationName}
+          </h2>
           <div className="divider" />
           <div className="row">
             <div className="col s12" style={{ marginTop: '20px' }}>

@@ -26,7 +26,7 @@ a.land-link {
   margin: 0 auto;
   /* border: 1px solid red; */
   min-height: 650px;
-  margin-top: 30px;
+  margin-top: 80px;
 }
 
 #logo {
@@ -112,6 +112,7 @@ body {
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-end;
+  background-color: #fafafa;
 }
 
 .topbar2 {
@@ -128,6 +129,11 @@ body {
 @media (min-width: 1201px) {
   .topbar {
     display: none;
+  }
+
+  .welcomeTitle {
+    color: #00bcd4;
+    margin-top: 70px;
   }
 }
 
@@ -148,6 +154,10 @@ body {
     margin: 0 auto;
     height: auto;
     justify-content: center;
+  }
+
+  .welcomeTitle {
+    margin-top: 0px;
   }
 }
 
@@ -172,7 +182,12 @@ body {
 }
 
 .landingTitle {
+<<<<<<< HEAD
   margin-left: 5px;
+=======
+  margin-left: 20px;
+  margin-top: -5px;
+>>>>>>> fa433a91a9a086bf988f6b92bb3aa25983130a44
 }
 
 .extraSpace {
@@ -184,13 +199,3 @@ body {
     margin-top: 600px;
   }
 }
-
-.welcomeTitle {
-  color: #00bcd4;
-}
-
-/* @media (max-width: 1200px) and (min-width: 900px) {
-  .navbar {
-    height: 70px;
-  }
-} */

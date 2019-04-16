@@ -22,13 +22,18 @@ const Issue = ({
     <div
       key={issue.id}
       className="card medium"
-      style={{ border: '1px solid #8d8d8d' }}
+      style={{ border: '1px solid #8d8d8d', width: '295px' }}
     >
       <Button
         onClick={deleteIssue}
         value={issue.id}
-        className="red darken-4"
-        style={{ float: 'right' }}
+        className="red"
+        style={{
+          float: 'right',
+          position: 'relative',
+          left: '22px',
+          bottom: '20px'
+        }}
       >
         X
       </Button>
@@ -76,7 +81,7 @@ const Issue = ({
       </div>
       <div className="card-action" style={{ float: 'bottom' }}>
         <NavLink to={`/issue/${issue.id}`} style={{ margin: 'auto' }}>
-          <Button value={issue.id} className="cyan lighten-2">
+          <Button value={issue.id} className="amber darken-1">
             View/Update
           </Button>
         </NavLink>

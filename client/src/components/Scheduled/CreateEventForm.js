@@ -53,6 +53,7 @@ class CreateEventForm extends Component {
             <div className="row">
               <div className="input-field col s12 black-text">
                 <input
+                  className="white-text"
                   onChange={this.handleChange}
                   placeholder="Name"
                   value={this.state.name}
@@ -63,6 +64,7 @@ class CreateEventForm extends Component {
             <div className="row">
               <div class="input-field col s12">
                 <input
+                  className="white-text"
                   onChange={this.handleChange}
                   placeholder="MM_DD_YY"
                   value={this.state.date}
@@ -73,6 +75,7 @@ class CreateEventForm extends Component {
             <div className="row">
               <div class="input-field col s12">
                 <input
+                  className="white-text"
                   onChange={this.handleChange}
                   placeholder="12:00 PM"
                   value={this.state.time}
@@ -83,6 +86,7 @@ class CreateEventForm extends Component {
             <div className="row">
               <div class="input-field col s12">
                 <input
+                  className="white-text"
                   onChange={this.handleChange}
                   name="organizationId"
                   type="number"

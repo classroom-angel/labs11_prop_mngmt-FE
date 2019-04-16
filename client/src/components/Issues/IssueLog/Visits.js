@@ -237,47 +237,14 @@ export default class Visits extends React.Component {
 
         var mod = document.querySelectorAll('.modal');
         if (mod) {
-          const instance = M.Modal.init(mod, { dismissible: false });
-          console.log(instance);
+          M.Modal.init(mod, { dismissible: false });
         }
 
         return (
           <div className="start-issue">
-            <h1 style={{ textAlign: 'center', color: '#333333' }}>
+            <h3 style={{ textAlign: 'center', color: '#333333' }}>
               Admin Visits
-            </h1>
-
-            {/* <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Open Login Modal</a>
-
-              <div id="modal1" class="modal">
-                <div class="modal-content">
-                  <h4>Login</h4>
-            	 <div class="col s6">
-            		<form class="">
-                  <div class="row">
-            		 <div class="input-field col s12">
-                      <input id="Email" type="email" class="validate" />
-                      <label for="Email">Email</label>
-                    </div>
-                    <div class="input-field col s12">
-                      <input id="Password" type="text" class="validate" />
-                      <label for="Password">Password</label>
-                    </div>
-            		 <div class="input-field col s12">
-                      <button type="submit" class="waves-effect waves-light btn">Login</button>
-                    </div>
-            		<div class="input-field col s12">
-            			<a href="#">Forgot Password?</a>
-            		</div>
-
-                  </div>
-                  </form>
-                 </div>
-                </div>
-                <div class="modal-footer">
-                  <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
-                </div>
-              </div> */}
+            </h3>
 
             {/* Modal Trigger */}
             <div
@@ -291,7 +258,7 @@ export default class Visits extends React.Component {
             >
               <button
                 data-target="modal1"
-                className="btn modal-trigger cyan darken-2"
+                className="btn modal-trigger amber darken-1"
               >
                 + New Issue
               </button>
@@ -329,7 +296,7 @@ export default class Visits extends React.Component {
 
             <div style={{ width: '85%', margin: 'auto' }}>
               <div className="issue-list">
-                <NewIssue
+                {/* <NewIssue
                   postIssues={this.postIssues}
                   issueName={this.state.issueName}
                   handleChange={this.handleChange}
@@ -338,7 +305,7 @@ export default class Visits extends React.Component {
                   uploading={this.state.uploading}
                   imgAdder={this.imgAdder}
                   statuses={statuses}
-                />
+                /> */}
                 {this.state.issues
                   .filter(issue => {
                     return issue.isVisit;

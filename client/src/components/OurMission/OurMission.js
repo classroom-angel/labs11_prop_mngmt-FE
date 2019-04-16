@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'react-materialize';
+import { Row, Col, CardPanel } from 'react-materialize';
 import kidsinclass from '../../img/kidsinclass.jpg';
 import oneboyinclass from '../../img/oneboyinclass.jpg';
 import groupofkids from '../../img/groupofkids.jpg';
@@ -13,14 +13,45 @@ class OurMission extends Component {
     };
     return (
       <div className="mission">
-        <div>
+        <CardPanel
+          style={{ height: 'auto', width: '80%', margin: '10px auto' }}
+        >
           <h3>Our Mission</h3>
           <h5>
             We help you meet classroom needs so you can focus on what really
             matters.
           </h5>
           <div className="pictures" style={{ margin: '0 auto' }}>
-            <div
+            <img
+              src={kidsinclass}
+              style={{
+                height: '150px',
+                width: '150px',
+                objectFit: 'cover',
+                objectPosition: 'center'
+              }}
+            />
+
+            <img
+              src={oneboyinclass}
+              style={{
+                height: '150px',
+                width: '150px',
+                objectFit: 'cover',
+                objectPosition: 'center'
+              }}
+            />
+
+            <img
+              src={groupofkids}
+              style={{
+                height: '150px',
+                width: '150px',
+                objectFit: 'cover',
+                objectPosition: 'center'
+              }}
+            />
+            {/* <div
               style={{
                 backgroundImage: `url(${kidsinclass})`,
                 backgroundSize: 'cover',
@@ -45,7 +76,7 @@ class OurMission extends Component {
                 height: '200px',
                 width: '200px'
               }}
-            />
+            /> */}
           </div>
           <div>
             <p>
@@ -59,7 +90,7 @@ class OurMission extends Component {
               classroom.
             </p>
           </div>
-        </div>
+        </CardPanel>
       </div>
     );
   }

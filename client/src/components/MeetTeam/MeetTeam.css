@@ -1,5 +1,5 @@
 .meet-team {
-  width: 650px;
+  width: 80%;
   margin: 0 auto;
   padding-top: 40px;
 }
@@ -7,4 +7,18 @@
 .row {
   display: flex !important;
   justify-content: center !important;
+}
+
+.activator .material-icons.right {
+  position: relative !important;
+  margin-top: -20px !important;
+  margin-right: -20px !important;
+  /* display: inline-block; */
+}
+
+.cards {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
 }

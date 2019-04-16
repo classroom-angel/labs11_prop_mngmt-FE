@@ -13,19 +13,21 @@
   border-bottom: 1px solid white !important;
 }
 
+.input-field textarea {
+  border-bottom: 1px solid white !important;
+}
+
 .panel {
   height: 350px;
 }
 
-
 @media (min-width: 1201px) {
   .addbtn {
-  position: fixed;
-  top: 15px;
-  left: 0;
+    position: fixed;
+    top: 15px;
+    left: 0;
   }
 }
-
 
 @media (max-width: 1200px) {
   .testimonials {
