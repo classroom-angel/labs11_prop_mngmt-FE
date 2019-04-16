@@ -88,39 +88,41 @@ export default class BoardMemberHub extends React.Component {
           <div className="row">
             <div className="col s12" style={{ marginTop: '20px' }}>
               {this.state.issuesLoaded ? (
-                <Collection className="z-depth-4">
-                  <ul className="il-header">
-                    <li class="collection-header">
-                      <h4>Issue Log</h4>
-                    </li>
-                  </ul>
-                  {this.state.issues.map(issue => {
-                    return (
-                      <CollectionItem
-                        style={{ textAlign: 'left', color: 'black' }}
-                        href="#!"
-                        key={issue.id}
-                        onClick={e => {
-                          this.goToIssue(issue.id);
-                        }}
-                      >
-                        <span style={{ margin: '2px 10px' }}>
-                          {' '}
-                          {issue.name}
-                        </span>
-                        <span style={{ margin: '2px 10px' }}>{issue.date}</span>
-                        <Chip style={{ float: 'right' }}>
-                          {issue.status.toUpperCase()}
-                        </Chip>
-                      </CollectionItem>
-                    );
-                  })}
-                </Collection>
+                <div className="col s10 offset-s1 l5">
+                  <Collection className="z-depth-4">
+                    <ul className="il-header">
+                      <li class="collection-header">
+                        <h4>Issue Log</h4>
+                      </li>
+                    </ul>
+                    {this.state.issues.map(issue => {
+                      return (
+                        <CollectionItem
+                          style={{ textAlign: 'left', color: 'black' }}
+                          href="#!"
+                          key={issue.id}
+                          onClick={e => {
+                            this.goToIssue(issue.id);
+                          }}
+                        >
+                          <span style={{ margin: '2px 10px' }}>
+                            {' '}
+                            {issue.name}
+                          </span>
+                          <span style={{ margin: '2px 10px' }}>
+                            {issue.date}
+                          </span>
+                          <Chip style={{ float: 'right' }}>
+                            {issue.status.toUpperCase()}
+                          </Chip>
+                        </CollectionItem>
+                      );
+                    })}
+                  </Collection>
+                </div>
               ) : (
                 'Loading...'
               )}
-              {/* </div> */}
-              {/* </div> */}
               <div
                 className="col s10 offset-s1 l7 z-depth-4"
                 style={{
