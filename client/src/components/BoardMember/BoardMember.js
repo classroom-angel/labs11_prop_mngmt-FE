@@ -83,18 +83,6 @@ export default class BoardMemberHub extends React.Component {
           <div className="divider" />
           <div className="row">
             <div className="col s12" style={{ marginTop: '20px' }}>
-              {/* <div
-                className="col s10 offset-s1 l5 z-depth-4"
-                style={{
-                  borderRadius: '10px',
-                  marginBottom: '20px'
-                }}
-              >
-                <h2 style={{ textAlign: 'left' }}>Issue Log</h2>
-                <div className="divider" />
-
-                <div style={{ overflow: 'auto', height: '500px' }}> */}
-
               {this.state.issuesLoaded ? (
                 <Collection className="z-depth-4">
                   <ul className="il-header">
