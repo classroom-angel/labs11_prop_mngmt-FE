@@ -8,3 +8,10 @@
   display: flex !important;
   justify-content: center !important;
 }
+
+.material-icons {
+  position: relative !important;
+  margin-top: -20px;
+  margin-right: -20px;
+  display: inline-block;
+}
