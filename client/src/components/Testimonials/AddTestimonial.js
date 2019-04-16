@@ -46,7 +46,7 @@ class AddTestimonial extends Component {
 
   render() {
     return (
-      <div>
+      <div className="addTestimonial">
         <h3>Add Testimonial</h3>
         <div className="TestimonialForm col s12  cyan  z-depth-4">
           <form onSubmit={this.createTestimonial}>
