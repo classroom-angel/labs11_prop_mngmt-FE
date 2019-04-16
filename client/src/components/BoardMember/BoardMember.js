@@ -44,6 +44,7 @@ export default class BoardMemberHub extends React.Component {
     axios
       .get('issues')
       .then(res => {
+        console.log(res.data);
         const issues = res.data.issues.filter(
           issue => issue.organizationId === prof.orgId
         );
@@ -56,11 +57,11 @@ export default class BoardMemberHub extends React.Component {
     this.props.history.push(`/issue/${id}`);
   };
 
-  equipSelect(event) {
+  equipSelect(event, id) {
     console.log(event.target);
     this.setState({
       selected: event.target.innerHTML,
-      selectedId: event.target.value
+      selectedId: id
     });
   }
 
@@ -242,7 +243,7 @@ export default class BoardMemberHub extends React.Component {
                 <Collapsible>
                   {this.state.equipmentLoaded
                   && this.state.equipment.map(item =>
-                        <CollapsibleItem header={item.name} value={item.id} onClick={this.equipSelect}>
+                        <CollapsibleItem header={item.name} onClick={(event) => {this.equipSelect(event, item.id)}}>
                           <table>
                             <tr>
                               <th>Open Issues</th>
@@ -263,9 +264,8 @@ export default class BoardMemberHub extends React.Component {
                                         })
                                         .map((issue, index) => {
                                           return (
-                                            <div>
-                                              <p>{`Issue ${index + 1}`}</p>
-                                              <p>Descriptions: {issue.name}</p>
+                                            <div style={{textAlign: 'left'}}>
+                                              <p>{`Issue ${index + 1}`}: {issue.name}</p>
                                             </div>
                                           );
                                         })}
