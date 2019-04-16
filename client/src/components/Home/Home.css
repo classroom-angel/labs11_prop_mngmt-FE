@@ -1,3 +1,6 @@
+.home {
+  margin-top: 60px;
+}
 h1,
 h4 {
   font-family: 'Quicksand', sans-serif;
@@ -102,7 +105,7 @@ body {
 .navbar {
   position: fixed;
   /* border: 1px solid red; */
-  width: 75vw;
+  width: 100vw;
   height: 60px;
   top: 0;
   right: 0;
@@ -112,26 +115,38 @@ body {
   background-color: #fafafa;
 }
 
-.topbar {
-  background-color: #fafafa;
-  width: 100vw;
+.topbar2 {
+  position: fixed;
+  left: 0;
+  top: -10px;
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
-  border: 0px solid pink;
-  position: fixed;
-  top: 0;
+  align-items: center;
+
 }
 
-.welcomeTitle {
-  color: #00bcd4;
-  margin-top: 70px;
+
+@media (min-width: 1201px) {
+  .topbar {
+    display: none;
+  }
+
+  .welcomeTitle {
+    color: #00bcd4;
+    margin-top: 70px;
+  }
 }
 
 @media (max-width: 1200px) {
   .topbar {
+    width: 100vw;
+    display: flex;
     flex-flow: column wrap;
-    position: relative;
+    justify-content: space-between;
+  }
+
+  .topbar2 {
+    display: none;
   }
 
   .navbar {
@@ -167,8 +182,12 @@ body {
 }
 
 .landingTitle {
+<<<<<<< HEAD
+  margin-left: 5px;
+=======
   margin-left: 20px;
   margin-top: -5px;
+>>>>>>> fa433a91a9a086bf988f6b92bb3aa25983130a44
 }
 
 .extraSpace {

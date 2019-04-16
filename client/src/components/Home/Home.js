@@ -23,7 +23,7 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
+      <div className="home">
         <div className="onboarding-component">
           <div className="topbar">
             <div className="landingTitle">
@@ -34,7 +34,7 @@ class Home extends Component {
           {this.isAuth && (
             <div>
               <h3 className="welcomeTitle">
-                Welcome, {this.props.profile.name.split(' ')[0]}
+                Welcome, <b>{this.props.profile.name.split(' ')[0]}</b>
               </h3>
               <div
                 className="avatar"

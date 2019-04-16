@@ -98,7 +98,7 @@ class Sidebar extends Component {
       (loc.pathname === '/' ||
         !profile ||
         loc.pathname === '/MeetTeam' ||
-        loc.pathname === 'OurMission' ||
+        loc.pathname === '/OurMission' ||
         loc.pathname === '/testimonials' ||
         loc.pathname === '/AddTestimonial')
     ) {
