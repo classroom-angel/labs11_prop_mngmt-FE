@@ -3,12 +3,12 @@ import React from 'react';
 const FilterOptions = ({ handleDropChange, statuses, tags, visitChange }) => (
   <>
     {/*Dropdown Trigger */}
-    <button
+    {/* <button
       className="dropdown-trigger btn amber darken-1"
       data-target="dropdown1"
     >
       Status
-    </button>
+    </button> */}
     {/* Dropdown Structure */}
     <ul id="dropdown1" className="dropdown-content">
       <li key={0} onClick={handleDropChange} name="filterStatus" value="all">
@@ -27,12 +27,12 @@ const FilterOptions = ({ handleDropChange, statuses, tags, visitChange }) => (
         );
       })}
     </ul>
-    <button
+    {/* <button
       className="dropdown-trigger btn amber darken-1"
       data-target="dropdown2"
     >
       Tags
-    </button>
+    </button> */}
     {/* Dropdown Structure */}
     <ul id="dropdown2" className="dropdown-content">
       <li key={0} onClick={handleDropChange} name="filterTag" value="all">

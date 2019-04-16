@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Comments from '../Comments';
+import VIModal from '../ViewIssue/VIModal';
 
 import { Button, Chip } from 'react-materialize';
 
@@ -29,15 +30,20 @@ const Issue = ({
         marginRight: '10px'
       }}
     >
+      {/* <div id={`modal${issue.id}`} className="modal">
+        <VIModal issueID={issue.id} />
+      </div> */}
+
       <Button
         onClick={deleteIssue}
         value={issue.id}
-        className="red"
+        className=""
         style={{
           float: 'right',
           position: 'relative',
           left: '22px',
-          bottom: '20px'
+          bottom: '20px',
+          backgroundColor: '#ee6e73'
         }}
       >
         X
@@ -85,11 +91,17 @@ const Issue = ({
         </form>
       </div>
       <div className="card-action" style={{ float: 'bottom' }}>
-        <NavLink to={`/issue/${issue.id}`} style={{ margin: 'auto' }}>
-          <Button value={issue.id} className="amber darken-1">
+        {/* <NavLink to={`/issue/${issue.id}`} style={{ margin: 'auto' }}> */}
+        {/* <Button value={issue.id} className="amber darken-1">
             View/Update
-          </Button>
-        </NavLink>
+          </Button> */}
+        <button
+          className="waves-effect waves-light btn modal-trigger amber"
+          data-target={`#modal${issue.id}`}
+        >
+          Edit
+        </button>
+        {/* </NavLink> */}
       </div>
     </div>
   );

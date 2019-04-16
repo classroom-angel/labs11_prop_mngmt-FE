@@ -16,6 +16,7 @@ import helpers, {
 } from '../axiosHelpers';
 import { statuses, today } from '../data';
 import Visits from './Visits';
+import VIModal from '../ViewIssue/VIModal';
 
 const { getIssues, getTags, getComments } = helpers;
 
@@ -233,16 +234,12 @@ export default class IssueLog extends React.Component {
       if (this.state.issuesLoaded) {
         var t = document.querySelectorAll('.tabs');
         if (t) {
-          M.Tabs.init(t, {
-            onShow: () => {
-              this.setState({ isVisit: !this.state.isVisit });
-            }
-          });
+          M.Tabs.init(t, {});
         }
 
         var mod = document.querySelectorAll('.modal');
         if (mod) {
-          M.Modal.init(mod, { dismissible: false });
+          M.Modal.init(mod, {});
         }
 
         var dd = document.querySelectorAll('.dropdown-trigger'); // Select the dropdown elements
@@ -253,11 +250,33 @@ export default class IssueLog extends React.Component {
         return (
           <div className="page-container">
             <div className="right-side">
+              <ul id="dropdown1" className="dropdown-content">
+                <li
+                  key={0}
+                  onClick={this.handleDropChange}
+                  name="filterStatus"
+                  value="all"
+                >
+                  All
+                </li>
+                {statuses.map((status, index) => {
+                  return (
+                    <li
+                      key={index + 1}
+                      onClick={this.handleDropChange}
+                      name="filterStatus"
+                      value={status}
+                    >
+                      {status}
+                    </li>
+                  );
+                })}
+              </ul>
               <ul className="tabs" style={{ width: '265px' }}>
                 <li className="tab">
                   <a
                     href="#is-test-1"
-                    style={{ fontSize: '15px', color: '#c1b507' }}
+                    style={{ fontSize: '15px', color: '#111111' }}
                   >
                     Issue Log
                   </a>
@@ -265,7 +284,7 @@ export default class IssueLog extends React.Component {
                 <li className="tab">
                   <a
                     href="#ad-test-1"
-                    style={{ fontSize: '15px', color: '#c1b507' }}
+                    style={{ fontSize: '15px', color: '#111111' }}
                   >
                     Admin Visits
                   </a>
@@ -291,18 +310,18 @@ export default class IssueLog extends React.Component {
                     onClick={this.toggleDateSort}
                   >
                     Sort by Date Added
-                    <i class="tiny material-icons" id="mod-arrow">
+                    <i className="tiny material-icons" id="mod-arrow">
                       arrow_downward
                     </i>
                   </button>
                   <button
-                    data-target="modal1"
+                    data-target="modalA"
                     className="btn modal-trigger amber darken-1"
                   >
                     + New Issue
                   </button>
 
-                  <div id="modal1" className="modal">
+                  <div id="modalA" className="modal">
                     <div className="modal-content">
                       <NewIssue
                         postIssues={this.postIssues}
@@ -316,6 +335,19 @@ export default class IssueLog extends React.Component {
                       />
                     </div>
                   </div>
+                  <button
+                    className="dropdown-trigger btn amber darken-1"
+                    data-target="dropdown1"
+                  >
+                    Status
+                  </button>
+
+                  <button
+                    className="dropdown-trigger btn amber darken-1"
+                    data-target="dropdown2"
+                  >
+                    Tags
+                  </button>
 
                   <FilterOptions
                     statuses={statuses}
@@ -364,16 +396,21 @@ export default class IssueLog extends React.Component {
                       })
                       .map((issue, index) => {
                         return (
-                          <Issue
-                            {...this.state}
-                            key={index}
-                            issue={issue}
-                            deleteIssue={this.deleteIssue}
-                            toggleShowComments={this.toggleShowComments}
-                            deleteComment={this.deleteComment}
-                            submitComment={this.submitComment}
-                            handleCommentChange={this.handleCommentChange}
-                          />
+                          <>
+                            <Issue
+                              {...this.state}
+                              key={index}
+                              issue={issue}
+                              deleteIssue={this.deleteIssue}
+                              toggleShowComments={this.toggleShowComments}
+                              deleteComment={this.deleteComment}
+                              submitComment={this.submitComment}
+                              handleCommentChange={this.handleCommentChange}
+                            />
+                            <div id={`modal${issue.id}`} className="modal">
+                              <VIModal issueId={issue.id} />
+                            </div>
+                          </>
                         );
                       })}
                   </div>
