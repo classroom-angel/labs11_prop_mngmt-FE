@@ -186,11 +186,6 @@ export default class Visits extends React.Component {
     this.setState({ [name]: checked });
   };
 
-  // toggleShowVisits = ({ target }) => {
-  //   const { name, checked } = target;
-  //   this.setState({ [name]: checked });
-  // };
-
   submitComment = (id, event) => {
     event.preventDefault();
     postComment({
@@ -257,34 +252,26 @@ export default class Visits extends React.Component {
               }}
             >
               <button
-                data-target="modal1"
+                data-target="modal2"
                 className="btn modal-trigger amber darken-1"
               >
                 + New Issue
               </button>
 
-              {/* <div id="modal1" className="modal">
-                  <div className="modal-content">
-                    <NewIssue
-                      postIssues={this.postIssues}
-                      issueName={this.state.issueName}
-                      handleChange={this.handleChange}
-                      issueNotes={this.state.issueNotes}
-                      visitChange={this.visitChange}
-                      uploading={this.state.uploading}
-                      imgAdder={this.imgAdder}
-                      statuses={statuses}
-                    />
-                  </div>
-                  <div class="modal-footer">
-                    <a
-                      class=" modal-action modal-close waves-effect btn-flat"
-                      onClick={this.postIssues}
-                    >
-                      Submit
-                    </a>
-                  </div>
-                </div> */}
+              <div id="modal2" className="modal">
+                <div className="modal-content">
+                  <NewIssue
+                    postIssues={this.postIssues}
+                    issueName={this.state.issueName}
+                    handleChange={this.handleChange}
+                    issueNotes={this.state.issueNotes}
+                    visitChange={this.visitChange}
+                    uploading={this.state.uploading}
+                    imgAdder={this.imgAdder}
+                    statuses={statuses}
+                  />
+                </div>
+              </div>
 
               <FilterOptions
                 statuses={statuses}
@@ -296,16 +283,6 @@ export default class Visits extends React.Component {
 
             <div style={{ width: '85%', margin: 'auto' }}>
               <div className="issue-list">
-                {/* <NewIssue
-                  postIssues={this.postIssues}
-                  issueName={this.state.issueName}
-                  handleChange={this.handleChange}
-                  issueNotes={this.state.issueNotes}
-                  visitChange={this.visitChange}
-                  uploading={this.state.uploading}
-                  imgAdder={this.imgAdder}
-                  statuses={statuses}
-                /> */}
                 {this.state.issues
                   .filter(issue => {
                     return issue.isVisit;

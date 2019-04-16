@@ -27,8 +27,6 @@ export default class IssueLog extends React.Component {
     this.state = {
       issues: [],
       issuesLoaded: false,
-      issueName: '',
-      issueNotes: '',
       issueStatus: '',
       orgID: 1,
       editingIssue: false,
@@ -83,7 +81,7 @@ export default class IssueLog extends React.Component {
     })
       .then(res => {
         const id = res.data.issue.id;
-        if (this.state.images === []) {
+        if (this.state.images.length !== 0) {
           const formData = new FormData();
           const files = [...this.state.images];
           files.forEach((file, i) => {
@@ -105,7 +103,7 @@ export default class IssueLog extends React.Component {
             ...prevState,
             issueName: '',
             issueNotes: '',
-            issues: [...prevState.issues, res.data.issue],
+            issues: [res.data.issue, ...prevState.issues],
             images: []
           }));
         }
@@ -220,6 +218,14 @@ export default class IssueLog extends React.Component {
     });
   };
 
+  toggleDateSort = () => {
+    let reversedArray = this.state.issues.reverse();
+    this.setState({ issues: reversedArray });
+    document.querySelector('#mod-arrow').innerHTML === 'arrow_downward'
+      ? (document.querySelector('#mod-arrow').innerHTML = 'arrow_upward')
+      : (document.querySelector('#mod-arrow').innerHTML = 'arrow_downward');
+  };
+
   render() {
     if (this.props.auth.isAuth()) {
       this.arrayTags();
@@ -247,12 +253,22 @@ export default class IssueLog extends React.Component {
         return (
           <div className="page-container">
             <div className="right-side">
-              <ul className="tabs" style={{ width: '400px' }}>
+              <ul className="tabs" style={{ width: '265px' }}>
                 <li className="tab">
-                  <a href="#is-test-1">Issue Log</a>
+                  <a
+                    href="#is-test-1"
+                    style={{ fontSize: '15px', color: '#c1b507' }}
+                  >
+                    Issue Log
+                  </a>
                 </li>
                 <li className="tab">
-                  <a href="#ad-test-1">Admin Visits</a>
+                  <a
+                    href="#ad-test-1"
+                    style={{ fontSize: '15px', color: '#c1b507' }}
+                  >
+                    Admin Visits
+                  </a>
                 </li>
               </ul>
               <div className="start-issue" id="is-test-1">
@@ -265,11 +281,20 @@ export default class IssueLog extends React.Component {
                   style={{
                     display: 'flex',
                     justifyContent: 'space-evenly',
-                    width: '500px',
+                    width: '600px',
                     marginBottom: '25px',
                     float: 'right'
                   }}
                 >
+                  <button
+                    className="btn amber darken-1"
+                    onClick={this.toggleDateSort}
+                  >
+                    Sort by Date Added
+                    <i class="tiny material-icons" id="mod-arrow">
+                      arrow_downward
+                    </i>
+                  </button>
                   <button
                     data-target="modal1"
                     className="btn modal-trigger amber darken-1"

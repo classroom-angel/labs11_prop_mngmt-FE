@@ -1,6 +1,14 @@
 import React from 'react';
 import Sidebar from '../Sidebar/Sidebar';
-import { Button, Modal, Collection, CollectionItem, Collapsible, CollapsibleItem } from 'react-materialize';
+import {
+  Button,
+  Modal,
+  Collection,
+  CollectionItem,
+  Collapsible,
+  CollapsibleItem,
+  Chip
+} from 'react-materialize';
 import '../../App.css';
 // import './BoardMember.css'
 import axios from '../../axiosInstance';
@@ -66,53 +74,52 @@ export default class BoardMemberHub extends React.Component {
               Sorry! You don't have access to this area :)
             </Modal>
           )}
-          <h2 style={{ textAlign: 'left', margin: '-7px 0 0 45px' }}>
+          <h2
+            style={{
+              height: '60px',
+              textAlign: 'left',
+              margin: '-7px 0 0 45px'
+            }}
+          >
             {profile.organizationName}
           </h2>
           <div className="divider" />
           <div className="row">
             <div className="col s12" style={{ marginTop: '20px' }}>
-              <div
-                className="col s10 offset-s1 l5 z-depth-4"
-                style={{
-                  borderRadius: '10px',
-                  marginBottom: '20px'
-                }}
-              >
-                <h2 style={{ textAlign: 'left' }}>Issue Log</h2>
-                <div className="divider" />
-
-                <div style={{ overflow: 'auto', height: '500px' }}>
-                  {this.state.issuesLoaded ? (
-                    <Collection>
-                      {this.state.issues.map(issue => {
-                        return (
-                          <CollectionItem
-                            href="#!"
-                            key={issue.id}
-                            onClick={e => {
-                              this.goToIssue(issue.id);
-                            }}
-                          >
-                            <span style={{ margin: '2px 10px' }}>
-                              {' '}
-                              {issue.name}
-                            </span>
-                            <span style={{ margin: '2px 10px' }}>
-                              {issue.date}
-                            </span>
-                            <span style={{ margin: '2px 10px' }}>
-                              {issue.status.toUpperCase()}
-                            </span>
-                          </CollectionItem>
-                        );
-                      })}
-                    </Collection>
-                  ) : (
-                    'Loading...'
-                  )}
-                </div>
-              </div>
+              {this.state.issuesLoaded ? (
+                <Collection className="z-depth-4">
+                  <ul className="il-header">
+                    <li class="collection-header">
+                      <h4>Issue Log</h4>
+                    </li>
+                  </ul>
+                  {this.state.issues.map(issue => {
+                    return (
+                      <CollectionItem
+                        style={{ textAlign: 'left', color: 'black' }}
+                        href="#!"
+                        key={issue.id}
+                        onClick={e => {
+                          this.goToIssue(issue.id);
+                        }}
+                      >
+                        <span style={{ margin: '2px 10px' }}>
+                          {' '}
+                          {issue.name}
+                        </span>
+                        <span style={{ margin: '2px 10px' }}>{issue.date}</span>
+                        <Chip style={{ float: 'right' }}>
+                          {issue.status.toUpperCase()}
+                        </Chip>
+                      </CollectionItem>
+                    );
+                  })}
+                </Collection>
+              ) : (
+                'Loading...'
+              )}
+              {/* </div> */}
+              {/* </div> */}
               <div
                 className="col s10 offset-s1 l7 z-depth-4"
                 style={{
