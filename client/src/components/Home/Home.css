@@ -1,6 +1,7 @@
 .home {
   margin-top: 60px;
 }
+
 h1,
 h4 {
   font-family: 'Quicksand', sans-serif;
@@ -182,12 +183,8 @@ body {
 }
 
 .landingTitle {
-<<<<<<< HEAD
-  margin-left: 5px;
-=======
   margin-left: 20px;
   margin-top: -5px;
->>>>>>> fa433a91a9a086bf988f6b92bb3aa25983130a44
 }
 
 .extraSpace {
