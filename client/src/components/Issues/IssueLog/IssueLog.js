@@ -81,7 +81,7 @@ export default class IssueLog extends React.Component {
     })
       .then(res => {
         const id = res.data.issue.id;
-        if (this.state.images === []) {
+        if (this.state.images.length !== 0) {
           const formData = new FormData();
           const files = [...this.state.images];
           files.forEach((file, i) => {

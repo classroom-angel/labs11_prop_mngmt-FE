@@ -157,15 +157,10 @@ export default class SignUp extends Component {
           Welcome, <b>{this.state.firstName}</b>, please tell us a little more
           about yourself...
         </h3>
-        <form
-          className="col s12 z-depth-4"
-          style={{ padding: '20px' }}
-        >
+        <form className="col s12 z-depth-4" style={{ padding: '20px' }}>
           <div className="col s12 l6">
             <div className="input-field">
-              <label htmlFor="username">
-                Email Address
-              </label>
+              <label htmlFor="username">Email Address</label>
               <input
                 id="username"
                 required
@@ -177,9 +172,7 @@ export default class SignUp extends Component {
               />
             </div>
             <div className="input-field">
-              <label htmlFor="first_name">
-                First Name
-              </label>
+              <label htmlFor="first_name">First Name</label>
               <input
                 id="first_name"
                 required
@@ -191,9 +184,7 @@ export default class SignUp extends Component {
               />
             </div>
             <div className="input-field">
-              <label htmlFor="last_name">
-                Last Name
-              </label>
+              <label htmlFor="last_name">Last Name</label>
               <input
                 id="last_name"
                 required
@@ -251,7 +242,7 @@ export default class SignUp extends Component {
           </form>
           {this.state.role === 'School administrator' && (
             <div className="input-field col s12 l3">
-              <label className="white-text">
+              <label className="grey-text">
                 <input
                   id="create"
                   className="validate"

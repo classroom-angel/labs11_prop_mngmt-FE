@@ -125,15 +125,16 @@ body {
   align-items: center;
 }
 
+.welcomeTitle {
+  color: #00bcd4;
+  margin-top: 70px;
+}
+
 @media (min-width: 1201px) {
   .topbar {
     display: none;
   }
 
-  .welcomeTitle {
-    color: #00bcd4;
-    margin-top: 70px;
-  }
 }
 
 @media (max-width: 1200px) {
