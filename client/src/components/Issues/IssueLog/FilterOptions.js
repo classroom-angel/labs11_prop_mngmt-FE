@@ -4,7 +4,7 @@ const FilterOptions = ({ handleDropChange, statuses, tags, visitChange }) => (
   <>
     {/*Dropdown Trigger */}
     <button
-      className="dropdown-trigger btn cyan darken-2"
+      className="dropdown-trigger btn amber darken-1"
       data-target="dropdown1"
     >
       Status
@@ -28,7 +28,7 @@ const FilterOptions = ({ handleDropChange, statuses, tags, visitChange }) => (
       })}
     </ul>
     <button
-      className="dropdown-trigger btn cyan darken-2"
+      className="dropdown-trigger btn amber darken-1"
       data-target="dropdown2"
     >
       Tags

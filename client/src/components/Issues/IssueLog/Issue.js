@@ -76,7 +76,7 @@ const Issue = ({
       </div>
       <div className="card-action" style={{ float: 'bottom' }}>
         <NavLink to={`/issue/${issue.id}`} style={{ margin: 'auto' }}>
-          <Button value={issue.id} className="cyan lighten-2">
+          <Button value={issue.id} className="amber darken-1">
             View/Update
           </Button>
         </NavLink>
