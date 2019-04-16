@@ -27,8 +27,6 @@ export default class Visits extends React.Component {
     this.state = {
       issues: [],
       issuesLoaded: false,
-      issueName: '',
-      issueNotes: '',
       issueStatus: '',
       orgID: 1,
       editingIssue: false,
@@ -74,20 +72,23 @@ export default class Visits extends React.Component {
 
   postIssues = event => {
     event.preventDefault();
-    postIssue({ state: this.state, today })
+    const adminFormData = document.querySelector('.submit-issue');
+    postIssue({
+      name: adminFormData[0].value,
+      notes: adminFormData[1].value,
+      state: this.state,
+      today
+    })
       .then(res => {
         const id = res.data.issue.id;
         if (this.state.images === []) {
           const formData = new FormData();
           const files = [...this.state.images];
-          console.log(files);
           files.forEach((file, i) => {
             formData.append(i, file);
           });
-          console.log(formData);
           postImages({ id, formData })
             .then(res2 => {
-              console.log('RES2', res2);
               this.setState(prevState => ({
                 ...prevState,
                 issueName: '',
@@ -102,7 +103,7 @@ export default class Visits extends React.Component {
             ...prevState,
             issueName: '',
             issueNotes: '',
-            issues: [...prevState.issues, res.data.issue],
+            issues: [res.data.issue, ...prevState.issues],
             images: []
           }));
         }
@@ -220,6 +221,14 @@ export default class Visits extends React.Component {
     });
   };
 
+  toggleDateSort = () => {
+    let reversedArray = this.state.issues.reverse();
+    this.setState({ issues: reversedArray });
+    document.querySelector('#mod-arrow').innerHTML === 'arrow_downward'
+      ? (document.querySelector('#mod-arrow').innerHTML = 'arrow_upward')
+      : (document.querySelector('#mod-arrow').innerHTML = 'arrow_downward');
+  };
+
   render() {
     if (this.props.auth.isAuth()) {
       this.arrayTags();
@@ -246,11 +255,21 @@ export default class Visits extends React.Component {
               style={{
                 display: 'flex',
                 justifyContent: 'space-evenly',
-                width: '500px',
+                width: '600px',
                 marginBottom: '25px',
                 float: 'right'
               }}
             >
+              <button
+                className="btn amber darken-1"
+                onClick={this.toggleDateSort}
+              >
+                Sort by Date Added
+                <i class="tiny material-icons" id="mod-arrow">
+                  arrow_downward
+                </i>
+              </button>
+
               <button
                 data-target="modal2"
                 className="btn modal-trigger amber darken-1"
@@ -281,7 +300,7 @@ export default class Visits extends React.Component {
               />
             </div>
 
-            <div style={{ width: '85%', margin: 'auto' }}>
+            <div style={{ width: '78%', margin: 'auto' }}>
               <div className="issue-list">
                 {this.state.issues
                   .filter(issue => {
