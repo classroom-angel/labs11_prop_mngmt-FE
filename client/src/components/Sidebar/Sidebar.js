@@ -95,7 +95,12 @@ class Sidebar extends Component {
     const loc = this.props.location;
     if (
       loc &&
-      (loc.pathname === '/' || !profile  || loc.pathname === '/MeetTeam' || loc.pathname === 'OurMission' || loc.pathname === '/testimonials' || loc.pathname === '/AddTestimonial')
+      (loc.pathname === '/' ||
+        !profile ||
+        loc.pathname === '/MeetTeam' ||
+        loc.pathname === 'OurMission' ||
+        loc.pathname === '/testimonials' ||
+        loc.pathname === '/AddTestimonial')
     ) {
       return null;
     } else {
@@ -121,7 +126,9 @@ class Sidebar extends Component {
                     : null
                 }
               />
-              {profile && <h4 style={{wordBreak: "break-word"}}>{profile.name}</h4>}
+              {profile && (
+                <h4 style={{ wordBreak: 'break-word' }}>{profile.name}</h4>
+              )}
             </div>
             <h3 className="sidebar-header">Classroom Angel</h3>
             {profile.role === 'Board member' && (
@@ -156,16 +163,6 @@ class Sidebar extends Component {
                   style={{ margin: 'auto' }}
                 >
                   Scheduled Issues
-                </p>
-              </NavLink>
-            </li>
-            <li className="side-item">
-              <NavLink to="/visits">
-                <p
-                  className="black-text waves-effect"
-                  style={{ margin: 'auto' }}
-                >
-                  Admin Visits
                 </p>
               </NavLink>
             </li>
