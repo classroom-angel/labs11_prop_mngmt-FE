@@ -127,6 +127,7 @@ export default class BoardMemberHub extends React.Component {
                   borderRadius: '10px'
                 }}
               >
+                <h3>Equipment</h3>
                 {/*// <div
                 //   className="dev-condition"
                 //   style={{
@@ -241,36 +242,48 @@ export default class BoardMemberHub extends React.Component {
                 //   </div>
                 // </div>*/}
                 <Collapsible>
-                  {this.state.equipmentLoaded
-                  && this.state.equipment.map(item =>
-                        <CollapsibleItem header={item.name} onClick={(event) => {this.equipSelect(event, item.id)}}>
-                          <table>
-                            <tr>
-                              <th>Open Issues</th>
-                              <th>Working</th>
-                              <th>Total</th>
-                            </tr>
-                            <tr>
-                              <td>{item.damaged}</td>
-                              <td>{item.working}</td>
-                              <td>{item.working + item.damaged}</td>
-                            </tr>
-                          </table>
-                          {this.state.selected !== "" && this.state.issues
-                                        .filter(issue => {
-                                          return (
-                                            issue.equipmentId == this.state.selectedId
-                                          );
-                                        })
-                                        .map((issue, index) => {
-                                          return (
-                                            <div style={{textAlign: 'left'}}>
-                                              <p>{`Issue ${index + 1}`}: {issue.name}</p>
-                                            </div>
-                                          );
-                                        })}
-                        </CollapsibleItem>
-                    )}
+                  {this.state.equipmentLoaded &&
+                    this.state.equipment.map(item => (
+                      <CollapsibleItem
+                        header={item.name}
+                        onClick={event => {
+                          this.equipSelect(event, item.id);
+                        }}
+                      >
+                        <table style={{ border: '1px dashed lightgray' }}>
+                          <tr>
+                            <th>Open Issues</th>
+                            <th>Working</th>
+                            <th>Total</th>
+                          </tr>
+                          <tr>
+                            <td>{item.damaged}</td>
+                            <td>{item.working}</td>
+                            <td>{item.working + item.damaged}</td>
+                          </tr>
+                        </table>
+                        {this.state.selected !== '' &&
+                          this.state.issues
+                            .filter(issue => {
+                              return issue.equipmentId == this.state.selectedId;
+                            })
+                            .map((issue, index) => {
+                              return (
+                                <div style={{ textAlign: 'left' }}>
+                                  <a
+                                    href={`/issue/${issue.id}`}
+                                    style={{ color: '#0097a7' }}
+                                  >
+                                    <p>
+                                      <b>{`Issue ${index + 1}`}</b>:{' '}
+                                      {issue.name}
+                                    </p>
+                                  </a>
+                                </div>
+                              );
+                            })}
+                      </CollapsibleItem>
+                    ))}
                   {/*<CollapsibleItem header="Better safe than sorry. That's my motto." icon="filter_drama">
                   Better safe than sorry. That's my motto.
                   </CollapsibleItem>
