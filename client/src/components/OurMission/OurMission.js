@@ -24,6 +24,7 @@ class OurMission extends Component {
           <div className="pictures" style={{ margin: '0 auto' }}>
             <img
               src={kidsinclass}
+              alt="kids in class"
               style={{
                 height: '150px',
                 width: '150px',
@@ -34,6 +35,7 @@ class OurMission extends Component {
 
             <img
               src={oneboyinclass}
+              alt="one boy in class"
               style={{
                 height: '150px',
                 width: '150px',
@@ -44,6 +46,7 @@ class OurMission extends Component {
 
             <img
               src={groupofkids}
+              alt="group of kids"
               style={{
                 height: '150px',
                 width: '150px',
@@ -85,8 +88,8 @@ class OurMission extends Component {
               get lost due to email traffic most of the time. We've created an
               application for you to easily submit issues and provide board
               members with easy access to get them solved in a short amount of
-              time.Never again will you have to worry about waiting long for a
-              response , as Classroom Angel is here fix every issue in the
+              time. Never again will you have to worry about waiting long for a
+              response, as Classroom Angel is here fix every issue in the
               classroom.
             </p>
           </div>
