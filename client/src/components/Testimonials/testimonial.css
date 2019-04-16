@@ -21,25 +21,17 @@
   height: 350px;
 }
 
-@media (min-width: 1201px) {
-  .addbtn {
-    position: fixed;
-    top: 15px;
-    left: 0;
-  }
+.addbtn {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 }
 
 @media (max-width: 1200px) {
   .testimonials {
     padding-top: 0;
-  }
-
-  .addbtn {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
   }
 
   .panel {
@@ -50,5 +42,11 @@
 @media (max-width: 1000px) {
   .panel {
     height: auto;
+  }
+}
+
+@media (min-width: 1200px) {
+  .addTestimonial {
+    margin-top: 70px;
   }
 }
