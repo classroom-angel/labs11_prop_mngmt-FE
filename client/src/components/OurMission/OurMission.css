@@ -6,12 +6,15 @@
   font-weight: bold;
   width: 80%;
   margin: 15px auto;
+  text-align: left;
 }
 
 .mission p {
   text-align: left;
   width: 80%;
   margin: 10px auto;
+  font-size: 17px;
+  line-height: 1.5;
 }
 
 .pictures {
