@@ -97,7 +97,7 @@ const Issue = ({
           </Button> */}
         <button
           className="waves-effect waves-light btn modal-trigger amber"
-          data-target={`#modal${issue.id}`}
+          data-target={`modal${issue.id}`}
         >
           Edit
         </button>
