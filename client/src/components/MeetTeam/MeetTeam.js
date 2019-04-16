@@ -23,7 +23,7 @@ class MeetTeam extends Component {
             className="cyan lighten-4"
             style={{ margin: '15px' }}
             header={<CardTitle />}
-            title="Aleczander Jordan"
+            title="Alec Jordan"
             reveal={
               <p style={{ textAlign: 'left' }}>
                 Alec is a Software Engineer who specializes in Front End Web
