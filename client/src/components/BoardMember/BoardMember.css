@@ -12,6 +12,11 @@
   }
 }
 
+.collection {
+  border-radius: 10px !important;
+  color: red;
+}
+
 .il-header ul {
   list-style: none;
 }
