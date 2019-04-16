@@ -88,11 +88,16 @@ export default class BoardMemberHub extends React.Component {
           <div className="row">
             <div className="col s12" style={{ marginTop: '20px' }}>
               {this.state.issuesLoaded ? (
-                <div className="col s10 offset-s1 l5">
+                <div
+                  className="col s10 offset-s1 l5"
+                  style={{
+                    marginTop: '-10px'
+                  }}
+                >
                   <Collection className="z-depth-4">
                     <ul className="il-header">
                       <li class="collection-header">
-                        <h4>Issue Log</h4>
+                        <h4>All Issues</h4>
                       </li>
                     </ul>
                     {this.state.issues.map(issue => {
