@@ -407,7 +407,11 @@ export default class IssueLog extends React.Component {
                               submitComment={this.submitComment}
                               handleCommentChange={this.handleCommentChange}
                             />
-                            <div id={`modal${issue.id}`} className="modal">
+                            <div
+                              id={`modal${issue.id}`}
+                              className="modal"
+                              style={{ width: '500px' }}
+                            >
                               <VIModal issueId={issue.id} />
                             </div>
                           </>

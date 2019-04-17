@@ -6,7 +6,7 @@ const Comments = ({ comments, issueId, deleteComment }) => (
       marginTop: '20px',
       textAlign: 'left',
       overflowY: 'scroll',
-      height: '112.5px'
+      maxHeight: '112.5px'
     }}
   >
     {comments
