@@ -23,7 +23,6 @@ const NewIssue = ({
       <div className="card-content">
         <form
           onSubmit={postIssues}
-          // className="issue-card submit-issue"
           className={`issue-card submit-issue ${adminSelect}`}
         >
           <h4>New Issue +</h4>
