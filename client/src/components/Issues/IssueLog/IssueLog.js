@@ -2,6 +2,7 @@ import React from 'react';
 import M from 'materialize-css';
 import Sidebar from '../../Sidebar/Sidebar';
 import '../Issues.css';
+import '../../../App.css';
 import Issue from './Issue';
 import NewIssue from './NewIssue';
 import FilterOptions from './FilterOptions';
@@ -277,7 +278,7 @@ export default class IssueLog extends React.Component {
                 })}
               </ul>
               <ul className="tabs" style={{ width: '265px' }}>
-                <li className="tab">
+                <li className="tab tab-mod">
                   <a
                     href="#is-test-1"
                     style={{ fontSize: '15px', color: '#111111' }}

@@ -129,7 +129,6 @@
 .issue-delete:hover {
   background: gray !important;
   color: white !important;
-  /* box-shadow: 1px 1px gray !important; */
 }
 
 /* .same-button {
@@ -139,3 +138,15 @@
 .same-button:hover {
   background: #ffa000 !important;
 }
+
+.tabs .tab a.active {
+  background: rgba(255, 160, 0, 0.2) !important;
+}
+
+/*Background and text color when a tab is active*/
+
+.tabs .indicator {
+  background-color: #ffa000 !important;
+}
+
+/*Color of underline*/
