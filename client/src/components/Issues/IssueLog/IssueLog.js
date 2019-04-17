@@ -230,6 +230,7 @@ export default class IssueLog extends React.Component {
   };
 
   render() {
+    console.log(this.state.issues);
     if (this.props.auth.isAuth()) {
       this.arrayTags();
 
@@ -359,8 +360,9 @@ export default class IssueLog extends React.Component {
                         return !issue.isVisit;
                       })
                       .filter(issue => {
+                        console.log(issue.status);
                         return (
-                          issue.status ===
+                          issue.status.toLowerCase() ===
                             this.state.filterStatus.toLowerCase() ||
                           this.state.filterStatus === 'all'
                         );

@@ -64,7 +64,7 @@ class ViewIssue extends React.Component {
           })
           .catch(err => console.log(err.data));
       })
-      .catch(console.log);
+      .catch(err => console.error(err));
 
     getComments()
       .then(res => this.setState({ comments: res.data.comments }))
@@ -99,6 +99,7 @@ class ViewIssue extends React.Component {
     newEdits.date = today;
     putIssue(id, newEdits)
       .then(response => {
+        console.log(response.data.issue);
         this.setState({ issue: response.data.issue, editingIssue: false });
       })
       .catch(err => {
@@ -119,7 +120,6 @@ class ViewIssue extends React.Component {
 
   handleTagEdit = id => {
     const newTag = { name: this.state.tag, issueId: id, organizationId: 1 };
-    console.log(newTag);
     postTag(newTag)
       .then(response => {
         this.setState({
@@ -173,8 +173,6 @@ class ViewIssue extends React.Component {
   };
 
   deleteComment = event => {
-    console.log('ga', event.target.getAttribute('id'));
-    console.log('val', event.target.value);
     delComment(event.target.getAttribute('id'))
       .then(res => {
         let copy = this.state.comments.slice().filter(function(comment) {
@@ -190,10 +188,6 @@ class ViewIssue extends React.Component {
   };
 
   render() {
-    // var sel = document.querySelectorAll('select');
-    // if (sel) {
-    //   M.FormSelect.init(sel, {});
-    // }
     return (
       <div style={{ padding: '20px', fontSize: '20px', textAlign: 'left' }}>
         {this.state.issue ? (
@@ -227,10 +221,11 @@ class ViewIssue extends React.Component {
                   this.state.issue.notes
                 )}
               </p>
-              <p>
-                Status:{' '}
-                {this.state.editingIssue ? (
-                  <form>
+
+              {this.state.editingIssue ? (
+                <>
+                  <p style={{ display: 'inline' }}>Status: </p>
+                  <form style={{ width: '60%', display: 'inline-block' }}>
                     <select name="issueStatus" onChange={this.handleChange}>
                       <option value="">Status...</option>
                       {statuses.map((status, index) => {
@@ -242,10 +237,11 @@ class ViewIssue extends React.Component {
                       })}
                     </select>
                   </form>
-                ) : (
-                  this.state.issue.status
-                )}
-              </p>
+                </>
+              ) : (
+                <p>Status: {this.state.issue.status}</p>
+              )}
+
               <p>Date: {this.state.issue.date}</p>
               {/* <h5>Org. Id: {this.state.issue.organizationId}</h5> */}
               {this.state.imageIds.map(id => {
