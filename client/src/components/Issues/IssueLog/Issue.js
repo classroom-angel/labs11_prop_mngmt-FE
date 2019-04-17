@@ -36,8 +36,8 @@ const Issue = ({
         style={{
           float: 'right',
           position: 'relative',
-          left: '10px',
-          bottom: '10px'
+          left: '4px',
+          bottom: '4px'
         }}
       >
         X{/* <i class="material-icons">delete</i> */}

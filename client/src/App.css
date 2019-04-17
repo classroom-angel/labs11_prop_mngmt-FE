@@ -124,11 +124,13 @@
 .issue-delete {
   background: transparent !important;
   color: #282c34 !important;
+  box-shadow: 0 0 transparent !important;
 }
 
 .issue-delete:hover {
   background: gray !important;
   color: white !important;
+  box-shadow: 1px 1px 1px 1px gray !important;
 }
 
 /* .same-button {
