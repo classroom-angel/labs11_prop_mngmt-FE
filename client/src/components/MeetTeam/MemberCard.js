@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, CardTitle } from 'react-materialize';
+import { SimpleImg } from 'react-simple-img';
 
 const randomOrder = () => Math.floor(Math.random() * 10);
 const imgstyle = { width: '200px', height: '200px' };
@@ -25,7 +26,7 @@ const MemberCard = ({ name, src, content, gitHub, linkedIn }) => {
           <p style={{ marginTop: '30px', textAlign: 'left' }}>{content}</p>
         }
       >
-        <img style={imgstyle} src={src} alt={firstName} />
+        <SimpleImg {...imgstyle} src={src} alt={firstName} />
         <p>
           <a
             target="_blank"

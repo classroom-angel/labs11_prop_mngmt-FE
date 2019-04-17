@@ -17,10 +17,18 @@
   line-height: 1.5;
 }
 
+.mission .pictures img {
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
+  object-position: center;
+}
+
 .pictures {
   display: flex;
   justify-content: space-evenly;
   width: 70%;
+  margin: 0 auto;
 }
 
 @media (max-width: 1200px) {

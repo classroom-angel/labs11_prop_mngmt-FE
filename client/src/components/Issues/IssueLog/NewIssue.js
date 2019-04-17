@@ -1,6 +1,6 @@
 import React from 'react';
 import { Icon } from 'react-materialize';
-import Uploader from '../../Uploader';
+import Uploader from '../Uploader';
 import { NavLink } from 'react-router-dom';
 import '../../../App.css';
 
