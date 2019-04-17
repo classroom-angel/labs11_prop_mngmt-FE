@@ -16,7 +16,8 @@ const Issue = ({
   deleteComment,
   submitComment,
   commentsObj,
-  handleCommentChange
+  handleCommentChange,
+  tabsToggle
 }) => {
   return (
     <div
@@ -86,7 +87,7 @@ const Issue = ({
       <div className="card-action" style={{ float: 'bottom' }}>
         <button
           className="btn modal-trigger cyan same-button"
-          data-target={`modal${issue.id}`}
+          data-target={`modal-${tabsToggle}-${issue.id}`}
         >
           Edit
         </button>

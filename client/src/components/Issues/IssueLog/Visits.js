@@ -6,6 +6,7 @@ import '../../../App.css';
 import Issue from './Issue';
 import NewIssue from './NewIssue';
 import FilterOptions from './FilterOptions';
+import VIModal from '../ViewIssue/VIModal';
 import helpers, {
   getIssue,
   postIssue,
@@ -73,7 +74,6 @@ export default class Visits extends React.Component {
   postIssues = event => {
     event.preventDefault();
     const adminFormData = document.querySelector('.admin-issue');
-    console.log('admin form dat', adminFormData);
     postIssue({
       name: adminFormData[0].value,
       notes: adminFormData[1].value,
@@ -156,7 +156,6 @@ export default class Visits extends React.Component {
   fetchIssue = id => {
     getIssue(id)
       .then(res => {
-        console.log('fetched note', res.data);
         this.setState({ issue: res.data.issue });
       })
       .catch(console.error);
@@ -167,7 +166,6 @@ export default class Visits extends React.Component {
     const newTag = { name: this.state.tag, issueId: id };
     postTag(newTag)
       .then(response => {
-        console.log('axios response', response.data);
         this.setState({ tags: response.data, tag: '' });
       })
       .catch(err => {
@@ -184,7 +182,6 @@ export default class Visits extends React.Component {
   };
 
   visitChange = ({ target }) => {
-    console.log(target);
     const { name, checked } = target;
     this.setState({ [name]: checked });
   };
@@ -232,7 +229,6 @@ export default class Visits extends React.Component {
   };
 
   render() {
-    console.log(this.state);
     if (this.props.auth.isAuth()) {
       this.arrayTags();
 
@@ -331,8 +327,8 @@ export default class Visits extends React.Component {
                   })
                   .filter(issue => {
                     return (
-                      issue.status === this.state.filterStatus.toLowerCase() ||
-                      this.state.filterStatus === 'all'
+                      issue.status === this.props.filterStatus.toLowerCase() ||
+                      this.props.filterStatus === 'all'
                     );
                   })
                   .filter((issue, i, array) => {
@@ -361,16 +357,29 @@ export default class Visits extends React.Component {
                   })
                   .map((issue, index) => {
                     return (
-                      <Issue
-                        {...this.state}
-                        key={index}
-                        issue={issue}
-                        deleteIssue={this.deleteIssue}
-                        toggleShowComments={this.toggleShowComments}
-                        deleteComment={this.deleteComment}
-                        submitComment={this.submitComment}
-                        handleCommentChange={this.handleCommentChange}
-                      />
+                      <>
+                        <Issue
+                          {...this.state}
+                          key={index}
+                          issue={issue}
+                          deleteIssue={this.deleteIssue}
+                          toggleShowComments={this.toggleShowComments}
+                          deleteComment={this.deleteComment}
+                          submitComment={this.submitComment}
+                          handleCommentChange={this.handleCommentChange}
+                          tabsToggle="admin"
+                        />
+                        <div
+                          id={`modal-admin-${issue.id}`}
+                          className="modal"
+                          style={{ width: '500px', maxHeight: '85%' }}
+                        >
+                          <VIModal
+                            issueId={issue.id}
+                            deleteComment={this.deleteComment}
+                          />
+                        </div>
+                      </>
                     );
                   })}
               </div>
