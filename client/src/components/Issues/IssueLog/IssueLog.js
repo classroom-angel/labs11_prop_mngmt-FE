@@ -17,7 +17,7 @@ import helpers, {
 } from '../axiosHelpers';
 import { statuses, today } from '../data';
 import Visits from './Visits';
-import VIModal from '../ViewIssue/VIModal';
+import VIModal from '../ViewIssue/ViewIssueModal';
 
 const { getIssues, getTags, getComments } = helpers;
 

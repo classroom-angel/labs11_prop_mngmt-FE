@@ -87,15 +87,10 @@ class ViewIssue extends React.Component {
         this.setState({ issue: res.data.issue });
       })
       .catch(console.log);
-    // this.setState({issueStatus: this.state.issue.status})s
   };
 
   handleEdit = id => {
     const newEdits = {};
-    // if (this.state.tag.length > 0){
-    //   newEdits.tags = this.state.note.tags;
-    //   newEdits.tags.push(this.state.tag);
-    // }
     if (this.state.nameEdits.length > 0) newEdits.name = this.state.nameEdits;
     if (this.state.noteEdits.length > 0) newEdits.notes = this.state.noteEdits;
     newEdits.status = this.state.issueStatus;

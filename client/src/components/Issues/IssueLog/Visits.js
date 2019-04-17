@@ -6,7 +6,7 @@ import '../../../App.css';
 import Issue from './Issue';
 import NewIssue from './NewIssue';
 import FilterOptions from './FilterOptions';
-import VIModal from '../ViewIssue/VIModal';
+import VIModal from '../ViewIssue/ViewIssueModal';
 import helpers, {
   getIssue,
   postIssue,

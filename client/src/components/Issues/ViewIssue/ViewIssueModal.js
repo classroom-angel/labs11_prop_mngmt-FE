@@ -22,7 +22,7 @@ import M from 'materialize-css';
 
 const { getTags, getComments } = helpers;
 
-class ViewIssue extends React.Component {
+class ViewIssueModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -332,4 +332,4 @@ class ViewIssue extends React.Component {
   }
 }
 
-export default ViewIssue;
+export default ViewIssueModal;
