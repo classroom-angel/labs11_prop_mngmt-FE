@@ -103,7 +103,7 @@ export default class BoardMemberHub extends React.Component {
                     {this.state.issues.map(issue => {
                       return (
                         <CollectionItem
-                          style={{ textAlign: 'left', color: 'black' }}
+                          style={{ textAlign: 'left', color: 'dimgrey' }}
                           href="#!"
                           key={issue.id}
                           onClick={e => {
@@ -117,7 +117,15 @@ export default class BoardMemberHub extends React.Component {
                           <span style={{ margin: '2px 10px' }}>
                             {issue.date}
                           </span>
-                          <Chip style={{ float: 'right' }}>
+                          <Chip
+                            className="chip"
+                            style={{
+                              float: 'right',
+                              backgroundColor: '#ffc107',
+                              position: 'relative',
+                              top: '-4px'
+                            }}
+                          >
                             {issue.status.toUpperCase()}
                           </Chip>
                         </CollectionItem>
