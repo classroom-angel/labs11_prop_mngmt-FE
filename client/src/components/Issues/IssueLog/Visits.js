@@ -283,14 +283,14 @@ export default class Visits extends React.Component {
 
               <button
                 className="dropdown-trigger btn amber darken-1"
-                data-target="dropdown1"
+                data-target="dropdown3"
               >
                 Status
               </button>
 
               <button
                 className="dropdown-trigger btn amber darken-1"
-                data-target="dropdown2"
+                data-target="dropdown4"
               >
                 Tags
               </button>
