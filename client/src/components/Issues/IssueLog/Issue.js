@@ -40,7 +40,7 @@ const Issue = ({
           bottom: '10px'
         }}
       >
-        X
+        X{/* <i class="material-icons">delete</i> */}
       </button>
       <div className="card-content">
         <p
