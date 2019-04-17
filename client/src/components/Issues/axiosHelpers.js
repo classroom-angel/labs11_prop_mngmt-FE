@@ -9,11 +9,11 @@ export default getHelpers;
 
 export const getIssue = async id => await axios.get(`issues/${id}`);
 
-export const postIssue = async ({ name, notes, state, today }) =>
+export const postIssue = async ({ name, notes, status, state, today }) =>
   await axios.post('issues', {
     name: name,
     notes: notes,
-    status: state.issueStatus.toLowerCase(),
+    status: status.toLowerCase(),
     isVisit: state.isVisit,
     organizationId: state.orgID,
     equipmentId: state.eid,

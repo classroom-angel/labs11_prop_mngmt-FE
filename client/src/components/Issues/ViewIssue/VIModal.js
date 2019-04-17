@@ -18,6 +18,7 @@ import helpers, {
 } from '../axiosHelpers';
 import { statuses, today } from '../data';
 import { Button, Chip } from 'react-materialize';
+import M from 'materialize-css';
 
 const { getTags, getComments } = helpers;
 
@@ -190,6 +191,10 @@ class ViewIssue extends React.Component {
   };
 
   render() {
+    // var sel = document.querySelectorAll('select');
+    // if (sel) {
+    //   M.FormSelect.init(sel, {});
+    // }
     return (
       <div style={{ padding: '20px', fontSize: '20px', textAlign: 'left' }}>
         {this.state.issue ? (
@@ -226,16 +231,18 @@ class ViewIssue extends React.Component {
               <p>
                 Status:{' '}
                 {this.state.editingIssue ? (
-                  <select name="issueStatus" onChange={this.handleChange}>
-                    <option value="">Status...</option>
-                    {statuses.map((status, index) => {
-                      return (
-                        <option key={index} value={status}>
-                          {status}
-                        </option>
-                      );
-                    })}
-                  </select>
+                  <form>
+                    <select name="issueStatus" onChange={this.handleChange}>
+                      <option value="">Status...</option>
+                      {statuses.map((status, index) => {
+                        return (
+                          <option key={index} value={status}>
+                            {status}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </form>
                 ) : (
                   this.state.issue.status
                 )}
