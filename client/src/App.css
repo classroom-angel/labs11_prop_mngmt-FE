@@ -86,15 +86,6 @@
   font-size: 14px;
 }
 
-.edit-issue-button {
-  border: 1px solid indianred;
-  width: 100px;
-  text-decoration: none;
-  background: indianred;
-  color: white;
-  font-weight: 800;
-}
-
 .tag {
   border: 1px solid;
   width: 110px;
@@ -126,12 +117,38 @@
   padding-left: 10px !important;
 }
 
-/* Tried to add this to darken the placeholder text but it's not working... */
-/* ::placeholder {
-  opacity: 1;
-  color: red;
-} */
-
 .sideTransparent {
   background-color: transparent !important;
 }
+
+.issue-delete {
+  background: transparent !important;
+  color: #282c34 !important;
+  box-shadow: 0 0 transparent !important;
+}
+
+.issue-delete:hover {
+  background: gray !important;
+  color: white !important;
+  box-shadow: 1px 1px 1px 1px gray !important;
+}
+
+/* .same-button {
+
+} */
+
+.same-button:hover {
+  background: #ffa000 !important;
+}
+
+.tabs .tab a.active {
+  background: rgba(255, 160, 0, 0.2) !important;
+}
+
+/*Background and text color when a tab is active*/
+
+.tabs .indicator {
+  background-color: #ffa000 !important;
+}
+
+/*Color of underline*/

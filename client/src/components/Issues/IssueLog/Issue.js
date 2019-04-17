@@ -1,8 +1,8 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import Comments from '../Comments';
+import '../../../App.css';
 
-import { Button, Chip } from 'react-materialize';
+import { Chip } from 'react-materialize';
 
 const Issue = ({
   issue,
@@ -16,7 +16,8 @@ const Issue = ({
   deleteComment,
   submitComment,
   commentsObj,
-  handleCommentChange
+  handleCommentChange,
+  tabsToggle
 }) => {
   return (
     <div
@@ -29,19 +30,19 @@ const Issue = ({
         marginRight: '10px'
       }}
     >
-      <Button
+      <button
         onClick={deleteIssue}
         value={issue.id}
-        className="red"
+        className="btn issue-delete"
         style={{
           float: 'right',
           position: 'relative',
-          left: '22px',
-          bottom: '20px'
+          left: '4px',
+          bottom: '4px'
         }}
       >
-        X
-      </Button>
+        X{/* <i class="material-icons">delete</i> */}
+      </button>
       <div className="card-content">
         <p
           style={{
@@ -55,7 +56,6 @@ const Issue = ({
         <p style={{ textAlign: 'left' }}>{issue.notes}</p>
         {/* <p>Status: {issue.status}</p> */}
         <p style={{ textAlign: 'left' }}>Date: {issue.date}</p>
-        {/* <p>Org. Id: {issue.organizationId}</p> */}
         <div>
           {tags
             .filter(function(tag) {
@@ -85,15 +85,15 @@ const Issue = ({
         </form>
       </div>
       <div className="card-action" style={{ float: 'bottom' }}>
-        <NavLink to={`/issue/${issue.id}`} style={{ margin: 'auto' }}>
-          <Button value={issue.id} className="amber darken-1">
-            View/Update
-          </Button>
-        </NavLink>
+        <button
+          className="btn modal-trigger cyan same-button"
+          data-target={`modal-${tabsToggle}-${issue.id}`}
+        >
+          Edit
+        </button>
       </div>
     </div>
   );
-  // }
 };
 
 export default Issue;

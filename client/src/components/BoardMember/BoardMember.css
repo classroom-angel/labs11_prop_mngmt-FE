@@ -12,6 +12,10 @@
   }
 }
 
+.collection {
+  border-radius: 10px !important;
+}
+
 .il-header ul {
   list-style: none;
 }

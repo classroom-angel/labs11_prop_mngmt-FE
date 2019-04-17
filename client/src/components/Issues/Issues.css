@@ -1,21 +1,6 @@
 .issue-list {
-  /* width: 100%; */
   display: flex;
   flex-wrap: wrap;
-}
-
-.edit-issue-button {
-  border: 1px solid gold;
-  width: 70px;
-  text-decoration: none;
-  background: indianred;
-  color: white;
-  font-weight: 400;
-  margin: 0 10px;
-}
-
-.edit-issue-button:hover {
-  cursor: pointer;
 }
 
 .tag-container .tag .close::after {
@@ -37,4 +22,9 @@
 .delete-button:hover {
   color: darkred;
   cursor: pointer;
+}
+
+/* This seems better than trying to add padding for the text */
+.dropdown-content > li {
+  text-align: center;
 }

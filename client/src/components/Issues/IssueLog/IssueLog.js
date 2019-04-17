@@ -1,7 +1,7 @@
 import React from 'react';
 import M from 'materialize-css';
-import Sidebar from '../../Sidebar/Sidebar';
 import '../Issues.css';
+import '../../../App.css';
 import Issue from './Issue';
 import NewIssue from './NewIssue';
 import FilterOptions from './FilterOptions';
@@ -12,10 +12,12 @@ import helpers, {
   postImages,
   postTag,
   postComment,
-  delComment
+  delComment,
+  putIssue
 } from '../axiosHelpers';
 import { statuses, today } from '../data';
 import Visits from './Visits';
+import VIModal from '../ViewIssue/ViewIssueModal';
 
 const { getIssues, getTags, getComments } = helpers;
 
@@ -45,7 +47,8 @@ export default class IssueLog extends React.Component {
       eid: 3,
       showCommentsObj: {},
       commentsObj: {},
-      showOnlyAdminVisits: false
+      showOnlyAdminVisits: false,
+      vimIssue: ''
     };
   }
 
@@ -76,6 +79,7 @@ export default class IssueLog extends React.Component {
     postIssue({
       name: issueFormData[0].value,
       notes: issueFormData[1].value,
+      status: issueFormData[3].value,
       state: this.state,
       today
     })
@@ -226,38 +230,59 @@ export default class IssueLog extends React.Component {
       : (document.querySelector('#mod-arrow').innerHTML = 'arrow_downward');
   };
 
+  updateIssue = (id, edits) => {
+    putIssue(id, edits)
+      .then(response => {
+        var copy = this.state.issues.filter(issue => {
+          return issue.id !== response.data.issue.id;
+        });
+        this.setState({
+          issues: [response.data.issue, ...copy],
+          vimIssue: response.data.issue
+        });
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+
   render() {
     if (this.props.auth.isAuth()) {
       this.arrayTags();
 
       if (this.state.issuesLoaded) {
-        var t = document.querySelectorAll('.tabs');
-        if (t) {
-          M.Tabs.init(t, {
-            onShow: () => {
-              this.setState({ isVisit: !this.state.isVisit });
-            }
-          });
-        }
-
-        var mod = document.querySelectorAll('.modal');
-        if (mod) {
-          M.Modal.init(mod, { dismissible: false });
-        }
-
-        var dd = document.querySelectorAll('.dropdown-trigger'); // Select the dropdown elements
-        if (dd) {
-          M.Dropdown.init(dd, {});
-        }
+        M.AutoInit();
 
         return (
           <div className="page-container">
             <div className="right-side">
+              <ul id="dropdown1" className="dropdown-content">
+                <li
+                  key={0}
+                  onClick={this.handleDropChange}
+                  name="filterStatus"
+                  value="all"
+                >
+                  All
+                </li>
+                {statuses.map((status, index) => {
+                  return (
+                    <li
+                      key={index + 1}
+                      onClick={this.handleDropChange}
+                      name="filterStatus"
+                      value={status}
+                    >
+                      {status}
+                    </li>
+                  );
+                })}
+              </ul>
               <ul className="tabs" style={{ width: '265px' }}>
-                <li className="tab">
+                <li className="tab tab-mod">
                   <a
                     href="#is-test-1"
-                    style={{ fontSize: '15px', color: '#c1b507' }}
+                    style={{ fontSize: '15px', color: '#111111' }}
                   >
                     Issue Log
                   </a>
@@ -265,7 +290,7 @@ export default class IssueLog extends React.Component {
                 <li className="tab">
                   <a
                     href="#ad-test-1"
-                    style={{ fontSize: '15px', color: '#c1b507' }}
+                    style={{ fontSize: '15px', color: '#111111' }}
                   >
                     Admin Visits
                   </a>
@@ -275,7 +300,6 @@ export default class IssueLog extends React.Component {
                 <h3 style={{ textAlign: 'center', color: '#333333' }}>
                   Issue Log
                 </h3>
-
                 {/* Modal Trigger */}
                 <div
                   style={{
@@ -287,22 +311,26 @@ export default class IssueLog extends React.Component {
                   }}
                 >
                   <button
-                    className="btn amber darken-1"
+                    className="btn cyan  same-button"
                     onClick={this.toggleDateSort}
                   >
                     Sort by Date Added
-                    <i class="tiny material-icons" id="mod-arrow">
+                    <i
+                      className="material-icons"
+                      style={{ fontSize: '1rem', marginLeft: '5px' }}
+                      id="mod-arrow"
+                    >
                       arrow_downward
                     </i>
                   </button>
                   <button
-                    data-target="modal1"
-                    className="btn modal-trigger amber darken-1"
+                    data-target="modalA"
+                    className="btn modal-trigger cyan  same-button"
                   >
                     + New Issue
                   </button>
 
-                  <div id="modal1" className="modal">
+                  <div id="modalA" className="modal">
                     <div className="modal-content">
                       <NewIssue
                         postIssues={this.postIssues}
@@ -313,9 +341,25 @@ export default class IssueLog extends React.Component {
                         uploading={this.state.uploading}
                         imgAdder={this.imgAdder}
                         statuses={statuses}
+                        adminSelect=""
+                        handleDropChange={this.handleDropChange}
+                        dropDownId="issueStatusDropDown"
                       />
                     </div>
                   </div>
+                  <button
+                    className="dropdown-trigger btn cyan  same-button"
+                    data-target="dropdown1"
+                  >
+                    Status
+                  </button>
+
+                  <button
+                    className="dropdown-trigger btn cyan  same-button"
+                    data-target="dropdown2"
+                  >
+                    Tags
+                  </button>
 
                   <FilterOptions
                     statuses={statuses}
@@ -333,7 +377,7 @@ export default class IssueLog extends React.Component {
                       })
                       .filter(issue => {
                         return (
-                          issue.status ===
+                          issue.status.toLowerCase() ===
                             this.state.filterStatus.toLowerCase() ||
                           this.state.filterStatus === 'all'
                         );
@@ -364,23 +408,41 @@ export default class IssueLog extends React.Component {
                       })
                       .map((issue, index) => {
                         return (
-                          <Issue
-                            {...this.state}
-                            key={index}
-                            issue={issue}
-                            deleteIssue={this.deleteIssue}
-                            toggleShowComments={this.toggleShowComments}
-                            deleteComment={this.deleteComment}
-                            submitComment={this.submitComment}
-                            handleCommentChange={this.handleCommentChange}
-                          />
+                          <>
+                            <Issue
+                              {...this.state}
+                              key={index}
+                              issue={issue}
+                              deleteIssue={this.deleteIssue}
+                              toggleShowComments={this.toggleShowComments}
+                              deleteComment={this.deleteComment}
+                              submitComment={this.submitComment}
+                              handleCommentChange={this.handleCommentChange}
+                              tabsToggle="issue"
+                            />
+                            <div
+                              id={`modal-issue-${issue.id}`}
+                              className="modal"
+                              style={{ width: '500px', maxHeight: '85%' }}
+                            >
+                              <VIModal
+                                issueId={issue.id}
+                                deleteComment={this.deleteComment}
+                                updateIssue={this.updateIssue}
+                                vimIssue={this.state.vimIssue}
+                              />
+                            </div>
+                          </>
                         );
                       })}
                   </div>
                 </div>
               </div>
               <div id="ad-test-1">
-                <Visits auth={this.props.auth} />
+                <Visits
+                  auth={this.props.auth}
+                  filterStatus={this.state.filterStatus}
+                />
               </div>
             </div>
           </div>

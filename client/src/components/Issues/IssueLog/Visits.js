@@ -1,11 +1,11 @@
 import React from 'react';
 import M from 'materialize-css';
-import Sidebar from '../../Sidebar/Sidebar';
 import '../Issues.css';
 import '../../../App.css';
 import Issue from './Issue';
 import NewIssue from './NewIssue';
 import FilterOptions from './FilterOptions';
+import VIModal from '../ViewIssue/ViewIssueModal';
 import helpers, {
   getIssue,
   postIssue,
@@ -27,8 +27,6 @@ export default class Visits extends React.Component {
     this.state = {
       issues: [],
       issuesLoaded: false,
-      issueName: '',
-      issueNotes: '',
       issueStatus: '',
       orgID: 1,
       editingIssue: false,
@@ -74,20 +72,24 @@ export default class Visits extends React.Component {
 
   postIssues = event => {
     event.preventDefault();
-    postIssue({ state: this.state, today })
+    const adminFormData = document.querySelector('.admin-issue');
+    postIssue({
+      name: adminFormData[0].value,
+      notes: adminFormData[1].value,
+      status: adminFormData[3].value,
+      state: this.state,
+      today
+    })
       .then(res => {
         const id = res.data.issue.id;
         if (this.state.images === []) {
           const formData = new FormData();
           const files = [...this.state.images];
-          console.log(files);
           files.forEach((file, i) => {
             formData.append(i, file);
           });
-          console.log(formData);
           postImages({ id, formData })
             .then(res2 => {
-              console.log('RES2', res2);
               this.setState(prevState => ({
                 ...prevState,
                 issueName: '',
@@ -102,7 +104,7 @@ export default class Visits extends React.Component {
             ...prevState,
             issueName: '',
             issueNotes: '',
-            issues: [...prevState.issues, res.data.issue],
+            issues: [res.data.issue, ...prevState.issues],
             images: []
           }));
         }
@@ -153,7 +155,6 @@ export default class Visits extends React.Component {
   fetchIssue = id => {
     getIssue(id)
       .then(res => {
-        console.log('fetched note', res.data);
         this.setState({ issue: res.data.issue });
       })
       .catch(console.error);
@@ -164,7 +165,6 @@ export default class Visits extends React.Component {
     const newTag = { name: this.state.tag, issueId: id };
     postTag(newTag)
       .then(response => {
-        console.log('axios response', response.data);
         this.setState({ tags: response.data, tag: '' });
       })
       .catch(err => {
@@ -181,7 +181,6 @@ export default class Visits extends React.Component {
   };
 
   visitChange = ({ target }) => {
-    console.log(target);
     const { name, checked } = target;
     this.setState({ [name]: checked });
   };
@@ -220,6 +219,14 @@ export default class Visits extends React.Component {
     });
   };
 
+  toggleDateSort = () => {
+    let reversedArray = this.state.issues.reverse();
+    this.setState({ issues: reversedArray });
+    document.querySelector('#mod-arrow').innerHTML === 'arrow_downward'
+      ? (document.querySelector('#mod-arrow').innerHTML = 'arrow_upward')
+      : (document.querySelector('#mod-arrow').innerHTML = 'arrow_downward');
+  };
+
   render() {
     if (this.props.auth.isAuth()) {
       this.arrayTags();
@@ -246,19 +253,47 @@ export default class Visits extends React.Component {
               style={{
                 display: 'flex',
                 justifyContent: 'space-evenly',
-                width: '500px',
+                width: '600px',
                 marginBottom: '25px',
                 float: 'right'
               }}
             >
               <button
-                data-target="modal2"
-                className="btn modal-trigger amber darken-1"
+                className="btn cyan same-button"
+                onClick={this.toggleDateSort}
+              >
+                Sort by Date Added
+                <i
+                  className="material-icons"
+                  style={{ fontSize: '1rem', marginLeft: '5px' }}
+                  id="mod-arrow"
+                >
+                  arrow_downward
+                </i>
+              </button>
+
+              <button
+                data-target="modalB"
+                className="btn modal-trigger cyan same-button"
               >
                 + New Issue
               </button>
 
-              <div id="modal2" className="modal">
+              <button
+                className="dropdown-trigger btn cyan same-button"
+                data-target="dropdown3"
+              >
+                Status
+              </button>
+
+              <button
+                className="dropdown-trigger btn cyan same-button"
+                data-target="dropdown4"
+              >
+                Tags
+              </button>
+
+              <div id="modalB" className="modal">
                 <div className="modal-content">
                   <NewIssue
                     postIssues={this.postIssues}
@@ -269,6 +304,8 @@ export default class Visits extends React.Component {
                     uploading={this.state.uploading}
                     imgAdder={this.imgAdder}
                     statuses={statuses}
+                    adminSelect="admin-issue"
+                    dropDownId="adminStatusDropDown"
                   />
                 </div>
               </div>
@@ -281,7 +318,7 @@ export default class Visits extends React.Component {
               />
             </div>
 
-            <div style={{ width: '85%', margin: 'auto' }}>
+            <div style={{ width: '78%', margin: 'auto' }}>
               <div className="issue-list">
                 {this.state.issues
                   .filter(issue => {
@@ -289,8 +326,8 @@ export default class Visits extends React.Component {
                   })
                   .filter(issue => {
                     return (
-                      issue.status === this.state.filterStatus.toLowerCase() ||
-                      this.state.filterStatus === 'all'
+                      issue.status === this.props.filterStatus.toLowerCase() ||
+                      this.props.filterStatus === 'all'
                     );
                   })
                   .filter((issue, i, array) => {
@@ -319,16 +356,29 @@ export default class Visits extends React.Component {
                   })
                   .map((issue, index) => {
                     return (
-                      <Issue
-                        {...this.state}
-                        key={index}
-                        issue={issue}
-                        deleteIssue={this.deleteIssue}
-                        toggleShowComments={this.toggleShowComments}
-                        deleteComment={this.deleteComment}
-                        submitComment={this.submitComment}
-                        handleCommentChange={this.handleCommentChange}
-                      />
+                      <>
+                        <Issue
+                          {...this.state}
+                          key={index}
+                          issue={issue}
+                          deleteIssue={this.deleteIssue}
+                          toggleShowComments={this.toggleShowComments}
+                          deleteComment={this.deleteComment}
+                          submitComment={this.submitComment}
+                          handleCommentChange={this.handleCommentChange}
+                          tabsToggle="admin"
+                        />
+                        <div
+                          id={`modal-admin-${issue.id}`}
+                          className="modal"
+                          style={{ width: '500px', maxHeight: '85%' }}
+                        >
+                          <VIModal
+                            issueId={issue.id}
+                            deleteComment={this.deleteComment}
+                          />
+                        </div>
+                      </>
                     );
                   })}
               </div>

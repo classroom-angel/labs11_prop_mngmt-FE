@@ -10,8 +10,15 @@ import {
   Chip
 } from 'react-materialize';
 import '../../App.css';
-// import './BoardMember.css'
+import './BoardMember.css';
 import axios from '../../axiosInstance';
+
+const chipStyles = {
+  IGNORED: 'amber lighten-3',
+  'NEEDS ATTENTION': 'amber darken-4',
+  SCHEDULED: 'amber',
+  RESOLVED: 'cyan'
+};
 
 export default class BoardMemberHub extends React.Component {
   constructor(props) {
@@ -77,7 +84,7 @@ export default class BoardMemberHub extends React.Component {
           )}
           <h2
             style={{
-              height: '60px',
+              padding: '20px',
               textAlign: 'left',
               margin: '-7px 0 0 45px'
             }}
@@ -88,11 +95,16 @@ export default class BoardMemberHub extends React.Component {
           <div className="row">
             <div className="col s12" style={{ marginTop: '20px' }}>
               {this.state.issuesLoaded ? (
-                <div className="col s10 offset-s1 l5">
-                  <Collection className="z-depth-4">
+                <div
+                  className="col s10 offset-s1 l5 collection-div"
+                  style={{
+                    marginTop: '-10px'
+                  }}
+                >
+                  <Collection className="z-depth-4 test">
                     <ul className="il-header">
                       <li class="collection-header">
-                        <h4>Issue Log</h4>
+                        <h4>All Issues</h4>
                       </li>
                     </ul>
                     {this.state.issues.map(issue => {
@@ -112,11 +124,18 @@ export default class BoardMemberHub extends React.Component {
                           <span style={{ margin: '2px 10px' }}>
                             {issue.date}
                           </span>
-                          <a href="javascript:void(0)" className="secondary-content">
-                            <Chip style={{ float: 'right' }}>
-                              {issue.status.toUpperCase()}
-                            </Chip>
-                          </a>
+                          <Chip
+                            className={`${
+                              chipStyles[issue.status.toUpperCase()]
+                            }`}
+                            style={{
+                              float: 'right',
+                              position: 'relative',
+                              top: '-4px'
+                            }}
+                          >
+                            {issue.status.toUpperCase()}
+                          </Chip>
                         </CollectionItem>
                       );
                     })}
