@@ -10,7 +10,8 @@ const NewIssue = ({
   visitChange,
   uploading,
   imgAdder,
-  statuses
+  statuses,
+  adminSelect
 }) => {
   const options = [];
   statuses.forEach(status => options.push({ label: status, value: status }));
@@ -20,7 +21,11 @@ const NewIssue = ({
       style={{ width: '350px', border: '1px solid #8d8d8d' }}
     >
       <div className="card-content">
-        <form onSubmit={postIssues} className="issue-card submit-issue">
+        <form
+          onSubmit={postIssues}
+          // className="issue-card submit-issue"
+          className={`issue-card submit-issue ${adminSelect}`}
+        >
           <h4>New Issue +</h4>
           <input
             name="issueName"
