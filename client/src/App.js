@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from './axiosInstance';
 // import useFormInput from './components/useFormInput';
-// import logo from './logo.svg';
 import './App.css';
 import { Route } from 'react-router-dom';
 import OnBoard from './components/OnBoard';
@@ -10,7 +9,6 @@ import Home from './components/Home/Home';
 import JoinOrg from './components/JoinOrg';
 import BoardMemberHub from './components/BoardMember/BoardMember';
 import IssueLog from './components/Issues/IssueLog/IssueLog';
-import ViewIssue from './components/Issues/ViewIssue/ViewIssue';
 import MeetTeam from './components/MeetTeam/MeetTeam';
 import OurMission from './components/OurMission/OurMission';
 import Scheduled from './components/Scheduled/Scheduled';
@@ -152,11 +150,6 @@ class App extends React.Component {
           exact
           path="/issue-log"
           render={props => <IssueLog {...props} auth={this.auth} />}
-        />
-        <Route
-          exact
-          path="/issue/:id"
-          render={props => <ViewIssue {...props} auth={this.auth} />}
         />
         <Route
           exact

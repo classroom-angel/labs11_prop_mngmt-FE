@@ -1,6 +1,5 @@
 import React from 'react';
 import M from 'materialize-css';
-import Sidebar from '../../Sidebar/Sidebar';
 import '../Issues.css';
 import '../../../App.css';
 import Issue from './Issue';
@@ -13,7 +12,8 @@ import helpers, {
   postImages,
   postTag,
   postComment,
-  delComment
+  delComment,
+  putIssue
 } from '../axiosHelpers';
 import { statuses, today } from '../data';
 import Visits from './Visits';
@@ -47,7 +47,8 @@ export default class IssueLog extends React.Component {
       eid: 3,
       showCommentsObj: {},
       commentsObj: {},
-      showOnlyAdminVisits: false
+      showOnlyAdminVisits: false,
+      vimIssue: ''
     };
   }
 
@@ -229,8 +230,23 @@ export default class IssueLog extends React.Component {
       : (document.querySelector('#mod-arrow').innerHTML = 'arrow_downward');
   };
 
+  updateIssue = (id, edits) => {
+    putIssue(id, edits)
+      .then(response => {
+        var copy = this.state.issues.filter(issue => {
+          return issue.id !== response.data.issue.id;
+        });
+        this.setState({
+          issues: [response.data.issue, ...copy],
+          vimIssue: response.data.issue
+        });
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+
   render() {
-    console.log(this.state.issues);
     if (this.props.auth.isAuth()) {
       this.arrayTags();
 
@@ -360,7 +376,6 @@ export default class IssueLog extends React.Component {
                         return !issue.isVisit;
                       })
                       .filter(issue => {
-                        console.log(issue.status);
                         return (
                           issue.status.toLowerCase() ===
                             this.state.filterStatus.toLowerCase() ||
@@ -413,6 +428,8 @@ export default class IssueLog extends React.Component {
                               <VIModal
                                 issueId={issue.id}
                                 deleteComment={this.deleteComment}
+                                updateIssue={this.updateIssue}
+                                vimIssue={this.state.vimIssue}
                               />
                             </div>
                           </>

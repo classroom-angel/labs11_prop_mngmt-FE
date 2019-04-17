@@ -1,5 +1,4 @@
 import React from 'react';
-import Sidebar from '../../Sidebar/Sidebar';
 import '../Issues.css';
 import '../../../App.css';
 import { NavLink } from 'react-router-dom';
@@ -17,8 +16,7 @@ import helpers, {
   getImages
 } from '../axiosHelpers';
 import { statuses, today } from '../data';
-import { Button, Chip } from 'react-materialize';
-import M from 'materialize-css';
+import { Chip } from 'react-materialize';
 
 const { getTags, getComments } = helpers;
 
@@ -75,7 +73,7 @@ class ViewIssueModal extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  toggleEdit = () => {
+  toggleEdit = event => {
     this.setState({
       editingIssue: !this.state.editingIssue,
       nameEdits: this.state.issue.name,
@@ -91,20 +89,14 @@ class ViewIssueModal extends React.Component {
       .catch(console.log);
   };
 
-  handleEdit = id => {
+  handleEdit = (id, event) => {
     const newEdits = {};
     if (this.state.nameEdits.length > 0) newEdits.name = this.state.nameEdits;
     if (this.state.noteEdits.length > 0) newEdits.notes = this.state.noteEdits;
     newEdits.status = this.state.issueStatus;
     newEdits.date = today;
-    putIssue(id, newEdits)
-      .then(response => {
-        console.log(response.data.issue);
-        this.setState({ issue: response.data.issue, editingIssue: false });
-      })
-      .catch(err => {
-        console.log('Edit Error:', err);
-      });
+    this.props.updateIssue(id, newEdits);
+    this.setState({ editingIssue: false });
   };
 
   deleteIssue = event => {

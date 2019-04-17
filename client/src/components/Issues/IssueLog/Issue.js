@@ -2,7 +2,7 @@ import React from 'react';
 import Comments from '../Comments';
 import '../../../App.css';
 
-import { Button, Chip } from 'react-materialize';
+import { Chip } from 'react-materialize';
 
 const Issue = ({
   issue,
