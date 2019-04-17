@@ -262,7 +262,7 @@ export default class Visits extends React.Component {
               }}
             >
               <button
-                className="btn amber darken-1"
+                className="btn cyan same-button"
                 onClick={this.toggleDateSort}
               >
                 Sort by Date Added
@@ -277,20 +277,20 @@ export default class Visits extends React.Component {
 
               <button
                 data-target="modalB"
-                className="btn modal-trigger amber darken-1"
+                className="btn modal-trigger cyan same-button"
               >
                 + New Issue
               </button>
 
               <button
-                className="dropdown-trigger btn amber darken-1"
+                className="dropdown-trigger btn cyan same-button"
                 data-target="dropdown3"
               >
                 Status
               </button>
 
               <button
-                className="dropdown-trigger btn amber darken-1"
+                className="dropdown-trigger btn cyan same-button"
                 data-target="dropdown4"
               >
                 Tags

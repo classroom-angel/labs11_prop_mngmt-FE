@@ -120,3 +120,22 @@
 .sideTransparent {
   background-color: transparent !important;
 }
+
+.issue-delete {
+  background: transparent !important;
+  color: #282c34 !important;
+}
+
+.issue-delete:hover {
+  background: gray !important;
+  color: white !important;
+  /* box-shadow: 1px 1px gray !important; */
+}
+
+/* .same-button {
+
+} */
+
+.same-button:hover {
+  background: #ffa000 !important;
+}

@@ -310,7 +310,7 @@ export default class IssueLog extends React.Component {
                   }}
                 >
                   <button
-                    className="btn amber darken-1"
+                    className="btn cyan  same-button"
                     onClick={this.toggleDateSort}
                   >
                     Sort by Date Added
@@ -324,7 +324,7 @@ export default class IssueLog extends React.Component {
                   </button>
                   <button
                     data-target="modalA"
-                    className="btn modal-trigger amber darken-1"
+                    className="btn modal-trigger cyan  same-button"
                   >
                     + New Issue
                   </button>
@@ -347,14 +347,14 @@ export default class IssueLog extends React.Component {
                     </div>
                   </div>
                   <button
-                    className="dropdown-trigger btn amber darken-1"
+                    className="dropdown-trigger btn cyan  same-button"
                     data-target="dropdown1"
                   >
                     Status
                   </button>
 
                   <button
-                    className="dropdown-trigger btn amber darken-1"
+                    className="dropdown-trigger btn cyan  same-button"
                     data-target="dropdown2"
                   >
                     Tags
