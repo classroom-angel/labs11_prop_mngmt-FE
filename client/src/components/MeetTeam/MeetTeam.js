@@ -20,8 +20,8 @@ const MeetTeam = () => (
                 Dev. He hopes to one day work at a top company like Google or
                 DeepMind and maybe start his own business. In his free time, he
                 enjoys filmmaking, health and fitness and learning about A.I."
-        gitHub="https://github.com/TheDeterminator"
-        linkedIn="https://www.linkedin.com/in/alec-jordan1"
+        gitHub="TheDeterminator"
+        linkedIn="alec-jordan1"
       />
 
       <MemberCard
@@ -32,7 +32,7 @@ const MeetTeam = () => (
                 and Media Arts from Temple University. He enjoys playing,
                 watching, and developing video games."
         gitHub="https://www.github.com/grantreighard"
-        linkedIn="https://www.linkedin.com/in/grantreighard"
+        linkedIn="grantreighard"
       />
 
       <MemberCard
@@ -42,8 +42,8 @@ const MeetTeam = () => (
                 play games. He aspires to work remotely from a mountainous beach
                 island. He enjoys the nitty gritty when it comes to coding. If
                 you need someone adaptable, he's your guy."
-        gitHub="https://github.com/johnoro"
-        linkedIn="https://www.linkedin.com/in/john-o-rourke"
+        gitHub="johnoro"
+        linkedIn="john-o-rourke"
       />
 
       <MemberCard
@@ -53,8 +53,8 @@ const MeetTeam = () => (
                 biological and social sciences, future in full-stack
                 engineering. Strong love of music, the ocean, furbabies of all
                 kinds, and STEM."
-        gitHub="https://github.com/jordan-massingill"
-        linkedIn="https://www.linkedin.com/in/jordan-massingill"
+        gitHub="jordan-massingill"
+        linkedIn="jordan-massingill"
       />
 
       <MemberCard
@@ -65,8 +65,8 @@ const MeetTeam = () => (
                 children for 5 years, she was ready for a career change and came
                 to Lambda School. Rachel loves building projects with her
                 technical skills and imagination."
-        gitHub="https://github.com/RachelDiCesare93"
-        linkedIn="https://www.linkedin.com/in/racheldicesare"
+        gitHub="RachelDiCesare93"
+        linkedIn="racheldicesare"
       />
     </div>
   </div>

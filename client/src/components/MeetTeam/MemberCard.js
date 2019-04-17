@@ -27,17 +27,22 @@ const MemberCard = ({ name, src, content, gitHub, linkedIn }) => {
       >
         <img style={imgstyle} src={src} alt={firstName} />
         <p>
-          <a target="_blank" rel="noopener noreferrer" href={gitHub}>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href={`https://github.com/${gitHub}`}
+          >
             <i
               style={{ color: 'black', margin: '10px' }}
               className="fab fa-github-square fa-2x"
             />
           </a>
-          <a target="_blank" rel="noopener noreferrer" href={linkedIn}>
-            <i
-              style={{ color: ' #0077B5' }}
-              className="fab fa-linkedin fa-2x"
-            />
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href={`https://www.linkedin.com/in/${linkedIn}`}
+          >
+            <i style={{ color: '#0077B5' }} className="fab fa-linkedin fa-2x" />
           </a>
         </p>
       </Card>
