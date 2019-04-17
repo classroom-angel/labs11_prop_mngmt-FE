@@ -15,9 +15,9 @@ import axios from '../../axiosInstance';
 
 const chipStyles = {
   IGNORED: 'amber lighten-3',
-  'NEEDS ATTENTION': 'amber darken-4',
-  SCHEDULED: 'amber',
-  RESOLVED: 'cyan'
+  'NEEDS ATTENTION': 'amber darken-4 white-text',
+  SCHEDULED: 'amber white-text',
+  RESOLVED: 'cyan white-text'
 };
 
 export default class BoardMemberHub extends React.Component {
