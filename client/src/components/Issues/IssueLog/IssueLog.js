@@ -2,6 +2,7 @@ import React from 'react';
 import M from 'materialize-css';
 import Sidebar from '../../Sidebar/Sidebar';
 import '../Issues.css';
+import '../../../App.css';
 import Issue from './Issue';
 import NewIssue from './NewIssue';
 import FilterOptions from './FilterOptions';
@@ -277,7 +278,7 @@ export default class IssueLog extends React.Component {
                 })}
               </ul>
               <ul className="tabs" style={{ width: '265px' }}>
-                <li className="tab">
+                <li className="tab tab-mod">
                   <a
                     href="#is-test-1"
                     style={{ fontSize: '15px', color: '#111111' }}
@@ -310,7 +311,7 @@ export default class IssueLog extends React.Component {
                   }}
                 >
                   <button
-                    className="btn amber darken-1"
+                    className="btn cyan  same-button"
                     onClick={this.toggleDateSort}
                   >
                     Sort by Date Added
@@ -324,7 +325,7 @@ export default class IssueLog extends React.Component {
                   </button>
                   <button
                     data-target="modalA"
-                    className="btn modal-trigger amber darken-1"
+                    className="btn modal-trigger cyan  same-button"
                   >
                     + New Issue
                   </button>
@@ -347,14 +348,14 @@ export default class IssueLog extends React.Component {
                     </div>
                   </div>
                   <button
-                    className="dropdown-trigger btn amber darken-1"
+                    className="dropdown-trigger btn cyan  same-button"
                     data-target="dropdown1"
                   >
                     Status
                   </button>
 
                   <button
-                    className="dropdown-trigger btn amber darken-1"
+                    className="dropdown-trigger btn cyan  same-button"
                     data-target="dropdown2"
                   >
                     Tags

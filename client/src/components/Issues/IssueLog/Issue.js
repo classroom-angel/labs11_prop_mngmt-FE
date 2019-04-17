@@ -1,5 +1,6 @@
 import React from 'react';
 import Comments from '../Comments';
+import '../../../App.css';
 
 import { Button, Chip } from 'react-materialize';
 
@@ -28,20 +29,19 @@ const Issue = ({
         marginRight: '10px'
       }}
     >
-      <Button
+      <button
         onClick={deleteIssue}
         value={issue.id}
-        className=""
+        className="btn issue-delete"
         style={{
           float: 'right',
           position: 'relative',
           left: '10px',
-          bottom: '10px',
-          backgroundColor: '#ee6e73'
+          bottom: '10px'
         }}
       >
-        X
-      </Button>
+        X{/* <i class="material-icons">delete</i> */}
+      </button>
       <div className="card-content">
         <p
           style={{
@@ -85,7 +85,7 @@ const Issue = ({
       </div>
       <div className="card-action" style={{ float: 'bottom' }}>
         <button
-          className="btn modal-trigger amber"
+          className="btn modal-trigger cyan same-button"
           data-target={`modal${issue.id}`}
         >
           Edit

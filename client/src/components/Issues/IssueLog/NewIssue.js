@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Icon } from 'react-materialize';
 import Uploader from '../../Uploader';
 import { NavLink } from 'react-router-dom';
+import '../../../App.css';
 
 const NewIssue = ({
   postIssues,
@@ -43,7 +44,7 @@ const NewIssue = ({
           <br />
 
           <button
-            class="dropdown-trigger btn amber darken-1"
+            class="dropdown-trigger btn cyan sambe-button"
             data-target={dropDownId}
           >
             Choose Status
@@ -69,7 +70,7 @@ const NewIssue = ({
           <Button
             type="submit"
             waves="light"
-            className="amber darken-1"
+            className="cyan same-button"
             style={{ marginTop: '10px' }}
           >
             Submit

@@ -1,6 +1,7 @@
 import React from 'react';
 import Sidebar from '../../Sidebar/Sidebar';
 import '../Issues.css';
+import '../../../App.css';
 import { NavLink } from 'react-router-dom';
 import { Image, Transformation } from 'cloudinary-react';
 import Comments from '../Comments';
@@ -44,7 +45,6 @@ class ViewIssue extends React.Component {
   }
 
   componentDidMount() {
-    // this.fetchIssue(this.props.match.params.id);
     this.fetchIssue(this.props.issueId);
     getTags()
       .then(res => {
@@ -313,7 +313,7 @@ class ViewIssue extends React.Component {
                   onClick={() => {
                     this.handleEdit(this.props.issueId);
                   }}
-                  className="btn amber"
+                  className="btn cyan same-button"
                   style={{ margin: '5px 10px' }}
                 >
                   Save
