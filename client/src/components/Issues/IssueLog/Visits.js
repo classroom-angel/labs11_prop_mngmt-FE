@@ -1,6 +1,5 @@
 import React from 'react';
 import M from 'materialize-css';
-import Sidebar from '../../Sidebar/Sidebar';
 import '../Issues.css';
 import '../../../App.css';
 import Issue from './Issue';
