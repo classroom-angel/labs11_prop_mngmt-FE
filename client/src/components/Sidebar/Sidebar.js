@@ -66,13 +66,7 @@ class Sidebar extends Component {
     var elem = document.querySelector('.sidenav');
     var instance = M.Sidenav.init(elem, {
       edge: 'left',
-      inDuration: 250,
-      onOpenStart: () => {
-        elem.classList = 'sidenav sidebar';
-      },
-      onCloseEnd: () => {
-        elem.classList = 'sidenav sidebar sideTransparent';
-      }
+      inDuration: 250
     });
     let side = document.querySelector('.sidenav-overlay');
     if (side && (this.props.location && this.props.location.pathname === '/')) {
@@ -83,7 +77,7 @@ class Sidebar extends Component {
         elem.classList = 'sidenav sidebar';
         side.classList = 'sidenav sidebar';
       } else {
-        elem.classList = 'sidenav sidebar sideTransparent';
+        // elem.classList = 'sidenav sidebar sideTransparent';
         console.log(side.classList);
         // side.classList = 'sidenave sidebar sideTransparent';
       }
