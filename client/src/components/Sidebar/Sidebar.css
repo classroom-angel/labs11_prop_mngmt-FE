@@ -1,8 +1,8 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  font-family: 'Roboto', sans-serif;
   padding: 0px 20px;
+  font-family: 'Quicksand', sans-serif;
   /* min-height: 100vh; */
   box-shadow: 2px 0px;
 }
