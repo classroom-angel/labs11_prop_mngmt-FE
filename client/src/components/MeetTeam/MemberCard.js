@@ -30,7 +30,7 @@ const MemberCard = ({ name, src, content, gitHub, linkedIn }) => {
           <a target="_blank" rel="noopener noreferrer" href={gitHub}>
             <i
               style={{ color: 'black', margin: '10px' }}
-              class="fab fa-github-square fa-2x"
+              className="fab fa-github-square fa-2x"
             />
           </a>
           <a target="_blank" rel="noopener noreferrer" href={linkedIn}>
