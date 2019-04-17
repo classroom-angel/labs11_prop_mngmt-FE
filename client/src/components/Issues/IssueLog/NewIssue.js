@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Icon } from 'react-materialize';
+import { Icon } from 'react-materialize';
 import Uploader from '../../Uploader';
 import { NavLink } from 'react-router-dom';
 import '../../../App.css';
@@ -43,39 +43,24 @@ const NewIssue = ({
           />
           <br />
 
-          <button
-            class="dropdown-trigger btn cyan sambe-button"
-            data-target={dropDownId}
-          >
-            Choose Status
-          </button>
-
-          <ul id={dropDownId} className="dropdown-content">
+          <select name="issueStatus">
+            <option value="needs attention">Choose status</option>
             {statuses.map((status, index) => {
-              return (
-                <li
-                  key={index}
-                  onClick={handleChange}
-                  name="issueStatus"
-                  value={status}
-                >
-                  {status}
-                </li>
-              );
+              return <option value={status}>{status}</option>;
             })}
-          </ul>
+          </select>
           <br />
           <Uploader uploading={uploading} imgAdder={imgAdder} />
           {/* <div className="card-action"> */}
-          <Button
+          <button
             type="submit"
             waves="light"
-            className="cyan same-button"
+            className="btn cyan same-button"
             style={{ marginTop: '10px' }}
           >
             Submit
             <Icon right>send</Icon>
-          </Button>
+          </button>
           {/* </div> */}
         </form>
         <NavLink to="/issue-log">Back to Issues</NavLink>

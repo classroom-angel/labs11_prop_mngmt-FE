@@ -78,6 +78,7 @@ export default class IssueLog extends React.Component {
     postIssue({
       name: issueFormData[0].value,
       notes: issueFormData[1].value,
+      status: issueFormData[3].value,
       state: this.state,
       today
     })
@@ -130,12 +131,9 @@ export default class IssueLog extends React.Component {
   };
 
   handleDropChange = ({ target }) => {
-    console.log(target);
-    console.log(target.attributes[0].value);
-    console.log(target.attributes[1].value);
-    // this.setState({
-    //   [target.attributes[0].value]: target.attributes[1].value
-    // });
+    this.setState({
+      [target.attributes[0].value]: target.attributes[1].value
+    });
   };
 
   toggleEdit = () => {
@@ -237,20 +235,7 @@ export default class IssueLog extends React.Component {
       this.arrayTags();
 
       if (this.state.issuesLoaded) {
-        var t = document.querySelectorAll('.tabs');
-        if (t) {
-          M.Tabs.init(t, {});
-        }
-
-        var mod = document.querySelectorAll('.modal');
-        if (mod) {
-          M.Modal.init(mod, {});
-        }
-
-        var dd = document.querySelectorAll('.dropdown-trigger'); // Select the dropdown elements
-        if (dd) {
-          M.Dropdown.init(dd, {});
-        }
+        M.AutoInit();
 
         return (
           <div className="page-container">
@@ -299,7 +284,6 @@ export default class IssueLog extends React.Component {
                 <h3 style={{ textAlign: 'center', color: '#333333' }}>
                   Issue Log
                 </h3>
-
                 {/* Modal Trigger */}
                 <div
                   style={{
