@@ -310,7 +310,11 @@ export default class IssueLog extends React.Component {
                     onClick={this.toggleDateSort}
                   >
                     Sort by Date Added
-                    <i className="tiny material-icons" id="mod-arrow">
+                    <i
+                      className="material-icons"
+                      style={{ fontSize: '1rem', marginLeft: '5px' }}
+                      id="mod-arrow"
+                    >
                       arrow_downward
                     </i>
                   </button>
