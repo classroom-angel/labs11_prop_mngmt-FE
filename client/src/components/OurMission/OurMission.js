@@ -83,7 +83,7 @@ class OurMission extends Component {
           </div>
           <div>
             <p>
-              In the past, teachers, and administrators had to submit issues by
+              In the past, teachers and administrators had to submit issues by
               sending emails to their board members that would, unfortunately,
               get lost due to email traffic most of the time. We've created an
               application for you to easily submit issues and provide board

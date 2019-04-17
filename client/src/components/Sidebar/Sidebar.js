@@ -167,11 +167,11 @@ class Sidebar extends Component {
               </li>
             )}
             <li className="side-item">
-              <NavLink to="/">
-                <p
-                  className="black-text waves-effect"
-                  style={{ margin: 'auto' }}
-                >
+              <NavLink
+                to="/"
+                onClick={() => localStorage.setItem('firstLoad', true)}
+              >
+                <p className="black-text" style={{ margin: 'auto' }}>
                   Landing Page
                 </p>
               </NavLink>

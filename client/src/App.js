@@ -34,7 +34,8 @@ class App extends React.Component {
       solutions: [],
       solutionsLoaded: false,
       orgID: 1,
-      solutionEditId: 1
+      solutionEditId: 1,
+      test: []
     };
 
     this.auth = new Auth(props);
