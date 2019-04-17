@@ -10,8 +10,15 @@ import {
   Chip
 } from 'react-materialize';
 import '../../App.css';
-// import './BoardMember.css'
+import './BoardMember.css';
 import axios from '../../axiosInstance';
+
+const chipStyles = {
+  IGNORED: 'amber lighten-3',
+  'NEEDS ATTENTION': 'amber darken-4',
+  SCHEDULED: 'amber',
+  RESOLVED: 'cyan'
+};
 
 export default class BoardMemberHub extends React.Component {
   constructor(props) {
@@ -77,7 +84,7 @@ export default class BoardMemberHub extends React.Component {
           )}
           <h2
             style={{
-              height: '60px',
+              padding: '20px',
               textAlign: 'left',
               margin: '-7px 0 0 45px'
             }}
@@ -89,12 +96,12 @@ export default class BoardMemberHub extends React.Component {
             <div className="col s12" style={{ marginTop: '20px' }}>
               {this.state.issuesLoaded ? (
                 <div
-                  className="col s10 offset-s1 l5"
+                  className="col s10 offset-s1 l5 collection-div"
                   style={{
                     marginTop: '-10px'
                   }}
                 >
-                  <Collection className="z-depth-4">
+                  <Collection className="z-depth-4 test">
                     <ul className="il-header">
                       <li class="collection-header">
                         <h4>All Issues</h4>
@@ -103,7 +110,7 @@ export default class BoardMemberHub extends React.Component {
                     {this.state.issues.map(issue => {
                       return (
                         <CollectionItem
-                          style={{ textAlign: 'left', color: 'dimgrey' }}
+                          style={{ textAlign: 'left', color: 'black' }}
                           href="#!"
                           key={issue.id}
                           onClick={e => {
@@ -118,10 +125,11 @@ export default class BoardMemberHub extends React.Component {
                             {issue.date}
                           </span>
                           <Chip
-                            className="chip"
+                            className={`${
+                              chipStyles[issue.status.toUpperCase()]
+                            }`}
                             style={{
                               float: 'right',
-                              backgroundColor: '#ffc107',
                               position: 'relative',
                               top: '-4px'
                             }}
