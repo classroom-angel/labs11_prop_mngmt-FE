@@ -58,7 +58,6 @@ class ViewIssue extends React.Component {
             const imageIds = images.map(image => {
               return image.path.slice(0, -4);
             });
-            console.log(imageIds);
             this.setState({
               imageIds
             });

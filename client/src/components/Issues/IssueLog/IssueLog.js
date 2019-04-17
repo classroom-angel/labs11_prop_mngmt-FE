@@ -230,6 +230,7 @@ export default class IssueLog extends React.Component {
   };
 
   render() {
+    console.log(this.state.filterStatus);
     if (this.props.auth.isAuth()) {
       this.arrayTags();
 
@@ -401,9 +402,10 @@ export default class IssueLog extends React.Component {
                               deleteComment={this.deleteComment}
                               submitComment={this.submitComment}
                               handleCommentChange={this.handleCommentChange}
+                              tabsToggle="issue"
                             />
                             <div
-                              id={`modal${issue.id}`}
+                              id={`modal-issue-${issue.id}`}
                               className="modal"
                               style={{ width: '500px', maxHeight: '85%' }}
                             >
@@ -419,7 +421,10 @@ export default class IssueLog extends React.Component {
                 </div>
               </div>
               <div id="ad-test-1">
-                <Visits auth={this.props.auth} />
+                <Visits
+                  auth={this.props.auth}
+                  filterStatus={this.state.filterStatus}
+                />
               </div>
             </div>
           </div>

@@ -6,6 +6,7 @@ import '../../../App.css';
 import Issue from './Issue';
 import NewIssue from './NewIssue';
 import FilterOptions from './FilterOptions';
+import VIModal from '../ViewIssue/VIModal';
 import helpers, {
   getIssue,
   postIssue,
@@ -330,8 +331,10 @@ export default class Visits extends React.Component {
                     return issue.isVisit;
                   })
                   .filter(issue => {
+                    console.log('propsfilerstat', this.props.filterStatus);
+                    console.log('vistit issue status', issue.status);
                     return (
-                      issue.status === this.state.filterStatus.toLowerCase() ||
+                      issue.status === this.props.filterStatus.toLowerCase() ||
                       this.state.filterStatus === 'all'
                     );
                   })
@@ -361,16 +364,29 @@ export default class Visits extends React.Component {
                   })
                   .map((issue, index) => {
                     return (
-                      <Issue
-                        {...this.state}
-                        key={index}
-                        issue={issue}
-                        deleteIssue={this.deleteIssue}
-                        toggleShowComments={this.toggleShowComments}
-                        deleteComment={this.deleteComment}
-                        submitComment={this.submitComment}
-                        handleCommentChange={this.handleCommentChange}
-                      />
+                      <>
+                        <Issue
+                          {...this.state}
+                          key={index}
+                          issue={issue}
+                          deleteIssue={this.deleteIssue}
+                          toggleShowComments={this.toggleShowComments}
+                          deleteComment={this.deleteComment}
+                          submitComment={this.submitComment}
+                          handleCommentChange={this.handleCommentChange}
+                          tabsToggle="admin"
+                        />
+                        <div
+                          id={`modal-admin-${issue.id}`}
+                          className="modal"
+                          style={{ width: '500px', maxHeight: '85%' }}
+                        >
+                          <VIModal
+                            issueId={issue.id}
+                            deleteComment={this.deleteComment}
+                          />
+                        </div>
+                      </>
                     );
                   })}
               </div>
