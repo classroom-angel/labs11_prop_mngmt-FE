@@ -30,7 +30,7 @@ class MeetTeam extends Component {
             className="alec"
             style={{
               margin: '15px',
-              width: '290px',
+              width: '310px',
               display: 'inline-block',
               order: randoms[0]
             }}
@@ -79,7 +79,7 @@ class MeetTeam extends Component {
             className="grant"
             style={{
               margin: '15px',
-              width: '290px',
+              width: '310px',
               display: 'inline-block',
               order: randoms[1]
             }}
@@ -127,7 +127,7 @@ class MeetTeam extends Component {
             className="john"
             style={{
               margin: '15px',
-              width: '290px',
+              width: '310px',
               display: 'inline-block',
               order: randoms[2]
             }}
@@ -175,7 +175,7 @@ class MeetTeam extends Component {
             className="jordan"
             style={{
               margin: '15px',
-              width: '290px',
+              width: '310px',
               display: 'inline-block',
               order: randoms[3]
             }}
@@ -223,7 +223,7 @@ class MeetTeam extends Component {
             className="rachel"
             style={{
               margin: '15px',
-              width: '290px',
+              width: '310px',
               display: 'inline-block',
               order: randoms[4]
             }}
