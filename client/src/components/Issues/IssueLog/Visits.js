@@ -333,9 +333,13 @@ export default class Visits extends React.Component {
                   .filter(issue => {
                     console.log('propsfilerstat', this.props.filterStatus);
                     console.log('vistit issue status', issue.status);
+                    console.log(
+                      'boolean',
+                      issue.status === this.props.filterStatus.toLowerCase()
+                    );
                     return (
                       issue.status === this.props.filterStatus.toLowerCase() ||
-                      this.state.filterStatus === 'all'
+                      this.props.filterStatus === 'all'
                     );
                   })
                   .filter((issue, i, array) => {
