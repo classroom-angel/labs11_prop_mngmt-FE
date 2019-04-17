@@ -23,3 +23,8 @@
   color: darkred;
   cursor: pointer;
 }
+
+/* This seems better than trying to add padding for the text */
+.dropdown-content > li {
+  text-align: center;
+}
