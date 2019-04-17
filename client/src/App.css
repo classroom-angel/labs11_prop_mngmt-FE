@@ -86,15 +86,6 @@
   font-size: 14px;
 }
 
-.edit-issue-button {
-  border: 1px solid indianred;
-  width: 100px;
-  text-decoration: none;
-  background: indianred;
-  color: white;
-  font-weight: 800;
-}
-
 .tag {
   border: 1px solid;
   width: 110px;
@@ -125,12 +116,6 @@
   border: 1px solid grey !important;
   padding-left: 10px !important;
 }
-
-/* Tried to add this to darken the placeholder text but it's not working... */
-/* ::placeholder {
-  opacity: 1;
-  color: red;
-} */
 
 .sideTransparent {
   background-color: transparent !important;

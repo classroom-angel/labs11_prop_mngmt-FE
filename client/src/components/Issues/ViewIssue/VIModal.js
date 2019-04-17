@@ -173,6 +173,8 @@ class ViewIssue extends React.Component {
   };
 
   deleteComment = event => {
+    console.log('ga', event.target.getAttribute('id'));
+    console.log('val', event.target.value);
     delComment(event.target.getAttribute('id'))
       .then(res => {
         let copy = this.state.comments.slice().filter(function(comment) {
@@ -201,6 +203,7 @@ class ViewIssue extends React.Component {
                     className="issue-input"
                     value={this.state.nameEdits}
                     onChange={this.handleChange}
+                    style={{ width: '70%', height: '20px' }}
                   />
                 ) : (
                   this.state.issue.name
@@ -214,6 +217,7 @@ class ViewIssue extends React.Component {
                     className="issue-input"
                     value={this.state.noteEdits}
                     onChange={this.handleChange}
+                    style={{ width: '70%', height: '20px' }}
                   />
                 ) : (
                   this.state.issue.notes
@@ -257,7 +261,7 @@ class ViewIssue extends React.Component {
                   })
                   .map((tag, index) => {
                     return (
-                      <Chip key={tag.id}>
+                      <Chip key={tag.id} className="amber lighten-3">
                         {tag.name}
                         <span
                           className="close"
@@ -282,7 +286,7 @@ class ViewIssue extends React.Component {
               <Comments
                 comments={this.state.comments}
                 issueId={this.state.issue.id}
-                deleteComment={this.deleteComment}
+                deleteComment={this.props.deleteComment}
               />
               <form onSubmit={this.submitComment}>
                 <input
@@ -309,7 +313,8 @@ class ViewIssue extends React.Component {
                   onClick={() => {
                     this.handleEdit(this.props.issueId);
                   }}
-                  className="view-issue-button"
+                  className="btn amber"
+                  style={{ margin: '5px 10px' }}
                 >
                   Save
                 </button>

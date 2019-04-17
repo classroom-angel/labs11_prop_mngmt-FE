@@ -410,9 +410,12 @@ export default class IssueLog extends React.Component {
                             <div
                               id={`modal${issue.id}`}
                               className="modal"
-                              style={{ width: '500px' }}
+                              style={{ width: '500px', maxHeight: '85%' }}
                             >
-                              <VIModal issueId={issue.id} />
+                              <VIModal
+                                issueId={issue.id}
+                                deleteComment={this.deleteComment}
+                              />
                             </div>
                           </>
                         );
