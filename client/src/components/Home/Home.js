@@ -102,10 +102,6 @@ class Home extends Component {
             © {this.date.getFullYear()}, Classroom Angel. All rights reserved.
           </p>
         </div>
-        {/*<div>
-        <NavLink className='cyan darken-2 btn' to="/" onClick={function(e) {props.auth.login()}}>Signup?</NavLink>
-        <NavLink className='cyan darken-2 btn' to="/" onClick={function(e) {props.auth.login()}}>Login?</NavLink>
-        </div>*/}
       </div>
     );
   }
