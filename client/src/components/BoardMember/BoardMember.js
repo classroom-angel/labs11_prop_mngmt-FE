@@ -112,9 +112,11 @@ export default class BoardMemberHub extends React.Component {
                           <span style={{ margin: '2px 10px' }}>
                             {issue.date}
                           </span>
-                          <Chip style={{ float: 'right' }}>
-                            {issue.status.toUpperCase()}
-                          </Chip>
+                          <a href="javascript:void(0)" className="secondary-content">
+                            <Chip style={{ float: 'right' }}>
+                              {issue.status.toUpperCase()}
+                            </Chip>
+                          </a>
                         </CollectionItem>
                       );
                     })}
