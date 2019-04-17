@@ -77,6 +77,7 @@ export default class Visits extends React.Component {
     postIssue({
       name: adminFormData[0].value,
       notes: adminFormData[1].value,
+      status: adminFormData[3].value,
       state: this.state,
       today
     })
@@ -231,6 +232,7 @@ export default class Visits extends React.Component {
   };
 
   render() {
+    console.log(this.state);
     if (this.props.auth.isAuth()) {
       this.arrayTags();
 
