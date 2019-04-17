@@ -228,6 +228,7 @@ export default class IssueLog extends React.Component {
   };
 
   render() {
+    console.log(this.state.issues);
     if (this.props.auth.isAuth()) {
       this.arrayTags();
 
@@ -336,6 +337,7 @@ export default class IssueLog extends React.Component {
                         uploading={this.state.uploading}
                         imgAdder={this.imgAdder}
                         statuses={statuses}
+                        adminSelect=""
                       />
                     </div>
                   </div>

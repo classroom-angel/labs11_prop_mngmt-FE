@@ -72,7 +72,8 @@ export default class Visits extends React.Component {
 
   postIssues = event => {
     event.preventDefault();
-    const adminFormData = document.querySelector('.submit-issue');
+    const adminFormData = document.querySelector('.admin-issue');
+    console.log('admin form dat', adminFormData);
     postIssue({
       name: adminFormData[0].value,
       notes: adminFormData[1].value,
@@ -275,7 +276,7 @@ export default class Visits extends React.Component {
               </button>
 
               <button
-                data-target="modal2"
+                data-target="modalB"
                 className="btn modal-trigger amber darken-1"
               >
                 + New Issue
@@ -295,7 +296,7 @@ export default class Visits extends React.Component {
                 Tags
               </button>
 
-              <div id="modal2" className="modal">
+              <div id="modalB" className="modal">
                 <div className="modal-content">
                   <NewIssue
                     postIssues={this.postIssues}
@@ -306,6 +307,7 @@ export default class Visits extends React.Component {
                     uploading={this.state.uploading}
                     imgAdder={this.imgAdder}
                     statuses={statuses}
+                    adminSelect="admin-issue"
                   />
                 </div>
               </div>
