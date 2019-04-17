@@ -308,6 +308,7 @@ export default class Visits extends React.Component {
                     imgAdder={this.imgAdder}
                     statuses={statuses}
                     adminSelect="admin-issue"
+                    dropDownId="adminStatusDropDown"
                   />
                 </div>
               </div>

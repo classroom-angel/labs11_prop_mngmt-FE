@@ -338,6 +338,8 @@ export default class IssueLog extends React.Component {
                         imgAdder={this.imgAdder}
                         statuses={statuses}
                         adminSelect=""
+                        handleDropChange={this.handleDropChange}
+                        dropDownId="issueStatusDropDown"
                       />
                     </div>
                   </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Icon } from 'react-materialize';
 import Uploader from '../../Uploader';
+import { NavLink } from 'react-router-dom';
 
 const NewIssue = ({
   postIssues,
@@ -11,10 +12,13 @@ const NewIssue = ({
   uploading,
   imgAdder,
   statuses,
-  adminSelect
+  adminSelect,
+  handleDropChange,
+  dropDownId
 }) => {
-  const options = [];
-  statuses.forEach(status => options.push({ label: status, value: status }));
+  // const options = [];
+  // statuses.forEach(status => options.push({ label: status, value: status }));
+  console.log(statuses);
   return (
     <div
       className="card"
@@ -41,16 +45,27 @@ const NewIssue = ({
           />
           <br />
 
-          {statuses.map((status, index) => {
-            return (
-              <input
-                type="radio"
-                // onChange={handleChange}
-                key={index}
-                // value={status}
-              />
-            );
-          })}
+          <button
+            class="dropdown-trigger btn amber darken-1"
+            data-target={dropDownId}
+          >
+            Choose Status
+          </button>
+
+          <ul id={dropDownId} className="dropdown-content">
+            {statuses.map((status, index) => {
+              return (
+                <li
+                  key={index}
+                  onClick={handleChange}
+                  name="issueStatus"
+                  value={status}
+                >
+                  {status}
+                </li>
+              );
+            })}
+          </ul>
           <br />
           <Uploader uploading={uploading} imgAdder={imgAdder} />
           {/* <div className="card-action"> */}
@@ -65,6 +80,7 @@ const NewIssue = ({
           </Button>
           {/* </div> */}
         </form>
+        <NavLink to="/issue-log">Back to Issues</NavLink>
       </div>
     </div>
   );
