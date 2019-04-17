@@ -74,7 +74,6 @@ export default class Visits extends React.Component {
   postIssues = event => {
     event.preventDefault();
     const adminFormData = document.querySelector('.admin-issue');
-    console.log('admin form dat', adminFormData);
     postIssue({
       name: adminFormData[0].value,
       notes: adminFormData[1].value,
@@ -157,7 +156,6 @@ export default class Visits extends React.Component {
   fetchIssue = id => {
     getIssue(id)
       .then(res => {
-        console.log('fetched note', res.data);
         this.setState({ issue: res.data.issue });
       })
       .catch(console.error);
@@ -168,7 +166,6 @@ export default class Visits extends React.Component {
     const newTag = { name: this.state.tag, issueId: id };
     postTag(newTag)
       .then(response => {
-        console.log('axios response', response.data);
         this.setState({ tags: response.data, tag: '' });
       })
       .catch(err => {
@@ -185,7 +182,6 @@ export default class Visits extends React.Component {
   };
 
   visitChange = ({ target }) => {
-    console.log(target);
     const { name, checked } = target;
     this.setState({ [name]: checked });
   };
@@ -233,7 +229,6 @@ export default class Visits extends React.Component {
   };
 
   render() {
-    console.log(this.state);
     if (this.props.auth.isAuth()) {
       this.arrayTags();
 
@@ -331,12 +326,6 @@ export default class Visits extends React.Component {
                     return issue.isVisit;
                   })
                   .filter(issue => {
-                    console.log('propsfilerstat', this.props.filterStatus);
-                    console.log('vistit issue status', issue.status);
-                    console.log(
-                      'boolean',
-                      issue.status === this.props.filterStatus.toLowerCase()
-                    );
                     return (
                       issue.status === this.props.filterStatus.toLowerCase() ||
                       this.props.filterStatus === 'all'

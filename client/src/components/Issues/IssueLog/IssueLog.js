@@ -230,7 +230,6 @@ export default class IssueLog extends React.Component {
   };
 
   render() {
-    console.log(this.state.filterStatus);
     if (this.props.auth.isAuth()) {
       this.arrayTags();
 
