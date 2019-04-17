@@ -26,7 +26,12 @@ const MemberCard = ({ name, src, content, gitHub, linkedIn }) => {
           <p style={{ marginTop: '30px', textAlign: 'left' }}>{content}</p>
         }
       >
-        <SimpleImg {...imgstyle} src={src} alt={firstName} />
+        <SimpleImg
+          {...imgstyle}
+          placeholder={false}
+          src={src}
+          alt={firstName}
+        />
         <p>
           <a
             target="_blank"
