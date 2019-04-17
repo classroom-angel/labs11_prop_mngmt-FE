@@ -265,7 +265,11 @@ export default class Visits extends React.Component {
                 onClick={this.toggleDateSort}
               >
                 Sort by Date Added
-                <i class="tiny material-icons" id="mod-arrow">
+                <i
+                  className="material-icons"
+                  style={{ fontSize: '1rem', marginLeft: '5px' }}
+                  id="mod-arrow"
+                >
                   arrow_downward
                 </i>
               </button>
@@ -275,6 +279,20 @@ export default class Visits extends React.Component {
                 className="btn modal-trigger amber darken-1"
               >
                 + New Issue
+              </button>
+
+              <button
+                className="dropdown-trigger btn amber darken-1"
+                data-target="dropdown3"
+              >
+                Status
+              </button>
+
+              <button
+                className="dropdown-trigger btn amber darken-1"
+                data-target="dropdown4"
+              >
+                Tags
               </button>
 
               <div id="modal2" className="modal">

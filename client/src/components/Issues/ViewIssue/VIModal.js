@@ -173,6 +173,8 @@ class ViewIssue extends React.Component {
   };
 
   deleteComment = event => {
+    console.log('ga', event.target.getAttribute('id'));
+    console.log('val', event.target.value);
     delComment(event.target.getAttribute('id'))
       .then(res => {
         let copy = this.state.comments.slice().filter(function(comment) {
@@ -189,18 +191,11 @@ class ViewIssue extends React.Component {
 
   render() {
     return (
-      <div
-        // id={`modal${this.props.issueId}`}
-        // className="modal"
-        style={{ width: '600px' }}
-      >
+      <div style={{ padding: '20px', fontSize: '20px', textAlign: 'left' }}>
         {this.state.issue ? (
           <div>
-            <h3 style={{ textAlign: 'center', border: '2px solid gray' }}>
-              Issue
-            </h3>
-            <div key={this.state.issue.id}>
-              <h3>
+            <div key={this.state.issue.id} style={{}}>
+              <p>
                 Name:{' '}
                 {this.state.editingIssue ? (
                   <input
@@ -208,12 +203,13 @@ class ViewIssue extends React.Component {
                     className="issue-input"
                     value={this.state.nameEdits}
                     onChange={this.handleChange}
+                    style={{ width: '70%', height: '20px' }}
                   />
                 ) : (
                   this.state.issue.name
                 )}
-              </h3>
-              <h3>
+              </p>
+              <p>
                 Notes:{' '}
                 {this.state.editingIssue ? (
                   <input
@@ -221,12 +217,13 @@ class ViewIssue extends React.Component {
                     className="issue-input"
                     value={this.state.noteEdits}
                     onChange={this.handleChange}
+                    style={{ width: '70%', height: '20px' }}
                   />
                 ) : (
                   this.state.issue.notes
                 )}
-              </h3>
-              <h3>
+              </p>
+              <p>
                 Status:{' '}
                 {this.state.editingIssue ? (
                   <select name="issueStatus" onChange={this.handleChange}>
@@ -242,9 +239,9 @@ class ViewIssue extends React.Component {
                 ) : (
                   this.state.issue.status
                 )}
-              </h3>
-              <h4>Date: {this.state.issue.date}</h4>
-              <h5>Org. Id: {this.state.issue.organizationId}</h5>
+              </p>
+              <p>Date: {this.state.issue.date}</p>
+              {/* <h5>Org. Id: {this.state.issue.organizationId}</h5> */}
               {this.state.imageIds.map(id => {
                 return (
                   <Image cloudName="dzeio0al7" publicId={id}>
@@ -264,16 +261,7 @@ class ViewIssue extends React.Component {
                   })
                   .map((tag, index) => {
                     return (
-                      // <div key={tag.id} className="tag">
-                      //   {tag.name}
-                      //   <span
-                      //     className="close"
-                      //     id={tag.id}
-                      //     index={index}
-                      //     onClick={this.deleteTag}
-                      //   />
-                      // </div>
-                      <Chip key={tag.id}>
+                      <Chip key={tag.id} className="amber lighten-3">
                         {tag.name}
                         <span
                           className="close"
@@ -298,7 +286,7 @@ class ViewIssue extends React.Component {
               <Comments
                 comments={this.state.comments}
                 issueId={this.state.issue.id}
-                deleteComment={this.deleteComment}
+                deleteComment={this.props.deleteComment}
               />
               <form onSubmit={this.submitComment}>
                 <input
@@ -323,9 +311,10 @@ class ViewIssue extends React.Component {
               {this.state.editingIssue ? (
                 <button
                   onClick={() => {
-                    this.handleEdit(this.props.match.params.id);
+                    this.handleEdit(this.props.issueId);
                   }}
-                  className="view-issue-button"
+                  className="btn amber"
+                  style={{ margin: '5px 10px' }}
                 >
                   Save
                 </button>

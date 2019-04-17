@@ -310,7 +310,11 @@ export default class IssueLog extends React.Component {
                     onClick={this.toggleDateSort}
                   >
                     Sort by Date Added
-                    <i className="tiny material-icons" id="mod-arrow">
+                    <i
+                      className="material-icons"
+                      style={{ fontSize: '1rem', marginLeft: '5px' }}
+                      id="mod-arrow"
+                    >
                       arrow_downward
                     </i>
                   </button>
@@ -407,8 +411,15 @@ export default class IssueLog extends React.Component {
                               submitComment={this.submitComment}
                               handleCommentChange={this.handleCommentChange}
                             />
-                            <div id={`modal${issue.id}`} className="modal">
-                              <VIModal issueId={issue.id} />
+                            <div
+                              id={`modal${issue.id}`}
+                              className="modal"
+                              style={{ width: '500px', maxHeight: '85%' }}
+                            >
+                              <VIModal
+                                issueId={issue.id}
+                                deleteComment={this.deleteComment}
+                              />
                             </div>
                           </>
                         );

@@ -1,7 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import Comments from '../Comments';
-import VIModal from '../ViewIssue/VIModal';
 
 import { Button, Chip } from 'react-materialize';
 
@@ -30,10 +28,6 @@ const Issue = ({
         marginRight: '10px'
       }}
     >
-      {/* <div id={`modal${issue.id}`} className="modal">
-        <VIModal issueID={issue.id} />
-      </div> */}
-
       <Button
         onClick={deleteIssue}
         value={issue.id}
@@ -41,8 +35,8 @@ const Issue = ({
         style={{
           float: 'right',
           position: 'relative',
-          left: '22px',
-          bottom: '20px',
+          left: '10px',
+          bottom: '10px',
           backgroundColor: '#ee6e73'
         }}
       >
@@ -61,7 +55,6 @@ const Issue = ({
         <p style={{ textAlign: 'left' }}>{issue.notes}</p>
         {/* <p>Status: {issue.status}</p> */}
         <p style={{ textAlign: 'left' }}>Date: {issue.date}</p>
-        {/* <p>Org. Id: {issue.organizationId}</p> */}
         <div>
           {tags
             .filter(function(tag) {
@@ -91,21 +84,15 @@ const Issue = ({
         </form>
       </div>
       <div className="card-action" style={{ float: 'bottom' }}>
-        {/* <NavLink to={`/issue/${issue.id}`} style={{ margin: 'auto' }}> */}
-        {/* <Button value={issue.id} className="amber darken-1">
-            View/Update
-          </Button> */}
         <button
-          className="waves-effect waves-light btn modal-trigger amber"
+          className="btn modal-trigger amber"
           data-target={`modal${issue.id}`}
         >
           Edit
         </button>
-        {/* </NavLink> */}
       </div>
     </div>
   );
-  // }
 };
 
 export default Issue;
