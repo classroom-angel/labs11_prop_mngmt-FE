@@ -6,11 +6,21 @@ import logo from '../../img/logo.png';
 class Home extends Component {
   constructor(props) {
     super(props);
-
+    this.state = {
+      test: []
+    };
     this.isAuth = props.auth.isAuth();
     this.date = new Date();
   }
-  componentDidMount = () => {};
+
+  componentDidMount = () => {
+    if (!localStorage.getItem('firstLoad')) {
+      // localStorage.setItem('firstLoad', true);
+    } else {
+      localStorage.removeItem('firstLoad');
+      window.location.reload();
+    }
+  };
 
   componentDidUpdate = () => {
     let footer = document.querySelector('.Footer');

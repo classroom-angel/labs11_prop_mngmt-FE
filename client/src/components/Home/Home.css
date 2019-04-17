@@ -1,5 +1,10 @@
+body {
+  overflow-y: auto;
+}
+
 .home {
   margin-top: 60px;
+  overflow-y: auto;
 }
 
 h1,
