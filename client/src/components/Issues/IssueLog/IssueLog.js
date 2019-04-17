@@ -129,9 +129,12 @@ export default class IssueLog extends React.Component {
   };
 
   handleDropChange = ({ target }) => {
-    this.setState({
-      [target.attributes[0].value]: target.attributes[1].value
-    });
+    console.log(target);
+    console.log(target.attributes[0].value);
+    console.log(target.attributes[1].value);
+    // this.setState({
+    //   [target.attributes[0].value]: target.attributes[1].value
+    // });
   };
 
   toggleEdit = () => {

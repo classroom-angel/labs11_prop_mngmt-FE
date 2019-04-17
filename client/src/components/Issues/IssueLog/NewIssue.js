@@ -16,9 +16,6 @@ const NewIssue = ({
   handleDropChange,
   dropDownId
 }) => {
-  // const options = [];
-  // statuses.forEach(status => options.push({ label: status, value: status }));
-  console.log(statuses);
   return (
     <div
       className="card"
