@@ -53,12 +53,14 @@ export default class Auth extends Component {
           );
         });
         if (oldUser.length !== 0) {
-          let userOrg = orgs.filter(org => org.id == oldUser[0].organizationId);
+          let [userOrg] = orgs.filter(
+            org => org.id == oldUser[0].organizationId
+          );
           let profile = JSON.parse(localStorage.getItem('profile'));
-          profile.orgId = oldUser[0].organizationId;
+          profile.orgId = oldUser[0].organizationId || userOrg.id;
           profile.role = oldUser[0].role;
           profile.name = oldUser[0].firstName + ' ' + oldUser[0].lastName;
-          profile.organizationName = userOrg[0].name;
+          profile.organizationName = userOrg.name;
           localStorage.setItem('profile', JSON.stringify(profile));
           if (profile.role === 'Board member') {
             location.pathname = '/bm-homepage';
