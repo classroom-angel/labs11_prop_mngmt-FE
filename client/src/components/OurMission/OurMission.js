@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, CardPanel } from 'react-materialize';
+import { CardPanel } from 'react-materialize';
 import { SimpleImg } from 'react-simple-img';
 import kidsinclass from '../../img/kidsinclass.jpg';
 import oneboyinclass from '../../img/oneboyinclass.jpg';

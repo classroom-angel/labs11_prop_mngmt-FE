@@ -15,9 +15,9 @@ import axios from '../../axiosInstance';
 
 const chipStyles = {
   IGNORED: 'amber lighten-3',
-  'NEEDS ATTENTION': 'amber darken-4',
-  SCHEDULED: 'amber',
-  RESOLVED: 'cyan'
+  'NEEDS ATTENTION': 'amber darken-4 white-text',
+  SCHEDULED: 'amber white-text',
+  RESOLVED: 'cyan white-text'
 };
 
 export default class BoardMemberHub extends React.Component {
@@ -61,7 +61,7 @@ export default class BoardMemberHub extends React.Component {
   }
 
   goToIssue = id => {
-    this.props.history.push(`/issue/${id}`);
+    this.props.history.push(`/issue-log`);
   };
 
   equipSelect(event, id) {
@@ -147,123 +147,11 @@ export default class BoardMemberHub extends React.Component {
               <div
                 className="col s10 offset-s1 l7 z-depth-4"
                 style={{
-                  borderRadius: '10px'
+                  borderRadius: '5px'
                 }}
               >
                 <h3>Equipment</h3>
-                {/*// <div
-                //   className="dev-condition"
-                //   style={{
-                //     display: 'flex',
-                //     width: '100%',
-                //     height: '500px',
-                //     justifyContent: 'space-between'
-                //   }}
-                // >
-                //   <div
-                //     style={{
-                //       borderLeft: '1px solid gray',
-                //       textAlign: 'center',
-                //       width: '15%',
-                //       overflow: 'auto'
-                //     }}
-                //   >
-                //     Equipment
-                //     <div className="divider" />
-                //     {this.state.equipmentLoaded
-                //       ? this.state.equipment.map(item => {
-                //           return (
-                //             <p onClick={this.equipSelect} value={item.id}>
-                //               {item.name}
-                //             </p>
-                //           );
-                //         })
-                //       : 'Loading...'}
-                //   </div>
-                //   <div
-                //     style={{
-                //       borderLeft: '1px solid gray',
-                //       textAlign: 'center',
-                //       width: '15%',
-                //       overflow: 'auto'
-                //     }}
-                //   >
-                //     Open Issues
-                //     <div className="divider" />
-                //     {this.state.equipmentLoaded
-                //       ? this.state.equipment.map(function(item) {
-                //           return <p>{item.damaged}</p>;
-                //         })
-                //       : 'Loading...'}
-                //   </div>
-                //   <div
-                //     style={{
-                //       borderLeft: '1px solid gray',
-                //       textAlign: 'center',
-                //       width: '15%',
-                //       overflow: 'auto'
-                //     }}
-                //   >
-                //     Working
-                //     <div className="divider" />
-                //     {this.state.equipmentLoaded
-                //       ? this.state.equipment.map(function(item) {
-                //           return <p>{item.working}</p>;
-                //         })
-                //       : 'Loading...'}
-                //   </div>
-                //   <div
-                //     style={{
-                //       borderLeft: '1px solid gray',
-                //       textAlign: 'center',
-                //       width: '15%',
-                //       overflow: 'auto'
-                //     }}
-                //   >
-                //     Total
-                //     <div className="divider" />
-                //     {this.state.equipmentLoaded
-                //       ? this.state.equipment.map(function(item) {
-                //           return <p>{item.working + item.damaged}</p>;
-                //         })
-                //       : 'Loading...'}
-                //   </div>
-                //   <div
-                //     className="dev-description"
-                //     style={{
-                //       display: 'inline-block',
-                //       borderLeft: '1px solid gray',
-                //       overflow: 'auto',
-                //       width: '25%'
-                //     }}
-                //   >
-                //     Equipment Details
-                //     <div className="divider" />
-                //     {this.state.selected !== '' && (
-                //       <>
-                //         <p style={{ borderBottom: '1px solid' }}>
-                //           {this.state.selected}
-                //         </p>
-                //         {this.state.issuesLoaded
-                //           ? this.state.issues
-                //               .filter(issue => {
-                //                 return (
-                //                   issue.equipmentId == this.state.selectedId
-                //                 );
-                //               })
-                //               .map((issue, index) => {
-                //                 return (
-                //                   <div>
-                //                     <p>{`Issue ${index + 1}`}</p>
-                //                     <p>Descriptions: {issue.name}</p>
-                //                   </div>
-                //                 );
-                //               })
-                //           : 'Loading....'}{' '}
-                //       </>
-                //     )}
-                //   </div>
-                // </div>*/}
+
                 <Collapsible>
                   {this.state.equipmentLoaded &&
                     this.state.equipment.map(item => (
@@ -292,12 +180,22 @@ export default class BoardMemberHub extends React.Component {
                             })
                             .map((issue, index) => {
                               return (
-                                <div style={{ textAlign: 'left' }}>
+                                <div
+                                  className="cyan white-text same-button z-depth-2"
+                                  style={{
+                                    textAlign: 'left',
+                                    width: '40%',
+
+                                    borderRadius: '2px'
+                                  }}
+                                >
                                   <a
-                                    href={`/issue/${issue.id}`}
-                                    style={{ color: '#0097a7' }}
+                                    style={{
+                                      color: 'white'
+                                    }}
+                                    href={`/issue-log`}
                                   >
-                                    <p>
+                                    <p style={{ paddingLeft: '3px' }}>
                                       <b>{`Issue ${index + 1}`}</b>:{' '}
                                       {issue.name}
                                     </p>
@@ -307,15 +205,6 @@ export default class BoardMemberHub extends React.Component {
                             })}
                       </CollapsibleItem>
                     ))}
-                  {/*<CollapsibleItem header="Better safe than sorry. That's my motto." icon="filter_drama">
-                  Better safe than sorry. That's my motto.
-                  </CollapsibleItem>
-                  <CollapsibleItem header="Yeah, you do seem to have a little 'shit creek' ac…" icon="place">
-                  Yeah, you do seem to have a little 'shit creek' action going.
-                  </CollapsibleItem>
-                  <CollapsibleItem header="You know, FYI, you can buy a paddle. Did you not p…" icon="whatshot">
-                  You know, FYI, you can buy a paddle. Did you not plan for this contingency?
-                  </CollapsibleItem>*/}
                 </Collapsible>
               </div>
             </div>
