@@ -89,12 +89,19 @@ const Issue = ({
         </form>
       </div>
       <div className="card-action" style={{ float: 'bottom' }}>
-        {profile.role !== 'Board member' && (
+        {profile.role !== 'Board member' ? (
           <button
             className="btn modal-trigger cyan same-button"
             data-target={`modal-${tabsToggle}-${issue.id}`}
           >
             Edit
+          </button>
+        ) : (
+          <button
+            className="btn modal-trigger cyan same-button"
+            data-target={`modal-${tabsToggle}-${issue.id}`}
+          >
+            View
           </button>
         )}
       </div>
