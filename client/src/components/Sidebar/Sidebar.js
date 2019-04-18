@@ -84,7 +84,6 @@ class Sidebar extends Component {
         side.classList = 'sidenav sidebar';
       } else {
         elem.classList = 'sidenav sidebar sideTransparent';
-        console.log(side.classList);
         // side.classList = 'sidenave sidebar sideTransparent';
       }
     }

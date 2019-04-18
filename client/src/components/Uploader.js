@@ -4,11 +4,11 @@ import React from 'react';
 export default function Uploader(props) {
   const { uploading } = props;
   const content = () => {
-    switch (true) {
-      case uploading:
-        const success = 'Images added :)';
-        return <div>{success}</div>;
-      default:
+  {/*  // switch (true) {
+    //   case uploading:
+    //     const success = 'Images added :)';
+    //     return <div>{success}</div>;
+    //   default:*/}
         return (
           <div className="uploader">
             <label htmlFor="files">Upload Image(s)?</label>
@@ -21,7 +21,7 @@ export default function Uploader(props) {
             />
           </div>
         );
-    }
+    // }
   };
   return <div>{content()}</div>;
 }

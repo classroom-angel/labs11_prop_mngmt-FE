@@ -3,6 +3,10 @@
   flex-wrap: wrap;
 }
 
+#files {
+  display: none;
+}
+
 .tag-container .tag .close::after {
   content: '\00d7';
   font-weight: bold;

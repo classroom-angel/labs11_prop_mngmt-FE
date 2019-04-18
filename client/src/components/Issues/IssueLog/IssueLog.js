@@ -85,9 +85,11 @@ export default class IssueLog extends React.Component {
     })
       .then(res => {
         const id = res.data.issue.id;
-        if (this.state.images.length !== 0) {
+        const images = document.querySelector('#files');
+        const files = Array.from(images.files);
+        if (files.length !== 0) {
+          console.log(files);
           const formData = new FormData();
-          const files = [...this.state.images];
           files.forEach((file, i) => {
             formData.append(i, file);
           });
@@ -97,9 +99,10 @@ export default class IssueLog extends React.Component {
                 ...prevState,
                 issueName: '',
                 issueNotes: '',
-                issues: [...prevState.issues, res.data.issue],
+                issues: [res.data.issue, ...prevState.issues],
                 images: []
               }));
+              console.log('ISSUES',this.state.issues);
             })
             .catch(console.error);
         } else {
@@ -111,6 +114,7 @@ export default class IssueLog extends React.Component {
             images: []
           }));
         }
+        this.props.history.push('/issue-log');
       })
       .catch(console.error);
   };
@@ -175,13 +179,14 @@ export default class IssueLog extends React.Component {
       });
   };
 
-  imgAdder = e => {
-    const files = Array.from(e.target.files);
-    this.setState({
-      images: files,
-      uploading: true
-    });
-  };
+  // imgAdder = e => {
+  //   console.log(e.target.files);
+  //   const files = Array.from(e.target.files);
+  //   this.setState({
+  //     images: files,
+  //     uploading: true
+  //   });
+  // };
 
   visitChange = ({ target }) => {
     const { name, checked } = target;
