@@ -4,6 +4,8 @@ import '../../../App.css';
 
 import { Chip } from 'react-materialize';
 
+const profile = JSON.parse(localStorage.getItem('profile'));
+
 const Issue = ({
   issue,
   tags,
@@ -30,19 +32,21 @@ const Issue = ({
         marginRight: '10px'
       }}
     >
-      <button
-        onClick={deleteIssue}
-        value={issue.id}
-        className="btn issue-delete"
-        style={{
-          float: 'right',
-          position: 'relative',
-          left: '4px',
-          bottom: '4px'
-        }}
-      >
-        X{/* <i class="material-icons">delete</i> */}
-      </button>
+      {profile.role !== 'Board member' && (
+        <button
+          onClick={deleteIssue}
+          value={issue.id}
+          className="btn issue-delete"
+          style={{
+            float: 'right',
+            position: 'relative',
+            left: '4px',
+            bottom: '4px'
+          }}
+        >
+          X{/* <i class="material-icons">delete</i> */}
+        </button>
+      )}
       <div className="card-content">
         <p
           style={{
@@ -85,12 +89,14 @@ const Issue = ({
         </form>
       </div>
       <div className="card-action" style={{ float: 'bottom' }}>
-        <button
-          className="btn modal-trigger cyan same-button"
-          data-target={`modal-${tabsToggle}-${issue.id}`}
-        >
-          Edit
-        </button>
+        {profile.role !== 'Board member' && (
+          <button
+            className="btn modal-trigger cyan same-button"
+            data-target={`modal-${tabsToggle}-${issue.id}`}
+          >
+            Edit
+          </button>
+        )}
       </div>
     </div>
   );
