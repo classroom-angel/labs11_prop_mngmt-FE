@@ -2,9 +2,10 @@ import axios from '../../axiosInstance';
 
 const getHelpers = {};
 
-const { orgId } = JSON.parse(localStorage.getItem('profile'));
-getHelpers.getIssues = async () =>
-  await axios.get(`organizations/${orgId}/issues`);
+getHelpers.getIssues = async () => {
+  const { orgId } = JSON.parse(localStorage.getItem('profile'));
+  return await axios.get(`organizations/${orgId}/issues`);
+};
 
 ['Tags', 'Comments'].forEach(table => {
   getHelpers[`get${table}`] = async () => await axios.get(table.toLowerCase());
