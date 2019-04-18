@@ -20,7 +20,6 @@ const NewIssue = ({
   return (
     <div
       className="card"
-      style={{ width: '350px', border: '1px solid #8d8d8d' }}
     >
       <div className="card-content">
         <form
