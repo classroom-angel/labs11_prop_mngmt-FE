@@ -57,7 +57,7 @@ export default class Auth extends Component {
             org => org.id == oldUser[0].organizationId
           );
           let profile = JSON.parse(localStorage.getItem('profile'));
-          profile.orgId = oldUser[0].organizationId || userOrg.id;
+          profile.orgId = userOrg.id;
           profile.role = oldUser[0].role;
           profile.name = oldUser[0].firstName + ' ' + oldUser[0].lastName;
           profile.organizationName = userOrg.name;
