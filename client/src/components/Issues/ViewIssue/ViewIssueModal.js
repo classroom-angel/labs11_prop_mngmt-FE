@@ -56,6 +56,7 @@ class ViewIssueModal extends React.Component {
             const imageIds = images.map(image => {
               return image.path.slice(0, -4);
             });
+            console.log(imageIds);
             this.setState({
               imageIds
             });
@@ -68,6 +69,11 @@ class ViewIssueModal extends React.Component {
       .then(res => this.setState({ comments: res.data.comments }))
       .catch(console.log);
   }
+
+  getRole = () => {
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    return profile.role === 'Board member';
+  };
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
@@ -213,7 +219,6 @@ class ViewIssueModal extends React.Component {
                   this.state.issue.notes
                 )}
               </p>
-
               {this.state.editingIssue ? (
                 <>
                   <p style={{ display: 'inline' }}>Status: </p>
@@ -233,9 +238,10 @@ class ViewIssueModal extends React.Component {
               ) : (
                 <p>Status: {this.state.issue.status}</p>
               )}
-
               <p>Date: {this.state.issue.date}</p>
               {/* <h5>Org. Id: {this.state.issue.organizationId}</h5> */}
+              {/* <Carousel images={this.state.imageIds} /> */}
+
               {this.state.imageIds.map(id => {
                 return (
                   <Image cloudName="dzeio0al7" publicId={id}>
@@ -248,6 +254,7 @@ class ViewIssueModal extends React.Component {
                   </Image>
                 );
               })}
+
               <div className="tag-container">
                 {this.state.tags
                   .filter(tag => {
@@ -291,17 +298,21 @@ class ViewIssueModal extends React.Component {
                   onChange={this.handleChange}
                 />
               </form>
-
-              <IssueBtn
-                onClick={this.deleteIssue}
-                issueId={this.state.issue.id}
-                action="Delete"
-              />
-              <IssueBtn
-                onClick={this.toggleEdit}
-                issueId={this.state.issue.id}
-                action="Edit"
-              />
+              {!this.getRole() && (
+                <>
+                  {' '}
+                  <IssueBtn
+                    onClick={this.deleteIssue}
+                    issueId={this.state.issue.id}
+                    action="Delete"
+                  />
+                  <IssueBtn
+                    onClick={this.toggleEdit}
+                    issueId={this.state.issue.id}
+                    action="Edit"
+                  />
+                </>
+              )}
               {this.state.editingIssue ? (
                 <button
                   onClick={() => {
