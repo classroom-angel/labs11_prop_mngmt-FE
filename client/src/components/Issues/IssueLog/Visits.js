@@ -28,7 +28,7 @@ export default class Visits extends React.Component {
       issues: [],
       issuesLoaded: false,
       issueStatus: '',
-      orgID: 1,
+      orgID: JSON.parse(localStorage.getItem('profile')).orgId || null,
       editingIssue: false,
       issue: null,
       tag: '',

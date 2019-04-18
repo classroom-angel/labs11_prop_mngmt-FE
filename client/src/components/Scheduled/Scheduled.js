@@ -19,8 +19,9 @@ export default class Scheduled extends React.Component {
   }
 
   componentDidMount() {
+    const profile = JSON.parse(localStorage.getItem('profile'));
     axios
-      .get('solutions')
+      .get(`organizations/${profile.orgId}/solutions`)
       .then(response => {
         console.log(response.data);
         this.setState(function() {
