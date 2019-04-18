@@ -273,31 +273,35 @@ class ViewIssueModal extends React.Component {
                       </Chip>
                     );
                   })}
-                <form className="tagForm" onSubmit={this.handleTagSubmit}>
-                  <input
-                    className="mainInput"
-                    type="text"
-                    placeholder="add tag"
-                    name="tag"
-                    onChange={this.handleChange}
-                    value={this.state.tag}
-                  />
-                </form>
+                {!this.getRole() && (
+                  <form className="tagForm" onSubmit={this.handleTagSubmit}>
+                    <input
+                      className="mainInput"
+                      type="text"
+                      placeholder="add tag"
+                      name="tag"
+                      onChange={this.handleChange}
+                      value={this.state.tag}
+                    />
+                  </form>
+                )}
               </div>
               <Comments
                 comments={this.state.comments}
                 issueId={this.state.issue.id}
                 deleteComment={this.props.deleteComment}
               />
-              <form onSubmit={this.submitComment}>
-                <input
-                  name="comment"
-                  placeholder="add comment"
-                  value={this.state.comment}
-                  issue_id={this.state.issue.id}
-                  onChange={this.handleChange}
-                />
-              </form>
+              {!this.getRole() && (
+                <form onSubmit={this.submitComment}>
+                  <input
+                    name="comment"
+                    placeholder="add comment"
+                    value={this.state.comment}
+                    issue_id={this.state.issue.id}
+                    onChange={this.handleChange}
+                  />
+                </form>
+              )}
               {!this.getRole() && (
                 <>
                   {' '}
