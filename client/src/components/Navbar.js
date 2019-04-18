@@ -17,13 +17,26 @@ export default function Navbar(props) {
     return (
       <div className="navbar" style={{ zIndex: '5' }}>
         <div className="topbar2">
-          <img
-            src={logo}
-            style={{ height: '40px', width: 'auto', marginLeft: '10px' }}
-          />
-          <div className="landingTitle">
-            <h3>Classroom Angel</h3>
-          </div>
+          <NavLink
+            to={profile === 'Board member' ? '/bm-homepage' : '/issue-log'}
+          >
+            <img
+              src={logo}
+              style={{
+                height: '40px',
+                width: 'auto',
+                marginLeft: '10px',
+                marginTop: '8px'
+              }}
+            />
+          </NavLink>
+          <NavLink
+            to={profile === 'Board member' ? '/bm-homepage' : '/issue-log'}
+          >
+            <div className="landingTitle">
+              <h3>Classroom Angel</h3>
+            </div>
+          </NavLink>
         </div>
         {loc !== '/' && (
           <NavLink

@@ -121,6 +121,14 @@ body {
   background-color: #fafafa;
 }
 
+.navbar .topbar2 a {
+  color: black;
+}
+
+.navbar .topbar2 a:hover {
+  background-color: inherit !important;
+}
+
 .landingTitle {
   margin-left: 20px;
   margin-top: -5px;
