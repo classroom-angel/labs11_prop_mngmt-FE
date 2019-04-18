@@ -38,19 +38,21 @@ export default class BoardMemberHub extends React.Component {
 
   componentDidMount() {
     const profile = JSON.parse(localStorage.getItem('profile'));
-    axios
-      .get(`organizations/${profile.orgId}/equipment`)
-      .then(({ data: { equipment } }) => {
-        this.setState({ equipment, equipmentLoaded: true });
-      })
-      .catch(console.error);
+    if (profile) {
+      axios
+        .get(`organizations/${profile.orgId}/equipment`)
+        .then(({ data: { equipment } }) => {
+          this.setState({ equipment, equipmentLoaded: true });
+        })
+        .catch(console.error);
 
-    axios
-      .get(`organizations/${profile.orgId}/issues`)
-      .then(({ data: { issues } }) => {
-        this.setState({ issues, issuesLoaded: true });
-      })
-      .catch(console.error);
+      axios
+        .get(`organizations/${profile.orgId}/issues`)
+        .then(({ data: { issues } }) => {
+          this.setState({ issues, issuesLoaded: true });
+        })
+        .catch(console.error);
+    }
   }
 
   goToIssue = id => {
