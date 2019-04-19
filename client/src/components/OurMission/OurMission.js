@@ -20,11 +20,11 @@ class OurMission extends Component {
           style={{ height: '100vh', width: '80%', margin: '10px auto' }}
         >
           <h3>Our Mission</h3>
-          <h5>
+          <h5 style={{ width: '450px' }}>
             We help you meet classroom needs so you can focus on what really
             matters.
           </h5>
-          <div className="pictures">
+          <div className="pictures" style={{ marginTop: '40px' }}>
             <SimpleImg style={imgstyle} src={kidsinclass} alt="kids in class" />
 
             <SimpleImg
@@ -36,7 +36,7 @@ class OurMission extends Component {
             <SimpleImg style={imgstyle} src={groupofkids} alt="group of kids" />
           </div>
           <div>
-            <p>
+            <p style={{ marginTop: '50px' }}>
               In the past, teachers and administrators had to submit issues by
               sending emails to their board members that would, unfortunately,
               get lost due to email traffic most of the time. We've created an
