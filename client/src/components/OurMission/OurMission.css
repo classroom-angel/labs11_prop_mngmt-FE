@@ -1,0 +1,44 @@
+.mission {
+  padding-top: 40px;
+}
+
+.mission h5 {
+  font-weight: bold;
+  width: 80%;
+  margin: 15px auto;
+  text-align: left;
+}
+
+.mission p {
+  text-align: left;
+  width: 80%;
+  margin: 10px auto;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.mission .pictures img {
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.pictures {
+  display: flex;
+  justify-content: space-evenly;
+  width: 70%;
+  margin: 0 auto;
+}
+
+@media (max-width: 1200px) {
+  .mission {
+    padding-top: 0px;
+  }
+}
+
+@media (max-width: 850px) {
+  .pictures {
+    display: none;
+  }
+}

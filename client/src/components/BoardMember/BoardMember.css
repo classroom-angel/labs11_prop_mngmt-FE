@@ -1,13 +1,21 @@
- .hud-box {
-     /* display: inline-block; */
-     /* display: flex; */
-     /* justify-content: center; */
-     /* align-items: flex-start; */
-     /* flex-wrap: nowrap; */
- }
- 
- @media only screen and (max-width: 700px) {
-    .hud-box {
-        display: block;
-    }
- }
+.hud-box {
+  /* display: inline-block; */
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: flex-start; */
+  /* flex-wrap: nowrap; */
+}
+
+@media only screen and (max-width: 700px) {
+  .hud-box {
+    display: block;
+  }
+}
+
+.collection {
+  border-radius: 5px !important;
+}
+
+.il-header ul {
+  list-style: none;
+}

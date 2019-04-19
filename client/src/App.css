@@ -27,6 +27,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -35,20 +36,17 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  background-color: #094D92;
-  width: 21.5%;
   font-family: 'Roboto', sans-serif;
   padding: 0px 20px;
-  /* min-height: 100vh; */
   box-shadow: 2px 0px;
 }
 
-.sidebar h1 {
-  color: white
+.sidebar h3 {
+  color: black;
 }
 
 .sidebar-button {
-  background: #FC5130;
+  background: #fc5130;
   color: white;
   height: 45px;
   width: 200px;
@@ -56,7 +54,6 @@
   font-size: 16px;
   font-family: 'Roboto', sans-serif;
   border: 1px solid black;
-
 }
 
 .page-container {
@@ -80,30 +77,14 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  /* justify-content: space-evenly; */
+  justify-content: space-evenly;
 }
 
 .issue-card {
   text-align: center;
-  border: 1px solid orange;
-  margin: 40px 20px;
-  width: 300px;
   padding-bottom: 20px;
   font-size: 14px;
 }
-
-.edit-issue-button {
-  border: 1px solid indianred;
-  width: 100px;
-  text-decoration: none;
-  background: indianred;
-  color: white;
-  font-weight: 800;
-}
-
-/* a {
-  text-decoration: none;
-} */
 
 .tag {
   border: 1px solid;
@@ -114,15 +95,6 @@
   display: inline-block;
   margin: 10px;
 }
-
-/* .tag-container .tag {
-  font-size: 85%;
-  padding: 5px 10px;
-  display: inline-block;
-  margin: 0.25em 0.1em;
-  background: #ddd;
-  transition: all 0.1s linear;
-} */
 
 .tag-container .tag .close::after {
   content: '\00d7';
@@ -136,3 +108,47 @@
   color: red;
   border: 2px solid indigo;
 }
+
+.paymentsInput {
+  width: 250px !important;
+  color: black !important;
+  background-color: white !important;
+  border: 1px solid grey !important;
+  padding-left: 10px !important;
+}
+
+.sideTransparent {
+  background-color: transparent !important;
+}
+
+.issue-delete {
+  background: transparent !important;
+  color: #282c34 !important;
+  box-shadow: 0 0 transparent !important;
+}
+
+.issue-delete:hover {
+  background: gray !important;
+  color: white !important;
+  box-shadow: 1px 1px 1px 1px gray !important;
+}
+
+/* .same-button {
+
+} */
+
+.same-button:hover {
+  background: #ffa000 !important;
+}
+
+.tabs .tab a.active {
+  background: rgba(255, 160, 0, 0.2) !important;
+}
+
+/*Background and text color when a tab is active*/
+
+.tabs .indicator {
+  background-color: #ffa000 !important;
+}
+
+/*Color of underline*/

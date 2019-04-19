@@ -1,25 +1,52 @@
-   .card {
-    border: 3px solid #30BCED;
-    background: #F0EFEF;
-    box-sizing: border-box;
-    width: 500px;
-    padding: 5px;
-    margin: 10px auto;
-    display: flex;
-    flex-direction:column; 
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: center;
-    font-weight: normal; 
-    font-style: normal;
-    cursor: pointer;
+.testimonials {
+  padding-top: 60px;
+}
+
+.TestimonialForm {
+  width: 500px;
+  margin: 0 auto;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.input-field textarea:focus {
+  border-bottom: 1px solid white !important;
+}
+
+.input-field textarea {
+  border-bottom: 1px solid white !important;
+}
+
+.panel {
+  height: 350px;
+}
+
+.addbtn {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+@media (max-width: 1200px) {
+  .testimonials {
+    padding-top: 0;
   }
 
-  .card h1 {
-    color:#094D92;
+  .panel {
+    height: 400px;
   }
+}
 
-  .card h2{
-    color: #FC5130;
+@media (max-width: 1000px) {
+  .panel {
+    height: auto;
   }
-  
+}
+
+@media (min-width: 1200px) {
+  .addTestimonial {
+    margin-top: 70px;
+  }
+}

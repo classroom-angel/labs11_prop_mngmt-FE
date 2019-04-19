@@ -1,15 +1,218 @@
-h1 {
-    font-family: 'Quicksand', sans-serif;
+body {
+  overflow-y: auto;
+}
+
+.home {
+  margin-top: 60px;
+  overflow-y: auto;
+}
+
+h1,
+h4 {
+  font-family: 'Quicksand', sans-serif;
 }
 
 a.land-link {
-   text-decoration: none;
-   margin: 60px 20px;
-   color: blue;
-   background: orange;
-   border: 2px solid blue;
-   }
+  text-decoration: none;
+  margin: 60px 20px;
+  color: blue;
+  background: orange;
+  border: 2px solid blue;
+}
 
-a:hover {
-  color: firebrick;
+.navbar a:hover {
+  /* color: black; */
+  background-color: #ffa000 !important;
+}
+
+.logoAndText {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 1000px;
+  margin: 0 auto;
+  /* border: 1px solid red; */
+  min-height: 650px;
+  margin-top: 80px;
+}
+
+#logo {
+  height: 600px;
+  width: 600px;
+}
+
+#logo img {
+  height: 600px;
+  width: 100%;
+}
+
+.textBox {
+  padding-top: 50px;
+  width: 400px;
+  /* background-color: #006064; */
+  /* border: 1px solid orange; */
+  font-size: 20px;
+  color: #fafafa;
+  /* border: 5px solid #0097a7; */
+  border-radius: 10px;
+  padding: 10px;
+}
+
+@media (max-width: 1000px) {
+  .logoAndText {
+    flex-flow: column;
+    width: 100vw;
+    margin: 20px auto;
+    margin-bottom: -200px;
+    height: 550px;
   }
+
+  .textBox {
+    width: 100vw;
+    padding-top: 0;
+    padding: 10px;
+  }
+
+  #logo {
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 600px) {
+  #logo {
+    width: 100vw;
+  }
+
+  #logo img {
+    width: 100vw;
+  }
+
+  .textBox {
+    margin: 0 auto;
+  }
+
+  .logoAndText {
+    min-height: 500px;
+    width: 100vw;
+    flex-flow: column;
+    margin-bottom: 0px;
+  }
+}
+
+body {
+  background-color: #fafafa;
+  box-sizing: border-box;
+  font-family: 'Quicksand', sans-serif;
+}
+
+::placeholder {
+  color: black;
+}
+
+.navbar {
+  position: fixed;
+  /* border: 1px solid red; */
+  width: 100vw;
+  height: 60px;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+  background-color: #fafafa;
+}
+
+.navbar .topbar2 a {
+  color: black;
+}
+
+.navbar .topbar2 a:hover {
+  background-color: inherit !important;
+}
+
+.landingTitle {
+  margin-left: 20px;
+  margin-top: -5px;
+}
+
+.extraSpace {
+  border: 0px solid red;
+}
+
+.topbar2 {
+  position: fixed;
+  left: 0;
+  top: -10px;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.welcomeTitle {
+  color: #00bcd4;
+  margin-top: 70px;
+}
+
+@media (min-width: 1201px) {
+  .topbar {
+    display: none;
+  }
+}
+
+@media (max-width: 1200px) {
+  .topbar {
+    width: 100vw;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+  }
+
+  .topbar2 {
+    display: none;
+  }
+
+  .navbar {
+    position: relative;
+    margin: 0 auto;
+    height: auto;
+    justify-content: center;
+  }
+
+  .welcomeTitle {
+    margin-top: 0px;
+  }
+
+  .landingTitle {
+    margin-top: 0;
+    margin-left: 0;
+  }
+
+  .landingTitle > h4 {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .navbar {
+    margin: 0 auto;
+    height: auto;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 450px) {
+  .navbar {
+    height: 230px;
+    width: 100vw;
+  }
+
+  .navbtn {
+    width: 100vw !important;
+    margin: 0 auto !important;
+  }
+}
+
+@media (max-width: 1000px) and (min-width: 992px) {
+  .Footer {
+    margin-top: 600px;
+  }
+}

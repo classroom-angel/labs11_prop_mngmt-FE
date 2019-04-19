@@ -60,7 +60,6 @@ class Payments extends React.Component {
   render() {
     return (
       <div className="page-container">
-        <Sidebar />
         <div className="checkout right-side">
           <h1>Upgrade Account</h1>
           <Checkout
@@ -69,6 +68,7 @@ class Payments extends React.Component {
             amount={this.fromDollarToCent(29.99)}
             sendToken={subscribe}
           />
+          <hr />
           <h1>Pay a contractor</h1>
           <p>
             Step 1: Send this link to your contractor via email to get them
@@ -87,12 +87,14 @@ class Payments extends React.Component {
               placeholder="Amount to send"
               value={this.state.amount}
               onChange={this.handleChange}
+              className="paymentsInput"
             />
             <input
               name="accountId"
               placeholder="Contractor's Stripe Account ID"
               value={this.state.accountId}
               onChange={this.handleChange}
+              className="paymentsInput"
             />
           </form>
           <p>Step 3: Pay</p>
