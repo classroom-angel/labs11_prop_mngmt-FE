@@ -3,10 +3,10 @@ import React from 'react';
 const Comments = ({ comments, issueId, deleteComment }) => (
   <div
     style={{
-      marginTop: '20px',
+      marginTop: '10px',
       textAlign: 'left',
       overflowY: 'scroll',
-      maxHeight: '112.5px'
+      height: '100px'
     }}
   >
     {comments

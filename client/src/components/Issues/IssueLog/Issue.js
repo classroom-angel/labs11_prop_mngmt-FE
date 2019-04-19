@@ -60,7 +60,13 @@ const Issue = ({
         <p style={{ textAlign: 'left' }}>{issue.notes}</p>
         {/* <p>Status: {issue.status}</p> */}
         <p style={{ textAlign: 'left' }}>Date: {issue.date}</p>
-        <div>
+        <div
+          style={{
+            marginTop: '10px',
+            textAlign: 'left',
+            minHeight: '37px'
+          }}
+        >
           {tags
             .filter(function(tag) {
               return tag.issueId === issue.id;
@@ -85,6 +91,7 @@ const Issue = ({
             value={commentsObj[`issue${issue.id}`]}
             issue_id={issue.id}
             onChange={e => handleCommentChange(issue.id, e)}
+            style={{ borderBottom: '0px' }}
           />
         </form>
       </div>
