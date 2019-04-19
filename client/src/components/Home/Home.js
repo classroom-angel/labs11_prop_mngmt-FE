@@ -40,25 +40,6 @@ class Home extends Component {
               <h4>Classroom Angel</h4>
             </div>
           </div>
-
-          {this.isAuth && (
-            <div>
-              <h3 className="welcomeTitle">
-                Welcome, <b>{this.props.profile.name.split(' ')[0]}</b>
-              </h3>
-              <div
-                className="avatar"
-                style={{
-                  backgroundImage: `url(${this.props.profile.picture})`,
-                  backgroundSize: 'cover',
-                  width: '100px',
-                  height: '100px',
-                  borderRadius: '50px',
-                  margin: '0 auto 20px'
-                }}
-              />
-            </div>
-          )}
         </div>
 
         <div className="logoAndText">

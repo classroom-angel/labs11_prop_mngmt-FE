@@ -48,7 +48,7 @@ a.land-link {
 .textBox {
   padding-top: 50px;
   width: 400px;
-  background-color: #006064;
+  /* background-color: #006064; */
   /* border: 1px solid orange; */
   font-size: 20px;
   color: #fafafa;
@@ -121,6 +121,23 @@ body {
   background-color: #fafafa;
 }
 
+.navbar .topbar2 a {
+  color: black;
+}
+
+.navbar .topbar2 a:hover {
+  background-color: inherit !important;
+}
+
+.landingTitle {
+  margin-left: 20px;
+  margin-top: -5px;
+}
+
+.extraSpace {
+  border: 0px solid red;
+}
+
 .topbar2 {
   position: fixed;
   left: 0;
@@ -139,7 +156,6 @@ body {
   .topbar {
     display: none;
   }
-
 }
 
 @media (max-width: 1200px) {
@@ -164,6 +180,15 @@ body {
   .welcomeTitle {
     margin-top: 0px;
   }
+
+  .landingTitle {
+    margin-top: 0;
+    margin-left: 0;
+  }
+
+  .landingTitle > h4 {
+    margin-top: 0;
+  }
 }
 
 @media (max-width: 700px) {
@@ -184,15 +209,6 @@ body {
     width: 100vw !important;
     margin: 0 auto !important;
   }
-}
-
-.landingTitle {
-  margin-left: 20px;
-  margin-top: -5px;
-}
-
-.extraSpace {
-  border: 0px solid red;
 }
 
 @media (max-width: 1000px) and (min-width: 992px) {
