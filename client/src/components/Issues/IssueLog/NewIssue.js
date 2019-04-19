@@ -2,6 +2,7 @@ import React from 'react';
 import { Icon } from 'react-materialize';
 import Uploader from '../Uploader';
 import { NavLink } from 'react-router-dom';
+import '../Issues.css';
 import '../../../App.css';
 
 const NewIssue = ({
@@ -18,10 +19,8 @@ const NewIssue = ({
   dropDownId
 }) => {
   return (
-    <div
-      className="card"
-    >
-      <div className="card-content">
+    <div>
+      <div>
         <form
           onSubmit={postIssues}
           className={`issue-card submit-issue ${adminSelect}`}
@@ -49,20 +48,21 @@ const NewIssue = ({
             })}
           </select>
           <br />
-          <Uploader uploading={uploading} imgAdder={imgAdder} />
-          {/* <div className="card-action"> */}
-          <button
-            type="submit"
-            waves="light"
-            className="btn cyan same-button"
-            style={{ marginTop: '10px' }}
-          >
-            Submit
-            <Icon right>send</Icon>
-          </button>
-          {/* </div> */}
-        </form>
-        <NavLink to="/issue-log">Back to Issues</NavLink>
+          <div className="newModalBtns">
+            <Uploader uploading={uploading} imgAdder={imgAdder} />
+            {/* <div className="card-action"> */}
+            <button
+              type="submit"
+              waves="light"
+              className="btn cyan same-button"
+            >
+              Submit
+              <Icon right>send</Icon>
+            </button>
+            {/* </div> */}
+              <NavLink className="btn cyan same-button" to="/issue-log">Back to Issues</NavLink>
+            </div>
+          </form>
       </div>
     </div>
   );
