@@ -102,7 +102,7 @@ export default class IssueLog extends React.Component {
                 issues: [res.data.issue, ...prevState.issues],
                 images: []
               }));
-              console.log('ISSUES',this.state.issues);
+              console.log('ISSUES', this.state.issues);
             })
             .catch(console.error);
         } else {
@@ -374,8 +374,16 @@ export default class IssueLog extends React.Component {
                   />
                 </div>
 
-                <div style={{ width: '78%', margin: 'auto' }}>
-                  <div className="issue-list">
+                <div
+                  style={{
+                    width: '78%',
+                    margin: 'auto'
+                  }}
+                >
+                  <div
+                    className="issue-list"
+                    style={{ display: 'flex', justifyContent: 'flex-start' }}
+                  >
                     {this.state.issues
                       .filter(issue => {
                         return !issue.isVisit;

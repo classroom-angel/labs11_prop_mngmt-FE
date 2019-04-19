@@ -91,7 +91,13 @@ const Issue = ({
             value={commentsObj[`issue${issue.id}`]}
             issue_id={issue.id}
             onChange={e => handleCommentChange(issue.id, e)}
-            style={{ borderBottom: '0px' }}
+            style={{
+              borderBottom: '0px',
+              position: 'absolute',
+              bottom: '50px',
+              left: '20px',
+              width: '200px'
+            }}
           />
         </form>
       </div>
